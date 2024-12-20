@@ -1,0 +1,19 @@
+{
+  "name": "@sse-auth/react",
+  "version": "3.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sse-auth/react-3.x.x.git"
+  },
+  "author": "SSE World",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sse-auth/react-3.x.x/issues"
+  },
+  "homepage": "https://github.com/sse-auth/react-3.x.x#readme",
+  "description": ""
+}
