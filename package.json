@@ -15,5 +15,9 @@
     "url": "https://github.com/sse-auth/react-3.x.x/issues"
   },
   "homepage": "https://github.com/sse-auth/react-3.x.x#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2"
+  }
 }
