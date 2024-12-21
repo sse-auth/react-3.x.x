@@ -1,0 +1,39 @@
+title: "OAuth Application Integration"
+labels: ["question", "help wanted", "OAuth"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## OAuth Application Integration
+
+        Please provide the details of your OAuth application integration issue or question.
+
+  - type: input
+    id: application_name
+    attributes:
+      label: "Application Name"
+      description: "Name of the OAuth application you are integrating with."
+      placeholder: "e.g., Google, Facebook, GitHub"
+
+  - type: textarea
+    id: issue_description
+    attributes:
+      label: "Issue Description"
+      description: "Describe the issue or question you have regarding the OAuth application integration."
+      placeholder: "Provide a detailed description of the problem or question."
+
+  - type: input
+    id: redirect_uri
+    attributes:
+      label: "Redirect URI"
+      description: "The redirect URI configured in your OAuth application."
+      placeholder: "e.g., https://yourapp.com/oauth/callback"
+
+  - type: input
+    id: error_message
+    attributes:
+      label: "Error Message"
+      description: "If applicable, provide the error message you are encountering."
+      placeholder: "e.g., Invalid redirect URI"

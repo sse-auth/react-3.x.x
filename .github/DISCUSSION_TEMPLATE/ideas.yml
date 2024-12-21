@@ -1,0 +1,49 @@
+name: OAuth Application Discussion
+description: Discuss ideas and improvements for the OAuth application integration.
+labels: 
+  - enhancement
+  - discussion
+  - oauth
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## OAuth Application Discussion
+
+        Use this template to discuss ideas and improvements for the OAuth application integration.
+
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: Provide a brief summary of your idea or improvement.
+      placeholder: Enter a summary
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: Provide detailed information about your idea or improvement.
+      placeholder: Enter details
+    validations:
+      required: true
+
+  - type: input
+    id: benefits
+    attributes:
+      label: Benefits
+      description: Describe the benefits of your idea or improvement.
+      placeholder: Enter benefits
+    validations:
+      required: true
+
+  - type: input
+    id: potential_issues
+    attributes:
+      label: Potential Issues
+      description: Describe any potential issues or challenges with your idea or improvement.
+      placeholder: Enter potential issues
+    validations:
+      required: false
