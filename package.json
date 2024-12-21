@@ -17,6 +17,7 @@
   "homepage": "https://github.com/sse-auth/react-3.x.x#readme",
   "description": "",
   "dependencies": {
+    "tailwind": "^4.0.0",
     "tsup": "^8.3.5",
     "typescript": "^5.7.2"
   }

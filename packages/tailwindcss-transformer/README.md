@@ -1,4 +1,4 @@
-<p align="center">
+<!-- <p align="center">
   <a href="https://clerk.com?utm_source=github&utm_medium=clerk_tailwindcss_transformer" target="_blank" rel="noopener noreferrer">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="https://images.clerk.com/static/logo-dark-mode-400x400.png">
@@ -6,9 +6,9 @@
     </picture>
   </a>
   <br />
-</p>
+</p> -->
 
-# @clerk/tailwindcss-transformer
+# @sse/tailwindcss-transformer
 
 > [!WARNING]  
 > This is an experimental package and breaking changes may occur regularly. Usage at your own risk!
@@ -66,4 +66,4 @@ export function Example({ flag }) {
 
 This project is licensed under the **MIT license**.
 
-See [LICENSE](https://github.com/clerk/javascript/blob/main/packages/tailwindcss-transformer/LICENSE) for more information.
+See [LICENSE](https://github.com/sse-auth/react-3.x.x/tree/master/packages/tailwindcss-transformer/LICENSE) for more information.

@@ -38,6 +38,6 @@
     "postcss-value-parser": "^4.2.0",
     "recast": "^0.23.9",
     "tailwindcss": "^3.4.17",
-    "tslib": "^2.8.1"
+    "tslib": "catalog:repo"
   }
 }
