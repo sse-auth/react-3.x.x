@@ -1,0 +1,41 @@
+{
+  "name": "@sse-auth/ui",
+  "version": "1.0.0",
+  "description": "UI for SSE World",
+  "main": "./dist/index.js",
+  "scripts": {
+    "js": "tsc",
+    "build": "rimraf dist && npm run js",
+    "dev": "tsc --watch",
+    "tsc": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sse-auth/react-3.x.x.git"
+  },
+  "author": "SSE World",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sse-auth/react-3.x.x/issues"
+  },
+  "homepage": "https://github.com/sse-auth/react-3.x.x#readme",
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "@types/resize-observer-browser": "^0.1.11",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "@floating-ui/react-dom": "^2.1.2",
+    "@sse-ui/themer": "^0.1.9",
+    "lucide-react": "^0.469.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-remove-scroll": "^2.6.2",
+    "tailwind-merge": "^2.5.5"
+  }
+}

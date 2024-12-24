@@ -1,4 +1,4 @@
-# Tailus UI Themer
+# SSE Themer
 
 Tailwind CSS Styling Library for Building Modern, Consistent and Accessible Web UIs with Radix UI, Melt UI, and Radix Vue.
 
@@ -20,7 +20,7 @@ Imagine Tailus Themer as a secret style vault for our UI Kits. It uses Tailwind 
 1. **Install Tailus Themer:**
 
 ```bash
-npm install @tailus/themer
+npm install @sse-ui/themer
 ```
 
 2. **Update your tailwindcss config**
@@ -29,12 +29,12 @@ npm install @tailus/themer
 
 ```javascript
 import type { Config } from 'tailwindcss'
-import { shade, components, rounded, animations, palettes, palette } from '@tailus/themer'
+import { shade, components, rounded, animations, palettes, palette } from '@sse-ui/themer'
 
 module.exports =  {
   content: [
     // your other paths
-    "./node_modules/@tailus/themer/dist/**/*.{js,ts}",
+    "./node_modules/@sse-ui/themer/dist/**/*.{js,ts}",
   ],
   theme: {
     extend: {
