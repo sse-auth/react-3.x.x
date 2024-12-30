@@ -1,0 +1,22 @@
+{
+  "name": "@sse-auth/backend",
+  "version": "1.0.0",
+  "description": "Backend for the SSE Authentication",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sse-auth/react-3.x.x.git"
+  },
+  "author": "SSE World",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sse-auth/react-3.x.x/issues"
+  },
+  "homepage": "https://github.com/sse-auth/react-3.x.x#readme",
+  "dependencies": {
+    "nodemailer": "^6.9.16"
+  },
+  "devDependencies": {
+    "@types/nodemailer": "^6.4.17"
+  }
+}
