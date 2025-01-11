@@ -9,7 +9,8 @@
  * @module providers/github
  */
 
-import type { OAuthConfig, OAuthUserConfig } from "../types";
+import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types";
+import { GithubIcon } from "../assets/Providers"
 
 export interface GitHubEmail {
   email: string;
@@ -145,9 +146,9 @@ export default function Github(
     },
     token: `${baseUrl}/login/oauth/access_token`,
     userinfo: `${apiBaseUrl}/user`,
-    style: {
-      logo: `https://authjs.dev/img/providers/github.svg`,
-    },
+    // style: {
+    //   logo: <GithubIcon />,
+    // },
     options: config,
     profile(profile) {
       return {

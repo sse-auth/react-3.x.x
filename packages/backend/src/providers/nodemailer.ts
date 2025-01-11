@@ -8,7 +8,7 @@ import * as SESTransport from "nodemailer/lib/ses-transport/index";
 import * as SMTPPool from "nodemailer/lib/smtp-pool/index";
 import * as SMTPTransport from "nodemailer/lib/smtp-transport/index";
 import * as StreamTransport from "nodemailer/lib/stream-transport/index";
-import type { Awaitable, Theme } from "../types";
+import type { Awaitable, Theme } from "@sse-auth/types";
 import type { EmailConfig } from "./email";
 
 type AllTransportOptions =

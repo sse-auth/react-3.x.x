@@ -1,0 +1,22 @@
+{
+  "name": "@sse-auth/locale",
+  "version": "1.0.0",
+  "description": "Localization for SSE Auth",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sse-auth/react-3.x.x.git"
+  },
+  "author": "SSE World",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sse-auth/react-3.x.x/issues"
+  },
+  "homepage": "https://github.com/sse-auth/react-3.x.x#readme"
+}

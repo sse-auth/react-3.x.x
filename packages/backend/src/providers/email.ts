@@ -1,4 +1,4 @@
-import type { CommonProviderOptions, Awaitable, Theme } from "../types";
+import type { CommonProviderOptions, Awaitable, Theme } from "@sse-auth/types";
 import Nodemailer from "./nodemailer";
 import type { NodemailerConfig, NodemailerUserConfig } from "./nodemailer";
 
