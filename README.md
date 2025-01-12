@@ -4,8 +4,6 @@
 
 ## Features
 
-mongodb+srv://sseworld:sseworld04%40@main.9p2ytf6.mongodb.net/?retryWrites=true&w=majority&appName=main
-
 - Simple and intuitive API
 - Supports various authentication methods (JWT, OAuth, etc.)
 - Easy integration with existing React applications
