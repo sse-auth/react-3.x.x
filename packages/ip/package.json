@@ -1,0 +1,37 @@
+{
+  "name": "@ss-auth/ip",
+  "version": "1.0.0",
+  "description": "Get current machine IP, MAC and DNS servers.",
+  "main": "./dist/commonjs/index.js",
+  "scripts": {
+    "build": "tshy && tshy-after"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tshy": "^3.0.2",
+    "tshy-after": "^1.4.0"
+  },
+  "type": "module",
+  "tshy": {
+    "exports": {
+      "./package.json": "./package.json",
+      ".": "./src/index.ts"
+    }
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/commonjs/index.d.ts",
+        "default": "./dist/commonjs/index.js"
+      }
+    }
+  },
+  "types": "./dist/commonjs/index.d.ts",
+  "module": "./dist/esm/index.js"
+}
