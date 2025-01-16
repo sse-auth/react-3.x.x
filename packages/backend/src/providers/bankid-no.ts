@@ -1,4 +1,4 @@
-import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types";
+import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/oauth";
 
 /**
  * @see [Core conepts - ID Token](https://confluence.bankidnorge.no/confluence/pdoidcl/technical-documentation/core-concepts/id-token)

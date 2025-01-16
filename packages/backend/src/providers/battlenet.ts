@@ -1,4 +1,4 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types";
+import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/oauth";
 
 export interface BattleNetProfile extends Record<string, any> {
   sub: string;

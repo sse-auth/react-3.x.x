@@ -1,4 +1,4 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types";
+import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/oauth";
 
 /** The returned user profile from Atlassian when using the profile callback. */
 export interface AtlassianProfile extends Record<string, any> {

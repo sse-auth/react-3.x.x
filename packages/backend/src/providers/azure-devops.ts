@@ -1,4 +1,4 @@
-import { OAuthConfig, OAuthUserConfig } from "@sse-auth/types";
+import { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/oauth";
 
 /** @see [Azure DevOps Services REST API 7.0 · Profiles · Get](https://learn.microsoft.com/en-us/rest/api/azure/devops/profile/profiles/get?view=azure-devops-rest-7.0&tabs=HTTP#examples) */
 export interface AzureDevOpsProfile extends Record<string, any> {

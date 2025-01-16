@@ -8,7 +8,7 @@
  *
  * @module providers/42-school
  */
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types";
+import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/oauth";
 
 export interface UserData {
   id: number;

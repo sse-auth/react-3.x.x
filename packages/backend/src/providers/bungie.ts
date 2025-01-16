@@ -1,4 +1,4 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types";
+import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/oauth";
 
 export default function Bungie(
   options: OAuthUserConfig<Record<string, any>>

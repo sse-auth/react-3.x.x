@@ -1,4 +1,4 @@
-import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types";
+import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/oauth";
 import { customFetch, conformInternal } from "@sse-auth/types/symbol";
 
 export interface MicrosoftEntraIDProfile extends Record<string, any> {
@@ -68,4 +68,4 @@ export default function MicrosoftEntraID(
   };
 }
 
-export { MicrosoftEntraID }
+export { MicrosoftEntraID };

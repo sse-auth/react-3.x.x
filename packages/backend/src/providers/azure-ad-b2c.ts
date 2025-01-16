@@ -1,4 +1,4 @@
-import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types";
+import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/oauth";
 
 export interface AzureADB2CProfile {
   exp: number;

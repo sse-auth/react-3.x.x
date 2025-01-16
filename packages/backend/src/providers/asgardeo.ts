@@ -1,4 +1,4 @@
-import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types";
+import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/oauth";
 
 /** The returned user profile from Asgardeo when using the profile callback. */
 export interface AsgardeoProfile extends Record<string, any> {
@@ -27,7 +27,7 @@ export default function Asgardeo(
     id: "asgardeo",
     name: "Asgardeo",
     type: "oidc",
-    wellknown: `${config?.issuer}/oauth2/token/.well-known/openid-configuration`,
+    wellKnown: `${config?.issuer}/oauth2/token/.well-known/openid-configuration`,
     options: config,
   };
 }

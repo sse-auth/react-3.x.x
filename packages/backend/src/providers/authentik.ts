@@ -1,4 +1,4 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types";
+import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/oauth";
 
 export interface AuthentikProfile extends Record<string, any> {
   iss: string;

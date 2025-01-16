@@ -9,7 +9,7 @@
  * @module providers/github
  */
 
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types";
+import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/oauth";
 import { GithubIcon } from "../assets/Providers"
 
 export interface GitHubEmail {
