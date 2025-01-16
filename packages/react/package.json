@@ -4,9 +4,9 @@
   "description": "UI for SSE World",
   "main": "./dist/index.js",
   "scripts": {
-    "js": "tsc",
+    "js": "tsup",
     "build": "rimraf dist && npm run js",
-    "dev": "tsc --watch",
+    "dev": "tsup --watch",
     "tsc": "tsc --noEmit"
   },
   "repository": {
@@ -27,11 +27,13 @@
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17",
+    "tsup": "^8.3.5",
     "typescript": "^5.7.2"
   },
   "dependencies": {
     "@floating-ui/react-dom": "^2.1.2",
     "@sse-ui/themer": "^0.1.9",
+    "@ssets/tailwindcss-transformer": "file:../tailwindcss-transformer/ssets-tailwindcss-transformer-1.0.0.tgz",
     "lucide-react": "^0.469.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

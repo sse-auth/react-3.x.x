@@ -7,7 +7,7 @@ import * as tsParser from "recast/parsers/babel-ts.js";
 import type { Config } from "tailwindcss";
 import tailwindcss from "tailwindcss";
 
-import { replaceVariableScope } from "./replace-variable-scope";
+import { replaceVariableScope } from "./replace-variable-scope.js";
 
 /**
  * A map of hashed classnames from Tailwind CSS classes and their original values
@@ -169,9 +169,7 @@ export async function generateStylesheet(
     tailwindcss(ctx.tailwindConfig) as Plugin,
     replaceVariableScope,
     cssnanoPlugin,
-  ]).process(stylesheet, {
-    from: undefined,
-  });
+  ]).process(stylesheet, { from: undefined });
 
   return result.css;
 }

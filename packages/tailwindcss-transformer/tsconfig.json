@@ -8,8 +8,8 @@
     "importHelpers": true,
     "isolatedModules": true,
     "lib": ["es2021.intl", "dom"],
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "ESNext", // Change this to "ESNext" or another compatible value
+    "moduleResolution": "Node", // Change this to "Node"
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
