@@ -3,9 +3,10 @@ import type { TokenEndpointResponse, AuthorizationDetails } from "oauth4webapi";
 
 export type { AuthorizationDetails }
 
+export type WebAuthnProviderType = "webauthn";
 export type Awaitable<T> = T | PromiseLike<T>;
 export type Awaited<T> = T extends Promise<infer U> ? U : T;
-export type ProviderType = "oauth" | "email" | "oidc" | "credentials";
+export type ProviderType = "oauth" | "email" | "oidc" | "credentials" | WebAuthnProviderType;
 
 export type SemverString =
   | `v${number}`

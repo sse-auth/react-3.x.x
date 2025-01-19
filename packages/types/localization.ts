@@ -46,9 +46,58 @@ export interface Localization extends Record<string, any> {
 
     // Edit
     edit: {
-      account: string;
-      security: string;
-      help: string;
+      sidebar: { account: string; security: string; help: string };
+      accounts: {
+        title: string;
+        subtitle: string;
+        profile: string;
+        emailAddresses: {
+          title: string;
+          primaryEmailAddress: string;
+          primaryEmailAddress_subtitle: string;
+          remove: string;
+          remove_subtitle: string;
+          removeemailAddress: string;
+          addAsEmailAddress: string;
+        };
+        connectedAccounts: {
+          title: string;
+          connectAccount: string;
+          remove: string;
+          remove_subtitle: string;
+          removeConnectAccount: string;
+        };
+      };
+      security: {
+        title: string;
+        password: string;
+        setPassword: string;
+        changePassword: string
+        activeDevices: string;
+      };
+      setPassword: {
+        title: string;
+        newPassword: string;
+        confirmPassword: string;
+        lenError: string;
+        confirmPasswordError: string;
+        signOutAllDevices: string;
+        cancel: string;
+        continue: string;
+      };
+      addConnectedAccount: {
+        title: string;
+        noProviderError: string;
+        cancel: string;
+      };
+      updateProfile: {
+        title: string;
+        profileImage: string;
+        uploadImage: string;
+        removeImage: string;
+        cancel: string;
+        continue: string;
+      };
     };
   };
 }
