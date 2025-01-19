@@ -1,4 +1,4 @@
-import type { Theme } from "../types";
+import type { Theme } from "@sse-auth/types";
 
 /**
  * Email HTML body

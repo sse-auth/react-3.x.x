@@ -49,3 +49,5 @@ export default function FusionAuth<P extends FusionAuthProfile>(
     options,
   };
 }
+
+export { FusionAuth }

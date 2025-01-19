@@ -3,9 +3,25 @@
   "version": "1.0.0",
   "description": "Backend for the SSE Authentication",
   "main": "index.js",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sse-auth/react-3.x.x.git"
+  },
+  "scripts": {
+    "build": "npm run clean && npm run providers && tsc",
+    "clean": "rimraf dist",
+    "providers": "node scripts/generate-providers"
+  },
+  "exports": {
+    "./providers/*": {
+      "import": "./dist/providers/*.js",
+      "types": "./dist/providers/*.ts"
+    },
+    "./utils": {
+      "import": "./dist/utils/*.js",
+      "types": "./dist/utils/*.ts"
+    }
   },
   "author": "SSE World",
   "license": "MIT",

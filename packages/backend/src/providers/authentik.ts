@@ -31,3 +31,5 @@ export default function Authentik<P extends AuthentikProfile>(
     options,
   };
 }
+
+export { Authentik }

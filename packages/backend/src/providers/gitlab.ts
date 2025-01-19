@@ -67,3 +67,5 @@ export default function GitLab<P extends GitLabProfile>(
     options,
   };
 }
+
+export { GitLab }

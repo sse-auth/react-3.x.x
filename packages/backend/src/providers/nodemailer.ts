@@ -81,3 +81,5 @@ export default function Nodemailer(
     options: config,
   };
 }
+
+export { Nodemailer }

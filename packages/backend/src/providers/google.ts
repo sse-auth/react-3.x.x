@@ -33,3 +33,5 @@ export default function Google<P extends GoogleProfile>(
     options,
   };
 }
+
+export { Google }

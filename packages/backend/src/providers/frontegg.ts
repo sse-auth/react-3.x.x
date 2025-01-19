@@ -33,3 +33,5 @@ export default function Frontegg(
     options,
   };
 }
+
+export { Frontegg }

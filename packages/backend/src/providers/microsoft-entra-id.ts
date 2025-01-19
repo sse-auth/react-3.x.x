@@ -54,14 +54,14 @@ export default function MicrosoftEntraID(
     async [customFetch](...args) {
       const url = new URL(args[0] instanceof Request ? args[0].url : args[0]);
       if (url.pathname.endsWith(".well-known/openid-configuration")) {
-        const response = await fetch(...args);
+        const response = await fetch(args[0], args[1]);
         const json = await response.clone().json();
         const tenantRe = /microsoftonline\.com\/(\w+)\/v2\.0/;
         const tenantId = config.issuer?.match(tenantRe)?.[1] ?? "common";
         const issuer = json.issuer.replace("{tenantid}", tenantId);
         return Response.json({ ...json, issuer });
       }
-      return fetch(...args);
+      return fetch(...(args as [RequestInfo, RequestInit?]));
     },
     [conformInternal]: true,
     options: config,

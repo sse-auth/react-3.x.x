@@ -36,17 +36,25 @@ export default function AzureDevOpsProvider<P extends AzureDevOpsProfile>(
     token: {
       url: tokenEndpointUrl,
       async request(context) {
+        const params = new URLSearchParams();
+        params.append(
+          "client_assertion_type",
+          "urn:ietf:params:oauth:client-assertion-type:jwt-bearer"
+        );
+        params.append(
+          "client_assertion",
+          context.provider.clientSecret as string
+        );
+        params.append(
+          "grant_type",
+          "urn:ietf:params:oauth:grant-type:jwt-bearer"
+        );
+        params.append("assertion", context.params.code as string);
+        params.append("redirect_uri", context.provider.callbackUrl ?? "");
         const response = await fetch(tokenEndpointUrl, {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
           method: "POST",
-          body: new URLSearchParams({
-            client_assertion_type:
-              "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
-            client_assertion: context.provider.clientSecret as string,
-            grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
-            assertion: context.params.code as string,
-            redirect_uri: context.provider.callbackUrl,
-          }),
+          body: params
         });
         return { tokens: await response.json() };
       },
@@ -78,4 +86,4 @@ export default function AzureDevOpsProvider<P extends AzureDevOpsProfile>(
   };
 }
 
-export { AzureDevOpsProvider }
+export { AzureDevOpsProvider };

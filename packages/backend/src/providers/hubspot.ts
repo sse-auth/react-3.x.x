@@ -49,3 +49,5 @@ export default function HubSpot<P extends HubSpotProfile>(
     options,
   };
 }
+
+export { HubSpot }

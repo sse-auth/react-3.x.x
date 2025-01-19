@@ -10,7 +10,6 @@
  */
 
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/oauth";
-import { GithubIcon } from "../assets/Providers"
 
 export interface GitHubEmail {
   email: string;
@@ -160,3 +159,5 @@ export default function Github(
     },
   };
 }
+
+export { Github }
