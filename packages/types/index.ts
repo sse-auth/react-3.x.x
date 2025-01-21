@@ -1,12 +1,11 @@
-import { SerializeOptions } from "./cookie";
+import { Cookie, SerializeOptions } from "./cookie";
 import type { TokenEndpointResponse, AuthorizationDetails } from "oauth4webapi";
+import { ProviderType } from "./provider";
 
-export type { AuthorizationDetails }
+export type { AuthorizationDetails };
 
-export type WebAuthnProviderType = "webauthn";
 export type Awaitable<T> = T | PromiseLike<T>;
 export type Awaited<T> = T extends Promise<infer U> ? U : T;
-export type ProviderType = "oauth" | "email" | "oidc" | "credentials" | WebAuthnProviderType;
 
 export type SemverString =
   | `v${number}`
@@ -162,39 +161,6 @@ export interface Authenticator {
   credentialDeviceType: string;
 }
 
-/** [Documentation](https://authjs.dev/reference/core#cookies) */
-export interface CookieOption {
-  name: string;
-  options: SerializeOptions;
-}
-
-/** [Documentation](https://authjs.dev/reference/core#cookies) */
-export interface CookiesOptions {
-  sessionToken: Partial<CookieOption>;
-  callbackUrl: Partial<CookieOption>;
-  csrfToken: Partial<CookieOption>;
-  pkceCodeVerifier: Partial<CookieOption>;
-  state: Partial<CookieOption>;
-  nonce: Partial<CookieOption>;
-  webauthnChallenge: Partial<CookieOption>;
-}
-
-export interface CommonProviderOptions {
-  /**
-   * Uniquely identifies the provider in {@link AuthConfig.providers}
-   * It's also part of the URL
-   */
-  id: string;
-  /**
-   * The provider name used on the default sign-in page's sign-in button.
-   * For example if it's "Google", the corresponding button will say:
-   * "Sign in with Google"
-   */
-  name: string;
-  /** See {@link ProviderType} */
-  type: ProviderType;
-}
-
 export interface Theme {
   colorScheme?: "auto" | "dark" | "light";
   logo?: string;
@@ -295,3 +261,66 @@ export interface JWTOptions {
   /** Override this method to control the Auth.js issued JWT decoding. */
   decode: (params: JWTDecodeParams) => Awaitable<JWT | null>;
 }
+
+/** @internal */
+export interface RequestInternal {
+  url: URL;
+  method: "GET" | "POST";
+  cookies?: Partial<Record<string, string>>;
+  headers?: Record<string, any>;
+  query?: Record<string, any>;
+  body?: Record<string, any>;
+  action: AuthAction;
+  providerId?: string;
+  error?: string;
+}
+
+// Should only be used by frameworks
+export interface ResponseInternal<
+  Body extends string | Record<string, any> | any[] | null = any
+> {
+  status?: number;
+  headers?: Headers | HeadersInit;
+  body?: Body;
+  redirect?: string;
+  cookies?: Cookie[];
+}
+
+/**
+ * Supported actions by Auth.js. Each action map to a REST API endpoint.
+ * Some actions have a `GET` and `POST` variant, depending on if the action
+ * changes the state of the server.
+ *
+ * - **`"callback"`**:
+ *   - **`GET`**: Handles the callback from an [OAuth provider](https://authjs.dev/reference/core/providers#oauth2configprofile).
+ *   - **`POST`**: Handles the callback from a [Credentials provider](https://authjs.dev/getting-started/providers/credentials#credentialsconfigcredentialsinputs).
+ * - **`"csrf"`**: Returns the raw CSRF token, which is saved in a cookie (encrypted).
+ * It is used for CSRF protection, implementing the [double submit cookie](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html#double-submit-cookie) technique.
+ * :::note
+ * Some frameworks have built-in CSRF protection and can therefore disable this action. In this case, the corresponding endpoint will return a 404 response. Read more at [`skipCSRFCheck`](https://authjs.dev/reference/core#skipcsrfcheck).
+ * _⚠ We don't recommend manually disabling CSRF protection, unless you know what you're doing._
+ * :::
+ * - **`"error"`**: Renders the built-in error page.
+ * - **`"providers"`**: Returns a client-safe list of all configured providers.
+ * - **`"session"`**:
+ *   - **`GET`**: Returns the user's session if it exists, otherwise `null`.
+ *   - **`POST`**: Updates the user's session and returns the updated session.
+ * - **`"signin"`**:
+ *   - **`GET`**: Renders the built-in sign-in page.
+ *   - **`POST`**: Initiates the sign-in flow.
+ * - **`"signout"`**:
+ *   - **`GET`**: Renders the built-in sign-out page.
+ *   - **`POST`**: Initiates the sign-out flow. This will invalidate the user's session (deleting the cookie, and if there is a session in the database, it will be deleted as well).
+ * - **`"verify-request"`**: Renders the built-in verification request page.
+ * - **`"webauthn-options"`**:
+ *   - **`GET`**: Returns the options for the WebAuthn authentication and registration flows.
+ */
+export type AuthAction =
+  | "callback"
+  | "csrf"
+  | "error"
+  | "providers"
+  | "session"
+  | "signin"
+  | "signout"
+  | "verify-request";

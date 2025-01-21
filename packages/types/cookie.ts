@@ -78,3 +78,24 @@ export interface SerializeOptions {
    */
   sameSite?: boolean | "lax" | "strict" | "none";
 }
+
+/** [Documentation](https://authjs.dev/reference/core#cookies) */
+export interface CookieOption {
+  name: string;
+  options: SerializeOptions;
+}
+
+/** [Documentation](https://authjs.dev/reference/core#cookies) */
+export interface CookiesOptions {
+  sessionToken: Partial<CookieOption>;
+  callbackUrl: Partial<CookieOption>;
+  csrfToken: Partial<CookieOption>;
+  pkceCodeVerifier: Partial<CookieOption>;
+  state: Partial<CookieOption>;
+  nonce: Partial<CookieOption>;
+  webauthnChallenge: Partial<CookieOption>;
+}
+
+export interface Cookie extends CookieOption {
+  value: string;
+}

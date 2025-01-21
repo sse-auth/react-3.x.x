@@ -1,6 +1,6 @@
 {
   "name": "@sse-auth/types",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "main": "./index.ts",
   "author": "SSE World",
   "license": "MIT",
@@ -15,7 +15,9 @@
     "./localization": "./localization.ts",
     "./cookie": "./cookie.ts",
     "./adapter": "./adapter.ts",
-    "./oauth": "./oauth.ts",
-    "./error": "./errors.ts"
+    "./config": "./config.ts",
+    "./error": "./errors.ts",
+    "./provider": "./provider.ts",
+    "./provider/*": "./provider/*.ts"
   }
 }

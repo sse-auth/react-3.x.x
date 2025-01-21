@@ -1,7 +1,7 @@
 import type { Client, PrivateKey } from "oauth4webapi";
-import type { Awaitable, Profile, TokenSet, User } from "./index";
+import type { Awaitable, Profile, TokenSet, User } from "../index";
 import type { CommonProviderOptions } from "./index";
-import { conformInternal, customFetch } from "./symbol";
+import { conformInternal, customFetch } from "../symbol";
 
 // TODO: fix types
 type AuthorizationParameters = any;
