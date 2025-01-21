@@ -3,7 +3,7 @@
 | Arabic                | `lib/ar_AE.ts` | 1.0.0 |
 | Chinese (simplified)  | `lib/zh_CN.ts` | 1.0.0 |
 | Chinese (traditional) | `lib/zh_TW.ts` | 1.0.0 |
-| English               | `lib/en_US/ts` | 1.0.0 |
+| English               | `lib/en_US.ts` | 1.0.0 |
 | French                | `lib/fr_FR.ts` | 1.0.0 |
 | German                | `lib/de_DE.ts` | 1.0.0 |
 | Italian               | `lib/it_IT.ts` | 1.0.0 |

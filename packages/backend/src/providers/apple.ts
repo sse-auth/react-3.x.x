@@ -127,9 +127,7 @@ export default function Apple(
       };
     },
     // Apple does not provide a userinfo endpoint.
-    async [customFetch](
-      ...args: [RequestInfo, RequestInit?]
-    ): Promise<Response> {
+    async [customFetch](...args): Promise<Response> {
       const url = new URL(args[0] instanceof Request ? args[0].url : args[0]);
       if (url.pathname.endsWith(".well-known/openid-configuration")) {
         const response: Response = await fetch(...args);

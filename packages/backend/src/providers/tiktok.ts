@@ -140,7 +140,7 @@ export default function TikTok(
         const json = await response.json();
         return Response.json({ ...json });
       }
-      return fetch(...(args as [RequestInfo, RequestInit?]));
+      return fetch(...args);
     },
     id: "tiktok",
     name: "TikTok",

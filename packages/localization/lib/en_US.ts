@@ -1,25 +1,200 @@
-import { Localization } from "../types";
+export interface Localization extends Record<string, any> {
+  id: string;
+
+  // Sign In
+  signIn: {
+    title: string;
+    subtitle: string;
+    label_email: string;
+    label_password: string;
+    label_phone: string;
+    link_forgotPassword: string;
+    submit_text: string;
+    divider_text: string;
+    social_text: string;
+    link_dontHaveAnAccount: string;
+    createAccount: string;
+  };
+
+  // Sign Up
+  signUp: {
+    title: string;
+    subtitle: string;
+    label_email: string;
+    label_password: string;
+    label_phone: string;
+    label_name: string;
+    submit_text: string;
+    divider_text: string;
+    link_haveAnAccount: string;
+    login: string;
+    label_firstName: string;
+    label_lastName: string;
+  };
+
+  // User
+  user: {
+    // Dropdown
+    dropdown: {
+      manage: string;
+      signOut: string;
+      switchAccount: string;
+      preferences: string;
+      help: string;
+      sendFeedback: string;
+    };
+
+    // Edit
+    edit: {
+      sidebar: { account: string; security: string; help: string };
+      accounts: {
+        title: string;
+        subtitle: string;
+        profile: string;
+        emailAddresses: {
+          title: string;
+          primaryEmailAddress: string;
+          primaryEmailAddress_subtitle: string;
+          remove: string;
+          remove_subtitle: string;
+          removeemailAddress: string;
+          addAsEmailAddress: string;
+        };
+        connectedAccounts: {
+          title: string;
+          connectAccount: string;
+          remove: string;
+          remove_subtitle: string;
+          removeConnectAccount: string;
+        };
+      };
+      security: {
+        title: string;
+        password: string;
+        setPassword: string;
+        changePassword: string;
+        activeDevices: string;
+      };
+      setPassword: {
+        title: string;
+        newPassword: string;
+        confirmPassword: string;
+        lenError: string;
+        confirmPasswordError: string;
+        signOutAllDevices: string;
+        cancel: string;
+        continue: string;
+      };
+      addConnectedAccount: {
+        title: string;
+        noProviderError: string;
+        cancel: string;
+      };
+      updateProfile: {
+        title: string;
+        profileImage: string;
+        uploadImage: string;
+        removeImage: string;
+        cancel: string;
+        continue: string;
+      };
+    };
+  };
+}
 
 export const enUS: Localization = {
   id: "English",
-  signIn_title: "Sign in to your account",
-  signIn_subtitle: "Welcome back! Enter your details to continue.",
-  signIn_label_email: "Email address",
-  signIn_label_password: "Password",
-  signIn_label_phone: "Phone number",
-  signIn_link_forgotPassword: "Forgot your password?",
-  signIn_submit_text: "Sign in",
-  signIn_divider_text: "Or continue with",
-  signIn_social_text: "Sign in with {{provider}}",
-  signIn_link_dontHaveAnAccount: "Don't have an account?",
-
-  signUp_title: "Create your account",
-  signUp_subtitle: "Enter your details to create an account and get started.",
-  signUp_label_email: "Email address",
-  signUp_label_password: "Password",
-  signUp_label_phone: "Phone number",
-  signUp_label_name: "Name",
-  signUp_submit_text: "Create account",
-  signUp_divider_text: "Or continue with",
-  signUp_link_haveAnAccount: "Already have an account?",
+  signIn: {
+    title: "Sign in to your account",
+    subtitle: "Welcome back! Enter your details to continue.",
+    label_email: "Email address",
+    label_password: "Password",
+    label_phone: "Phone number",
+    link_forgotPassword: "Forgot your password?",
+    submit_text: "Sign in",
+    divider_text: "Or continue with",
+    social_text: "Sign in with {{provider}}",
+    link_dontHaveAnAccount: "Don't have an account?",
+    createAccount: "Create Account",
+  },
+  signUp: {
+    title: "Create your account",
+    subtitle: "Enter your details to create an account and get started.",
+    label_email: "Email address",
+    label_password: "Password",
+    label_phone: "Phone number",
+    label_name: "Name",
+    submit_text: "Create account",
+    divider_text: "Or continue with",
+    link_haveAnAccount: "Already have an account?",
+    login: "Login",
+    label_firstName: "First Name",
+    label_lastName: "Last Name",
+  },
+  user: {
+    dropdown: {
+      manage: "Manage",
+      signOut: "Sign Out",
+      switchAccount: "Switch Account",
+      preferences: "Preferences",
+      help: "Help",
+      sendFeedback: "Send Feedback",
+    },
+    edit: {
+      sidebar: { account: "Account", security: "Security", help: "Help" },
+      accounts: {
+        title: "Account",
+        subtitle: "Manage your account information",
+        profile: "Profile",
+        emailAddresses: {
+          title: "Email Addresses",
+          primaryEmailAddress: "Primary Email Address",
+          primaryEmailAddress_subtitle:
+            "The email address is the primary email address",
+          remove: "Remove",
+          remove_subtitle:
+            "Delete this meail address and remove it from your account",
+          removeemailAddress: "Remove email address",
+          addAsEmailAddress: "Add an email address",
+        },
+        connectedAccounts: {
+          title: "Connected Accounts",
+          connectAccount: "Connect Account",
+          remove: "Remove",
+          remove_subtitle: "Remove this connected account from your account",
+          removeConnectAccount: "Remove connected account",
+        },
+      },
+      security: {
+        title: "Security",
+        password: "Password",
+        setPassword: "Set Password",
+        activeDevices: "Active Devices",
+        changePassword: "Change Password",
+      },
+      setPassword: {
+        title: "Set Password",
+        newPassword: "New Password",
+        confirmPassword: "Confirm Password",
+        lenError: "Your password nust contains 8 or more charactes.",
+        confirmPasswordError: "Password doesn't match",
+        signOutAllDevices: "Sign out of all other devices",
+        cancel: "CANCEL",
+        continue: "Continue",
+      },
+      addConnectedAccount: {
+        title: "Add COnnected Devices",
+        noProviderError: "There are no available external account providers.",
+        cancel: "CANCEL"
+      },
+      updateProfile: {
+        title: "Update Profile",
+        profileImage: "Profile Image",
+        uploadImage: "Upload Image",
+        removeImage: "Remove Image",
+        cancel: "CANCEL",
+        continue: "Continue",
+      }
+    },
+  },
 };

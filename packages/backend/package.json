@@ -9,18 +9,30 @@
     "url": "git+https://github.com/sse-auth/react-3.x.x.git"
   },
   "scripts": {
-    "build": "npm run clean && npm run providers && tsc",
+    "build": "npm run clean && npm run providers && tsup",
     "clean": "rimraf dist",
     "providers": "node scripts/generate-providers"
   },
   "exports": {
     "./providers/*": {
-      "import": "./dist/providers/*.js",
-      "types": "./dist/providers/*.ts"
+      "import": {
+        "types": "./dist/providers/*.d.ts",
+        "default": "./dist/providers/*.d.js"
+      },
+      "require": {
+        "types": "./dist/providers/*.d.cts",
+        "default": "./dist/providers/*.d.cjs"
+      }
     },
-    "./utils": {
-      "import": "./dist/utils/*.js",
-      "types": "./dist/utils/*.ts"
+    "./utils/*": {
+      "import": {
+        "types": "./dist/utils/*.d.ts",
+        "default": "./dist/utils/*.d.js"
+      },
+      "require": {
+        "types": "./dist/utils/*.d.cts",
+        "default": "./dist/utils/*.d.cjs"
+      }
     }
   },
   "author": "SSE World",
@@ -35,6 +47,7 @@
     "react": "^19.0.0"
   },
   "devDependencies": {
-    "@types/nodemailer": "^6.4.17"
+    "@types/nodemailer": "^6.4.17",
+    "tsup": "^8.3.5"
   }
 }

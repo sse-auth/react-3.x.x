@@ -61,7 +61,7 @@ export default function MicrosoftEntraID(
         const issuer = json.issuer.replace("{tenantid}", tenantId);
         return Response.json({ ...json, issuer });
       }
-      return fetch(...(args as [RequestInfo, RequestInit?]));
+      return fetch(...args);
     },
     [conformInternal]: true,
     options: config,
