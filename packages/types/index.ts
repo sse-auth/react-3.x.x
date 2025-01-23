@@ -262,30 +262,6 @@ export interface JWTOptions {
   decode: (params: JWTDecodeParams) => Awaitable<JWT | null>;
 }
 
-/** @internal */
-export interface RequestInternal {
-  url: URL;
-  method: "GET" | "POST";
-  cookies?: Partial<Record<string, string>>;
-  headers?: Record<string, any>;
-  query?: Record<string, any>;
-  body?: Record<string, any>;
-  action: AuthAction;
-  providerId?: string;
-  error?: string;
-}
-
-// Should only be used by frameworks
-export interface ResponseInternal<
-  Body extends string | Record<string, any> | any[] | null = any
-> {
-  status?: number;
-  headers?: Headers | HeadersInit;
-  body?: Body;
-  redirect?: string;
-  cookies?: Cookie[];
-}
-
 /**
  * Supported actions by Auth.js. Each action map to a REST API endpoint.
  * Some actions have a `GET` and `POST` variant, depending on if the action
