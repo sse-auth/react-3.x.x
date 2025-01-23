@@ -1,4 +1,4 @@
-import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/oauth";
+import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider";
 
 /** The returned user profile from Frontegg when using the profile callback. [Reference](https://docs.frontegg.com/docs/admin-portal-profile). */
 export interface FronteggProfile {

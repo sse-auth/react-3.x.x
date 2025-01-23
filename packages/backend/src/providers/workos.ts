@@ -1,4 +1,4 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/oauth";
+import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
 
 /**
  * - {@link https://workos.com/docs/reference/sso/profile | The returned profile object}

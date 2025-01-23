@@ -1,4 +1,4 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/oauth";
+import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
 
 /**
  * Represents the Nextcloud user profile data returned from the `/ocs/v1.php/cloud/users/`.

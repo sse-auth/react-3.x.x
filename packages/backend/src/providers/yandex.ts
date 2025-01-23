@@ -1,4 +1,4 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/oauth";
+import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
 
 /**
  * - {@link https://yandex.com/dev/id/doc/en/user-information | Getting information about the user}

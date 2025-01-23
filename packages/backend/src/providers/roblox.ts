@@ -1,4 +1,4 @@
-import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/oauth";
+import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider";
 
 /**
  * Corresponds to the user structure documented here:

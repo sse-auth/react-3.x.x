@@ -1,5 +1,5 @@
 import { conformInternal, customFetch } from "@sse-auth/types/symbol";
-import { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/oauth";
+import { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
 
 /** The returned user profile from Apple when using the profile callback. */
 export interface AppleProfile extends Record<string, any> {

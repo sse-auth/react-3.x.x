@@ -1,4 +1,4 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/oauth";
+import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
 
 export interface PinterestProfile extends Record<string, any> {
   account_type: "BUSINESS" | "PINNER";

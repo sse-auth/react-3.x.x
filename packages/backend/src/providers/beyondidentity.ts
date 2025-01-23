@@ -1,4 +1,4 @@
-import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/oauth";
+import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider";
 
 /** @see [Beyond Identity Developer Docs](https://developer.beyondidentity.com/) */
 export interface BeyondIdentityProfile {

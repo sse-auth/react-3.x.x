@@ -1,4 +1,4 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/oauth";
+import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
 
 /**
  * See: https://developers.zoom.us/docs/integrations/oauth/#using-an-access-token
@@ -55,4 +55,4 @@ export default function Zoom(
   };
 }
 
-export { Zoom }
+export { Zoom };

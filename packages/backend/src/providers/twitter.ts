@@ -1,4 +1,4 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/oauth";
+import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
 
 /**
  * [Users lookup](https://developer.x.com/en/docs/twitter-api/users/lookup/api-reference/get-users-me)

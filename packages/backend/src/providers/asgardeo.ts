@@ -1,4 +1,4 @@
-import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/oauth";
+import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider";
 
 /** The returned user profile from Asgardeo when using the profile callback. */
 export interface AsgardeoProfile extends Record<string, any> {

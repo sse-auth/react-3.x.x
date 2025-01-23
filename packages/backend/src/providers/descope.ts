@@ -1,4 +1,4 @@
-import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/oauth";
+import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider";
 
 /** The returned user profile from Descope when using the profile callback.
  * [See Load User](https://docs.descope.com/api/openapi/usermanagement/operation/LoadUser/)

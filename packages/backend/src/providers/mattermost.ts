@@ -1,4 +1,4 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/oauth";
+import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
 
 /** [Get a user](https://api.mattermost.com/#tag/users/operation/GetUser) */
 export interface MattermostProfile {

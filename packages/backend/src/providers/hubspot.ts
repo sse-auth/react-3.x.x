@@ -1,4 +1,4 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/oauth";
+import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
 
 interface HubSpotProfile extends Record<string, any> {
   // https://legacydocs.hubspot.com/docs/methods/oauth2/get-access-token-information

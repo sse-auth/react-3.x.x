@@ -1,4 +1,4 @@
-import type { OIDCConfig, OAuthUserConfig } from "@sse-auth/types/oauth";
+import type { OIDCConfig, OAuthUserConfig } from "@sse-auth/types/provider";
 
 /**
  * The returned user profile from ZITADEL when using the profile callback. See the standard claims reference [here](https://zitadel.com/docs/apis/openidoauth/claims#standard-claims).

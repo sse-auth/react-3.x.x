@@ -1,4 +1,4 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/oauth";
+import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
 
 /** https://developers.naver.com/docs/login/profile/profile.md */
 export interface NaverProfile extends Record<string, any> {

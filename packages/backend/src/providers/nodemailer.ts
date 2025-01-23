@@ -1,51 +1,10 @@
 import { createTransport } from "nodemailer";
 import { html, text } from "../utils/email";
-
-import type { Transport, TransportOptions } from "nodemailer";
-import * as JSONTransport from "nodemailer/lib/json-transport/index";
-import * as SendmailTransport from "nodemailer/lib/sendmail-transport/index";
-import * as SESTransport from "nodemailer/lib/ses-transport/index";
-import * as SMTPPool from "nodemailer/lib/smtp-pool/index";
-import * as SMTPTransport from "nodemailer/lib/smtp-transport/index";
-import * as StreamTransport from "nodemailer/lib/stream-transport/index";
-import type { Awaitable, Theme } from "@sse-auth/types";
-import type { EmailConfig } from "./email";
-
-type AllTransportOptions =
-  | string
-  | SMTPTransport
-  | SMTPTransport.Options
-  | SMTPPool
-  | SMTPPool.Options
-  | SendmailTransport
-  | SendmailTransport.Options
-  | StreamTransport
-  | StreamTransport.Options
-  | JSONTransport
-  | JSONTransport.Options
-  | SESTransport
-  | SESTransport.Options
-  | Transport<any>
-  | TransportOptions;
-
-export interface NodemailerConfig extends EmailConfig {
-  server?: AllTransportOptions;
-  sendVerificationRequest: (params: {
-    identifier: string;
-    url: string;
-    expires: Date;
-    provider: NodemailerConfig;
-    token: string;
-    theme: Theme;
-    request: Request;
-  }) => Awaitable<void>;
-  options?: NodemailerUserConfig;
-}
-
-export type NodemailerUserConfig = Omit<
-  Partial<NodemailerConfig>,
-  "options" | "type"
->;
+import {
+  NodemailerConfig,
+  NodemailerUserConfig,
+} from "@sse-auth/types/provider/nodemailer";
+export * from "@sse-auth/types/provider/nodemailer"
 
 export default function Nodemailer(
   config: NodemailerUserConfig
@@ -82,4 +41,4 @@ export default function Nodemailer(
   };
 }
 
-export { Nodemailer }
+export { Nodemailer };

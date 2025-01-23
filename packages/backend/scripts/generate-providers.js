@@ -1,7 +1,9 @@
 import { join } from "path";
 import { readdirSync, writeFileSync } from "fs";
 
-const providersPath = join(process.cwd(), "src/providers");
+const currentDir = process.cwd();
+const providersPath = join(currentDir, "src/providers");
+const outputPath = join(currentDir, "..", "types/provider")
 
 const files = readdirSync(providersPath, "utf8");
 
@@ -51,4 +53,4 @@ export type OAuthProviderId =
 export type EmailProviderId = 
   | ${emailProviders.join("\n  | ")}`;
 
-writeFileSync(join(providersPath, "provider-types.ts"), content);
+writeFileSync(join(outputPath, "provider-types.ts"), content);

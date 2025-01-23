@@ -1,4 +1,4 @@
-import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/oauth";
+import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider";
 import { customFetch, conformInternal } from "@sse-auth/types/symbol";
 
 export interface MicrosoftEntraIDProfile extends Record<string, any> {
