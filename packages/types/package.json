@@ -1,11 +1,12 @@
 {
   "name": "@sse-auth/types",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "main": "./index.ts",
   "author": "SSE World",
   "license": "MIT",
   "description": "",
   "dependencies": {
+    "csstype": "^3.1.3",
     "nodemailer": "^6.9.16",
     "oauth4webapi": "^3.1.4"
   },
@@ -17,7 +18,7 @@
     "./adapter": "./adapter.ts",
     "./config": "./config.ts",
     "./error": "./errors.ts",
-    "./provider": "./provider.ts",
+    "./provider": "./provider/index.ts",
     "./provider/*": "./provider/*.ts"
   }
 }

@@ -22,6 +22,31 @@ import type { Adapter, AdapterSession, AdapterUser } from "./adapter";
 import { Cookie, CookieOption, CookiesOptions } from "./cookie";
 import { raw, skipCSRFCheck } from "./symbol";
 
+export interface PagesOptions {
+  /**
+   * The path to the sign in page.
+   *
+   * The optional "error" query parameter is set to
+   * one of the {@link SignInPageErrorParam available} values.
+   *
+   * @default "/signin"
+   */
+  signIn: string;
+  signOut: string;
+  /**
+   * The path to the error page.
+   *
+   * The optional "error" query parameter is set to
+   * one of the {@link ErrorPageParam available} values.
+   *
+   * @default "/error"
+   */
+  error: string;
+  verifyRequest: string;
+  /** If set, new users will be directed here on first sign in */
+  newUser: string;
+}
+
 export interface AuthConfig {
   /**
    * List of authentication providers for signing in
@@ -97,15 +122,15 @@ export interface AuthConfig {
    *
    * ```ts
    *   pages: {
-   *     signIn: '/auth/signin',
-   *     signOut: '/auth/signout',
-   *     error: '/auth/error',
-   *     verifyRequest: '/auth/verify-request',
-   *     newUser: '/auth/new-user'
+   *     signIn: '/signin',
+   *     signOut: '/signout',
+   *     error: '/error',
+   *     verifyRequest: '/verify-request',
+   *     newUser: '/new-user'
    *   }
    * ```
    */
-  // pages?: Partial<PagesOptions>;
+  pages?: Partial<PagesOptions>;
   /**
    * Callbacks are asynchronous functions you can use to control what happens when an action is performed.
    * Callbacks are *extremely powerful*, especially in scenarios involving JSON Web Tokens
@@ -536,7 +561,7 @@ export interface InternalOptions<TProviderType = ProviderType> {
   debug: boolean;
   // logger: LoggerInstance;
   session: NonNullable<Required<AuthConfig["session"]>>;
-  // pages: Partial<PagesOptions>;
+  pages: Partial<PagesOptions>;
   jwt: JWTOptions;
   events: NonNullable<AuthConfig["events"]>;
   adapter: Required<Adapter> | undefined;
