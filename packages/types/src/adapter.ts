@@ -1,5 +1,6 @@
 import { TokenEndpointResponse } from "oauth4webapi";
-import { Authenticator, Awaitable, Profile, ProviderType } from "./index";
+import { Authenticator, Awaitable, Profile } from "./index";
+import { ProviderType } from "./provider";
 
 export interface Account extends Partial<TokenEndpointResponse> {
   /** Provider's id for this account. E.g. "google". See the full list at https://authjs.dev/reference/core/providers */

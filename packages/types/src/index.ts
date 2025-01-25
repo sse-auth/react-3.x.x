@@ -1,4 +1,3 @@
-import { Cookie, SerializeOptions } from "./cookie";
 import type { TokenEndpointResponse, AuthorizationDetails } from "oauth4webapi";
 import { ProviderType } from "./provider";
 
