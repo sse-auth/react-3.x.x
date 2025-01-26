@@ -5,11 +5,11 @@
  */
 
 import * as o from "oauth4webapi";
-import { InvalidCheck } from "@sse-auth/types/errors";
-import { decode, encode } from "../utils/jwt";
+import { InvalidCheck } from "@sse-auth/types/error";
+import { decode, encode } from "../utils/jwt.js";
 import type { Cookie, CookiesOptions } from "@sse-auth/types/cookie";
 import type { InternalOptions, RequestInternal } from "@sse-auth/types/config";
-import type { User } from "@sse-auth/types";
+// import type { User } from "@sse-auth/types";
 
 interface CookiePayload {
   value: string;

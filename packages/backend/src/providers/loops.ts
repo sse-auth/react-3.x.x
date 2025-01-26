@@ -1,4 +1,4 @@
-import type { EmailConfig } from "./email";
+import type { EmailConfig } from "./email.js";
 
 export type LoopsUserConfig = Omit<Partial<LoopsConfig>, "options" | "type">;
 

@@ -1,5 +1,4 @@
 import type { AuthConfig } from "@sse-auth/types/config";
-import type { AuthAction } from "@sse-auth/types";
 
 /**
  *  Set default env variables on the config object

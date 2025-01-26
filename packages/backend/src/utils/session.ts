@@ -1,5 +1,5 @@
 import type { InternalOptions } from "@sse-auth/types/config";
-import type { SessionStore } from "./cookie";
+import type { SessionStore } from "./cookie.js";
 import type { User } from "@sse-auth/types";
 
 /**

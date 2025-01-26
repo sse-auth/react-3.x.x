@@ -1,4 +1,4 @@
-import * as checks from "./checks";
+import * as checks from "./checks.js";
 import * as o from "oauth4webapi";
 import type { InternalOptions, RequestInternal } from "@sse-auth/types/config";
 import type { Cookie } from "@sse-auth/types/cookie";
@@ -6,10 +6,10 @@ import { conformInternal, customFetch } from "@sse-auth/types/symbol";
 import {
   OAuthCallbackError,
   OAuthProfileParseError,
-} from "@sse-auth/types/errors";
+} from "@sse-auth/types/error";
 import { Account, Profile, TokenSet, User } from "@sse-auth/types";
 import { OAuthConfigInternal } from "@sse-auth/types/provider";
-import { isOIDCProvider } from "../utils/providers";
+import { isOIDCProvider } from "../utils/providers.js";
 import { decodeJwt } from "jose";
 
 /**

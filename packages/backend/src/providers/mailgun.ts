@@ -1,5 +1,5 @@
-import type { EmailConfig, EmailUserConfig } from "./email";
-import { html, text } from "../utils/email";
+import type { EmailConfig, EmailUserConfig } from "./email.js";
+import { html, text } from "../utils/email.js";
 
 export default function MailGun(config: EmailUserConfig): EmailConfig {
   return {

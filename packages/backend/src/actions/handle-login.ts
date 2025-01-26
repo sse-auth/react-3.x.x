@@ -1,8 +1,8 @@
 import {
   AccountNotLinked,
   OAuthAccountNotLinked,
-} from "@sse-auth/types/errors";
-import { fromDate } from "../utils/date";
+} from "@sse-auth/types/error";
+import { fromDate } from "../utils/date.js";
 import type {
   AdapterAccount,
   AdapterSession,
@@ -11,7 +11,7 @@ import type {
 import type { InternalOptions } from "@sse-auth/types/config";
 import type { Account, User, JWT } from "@sse-auth/types";
 import type { OAuthConfig } from "@sse-auth/types/provider";
-import type { SessionToken } from "../utils/cookie";
+import type { SessionToken } from "../utils/cookie.js";
 
 /**
  * This function handles the complex flow of signing users in, and either creating,

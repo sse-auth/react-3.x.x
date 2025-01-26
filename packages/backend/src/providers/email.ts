@@ -1,5 +1,5 @@
-import Nodemailer from "./nodemailer";
-import type { NodemailerConfig, NodemailerUserConfig } from "./nodemailer";
+import Nodemailer from "./nodemailer.js";
+import type { NodemailerConfig, NodemailerUserConfig } from "./nodemailer.js";
 export * from "@sse-auth/types/provider/email";
 
 /**

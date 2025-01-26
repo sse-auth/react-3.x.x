@@ -1,4 +1,4 @@
-import { defaultCookies } from "./cookie";
+import { defaultCookies } from "./cookie.js";
 import {
   AuthError,
   DuplicateConditionalUI,
@@ -12,7 +12,7 @@ import {
   MissingWebAuthnAutocomplete,
   UnsupportedStrategy,
   UntrustedHost,
-} from "@sse-auth/types/errors";
+} from "@sse-auth/types/error";
 import type { SemverString } from "@sse-auth/types";
 import { Adapter } from "@sse-auth/types/adapter";
 import { AuthConfig, RequestInternal } from "@sse-auth/types/config";

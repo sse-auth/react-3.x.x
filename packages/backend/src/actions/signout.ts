@@ -1,7 +1,7 @@
-import { SignOutError } from "@sse-auth/types/errors";
+import { SignOutError } from "@sse-auth/types/error";
 import type { InternalOptions, ResponseInternal } from "@sse-auth/types/config";
 import type { Cookie } from "@sse-auth/types/cookie";
-import type { SessionStore } from "../utils/cookie";
+import type { SessionStore } from "../utils/cookie.js";
 
 /**
  * Destroys the session.

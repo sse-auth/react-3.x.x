@@ -1,12 +1,12 @@
-import * as cookie from "./vendored/cookie";
-import { UnknownAction } from "@sse-auth/types/errors";
+import * as cookie from "./vendored/cookie.js";
+import { UnknownAction } from "@sse-auth/types/error";
 import { AuthAction } from "@sse-auth/types";
 import {
   RequestInternal,
   ResponseInternal,
   AuthConfig,
 } from "@sse-auth/types/config";
-import { isAuthAction } from "./actions";
+import { isAuthAction } from "./actions.js";
 
 const { parse: parseCookie, serialize: serializeCookie } = cookie;
 

@@ -1,5 +1,5 @@
-import { createHash, randomString, toRequest } from "../utils/web";
-import { AccessDenied } from "@sse-auth/types/errors";
+import { createHash, randomString, toRequest } from "../utils/web.js";
+import { AccessDenied } from "@sse-auth/types/error";
 import type { InternalOptions, RequestInternal } from "@sse-auth/types/config";
 import type { Account } from "@sse-auth/types";
 

@@ -50,7 +50,7 @@ export default function AzureDevOpsProvider<P extends AzureDevOpsProfile>(
           "urn:ietf:params:oauth:grant-type:jwt-bearer"
         );
         params.append("assertion", context.params.code as string);
-        params.append("redirect_uri", context.provider.callbackUrl ?? "");
+        params.append("redirect_uri", "");
         const response = await fetch(tokenEndpointUrl, {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
           method: "POST",

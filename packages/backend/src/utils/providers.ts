@@ -1,4 +1,4 @@
-import { merge } from "./merge";
+import { merge } from "./merge.js";
 
 import type {
   AccountCallback,

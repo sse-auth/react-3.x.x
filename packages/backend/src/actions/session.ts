@@ -1,10 +1,10 @@
-import { JWTSessionError, SessionTokenError } from "@sse-auth/types/errors";
-import { fromDate } from "../utils/date";
+import { JWTSessionError, SessionTokenError } from "@sse-auth/types/error";
+import { fromDate } from "../utils/date.js";
 import type { Adapter } from "@sse-auth/types/adapter";
 import type { InternalOptions, ResponseInternal } from "@sse-auth/types/config";
 import type { Session } from "@sse-auth/types";
 import type { Cookie } from "@sse-auth/types/cookie";
-import type { SessionStore } from "../utils/cookie";
+import type { SessionStore } from "../utils/cookie.js";
 
 /** Return a session object filtered via `callbacks.session` */
 export async function session(

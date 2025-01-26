@@ -3,7 +3,7 @@ import type {
   CookiesOptions,
   Cookie,
 } from "@sse-auth/types/cookie";
-import type { RequestInternal } from "@sse-auth/types";
+import type { RequestInternal } from "@sse-auth/types/config";
 
 // Uncomment to recalculate the estimated size
 // of an empty session cookie

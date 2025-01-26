@@ -1,9 +1,9 @@
-import * as jwt from "../utils/jwt";
-import * as cookie from "../utils/cookie";
-import { createCSRFToken } from "../actions/csrf-token";
-import { AdapterError, EventError } from "@sse-auth/types/errors";
-import parseProviders from "../utils/providers";
-import { merge } from "../utils/merge";
+import * as jwt from "../utils/jwt.js";
+import * as cookie from "../utils/cookie.js";
+import { createCSRFToken } from "../actions/csrf-token.js";
+import { AdapterError, EventError } from "@sse-auth/types/error";
+import parseProviders from "../utils/providers.js";
+import { merge } from "../utils/merge.js";
 import type {
   InternalOptions,
   RequestInternal,
@@ -68,19 +68,19 @@ export async function init({
   const { providers, provider } = parseProviders({ url, providerId, config });
   const maxAge = 30 * 24 * 60 * 60; // Sessions expire after 30 days of being idle by default
   let isOnRedirectProxy = false;
-  if (
-    (provider?.type === "oauth" || provider?.type === "oidc") &&
-    provider.redirectProxyUrl
-  ) {
-    try {
-      isOnRedirectProxy =
-        new URL(provider.redirectProxyUrl).origin === url.origin;
-    } catch {
-      throw new TypeError(
-        `redirectProxyUrl must be a valid URL. Received: ${provider.redirectProxyUrl}`
-      );
-    }
-  }
+  // if (
+  //   (provider?.type === "oauth" || provider?.type === "oidc") &&
+  //   provider.redirectProxyUrl
+  // ) {
+  //   try {
+  //     isOnRedirectProxy =
+  //       new URL(provider.redirectProxyUrl).origin === url.origin;
+  //   } catch {
+  //     throw new TypeError(
+  //       `redirectProxyUrl must be a valid URL. Received: ${provider.redirectProxyUrl}`
+  //     );
+  //   }
+  // }
 
   // User provided options are overridden by other options,
   // except for the options with special handling above

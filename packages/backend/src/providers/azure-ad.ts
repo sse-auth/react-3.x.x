@@ -1,7 +1,7 @@
 import {
   MicrosoftEntraID,
   MicrosoftEntraIDProfile,
-} from "./microsoft-entra-id";
+} from "./microsoft-entra-id.js";
 
 export type AzureADProfile = MicrosoftEntraIDProfile;
 

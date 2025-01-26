@@ -8,8 +8,9 @@
     "type": "git",
     "url": "git+https://github.com/sse-auth/react-3.x.x.git"
   },
+  "files": ["dist"],
   "scripts": {
-    "build": "npm run clean && npm run providers && tsup",
+    "build": "npm run clean && tsup",
     "clean": "rimraf dist",
     "providers": "node scripts/generate-providers"
   },
@@ -17,21 +18,41 @@
     "./providers/*": {
       "import": {
         "types": "./dist/providers/*.d.ts",
-        "default": "./dist/providers/*.d.js"
+        "default": "./dist/providers/*.js"
       },
       "require": {
         "types": "./dist/providers/*.d.cts",
-        "default": "./dist/providers/*.d.cjs"
+        "default": "./dist/providers/*.cjs"
       }
     },
     "./utils/*": {
       "import": {
         "types": "./dist/utils/*.d.ts",
-        "default": "./dist/utils/*.d.js"
+        "default": "./dist/utils/*.js"
       },
       "require": {
         "types": "./dist/utils/*.d.cts",
-        "default": "./dist/utils/*.d.cjs"
+        "default": "./dist/utils/*.cjs"
+      }
+    },
+    "./actions/*": {
+      "import": {
+        "types": "./dist/actions/*.d.ts",
+        "default": "./dist/actions/*.js"
+      },
+      "require": {
+        "types": "./dist/actions/*.d.cts",
+        "default": "./dist/actions/*.cjs"
+      }
+    },
+    "./lib/*": {
+      "import": {
+        "types": "./dist/lib/*.d.ts",
+        "default": "./dist/lib/*.js"
+      },
+      "require": {
+        "types": "./dist/actions/*.d.cts",
+        "default": "./dist/lib/*.cjs"
       }
     }
   },
@@ -43,7 +64,7 @@
   "homepage": "https://github.com/sse-auth/react-3.x.x#readme",
   "dependencies": {
     "@panva/hkdf": "^1.2.1",
-    "@sse-auth/types": "^1.3.3",
+    "@sse-auth/types": "file:../types/sse-auth-types-1.3.5.tgz",
     "jose": "^5.9.6",
     "nodemailer": "^6.9.16",
     "oauth4webapi": "^3.1.4",
@@ -51,6 +72,9 @@
   },
   "devDependencies": {
     "@types/nodemailer": "^6.4.17",
-    "tsup": "^8.3.5"
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3"
   }
 }

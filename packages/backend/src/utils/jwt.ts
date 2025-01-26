@@ -38,10 +38,10 @@ import {
   calculateJwkThumbprint,
   jwtDecrypt,
 } from "jose";
-import { defaultCookies, SessionStore } from "./cookie";
+import { defaultCookies, SessionStore } from "./cookie.js";
 // import type { LoggerInstance } from "./lib/utils/logger.js";
-import { MissingSecret } from "@sse-auth/types/errors";
-import * as cookie from "./vendored/cookie";
+import { MissingSecret } from "@sse-auth/types/error";
+import * as cookie from "./vendored/cookie.js";
 import {
   JWT,
   JWTDecodeParams,

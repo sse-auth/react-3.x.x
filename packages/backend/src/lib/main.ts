@@ -1,7 +1,7 @@
 import { AuthConfig } from "@sse-auth/types/config";
 import { raw } from "@sse-auth/types/symbol";
-import { toInternalRequest } from "../utils/web";
-import { assertConfig } from "../utils/assert";
+import { toInternalRequest } from "../utils/web.js";
+import { assertConfig } from "../utils/assert.js";
 
 export async function Auth(
   request: Request,

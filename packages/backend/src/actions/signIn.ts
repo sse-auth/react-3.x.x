@@ -1,5 +1,5 @@
-import { getAuthorizationUrl } from "./oauth";
-import { sendToken } from "./send-token";
+import { getAuthorizationUrl } from "./oauth.js";
+import { sendToken } from "./send-token.js";
 import type { Cookie } from "@sse-auth/types/cookie";
 import {
   InternalOptions,

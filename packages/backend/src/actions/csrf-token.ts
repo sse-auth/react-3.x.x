@@ -1,7 +1,7 @@
-import { createHash, randomString } from "../utils/web";
+import { createHash, randomString } from "../utils/web.js";
 import type { AuthAction } from "@sse-auth/types";
 import type { InternalOptions } from "@sse-auth/types/config";
-import { MissingCSRF } from "@sse-auth/types/errors";
+import { MissingCSRF } from "@sse-auth/types/error";
 
 interface CreateCSRFTokenParams {
   options: InternalOptions;

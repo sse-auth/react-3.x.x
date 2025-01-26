@@ -1,8 +1,8 @@
-import { UnknownAction } from "@sse-auth/types/errors";
-import { SessionStore } from "../utils/cookie";
-import { init } from "./init";
-import * as actions from "../actions";
-import { validateCSRF } from "../actions/csrf-token";
+import { UnknownAction } from "@sse-auth/types/error";
+import { SessionStore } from "../utils/cookie.js";
+import { init } from "./init.js";
+import * as actions from "../actions/index.js";
+import { validateCSRF } from "../actions/csrf-token.js";
 import type {
   RequestInternal,
   ResponseInternal,
@@ -33,17 +33,17 @@ export async function AuthInternal(
   const sessionStore = new SessionStore(
     options.cookies.sessionToken,
     request.cookies,
-    options.logger
+    console
   );
 
   if (method === "POST") {
     const { csrfTokenVerified } = options;
     switch (action) {
-      case "callback":
-        if (options.provider.type === "credentials")
-          // Verified CSRF Token required for credentials providers only
-          validateCSRF(action, csrfTokenVerified);
-        return await actions.callback(request, options, sessionStore, cookies);
+      // case "callback":
+      //   if (options.provider.type === "credentials")
+      //     // Verified CSRF Token required for credentials providers only
+      //     validateCSRF(action, csrfTokenVerified);
+      //   return await actions.callback(request, options, sessionStore, cookies);
       case "session":
         validateCSRF(action, csrfTokenVerified);
         return await actions.session(
