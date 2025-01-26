@@ -18,7 +18,10 @@
   "description": "",
   "dependencies": {
     "tailwind": "^4.0.0",
-    "tsup": "^8.3.5",
     "typescript": "^5.7.2"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.2",
+    "tsup": "^8.3.5"
   }
 }
