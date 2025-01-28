@@ -79,8 +79,8 @@ export type Algorithm =
   | "sha384"
   | "sha512";
 
-interface ParsedUrlQuery extends NodeJS.Dict<string | string[]> {}
-interface ParsedUrlQueryInput
+export interface ParsedUrlQuery extends NodeJS.Dict<string | string[]> {}
+export interface ParsedUrlQueryInput
   extends NodeJS.Dict<
     | string
     | number
@@ -107,7 +107,7 @@ export interface UrlObject {
 }
 
 // Output of `url.parse`
-interface Url {
+export interface Url {
   auth: string | null;
   hash: string | null;
   host: string | null;

@@ -1,6 +1,6 @@
 import * as base32 from "base32.js";
+import * as crypto from "crypto";
 import { Buffer } from "buffer";
-import * as url from "url";
 import {
   byteSizeForAlgo,
   checkAlgorithm,
@@ -15,7 +15,6 @@ import {
   secretAsBuffer,
 } from "./helper";
 import { BaseParams, HOTPParams, TOTPParams } from "./types";
-import createHmac, { Algorithm } from "create-hmac";
 
 /**
  * Generate a base32-encoded random secret.
@@ -117,8 +116,7 @@ abstract class OTP {
     }
 
     // return hmac digest buffer
-    const hmac = createHmac(this.algorithm as Algorithm, this._getSecret());
-    // const hmac = window.crypto;
+    const hmac = crypto.createHmac(this.algorithm, this._getSecret());
     hmac.update(buf);
     return hmac.digest();
   }
@@ -236,7 +234,7 @@ abstract class OTP {
    * @see https://github.com/google/google-authenticator/wiki/Key-Uri-Format
    */
   public url(): string {
-    // // unpack options
+    // unpack options
     // const label = this.label;
     // const counter = this.counter;
 
@@ -277,13 +275,19 @@ abstract class OTP {
       query["period"] = this.period;
     }
 
-    const ur = url.format({
-      protocol: "otpauth",
-      hostname: this.type,
-      pathname: encodeURIComponent(this.label),
-      query,
-      slashes: true,
-    });
+    // return url
+    // return url.format({
+    //   protocol: "otpauth",
+    //   hostname: this.type,
+    //   pathname: encodeURIComponent(this.label),
+    //   query,
+    //   slashes: true,
+    // });
+
+    const queryString = new URLSearchParams(query).toString();
+    const ur = `otpauth://${this.type}/${encodeURIComponent(
+      this.label
+    )}?${queryString}`;
     // return url
     return ur;
   }
