@@ -4,6 +4,7 @@ import * as base32 from "base32.js";
 import _debug from "debug";
 import { Buffer } from "buffer";
 import { UrlObject } from "./types";
+import { Hmac } from "./lib/hmac";
 
 export const debug = _debug("sse-authenticator");
 
@@ -137,7 +138,13 @@ export function secretAsBuffer(secret, encoding): Buffer {
   }
 }
 
-// export function createHmac() {}
+// function createHmacBuffer(algo: Algorithm, key: string | Buffer): Hmac {
+//   const alg = algo
+//   // if (alg === 'md5') {
+//   //   return new Legacy(md5, key)
+//   // }
+//   // return new Hmac(alg, key)
+// }
 
 export function urlFormat(urlObject: UrlObject | string): string {
   if (typeof urlObject === "string") {

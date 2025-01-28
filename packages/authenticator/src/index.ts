@@ -1,5 +1,4 @@
 import * as base32 from "base32.js";
-import * as crypto from "crypto";
 import { Buffer } from "buffer";
 import {
   byteSizeForAlgo,
@@ -15,6 +14,7 @@ import {
   secretAsBuffer,
 } from "./helper";
 import { BaseParams, HOTPParams, TOTPParams } from "./types";
+import { createHmac } from "./lib/hmac";
 
 /**
  * Generate a base32-encoded random secret.
@@ -115,9 +115,9 @@ abstract class OTP {
       tmp = tmp >> 8;
     }
 
-    // return hmac digest buffer
-    const hmac = crypto.createHmac(this.algorithm, this._getSecret());
+    const hmac = createHmac(this.algorithm, this._getSecret());
     hmac.update(buf);
+    // return hmac digest buffer
     return hmac.digest();
   }
 
