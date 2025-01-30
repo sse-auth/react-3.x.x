@@ -17,13 +17,13 @@ function App() {
   };
 
   const handleGenerateToken = () => {
-    const totp = new TOTP({ secret, label: "SSE WOrld", issuer: "SSE", period: 30 });
+    const totp = new TOTP({ secret, label: "SSE World", issuer: "SSE", period: 30 });
     const generatedToken = totp.token();
     setToken(generatedToken);
   };
 
   const handleVerifyCode = () => {
-    const totp = new TOTP({ secret, label: "SSE WOrld", issuer: "SSE", period: 30 });
+    const totp = new TOTP({ secret, label: "SSE World", issuer: "SSE", period: 30 });
     const valid = totp.test(inputCode);
     setIsValid(valid);
   };
