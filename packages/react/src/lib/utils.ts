@@ -1,3 +1,4 @@
+import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import React from "react";
 
@@ -13,4 +14,17 @@ export function cloneElement(element: React.ReactElement, classNames: string) {
     // @ts-ignore
     className: twMerge(element.props.className, classNames),
   });
+}
+
+export function getColumnCount({
+  length,
+  max,
+}: Record<"length" | "max", number>): number {
+  const numRows = Math.ceil(length / max);
+  return Math.ceil(length / numRows);
+}
+
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
 }

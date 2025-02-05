@@ -19,10 +19,7 @@
     "skipLibCheck": true,
     "sourceMap": false,
     "strict": true,
-    "target": "ES2019",
-    "paths": {
-      "~/*": ["src/*"]
-    }
+    "target": "ES2019"
   },
   "include": ["src"],
   "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts", "dist", "build"]

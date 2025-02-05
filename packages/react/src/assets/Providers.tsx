@@ -1,31 +1,6 @@
-export const GoogleIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="0.98em"
-    height="1em"
-    viewBox="0 0 256 262"
-    className="-ml-1 size-3.5"
-  >
-    <path
-      fill="#4285f4"
-      d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622l38.755 30.023l2.685.268c24.659-22.774 38.875-56.282 38.875-96.027"
-    ></path>
-    <path
-      fill="#34a853"
-      d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055c-34.523 0-63.824-22.773-74.269-54.25l-1.531.13l-40.298 31.187l-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1"
-    ></path>
-    <path
-      fill="#fbbc05"
-      d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82c0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602z"
-    ></path>
-    <path
-      fill="#eb4335"
-      d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0C79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251"
-    ></path>
-  </svg>
-);
+import { BungieIcon, ClickUpIcon, InstagramIcon } from "./Icon";
 
-export const MicrosoftIcon = () => (
+const MicrosoftIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="1em"
@@ -40,7 +15,7 @@ export const MicrosoftIcon = () => (
   </svg>
 );
 
-export const AppleIcon = () => (
+const AppleIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="4 32 376.4 449.4"
@@ -50,7 +25,7 @@ export const AppleIcon = () => (
   </svg>
 );
 
-export const School42Icon = () => (
+const School42Icon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlSpace="preserve"
@@ -64,7 +39,7 @@ export const School42Icon = () => (
   </svg>
 );
 
-export const AsgardeoIcon = () => (
+const AsgardeoIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     className="-ml-1 size-3.5"
@@ -89,7 +64,7 @@ export const AsgardeoIcon = () => (
   </svg>
 );
 
-export const Auth0Icon = () => (
+const Auth0Icon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     preserveAspectRatio="xMinYMin meet"
@@ -103,7 +78,7 @@ export const Auth0Icon = () => (
   </svg>
 );
 
-export const AuthentikIcon = () => (
+const AuthentikIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -182,7 +157,7 @@ export const AuthentikIcon = () => (
   </svg>
 );
 
-export const AzureIcon = () => (
+const AzureIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 59.2 47.3"
@@ -195,7 +170,7 @@ export const AzureIcon = () => (
   </svg>
 );
 
-export const BankIDIcon = () => (
+const BankIDIcon = () => (
   <svg
     width="120"
     height="90"
@@ -240,7 +215,7 @@ export const BankIDIcon = () => (
   </svg>
 );
 
-export const BattleNetIcon = () => (
+const BattleNetIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     className="-ml-1 size-4"
@@ -253,7 +228,7 @@ export const BattleNetIcon = () => (
   </svg>
 );
 
-export const BeyondIdentityIcon = () => (
+const BeyondIdentityIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
@@ -267,7 +242,7 @@ export const BeyondIdentityIcon = () => (
   </svg>
 );
 
-export const BoxIcon = () => (
+const BoxIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     className="-ml-1 size-4"
@@ -280,7 +255,7 @@ export const BoxIcon = () => (
   </svg>
 );
 
-export const BoxyHQIcon = () => (
+const BoxyHQIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     className="-ml-1 size-3.5 fill-current dark:text-white"
@@ -293,20 +268,20 @@ export const BoxyHQIcon = () => (
     />
     <path
       fill="#212121"
-      fill-rule="evenodd"
+      fillRule="evenodd"
       d="M147.3 0a24 24 0 0 0-24 24v403a24 24 0 0 0 24 24H550a24 24 0 0 0 24-24V24a24 24 0 0 0-24-24H147.3Zm21.2 21.2a24 24 0 0 0-24 24v360.6a24 24 0 0 0 24 24h360.3a24 24 0 0 0 24-24V45.2a24 24 0 0 0-24-24H168.5Z"
-      clip-rule="evenodd"
+      clipRule="evenodd"
     />
     <path
       stroke="#212121"
-      stroke-linecap="round"
-      stroke-width="40"
+      strokeLinecap="round"
+      strokeWidth="40"
       d="m285 171.6-49 49m176.3 49.2 49.5-48.5m-176.6 48.5-49-49m176.9-49.2 48.5 49.5"
     />
     <path
       stroke="#212121"
-      stroke-linecap="round"
-      stroke-width="42"
+      strokeLinecap="round"
+      strokeWidth="42"
       d="M361.3 143.8 338 307"
     />
     <path
@@ -316,7 +291,7 @@ export const BoxyHQIcon = () => (
   </svg>
 );
 
-// export const ClickUpIcon = () => (
+// const ClickUpIcon = () => (
 //   <svg
 //     xmlns="http://www.w3.org/2000/svg"
 //     xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -329,15 +304,15 @@ export const BoxyHQIcon = () => (
 //       <rect width="125" height="125" x="30" y="20" fill="#fff" rx="62.5" />
 //       <path
 //         fill="url(#b)"
-//         fill-rule="evenodd"
+//         fillRule="evenodd"
 //         d="m55.9 105.7 13.5-10.3c7.2 9.3 14.8 13.7 23.3 13.7 8.4 0 15.9-4.3 22.7-13.6l13.7 10c-9.9 13.5-22.2 20.6-36.4 20.6s-26.6-7-36.8-20.4Z"
-//         clip-rule="evenodd"
+//         clipRule="evenodd"
 //       />
 //       <path
 //         fill="url(#c)"
-//         fill-rule="evenodd"
+//         fillRule="evenodd"
 //         d="m92.6 60.7-24 20.7-11.1-12.9 35.2-30.3 35 30.4-11.2 12.8-23.9-20.7Z"
-//         clip-rule="evenodd"
+//         clipRule="evenodd"
 //       />
 //     </g>
 //     <defs>
@@ -349,8 +324,8 @@ export const BoxyHQIcon = () => (
 //         y2="116.3"
 //         gradientUnits="userSpaceOnUse"
 //       >
-//         <stop stop-color="#8930FD" />
-//         <stop offset="1" stop-color="#49CCF9" />
+//         <stop stopColor="#8930FD" />
+//         <stop offset="1" stopColor="#49CCF9" />
 //       </linearGradient>
 //       <linearGradient
 //         id="c"
@@ -360,8 +335,8 @@ export const BoxyHQIcon = () => (
 //         y2="67.6"
 //         gradientUnits="userSpaceOnUse"
 //       >
-//         <stop stop-color="#FF02F0" />
-//         <stop offset="1" stop-color="#FFC800" />
+//         <stop stopColor="#FF02F0" />
+//         <stop offset="1" stopColor="#FFC800" />
 //       </linearGradient>
 //       <filter
 //         id="a"
@@ -387,7 +362,7 @@ export const BoxyHQIcon = () => (
 //   </svg>
 // );
 
-export const CognitoIcon = () => (
+const CognitoIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     preserveAspectRatio="xMidYMid"
@@ -423,7 +398,7 @@ export const CognitoIcon = () => (
   </svg>
 );
 
-export const CoinbaseIcon = () => (
+const CoinbaseIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -437,7 +412,7 @@ export const CoinbaseIcon = () => (
       </clipPath>
     </defs>
     <style></style>
-    <g id="Clip-Path" clip-path="url(#cp1)">
+    <g id="Clip-Path" clipPath="url(#cp1)">
       <path
         id="Layer"
         d="M350.4 777.1c0 259.8 176.7 453.3 428.7 453.3 182.5 0 327.4-115.5 379.5-283h365.1c-66.7 361-367.9 603.6-744.5 603.6C333.2 1551 0 1221.8 0 777.1 0 332.3 341.8.2 779.2.2c385.2 0 680.6 242.6 747.3 600.6h-367.9c-55-167.5-199.8-280.1-382.3-280.1-252 0-425.8 193.5-425.9 456.4z"
@@ -447,7 +422,7 @@ export const CoinbaseIcon = () => (
   </svg>
 );
 
-export const DescopeIcon = () => (
+const DescopeIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlSpace="preserve"
@@ -467,9 +442,9 @@ export const DescopeIcon = () => (
       y2="41.03"
       gradientUnits="userSpaceOnUse"
     >
-      <stop offset="0" stop-color="#0083b5" />
-      <stop offset=".42" stop-color="#0ff" />
-      <stop offset="1" stop-color="#6ff12d" />
+      <stop offset="0" stopColor="#0083b5" />
+      <stop offset=".42" stopColor="#0ff" />
+      <stop offset="1" stopColor="#6ff12d" />
     </linearGradient>
     <path
       d="M129.8 174.7c7.6-1.6 14-4.8 19.2-9.7 7.7-7.3 8.8-17.1 8.8-29.4V80.7c0-12.3-1.1-22.1-8.8-29.4-5.2-4.9-11.6-8.1-19.2-9.7V15.4c12.5 1.8 22.9 6.5 31 14.2 10.6 10 19.9 23.5 19.9 40.5v75c0 17-9.3 30.5-19.9 40.5-8.1 7.7-18.5 12.4-31 14.2v-25.1z"
@@ -483,9 +458,9 @@ export const DescopeIcon = () => (
       y2=".23"
       gradientUnits="userSpaceOnUse"
     >
-      <stop offset="0" stop-color="#0083b5" />
-      <stop offset=".42" stop-color="#0ff" />
-      <stop offset="1" stop-color="#6ff12d" />
+      <stop offset="0" stopColor="#0083b5" />
+      <stop offset=".42" stopColor="#0ff" />
+      <stop offset="1" stopColor="#6ff12d" />
     </linearGradient>
     <path
       fill="url(#SVGID_00000040544740507634666800000017273841385603649669_)"
@@ -499,9 +474,9 @@ export const DescopeIcon = () => (
       y2="11.17"
       gradientUnits="userSpaceOnUse"
     >
-      <stop offset="0" stop-color="#0083b5" />
-      <stop offset=".42" stop-color="#0ff" />
-      <stop offset="1" stop-color="#6ff12d" />
+      <stop offset="0" stopColor="#0083b5" />
+      <stop offset=".42" stopColor="#0ff" />
+      <stop offset="1" stopColor="#6ff12d" />
     </linearGradient>
     <path
       fill="url(#SVGID_00000060713993868866928010000000698955780952733088_)"
@@ -515,9 +490,9 @@ export const DescopeIcon = () => (
       y2="21.43"
       gradientUnits="userSpaceOnUse"
     >
-      <stop offset="0" stop-color="#0083b5" />
-      <stop offset=".42" stop-color="#0ff" />
-      <stop offset="1" stop-color="#6ff12d" />
+      <stop offset="0" stopColor="#0083b5" />
+      <stop offset=".42" stopColor="#0ff" />
+      <stop offset="1" stopColor="#6ff12d" />
     </linearGradient>
     <path
       fill="url(#SVGID_00000115475840050352750520000000840372054167564949_)"
@@ -526,7 +501,7 @@ export const DescopeIcon = () => (
   </svg>
 );
 
-export const DiscordIcon = () => (
+const DiscordIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     preserveAspectRatio="xMidYMid"
@@ -540,7 +515,7 @@ export const DiscordIcon = () => (
   </svg>
 );
 
-export const DribbbleIcon = () => (
+const DribbbleIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     preserveAspectRatio="xMidYMid"
@@ -558,7 +533,7 @@ export const DribbbleIcon = () => (
   </svg>
 );
 
-export const DropboxIcon = () => (
+const DropboxIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     id="Layer_1"
@@ -573,7 +548,7 @@ export const DropboxIcon = () => (
   </svg>
 );
 
-export const EveonlineIcon = () => (
+const EveonlineIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlSpace="preserve"
@@ -584,7 +559,7 @@ export const EveonlineIcon = () => (
   </svg>
 );
 
-export const FacebookIcon = () => (
+const FacebookIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     preserveAspectRatio="xMidYMid"
@@ -602,7 +577,7 @@ export const FacebookIcon = () => (
   </svg>
 );
 
-export const FaceItIcon = () => (
+const FaceItIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="29.3 101.1 451.7 357.9"
@@ -619,7 +594,7 @@ export const FaceItIcon = () => (
   </svg>
 );
 
-export const FoursquareIcon = () => (
+const FoursquareIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 275.9 275.9"
@@ -644,7 +619,7 @@ export const FoursquareIcon = () => (
   </svg>
 );
 
-export const FreshbooksIcon = () => (
+const FreshbooksIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="1 1 253.7 253.7"
@@ -657,7 +632,7 @@ export const FreshbooksIcon = () => (
   </svg>
 );
 
-export const FronteggIcon = () => (
+const FronteggIcon = () => (
   <svg
     width="24"
     className="-ml-1 size-6"
@@ -668,8 +643,8 @@ export const FronteggIcon = () => (
   >
     <rect width="24" height="24" rx="4" fill="#010101" />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M7.40763 4.64403C8.95177 3.54492 10.4959 3.88223 11.9242 5.42988V5.43229C13.3526 6.98175 14.9353 10.0055 14.3924 13.2115C14.2818 13.9037 14.0468 14.5703 13.6988 15.1794C13.016 16.3285 11.8927 17.1504 10.5882 17.4552C9.1414 17.825 7.60647 17.6066 6.32131 16.8479C6.15835 16.7447 6.00202 16.6314 5.85324 16.5088C4.71533 15.5046 4.0295 14.087 3.94961 12.5741C3.88657 11.7325 3.94877 10.8861 4.13419 10.0626C4.30259 9.30607 4.55612 8.57088 4.88997 7.87102C5.44309 6.60112 6.30911 5.49111 7.40763 4.64403ZM6.19819 8.99926C6.37492 8.37094 6.99861 6.54069 8.47096 5.62015C8.54445 5.57504 8.58821 5.49428 8.58576 5.40828C8.58331 5.32229 8.53502 5.24414 8.45909 5.20325C8.38316 5.16237 8.29111 5.16498 8.21763 5.21009C7.35108 5.78903 6.66464 6.59848 6.23619 7.5466C6.02931 7.97185 5.86057 8.4145 5.73193 8.86939C5.71382 8.93369 5.72336 9.00261 5.75825 9.05963C5.79315 9.11665 5.85026 9.15664 5.9159 9.17002C6.04046 9.19625 6.16402 9.1215 6.19819 8.99926Z"
       fill="white"
     />
@@ -680,7 +655,7 @@ export const FronteggIcon = () => (
   </svg>
 );
 
-export const FusionAuthIcon = () => (
+const FusionAuthIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlSpace="preserve"
@@ -697,13 +672,13 @@ export const FusionAuthIcon = () => (
       <g
         id="g6"
         fill="#ec8d53"
-        fill-opacity="1"
+        fillOpacity="1"
         transform="translate(13.26 18.77)scale(.15723)"
       >
         <path
           id="path4"
           fill="#ec8d53"
-          fill-opacity="1"
+          fillOpacity="1"
           d="M77.7 2.2c-3.9 0-7.5 2.1-9.4 5.5a10.6 10.6 0 0 0 9.4 15.8c3.9 0 7.5-2.1 9.4-5.5 2.9-5.2 1-11.7-4.2-14.5-1.7-.8-3.5-1.3-5.2-1.3Z"
           style={{ fill: "#ec8d53" }}
         />
@@ -711,13 +686,13 @@ export const FusionAuthIcon = () => (
       <g
         id="g10"
         fill="#ec8d53"
-        fill-opacity="1"
+        fillOpacity="1"
         transform="translate(13.26 18.77)scale(.15723)"
       >
         <path
           id="path8"
           fill="#ec8d53"
-          fill-opacity="1"
+          fillOpacity="1"
           d="M16 103.6c-3.9 0-7.5 2.1-9.4 5.5a10.6 10.6 0 0 0 9.4 15.8c3.9 0 7.5-2.1 9.4-5.5 2.9-5.2 1-11.7-4.2-14.5-1.6-.8-3.4-1.3-5.2-1.3z"
           style={{ fill: "#ec8d53" }}
         />
@@ -725,13 +700,13 @@ export const FusionAuthIcon = () => (
       <g
         id="g14"
         fill="#ec8d53"
-        fill-opacity="1"
+        fillOpacity="1"
         transform="translate(13.26 18.77)scale(.15723)"
       >
         <path
           id="path12"
           fill="#ec8d53"
-          fill-opacity="1"
+          fillOpacity="1"
           d="M136.4 109.1c-3.9 0-7.5 2.1-9.4 5.5a10.6 10.6 0 0 0 9.4 15.8c3.9 0 7.5-2.1 9.4-5.5 2.9-5.2 1-11.7-4.2-14.5-1.6-.9-3.4-1.3-5.2-1.3z"
           style={{ fill: "#ec8d53" }}
         />
@@ -739,16 +714,16 @@ export const FusionAuthIcon = () => (
       <path
         id="path40"
         fill="#ec8d53"
-        fill-opacity="1"
-        stroke-width=".16"
+        fillOpacity="1"
+        strokeWidth=".16"
         d="M29.66 20.9a.68.68 0 0 0-.85.37c-.13.33.05.7.38.85a10.27 10.27 0 0 1 6.08 6.3l-4.06 1.09a6.17 6.17 0 0 0-9.75-2.56L18.6 24.1a10.4 10.4 0 0 1 4.84-2.47c-.17-.4-.22-.86-.12-1.3-4.23.83-7.82 4-9.01 8.3a11.9 11.9 0 0 0-.37 4.4c.04.33.32.58.65.58h.08a.66.66 0 0 0 .58-.72 10.21 10.21 0 0 1 2.44-7.85l2.89 2.83a6.2 6.2 0 0 0 2.45 9.58l-1.2 3.93a10.16 10.16 0 0 1-4.38-3.2c-.3.34-.68.57-1.12.68a11.54 11.54 0 0 0 9.22 4.5c2.5 0 4.93-.82 7-2.38a.65.65 0 0 0-.8-1.03 10.26 10.26 0 0 1-8.65 1.8l1.19-3.94a5.58 5.58 0 0 0 1.18.1 6.21 6.21 0 0 0 6.12-7.16l4.05-1.09c.32 1.56.27 3.2-.17 4.83-.1.32-.19.63-.32.94.22.05.44.13.65.24.19.11.36.24.52.4a11.6 11.6 0 0 0-6.65-15.17zm-9.22 10.48a5.01 5.01 0 0 1 8.76-2.94 5 5 0 1 1-8.76 2.94z"
         style={{ fill: "#fff" }}
       />
       <path
         id="path42"
         fill="#ec8d53"
-        fill-opacity="1"
-        stroke-width=".16"
+        fillOpacity="1"
+        strokeWidth=".16"
         d="M29.22 28.42a4.98 4.98 0 0 0-3.45-1.73l-.34-.01a5.03 5.03 0 1 0 3.79 1.75zm-3.78 6.39c-.75 0-1.36.06-1.36-.35l.6-3.41a1.3 1.3 0 0 1-.57-1.09c0-.72.6-1.32 1.32-1.32.72 0 1.32.6 1.32 1.32 0 .44-.22.84-.57 1.09l.62 3.38v.03c.01.4-.6.35-1.36.35z"
         style={{ fill: "#ec8d53" }}
       />
@@ -756,7 +731,7 @@ export const FusionAuthIcon = () => (
   </svg>
 );
 
-export const GithubIcon = () => (
+const GithubIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
@@ -766,7 +741,7 @@ export const GithubIcon = () => (
   </svg>
 );
 
-export const GitlabIcon = () => (
+const GitlabIcon = () => (
   <svg
     className="-ml-1 size-5"
     xmlns="http://www.w3.org/2000/svg"
@@ -792,3 +767,185 @@ export const GitlabIcon = () => (
     />
   </svg>
 );
+
+const GoogleIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    className="-ml-1 size-4"
+  >
+    <path
+      fill="#EA4335"
+      d="M5.27 9.76A7.08 7.08 0 0 1 16.42 6.5L19.9 3A11.97 11.97 0 0 0 1.24 6.65l4.03 3.11Z"
+    />
+    <path
+      fill="#34A853"
+      d="M16.04 18.01A7.4 7.4 0 0 1 12 19.1a7.08 7.08 0 0 1-6.72-4.82l-4.04 3.06A11.96 11.96 0 0 0 12 24a11.4 11.4 0 0 0 7.83-3l-3.79-2.99Z"
+    />
+    <path
+      fill="#4A90E2"
+      d="M19.83 21c2.2-2.05 3.62-5.1 3.62-9 0-.7-.1-1.47-.27-2.18H12v4.63h6.44a5.4 5.4 0 0 1-2.4 3.56l3.8 2.99Z"
+    />
+    <path
+      fill="#FBBC05"
+      d="M5.28 14.27a7.12 7.12 0 0 1-.01-4.5L1.24 6.64A11.93 11.93 0 0 0 0 12c0 1.92.44 3.73 1.24 5.33l4.04-3.06Z"
+    />
+  </svg>
+);
+
+const HubspotIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="-ml-1 size-4"
+    viewBox="6.21 0.64 244.27 251.25"
+  >
+    <path
+      fill="#ff7a59"
+      d="M191.39 85.7V56.18a22.72 22.72 0 0 0 13.1-20.48v-.68a22.72 22.72 0 0 0-22.73-22.72h-.67a22.72 22.72 0 0 0-22.73 22.72v.68a22.72 22.72 0 0 0 13.1 20.48v29.5a64.34 64.34 0 0 0-30.59 13.47L59.95 36.13a25 25 0 0 0 .91-6.37A25.6 25.6 0 1 0 35.23 55.3a25.32 25.32 0 0 0 12.6-3.43l79.7 62a64.54 64.54 0 0 0 .98 72.7l-24.24 24.25c-1.96-.63-4-.96-6.06-.99a21.02 21.02 0 1 0 21.05 21.04 20.75 20.75 0 0 0-1-6.05l23.98-23.99A64.65 64.65 0 1 0 191.38 85.7m-9.93 97.05a33.17 33.17 0 1 1 0-66.32 33.17 33.17 0 0 1 .03 66.3"
+    />
+  </svg>
+);
+
+interface Icon {
+  name: string;
+  icons?: React.ReactNode | string;
+}
+
+export const multiIcons: Icon[] = [
+  {
+    name: "Google",
+    icons: <GoogleIcon />,
+  },
+  {
+    name: "Microsoft",
+    icons: <MicrosoftIcon />,
+  },
+  {
+    name: "Apple",
+    icons: <AppleIcon />,
+  },
+  {
+    name: "42School",
+    icons: <School42Icon />,
+  },
+  {
+    name: "Asgardeo",
+    icons: <AsgardeoIcon />,
+  },
+  {
+    name: "Auth0",
+    icons: <Auth0Icon />,
+  },
+  {
+    name: "Authentik",
+    icons: <AuthentikIcon />,
+  },
+  {
+    name: "Azure AD",
+    icons: <AzureIcon />,
+  },
+  {
+    name: "Azure AD B2C",
+    icons: <AzureIcon />,
+  },
+  {
+    name: "Azure DevOps",
+    icons: <AzureIcon />,
+  },
+  {
+    name: "BankID Norway",
+    icons: <BankIDIcon />,
+  },
+  {
+    name: "Battle.net",
+    icons: <BattleNetIcon />,
+  },
+  {
+    name: "Beyond Identity",
+    icons: <BeyondIdentityIcon />,
+  },
+  {
+    name: "Box",
+    icons: <BoxIcon />,
+  },
+  {
+    name: "BoxyHQ SAML",
+    icons: <BoxyHQIcon />,
+  },
+  {
+    name: "Bungie",
+    icons: <BungieIcon className="-ml-1 size-5 fill-current dark:text-white" />,
+  },
+  {
+    name: "Click-Up",
+    icons: <ClickUpIcon />,
+  },
+  {
+    name: "Cognito",
+    icons: <CognitoIcon />,
+  },
+  {
+    name: "Coinbase",
+    icons: <CoinbaseIcon />,
+  },
+  {
+    name: "Descope",
+    icons: <DescopeIcon />,
+  },
+  {
+    name: "Discord",
+    icons: <DiscordIcon />,
+  },
+  {
+    name: "Dribbble",
+    icons: <DribbbleIcon />,
+  },
+  {
+    name: "Dropbox",
+    icons: <DropboxIcon />,
+  },
+  {
+    name: "EVEOnline",
+    icons: <EveonlineIcon />,
+  },
+  {
+    name: "Facebook",
+    icons: <FacebookIcon />,
+  },
+  {
+    name: "Faceit",
+    icons: <FaceItIcon />,
+  },
+  {
+    name: "Foursquare",
+    icons: <FoursquareIcon />,
+  },
+  {
+    name: "Freshbooks",
+    icons: <FreshbooksIcon />,
+  },
+  {
+    name: "Frontegg",
+    icons: <FronteggIcon />,
+  },
+  {
+    name: "Fusion Auth",
+    icons: <FusionAuthIcon />,
+  },
+  {
+    name: "Github",
+    icons: <GithubIcon />,
+  },
+  {
+    name: "Gitlab",
+    icons: <GitlabIcon />,
+  },
+  {
+    name: "Hubspot",
+    icons: <HubspotIcon />,
+  },
+  {
+    name: "Instagram",
+    icons: <InstagramIcon />,
+  },
+];
