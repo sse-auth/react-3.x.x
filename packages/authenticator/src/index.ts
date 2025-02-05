@@ -1,5 +1,5 @@
 import * as base32 from "base32.js";
-import { Buffer } from "buffer";
+import { Buffer } from "@ssets/crypto/dist/buffer";
 import {
   byteSizeForAlgo,
   checkAlgorithm,
@@ -14,7 +14,7 @@ import {
   secretAsBuffer,
 } from "./helper";
 import { BaseParams, HOTPParams, TOTPParams } from "./types";
-import { createHmac } from "./lib/hmac";
+import { createHmac } from "@ssets/crypto/dist/hmac";
 
 /**
  * Generate a base32-encoded random secret.
@@ -69,7 +69,7 @@ abstract class OTP {
     if (!params.secret) throw new Error("Missing secret value");
 
     // check secret
-    this.secret = params.secret;
+    this.secret = params.secret as string | Buffer;
     if (!Buffer.isBuffer(params.secret)) {
       if (!params.encoding) {
         debug(

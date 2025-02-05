@@ -2,9 +2,8 @@
 
 import * as base32 from "base32.js";
 import _debug from "debug";
-import { Buffer } from "buffer";
+import { Buffer } from "@ssets/crypto/dist/buffer";
 import { UrlObject } from "./types";
-import { Hmac } from "./lib/hmac";
 
 export const debug = _debug("sse-authenticator");
 

@@ -1,0 +1,56 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+
+name: Node.js Package
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        type: choice
+        description: Package name (npm)
+        options:
+          - "authenticator"
+          - "backend"
+          - "ip"
+          - "localization"
+          - "react"
+          - "themes/plugins"
+          - "themes/themer"
+          - "types"
+
+env:
+  FORCE_COLOR: true
+  NPM_CONFIG_PROVENANCE: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+
+  publish-npm:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org/
+      - run: cd packages/${{ github.event.inputs.name }}
+      - run: npm ci
+      - run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

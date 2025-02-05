@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { TOTP, generateSecret } from "@sse-auth/authenticator";
+import { TOTP, HOTP, generateSecret } from "@sse-auth/authenticator";
 import { QRCodeSVG } from "qrcode.react";
 
 function App() {
@@ -8,33 +8,44 @@ function App() {
   const [inputCode, setInputCode] = useState("");
   const [isValid, setIsValid] = useState<boolean | null>(null);
   const [otpUrl, setOtpUrl] = useState("");
-  
+
   const handleGenerateSecret = () => {
     const newSecret = generateSecret();
     setSecret(newSecret.toString());
-    const totp = new TOTP({ secret: newSecret, label: "SSE World", issuer: "SSE Testing", period: 30 });
+    const totp = new TOTP({
+      secret,
+      label: "SSE World",
+      issuer: "SSE Testing",
+      period: 30,
+    });
     setOtpUrl(totp.url());
   };
 
   const handleGenerateToken = () => {
-    const totp = new TOTP({ secret, label: "SSE World", issuer: "SSE", period: 30 });
+    const totp = new TOTP({
+      secret,
+      label: "SSE World",
+      issuer: "SSE",
+      period: 30,
+    });
     const generatedToken = totp.token();
     setToken(generatedToken);
   };
 
   const handleVerifyCode = () => {
-    const totp = new TOTP({ secret, label: "SSE World", issuer: "SSE", period: 30 });
+    const totp = new TOTP({
+      secret,
+      label: "SSE World",
+      issuer: "SSE",
+      period: 30,
+    });
     const valid = totp.test(inputCode);
     setIsValid(valid);
   };
 
   useEffect(() => {
-    console.log(secret)
-    console.log(token)
-    console.log(inputCode)
-    console.log(isValid)
-    console.log(otpUrl)
-  }, [secret, token, inputCode, isValid, otpUrl])
+    console.log(isValid);
+  }, [isValid]);
 
   return (
     <div>

@@ -1,0 +1,9 @@
+# https://github.com/actions/labeler#create-githublabeleryml
+backend: ["packages/backend/**/*"]
+authenticator: ["packages/authenticator/**/*"]
+ip: ["packages/ip/**/*"]
+localization: ["packages/localization/**/*"]
+react: ["packages/react/**/*"]
+types: ["packages/types/**/*"]
+themes_plugins: ["packages/themes/plugins/**/*"]
+themes_themer: ["packages/themes/themer/**/*"]
