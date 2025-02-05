@@ -34,7 +34,6 @@
   "license": "MIT",
   "devDependencies": {
     "@ssets/crypto": "1.1.0",
-    "@types/node": "^22.10.10",
     "base32.js": "^0.1.0"
   },
   "dependencies": {
