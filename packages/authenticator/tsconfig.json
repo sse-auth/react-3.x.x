@@ -9,7 +9,8 @@
     "declaration": true,
     "target": "ES2016",
     "esModuleInterop": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "types": ["node"]
   },
   "include": ["./src"],
   "exclude": ["./demo", "node_modules"]

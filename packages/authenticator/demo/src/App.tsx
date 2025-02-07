@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { TOTP, HOTP, generateSecret } from "@sse-auth/authenticator";
+import { TOTP, HOTP, generateSecret } from "../../src/index";
 import { QRCodeSVG } from "qrcode.react";
 
 function App() {

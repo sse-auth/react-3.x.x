@@ -12,6 +12,7 @@
   "scripts": {
     "build": "npm run clean && tsup",
     "clean": "rimraf dist",
+    "prepare": "npm run build",
     "providers": "node scripts/generate-providers"
   },
   "exports": {

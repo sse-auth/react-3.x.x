@@ -33,11 +33,13 @@
   "author": "SSE World",
   "license": "MIT",
   "devDependencies": {
-    "@ssets/crypto": "1.1.0",
-    "base32.js": "^0.1.0"
+    "@ssets/crypto": "^1.1.0",
+    "@types/node": "^22.13.1",
+    "base32.js": "^0.1.0",
+    "buffer": "^6.0.3"
   },
   "dependencies": {
-    "buffer": "^6.0.3"
+    "react": "^19.0.0"
   },
   "peerDependencies": {
     "@ssets/crypto": "1.1.0"

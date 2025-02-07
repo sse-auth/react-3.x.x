@@ -49,8 +49,9 @@ jobs:
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
-      - run: cd packages/${{ github.event.inputs.name }}
       - run: npm ci
-      - run: cd packages/${{ github.event.inputs.name }} && npm publish --provenance --access public
+      - run: |
+            cd ${{ github.event.inputs.name }}
+            npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
