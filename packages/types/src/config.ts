@@ -17,6 +17,8 @@ import type {
   OIDCConfigInternal,
   Provider,
   ProviderType,
+  WebAuthnConfig,
+  WebAuthnProviderType,
 } from "./provider";
 import type { Adapter, AdapterSession, AdapterUser } from "./adapter";
 import { Cookie, CookieOption, CookiesOptions } from "./cookie";
@@ -508,6 +510,8 @@ export type InternalProvider<T = ProviderType> = (T extends "oauth"
   ? EmailConfig
   : T extends "credentials"
   ? CredentialInput
+  : T extends WebAuthnProviderType
+  ? WebAuthnConfig
   : never) & {
   signinUrl: string;
   /** @example `"https://example.com/api/auth/callback/id"` */
