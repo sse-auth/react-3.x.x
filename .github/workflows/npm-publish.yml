@@ -52,6 +52,8 @@ jobs:
       - run: npm ci
       - run: |
             cd packages/${{ github.event.inputs.name }}
+            npm install
+            npm run build
             npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
