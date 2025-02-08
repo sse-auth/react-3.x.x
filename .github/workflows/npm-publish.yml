@@ -51,7 +51,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: npm ci
       - run: |
-            cd ${{ github.event.inputs.name }}
+            cd packages/${{ github.event.inputs.name }}
             npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
