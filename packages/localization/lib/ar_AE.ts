@@ -1,7 +1,7 @@
 import { Localization } from "@sse-auth/types/localization";
 
 export const arAE: Localization = {
-  id: "العربية",
+  id: "Arabic",
   signIn: {
     title: "تسجيل الدخول إلى حسابك",
     subtitle: "مرحبًا بعودتك! أدخل تفاصيلك للمتابعة.",
@@ -39,9 +39,59 @@ export const arAE: Localization = {
       sendFeedback: "إرسال ملاحظات",
     },
     edit: {
-      account: "الحساب",
-      security: "الأمان",
-      help: "مساعدة",
+      sidebar: { account: "الحساب", security: "الأمان", help: "مساعدة" },
+      accounts: {
+        title: "الحساب",
+        subtitle: "إدارة معلومات حسابك",
+        profile: "الملف الشخصي",
+        emailAddresses: {
+          title: "عناوين البريد الإلكتروني",
+          primaryEmailAddress: "عنوان البريد الإلكتروني الرئيسي",
+          primaryEmailAddress_subtitle:
+            "عنوان البريد الإلكتروني هو العنوان الرئيسي",
+          remove: "إزالة",
+          remove_subtitle: "احذف هذا العنوان من حسابك",
+          removeemailAddress: "إزالة عنوان البريد الإلكتروني",
+          addAsEmailAddress: "إضافة عنوان بريد إلكتروني",
+        },
+        connectedAccounts: {
+          title: "الحسابات المتصلة",
+          connectAccount: "ربط حساب",
+          remove: "إزالة",
+          remove_subtitle: "إزالة هذا الحساب المتصل من حسابك",
+          removeConnectAccount: "إزالة الحساب المتصل",
+        },
+      },
+      security: {
+        title: "الأمان",
+        password: "كلمة المرور",
+        setPassword: "تعيين كلمة المرور",
+        activeDevices: "الأجهزة النشطة",
+        changePassword: "تغيير كلمة المرور",
+      },
+      setPassword: {
+        title: "تعيين كلمة المرور",
+        newPassword: "كلمة المرور الجديدة",
+        confirmPassword: "تأكيد كلمة المرور",
+        lenError: "يجب أن تحتوي كلمة المرور على 8 أحرف أو أكثر.",
+        confirmPasswordError: "كلمة المرور غير متطابقة",
+        signOutAllDevices: "تسجيل الخروج من جميع الأجهزة الأخرى",
+        cancel: "إلغاء",
+        continue: "متابعة",
+      },
+      addConnectedAccount: {
+        title: "إضافة أجهزة متصلة",
+        noProviderError: "لا توجد مزودي حسابات خارجيين متاحين.",
+        cancel: "إلغاء",
+      },
+      updateProfile: {
+        title: "تحديث الملف الشخصي",
+        profileImage: "صورة الملف الشخصي",
+        uploadImage: "تحميل الصورة",
+        removeImage: "إزالة الصورة",
+        cancel: "إلغاء",
+        continue: "متابعة",
+      },
     },
   },
 };
