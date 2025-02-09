@@ -1,0 +1,98 @@
+import { Localization } from "@sse-auth/types/localization";
+
+export const ptBR: Localization = {
+  id: "Português",
+  signIn: {
+    title: "Faça login na sua conta",
+    subtitle: "Bem-vindo de volta! Insira seus dados para continuar.",
+    label_email: "Endereço de e-mail",
+    label_password: "Senha",
+    label_phone: "Número de telefone",
+    link_forgotPassword: "Esqueceu sua senha?",
+    submit_text: "Entrar",
+    divider_text: "Ou continue com",
+    social_text: "Faça login com {{provider}}",
+    link_dontHaveAnAccount: "Não tem uma conta?",
+    createAccount: "Criar Conta",
+  },
+  signUp: {
+    title: "Crie sua conta",
+    subtitle: "Insira seus dados para criar uma conta e começar.",
+    label_email: "Endereço de e-mail",
+    label_password: "Senha",
+    label_phone: "Número de telefone",
+    label_name: "Nome",
+    submit_text: "Criar conta",
+    divider_text: "Ou continue com",
+    link_haveAnAccount: "Já tem uma conta?",
+    login: "Login",
+    label_firstName: "Primeiro Nome",
+    label_lastName: "Sobrenome",
+  },
+  user: {
+    dropdown: {
+      manage: "Gerenciar",
+      signOut: "Sair",
+      switchAccount: "Trocar Conta",
+      preferences: "Preferências",
+      help: "Ajuda",
+      sendFeedback: "Enviar Feedback",
+    },
+    edit: {
+      sidebar: { account: "Conta", security: "Segurança", help: "Ajuda" },
+      accounts: {
+        title: "Conta",
+        subtitle: "Gerencie as informações da sua conta",
+        profile: "Perfil",
+        emailAddresses: {
+          title: "Endereços de E-mail",
+          primaryEmailAddress: "Endereço de E-mail Principal",
+          primaryEmailAddress_subtitle:
+            "O endereço de e-mail é o principal endereço de e-mail",
+          remove: "Remover",
+          remove_subtitle:
+            "Excluir este endereço de e-mail e removê-lo da sua conta",
+          removeemailAddress: "Remover endereço de e-mail",
+          addAsEmailAddress: "Adicionar um endereço de e-mail",
+        },
+        connectedAccounts: {
+          title: "Contas Conectadas",
+          connectAccount: "Conectar Conta",
+          remove: "Remover",
+          remove_subtitle: "Remover esta conta conectada da sua conta",
+          removeConnectAccount: "Remover conta conectada",
+        },
+      },
+      security: {
+        title: "Segurança",
+        password: "Senha",
+        setPassword: "Definir Senha",
+        activeDevices: "Dispositivos Ativos",
+        changePassword: "Alterar Senha",
+      },
+      setPassword: {
+        title: "Definir Senha",
+        newPassword: "Nova Senha",
+        confirmPassword: "Confirmar Senha",
+        lenError: "Sua senha deve conter 8 ou mais caracteres.",
+        confirmPasswordError: "A senha não corresponde",
+        signOutAllDevices: "Sair de todos os outros dispositivos",
+        cancel: "CANCELAR",
+        continue: "Continuar",
+      },
+      addConnectedAccount: {
+        title: "Adicionar Dispositivos Conectados",
+        noProviderError: "Não há provedores de conta externa disponíveis.",
+        cancel: "CANCELAR",
+      },
+      updateProfile: {
+        title: "Atualizar Perfil",
+        profileImage: "Imagem de Perfil",
+        uploadImage: "Carregar Imagem",
+        removeImage: "Remover Imagem",
+        cancel: "CANCELAR",
+        continue: "Continuar",
+      },
+    },
+  },
+};

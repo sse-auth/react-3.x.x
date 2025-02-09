@@ -1,0 +1,98 @@
+import { Localization } from "@sse-auth/types/localization";
+
+export const esES: Localization = {
+  id: "Español",
+  signIn: {
+    title: "Inicia sesión en tu cuenta",
+    subtitle: "¡Bienvenido de nuevo! Ingresa tus datos para continuar.",
+    label_email: "Dirección de correo electrónico",
+    label_password: "Contraseña",
+    label_phone: "Número de teléfono",
+    link_forgotPassword: "¿Olvidaste tu contraseña?",
+    submit_text: "Iniciar sesión",
+    divider_text: "O continúa con",
+    social_text: "Inicia sesión con {{provider}}",
+    link_dontHaveAnAccount: "¿No tienes una cuenta?",
+    createAccount: "Crear cuenta",
+  },
+  signUp: {
+    title: "Crea tu cuenta",
+    subtitle: "Ingresa tus datos para crear una cuenta y comenzar.",
+    label_email: "Dirección de correo electrónico",
+    label_password: "Contraseña",
+    label_phone: "Número de teléfono",
+    label_name: "Nombre",
+    submit_text: "Crear cuenta",
+    divider_text: "O continúa con",
+    link_haveAnAccount: "¿Ya tienes una cuenta?",
+    login: "Iniciar sesión",
+    label_firstName: "Nombre",
+    label_lastName: "Apellido",
+  },
+  user: {
+    dropdown: {
+      manage: "Gestionar",
+      signOut: "Cerrar sesión",
+      switchAccount: "Cambiar cuenta",
+      preferences: "Preferencias",
+      help: "Ayuda",
+      sendFeedback: "Enviar comentarios",
+    },
+    edit: {
+      sidebar: { account: "Cuenta", security: "Seguridad", help: "Ayuda" },
+      accounts: {
+        title: "Cuenta",
+        subtitle: "Gestiona la información de tu cuenta",
+        profile: "Perfil",
+        emailAddresses: {
+          title: "Direcciones de correo electrónico",
+          primaryEmailAddress: "Dirección de correo electrónico principal",
+          primaryEmailAddress_subtitle:
+            "La dirección de correo electrónico es la principal",
+          remove: "Eliminar",
+          remove_subtitle:
+            "Elimina esta dirección de correo electrónico y quítala de tu cuenta",
+          removeemailAddress: "Eliminar dirección de correo electrónico",
+          addAsEmailAddress: "Agregar una dirección de correo electrónico",
+        },
+        connectedAccounts: {
+          title: "Cuentas conectadas",
+          connectAccount: "Conectar cuenta",
+          remove: "Eliminar",
+          remove_subtitle: "Eliminar esta cuenta conectada de tu cuenta",
+          removeConnectAccount: "Eliminar cuenta conectada",
+        },
+      },
+      security: {
+        title: "Seguridad",
+        password: "Contraseña",
+        setPassword: "Establecer contraseña",
+        activeDevices: "Dispositivos activos",
+        changePassword: "Cambiar contraseña",
+      },
+      setPassword: {
+        title: "Establecer contraseña",
+        newPassword: "Nueva contraseña",
+        confirmPassword: "Confirmar contraseña",
+        lenError: "Tu contraseña debe contener 8 o más caracteres.",
+        confirmPasswordError: "La contraseña no coincide",
+        signOutAllDevices: "Cerrar sesión en todos los demás dispositivos",
+        cancel: "CANCELAR",
+        continue: "Continuar",
+      },
+      addConnectedAccount: {
+        title: "Agregar dispositivos conectados",
+        noProviderError: "No hay proveedores de cuentas externas disponibles.",
+        cancel: "CANCELAR",
+      },
+      updateProfile: {
+        title: "Actualizar perfil",
+        profileImage: "Imagen de perfil",
+        uploadImage: "Subir imagen",
+        removeImage: "Eliminar imagen",
+        cancel: "CANCELAR",
+        continue: "Continuar",
+      },
+    },
+  },
+};
