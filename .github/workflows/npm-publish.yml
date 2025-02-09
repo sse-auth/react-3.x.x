@@ -53,6 +53,7 @@ jobs:
       - run: |
             cd packages/${{ github.event.inputs.name }}
             npm install
+            npm install rimraf -D
             npm run build
             npm publish --provenance --access public
         env:
