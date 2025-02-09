@@ -12,6 +12,7 @@ import type {
 } from "./index";
 import type {
   CredentialInput,
+  CredentialsConfig,
   EmailConfig,
   OAuthConfigInternal,
   OIDCConfigInternal,
@@ -501,7 +502,7 @@ export interface AuthConfig {
   basePath?: string;
 }
 
-/** @internals */
+/** @internal */
 export type InternalProvider<T = ProviderType> = (T extends "oauth"
   ? OAuthConfigInternal<any>
   : T extends "oidc"
@@ -509,7 +510,7 @@ export type InternalProvider<T = ProviderType> = (T extends "oauth"
   : T extends "email"
   ? EmailConfig
   : T extends "credentials"
-  ? CredentialInput
+  ? CredentialsConfig
   : T extends WebAuthnProviderType
   ? WebAuthnConfig
   : never) & {
@@ -549,6 +550,7 @@ export interface ResponseInternal<
   cookies?: Cookie[];
 }
 
+/** @internal */
 export interface InternalOptions<TProviderType = ProviderType> {
   providers: InternalProvider[];
   url: URL;

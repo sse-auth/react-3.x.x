@@ -72,7 +72,7 @@ export interface Localization extends Record<string, any> {
         title: string;
         password: string;
         setPassword: string;
-        changePassword: string
+        changePassword: string;
         activeDevices: string;
       };
       setPassword: {
