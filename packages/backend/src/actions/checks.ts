@@ -1,15 +1,10 @@
-/**
- * @source https://github.com/nextauthjs/next-auth
- * @author balazsorban44
- * @license MIT
- */
-
 import * as o from "oauth4webapi";
 import { InvalidCheck } from "@sse-auth/types/error";
 import { decode, encode } from "../utils/jwt.js";
 import type { Cookie, CookiesOptions } from "@sse-auth/types/cookie";
 import type { InternalOptions, RequestInternal } from "@sse-auth/types/config";
-// import type { User } from "@sse-auth/types";
+import { User } from "@sse-auth/types";
+import { WebAuthnProviderType } from "../providers/webauthn.js";
 
 interface CookiePayload {
   value: string;
@@ -21,7 +16,7 @@ const COOKIE_TTL = 60 * 15; // 15 minutes
 async function sealCookie(
   name: keyof CookiesOptions,
   payload: string,
-  options: InternalOptions<"oauth" | "oidc">
+  options: InternalOptions<"oauth" | "oidc" | WebAuthnProviderType>
 ): Promise<Cookie> {
   const { cookies } = options;
   const cookie = cookies[name];
@@ -201,4 +196,56 @@ export const nonce = {
    * @see https://danielfett.de/2020/05/16/pkce-vs-nonce-equivalent-or-not/#nonce
    */
   use: useCookie("nonce", "nonce"),
+};
+
+const WEBAUTHN_CHALLENGE_MAX_AGE = 60 * 15; // 15 minutes in seconds
+
+interface WebAuthnChallengePayload {
+  challenge: string;
+  registerData?: User;
+}
+
+const webauthnChallengeSalt = "encodedWebauthnChallenge";
+export const webauthnChallenge = {
+  async create(
+    options: InternalOptions<WebAuthnProviderType>,
+    challenge: string,
+    registerData?: User
+  ) {
+    return {
+      cookie: await sealCookie(
+        "webauthnChallenge",
+        await encode({
+          secret: options.jwt.secret,
+          token: { challenge, registerData } satisfies WebAuthnChallengePayload,
+          salt: webauthnChallengeSalt,
+          maxAge: WEBAUTHN_CHALLENGE_MAX_AGE,
+        }),
+        options
+      ),
+    };
+  },
+  /** Returns WebAuthn challenge if present. */
+  async use(
+    options: InternalOptions<WebAuthnProviderType>,
+    cookies: RequestInternal["cookies"],
+    resCookies: Cookie[]
+  ): Promise<WebAuthnChallengePayload> {
+    const cookieValue = cookies?.[options.cookies.webauthnChallenge.name];
+
+    const parsed = await parseCookie("webauthnChallenge", cookieValue, options);
+
+    const payload = await decode<WebAuthnChallengePayload>({
+      secret: options.jwt.secret,
+      token: parsed,
+      salt: webauthnChallengeSalt,
+    });
+
+    // Clear the WebAuthn challenge cookie after use
+    clearCookie("webauthnChallenge", options, resCookies);
+
+    if (!payload) throw new InvalidCheck("WebAuthn challenge was missing");
+
+    return payload;
+  },
 };

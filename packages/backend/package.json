@@ -8,7 +8,6 @@
     "type": "git",
     "url": "git+https://github.com/sse-auth/react-3.x.x.git"
   },
-  "files": ["dist"],
   "scripts": {
     "build": "npm run clean && tsup",
     "clean": "rimraf dist",
@@ -45,16 +44,6 @@
         "types": "./dist/actions/*.d.cts",
         "default": "./dist/actions/*.cjs"
       }
-    },
-    "./lib/*": {
-      "import": {
-        "types": "./dist/lib/*.d.ts",
-        "default": "./dist/lib/*.js"
-      },
-      "require": {
-        "types": "./dist/actions/*.d.cts",
-        "default": "./dist/lib/*.cjs"
-      }
     }
   },
   "author": "SSE World",
@@ -65,13 +54,16 @@
   "homepage": "https://github.com/sse-auth/react-3.x.x#readme",
   "dependencies": {
     "@panva/hkdf": "^1.2.1",
-    "@sse-auth/types": "file:../types/sse-auth-types-1.3.5.tgz",
+    "@simplewebauthn/server": "^13.1.1",
+    "@sse-auth/types": "^1.3.5",
     "jose": "^5.9.6",
     "nodemailer": "^6.9.16",
     "oauth4webapi": "^3.1.4",
     "react": "^19.0.0"
   },
   "devDependencies": {
+    "@simplewebauthn/browser": "^13.1.0",
+    "@simplewebauthn/types": "^12.0.0",
     "@types/nodemailer": "^6.4.17",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",

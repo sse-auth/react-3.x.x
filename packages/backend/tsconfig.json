@@ -12,8 +12,10 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": "./src",
     "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "types": ["nodemailer", "react", "react-dom"]
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "*.js", "*.d.ts"]
 }
