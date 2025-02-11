@@ -1,7 +1,9 @@
 import type { Client, PrivateKey } from "oauth4webapi";
-import type { Awaitable, Profile, TokenSet, User } from "../index";
+import type { Awaitable, Profile, Theme, TokenSet, User } from "../index";
 import type { CommonProviderOptions } from "./index";
 import { conformInternal, customFetch } from "../symbol";
+import * as React from "react";
+import { AuthConfig } from "../config";
 
 // TODO: fix types
 type AuthorizationParameters = any;
@@ -9,6 +11,8 @@ type CallbackParamsType = any;
 type IssuerMetadata = any;
 type OAuthCallbackChecks = any;
 type OpenIDCallbackChecks = any;
+
+export type { OAuthProviderId } from "./provider-types";
 
 export type OAuthChecks = OAuthCallbackChecks | OpenIDCallbackChecks;
 type PartialIssuer = Partial<Pick<IssuerMetadata, "jwks_endpoint" | "issuer">>;
@@ -87,7 +91,17 @@ export type ProfileCallback<Profile> = (
 export type AccountCallback = (tokens: TokenSet) => TokenSet | undefined | void;
 
 export interface OAuthProviderButtonStyles {
-  logo?: string | React.ReactNode;
+  logo?: string;
+  /**
+   * @deprecated
+   */
+  text?: string;
+  /**
+   * @deprecated Please use 'brandColor' instead
+   */
+  bg?: string;
+  brandColor?: string;
+  icon?: React.ReactNode;
 }
 
 /** TODO: Document */
@@ -189,7 +203,7 @@ export interface OAuth2Config<Profile>
    * See [`oauth4webapi` client](https://github.com/panva/oauth4webapi/blob/main/docs/interfaces/Client.md) for details.
    */
   client?: Partial<Client & { token_endpoint_auth_method: string }>;
-  style?: OAuthProviderButtonStyles;
+  style?: Theme;
   /**
    * Normally, when you sign in with an OAuth provider and another account
    * with the same email address already exists,
@@ -204,8 +218,7 @@ export interface OAuth2Config<Profile>
    * to enable automatic account linking.
    */
   allowDangerousEmailAccountLinking?: boolean;
-  //   redirectProxyUrl?: AuthConfig["redirectProxyUrl"];
-  redirectProxyUrl?: string;
+  redirectProxyUrl?: AuthConfig["redirectProxyUrl"];
   /** @see {customFetch} */
   [customFetch]?: typeof fetch;
   /**
