@@ -86,7 +86,6 @@ function normalizeOAuth(
   }
 
   const token = normalizeEndpoint(c.token, c.issuer);
-
   const userinfo = normalizeEndpoint(c.userinfo, c.issuer);
 
   const checks = c.checks ?? ["pkce"];

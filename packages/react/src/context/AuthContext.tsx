@@ -1,8 +1,11 @@
 import React from "react";
 import { ProviderId } from "@sse-auth/types/provider/index";
-import { RequestInternal, Session } from "@sse-auth/types";
-import { AuthConfig, InternalOptions } from "@sse-auth/types/config";
-import { init } from "@sse-auth/backend/lib/init";
+import { Session } from "@sse-auth/types";
+import {
+  AuthConfig,
+  InternalOptions,
+  RequestInternal,
+} from "@sse-auth/types/config";
 import { skipCSRFCheck } from "@sse-auth/types/symbol";
 
 interface AuthContextProps {
@@ -112,20 +115,7 @@ export const AuthProvider: React.FC<
 > = ({ config, children, request }) => {
   const [user, setUser] = React.useState<any>(null);
   const [loading, setLoading] = React.useState(true);
-  const { action, providerId, error, method } = request;
   const csrfDisabled = config.skipCSRFCheck === skipCSRFCheck;
-
-  const { options, cookies } = await init({
-    authOptions: config,
-    action,
-    providerId,
-    url: request.url,
-    callbackUrl: request.body?.callbackUrl ?? request.query?.callbackUrl,
-    csrfToken: request.body?.csrfToken,
-    cookies: request.cookies,
-    isPost: method === "POST",
-    csrfDisabled,
-  });
 
   return (
     <AuthContext.Provider value={{ user, loading, configInternal: options }}>

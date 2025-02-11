@@ -1,9 +1,12 @@
 {
   "name": "@sse-auth/react",
   "version": "3.0.0",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "changelog": "node ./script/changelog.js",
+    "release": "changeset publish && git push --follow-tags",
+    "release:canary": "changeset publish --tag canary --no-git-tag",
+    "release:snapshot": "changeset publish --tag snapshot --no-git-tag",
+    "release:verdaccio": "if [ \"$(npm config get registry)\" = \"https://registry.npmjs.org/\" ]; then echo 'Error: Using default registry' && exit 1; else TURBO_CONCURRENCY=1 pnpm build && changeset publish --no-git-tag; fi"
   },
   "repository": {
     "type": "git",
@@ -21,7 +24,17 @@
     "typescript": "^5.7.2"
   },
   "devDependencies": {
+<<<<<<< Updated upstream
     "esbuild": "^0.25.0",
+=======
+    "@changesets/cli": "^2.27.12",
+    "@changesets/get-github-info": "^0.6.0",
+    "@commitlint/cli": "^19.7.1",
+    "@commitlint/config-conventional": "^19.7.1",
+    "conventional-changelog-cli": "^5.0.0",
+    "conventional-changelog-conventionalcommits": "^8.0.0",
+    "esbuild": "^0.24.2",
+>>>>>>> Stashed changes
     "tsup": "^8.3.5"
   }
 }

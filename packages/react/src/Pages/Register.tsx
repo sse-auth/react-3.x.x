@@ -11,7 +11,7 @@ import { useBodyClass } from "../lib/useClass";
 
 export function Register() {
   const { localization } = useLocalization();
-  const { providers } = useAuth();
+  const { configInternal } = useAuth();
   useBodyClass(
     "antialiased bg-gray-50 dark:[--body-text-color:theme(colors.gray.300)] dark:bg-gray-950 font-sans"
   );
