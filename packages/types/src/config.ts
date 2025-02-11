@@ -24,6 +24,7 @@ import type {
 import type { Adapter, AdapterSession, AdapterUser } from "./adapter";
 import { Cookie, CookieOption, CookiesOptions } from "./cookie";
 import { raw, skipCSRFCheck } from "./symbol";
+import { LoggerInstance } from "./logger";
 
 export interface PagesOptions {
   /**
@@ -404,7 +405,7 @@ export interface AuthConfig {
    *
    * @default console
    */
-  // logger?: Partial<LoggerInstance>;
+  logger?: Partial<LoggerInstance>;
   /** Changes the theme of built-in {@link AuthConfig.pages}. */
   theme?: Theme;
   /**
@@ -565,7 +566,7 @@ export interface InternalOptions<TProviderType = ProviderType> {
   secret: string | string[];
   theme: Theme;
   debug: boolean;
-  // logger: LoggerInstance;
+  logger: LoggerInstance;
   session: NonNullable<Required<AuthConfig["session"]>>;
   pages: Partial<PagesOptions>;
   jwt: JWTOptions;

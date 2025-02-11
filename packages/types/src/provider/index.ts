@@ -95,19 +95,3 @@ export type ProviderId =
   | OAuthProviderId
   | WebAuthnProviderType
   | (string & {}); // HACK: To allow user-defined providers in `signIn`
-
-/** TODO: Check if all these are used/correct */
-export type ErrorPageParam = "Configuration" | "AccessDenied" | "Verification";
-
-/** TODO: Check if all these are used/correct */
-export type SignInPageErrorParam =
-  | "Signin"
-  | "OAuthSignin"
-  | "OAuthCallbackError"
-  | "OAuthCreateAccount"
-  | "EmailCreateAccount"
-  | "Callback"
-  | "OAuthAccountNotLinked"
-  | "EmailSignin"
-  | "CredentialsSignin"
-  | "SessionRequired";

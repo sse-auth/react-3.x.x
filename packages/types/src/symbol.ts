@@ -7,7 +7,7 @@
  * if you are implementing a framework that is already protected against CSRF attacks, you can skip this check by
  * passing this value to {@link AuthConfig.skipCSRFCheck}.
  */
-export const skipCSRFCheck = Symbol("skip-csrf-check");
+export const skipCSRFCheck = Symbol("sse-skip-csrf-check");
 
 /**
  * :::danger

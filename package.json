@@ -24,17 +24,7 @@
     "typescript": "^5.7.2"
   },
   "devDependencies": {
-<<<<<<< Updated upstream
-    "esbuild": "^0.25.0",
-=======
-    "@changesets/cli": "^2.27.12",
-    "@changesets/get-github-info": "^0.6.0",
-    "@commitlint/cli": "^19.7.1",
-    "@commitlint/config-conventional": "^19.7.1",
-    "conventional-changelog-cli": "^5.0.0",
-    "conventional-changelog-conventionalcommits": "^8.0.0",
     "esbuild": "^0.24.2",
->>>>>>> Stashed changes
     "tsup": "^8.3.5"
   }
 }

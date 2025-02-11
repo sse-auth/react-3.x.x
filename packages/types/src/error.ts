@@ -34,6 +34,22 @@ type ErrorType =
   | "WebAuthnVerificationError"
   | "ExperimentalFeatureNotEnabled";
 
+/** TODO: Check if all these are used/correct */
+export type ErrorPageParam = "Configuration" | "AccessDenied" | "Verification";
+
+/** TODO: Check if all these are used/correct */
+export type SignInPageErrorParam =
+  | "Signin"
+  | "OAuthSignin"
+  | "OAuthCallbackError"
+  | "OAuthCreateAccount"
+  | "EmailCreateAccount"
+  | "Callback"
+  | "OAuthAccountNotLinked"
+  | "EmailSignin"
+  | "CredentialsSignin"
+  | "SessionRequired";
+
 /**
  * Base error class for all Auth.js errors.
  * It's optimized to be printed in the server logs in a nicely formatted way

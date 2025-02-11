@@ -6,7 +6,7 @@ name: SSE Auth Types Release
 on:
   push:
     tags:
-      - "v*"
+      - "@sse-auth/types@*"
 
 jobs:
   build:
