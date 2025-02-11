@@ -1,3 +1,4 @@
+import { AzureIcon } from "./azure-ad-b2c.js";
 import {
   MicrosoftEntraID,
   MicrosoftEntraIDProfile,
@@ -12,7 +13,10 @@ export default function AzureAD(
     ...MicrosoftEntraID(config),
     id: "azure-ad",
     name: "Azure Active Directory",
+    style: {
+      icon: <AzureIcon />,
+    },
   };
 }
 
-export { AzureAD }
+export { AzureAD };

@@ -1,4 +1,5 @@
 import { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { AzureIcon } from "./azure-ad-b2c.js";
 
 /** @see [Azure DevOps Services REST API 7.0 · Profiles · Get](https://learn.microsoft.com/en-us/rest/api/azure/devops/profile/profiles/get?view=azure-devops-rest-7.0&tabs=HTTP#examples) */
 export interface AzureDevOpsProfile extends Record<string, any> {
@@ -54,7 +55,7 @@ export default function AzureDevOpsProvider<P extends AzureDevOpsProfile>(
         const response = await fetch(tokenEndpointUrl, {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
           method: "POST",
-          body: params
+          body: params,
         });
         return { tokens: await response.json() };
       },
@@ -83,6 +84,9 @@ export default function AzureDevOpsProvider<P extends AzureDevOpsProfile>(
     },
 
     options,
+    style: {
+      icon: <AzureIcon />,
+    },
   };
 }
 

@@ -62,6 +62,20 @@ export interface Auth0Profile extends Record<string, any> {
   user_id: string;
 }
 
+const Auth0Icon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="xMinYMin meet"
+    viewBox="0 0 256 287"
+    className="-ml-1 size-3.5"
+  >
+    <path
+      fill="#EB5424"
+      d="m203.2 231.5-28.7-88.4 75.2-54.6h-93L128 0h93l28.7 88.4a128 128 0 0 1-46.5 143.1zm-150.4 0 75.2 54.7 75.2-54.7L128 177l-75.2 54.6zM6.3 88.5a128 128 0 0 0 46.5 143l28.7-88.4L6.3 88.5h93L128 0H35L6.3 88.4z"
+    />
+  </svg>
+);
+
 export default function Auth0(
   config: OIDCUserConfig<Auth0Profile>
 ): OIDCConfig<Auth0Profile> {
@@ -70,7 +84,10 @@ export default function Auth0(
     name: "Auth0",
     type: "oidc",
     options: config,
+    style: {
+      icon: <Auth0Icon />,
+    },
   };
 }
 
-export { Auth0 };
+export { Auth0, Auth0Icon };

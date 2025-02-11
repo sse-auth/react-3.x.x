@@ -12,6 +12,20 @@ export interface BeyondIdentityProfile {
   email: string;
 }
 
+const BeyondIdentityIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 32 32"
+    className="-ml-1 size-3.5"
+  >
+    <path
+      fill="#5077c5"
+      d="m22.1 0-8.3 16.6L10 8.7H7.1l6.7 12.8L25 0Zm-9.2 27.2V30h2.5v-7.7z"
+    />
+  </svg>
+);
+
 export default function BeyondIdentity(
   config: OIDCUserConfig<BeyondIdentityProfile>
 ): OIDCConfig<BeyondIdentityProfile> {
@@ -29,7 +43,8 @@ export default function BeyondIdentity(
       };
     },
     options: config,
+    style: { icon: <BeyondIdentityIcon /> },
   };
 }
 
-export { BeyondIdentity }
+export { BeyondIdentity, BeyondIdentityIcon };

@@ -164,6 +164,20 @@ export interface FortyTwoProfile extends UserData, Record<string, any> {
   user: any | null;
 }
 
+const School42Icon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlSpace="preserve"
+    viewBox="0 -200 960 960"
+    className="-ml-1 size-3.5 fill-current dark:text-white"
+  >
+    <polygon points="32 412.6 362.1 412.6 362.1 578 526.8 578 526.8 279.1 197.3 279.1 526.8 -51.1 362.1 -51.1 32 279.1" />
+    <polygon points="597.9 114.2 762.7 -51.1 597.9 -51.1" />
+    <polygon points="762.7 114.2 597.9 279.1 597.9 443.9 762.7 443.9 762.7 279.1 928 114.2 928 -51.1 762.7 -51.1" />
+    <polygon points="928 279.1 762.7 443.9 928 443.9" />
+  </svg>
+);
+
 export default function FortyTwo<P extends FortyTwoProfile>(
   options: OAuthUserConfig<P>
 ): OAuthConfig<P> {
@@ -185,8 +199,11 @@ export default function FortyTwo<P extends FortyTwoProfile>(
         image: profile.image.link,
       };
     },
+    style: {
+      icon: <School42Icon />,
+    },
     options,
   };
 }
 
-export { FortyTwo };
+export { FortyTwo, School42Icon };
