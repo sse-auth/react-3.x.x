@@ -13,7 +13,7 @@ on:
           - "authenticator"
           - "backend"
           - "ip"
-          - "localization"
+          - "locale"
           - "react"
           - "themes/plugins"
           - "themes/themer"

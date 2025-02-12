@@ -1,17 +1,60 @@
 {
   "name": "@sse-auth/locale",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Localization for SSE Auth",
-  "main": "index.js",
   "scripts": {
     "build": "npm run clean && tsc",
     "clean": "rimraf dist",
+    "remove": "node ./scripts/removeSubFolder.mjs",
+    "postbuild": "node ../../scripts/subpath-workaround.mjs locale",
     "prepack": "tsc"
   },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    },
+    "./*": {
+      "import": {
+        "types": "./dist/*.d.mts",
+        "default": "./dist/*.mjs"
+      },
+      "require": {
+        "types": "./dist/*.d.ts",
+        "default": "./dist/*.js"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "ar-AE",
+    "de-DE",
+    "en-US",
+    "es-ES",
+    "fr-FR",
+    "hi-IN",
+    "it-IT",
+    "jp-JP",
+    "ko-KR",
+    "pt-PT",
+    "ru-RU",
+    "vi-VN",
+    "zh-CN",
+    "zh-TW"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sse-auth/react-3.x.x.git",
-    "directory": "packages/localization"
+    "directory": "packages/locale"
   },
   "author": "SSE World",
   "license": "MIT",
@@ -20,9 +63,9 @@
   },
   "homepage": "https://github.com/sse-auth/react-3.x.x#readme",
   "dependencies": {
-    "@sse-auth/types": "^1.3.5"
+    "@sse-auth/types": "^1.3.9"
   },
   "peerDependencies": {
-    "@sse-auth/types": "1.3.5"
+    "@sse-auth/types": "1.3.9"
   }
 }
