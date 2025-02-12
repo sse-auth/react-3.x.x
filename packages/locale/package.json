@@ -3,11 +3,11 @@
   "version": "1.2.0",
   "description": "Localization for SSE Auth",
   "scripts": {
-    "build": "npm run clean && tsc",
+    "build": "npm run clean && tsup",
     "clean": "rimraf dist",
     "remove": "node ./scripts/removeSubFolder.mjs",
     "postbuild": "node ../../scripts/subpath-workaround.mjs locale",
-    "prepack": "tsc"
+    "prepack": "tsup && node ../../scripts/subpath-workaround.mjs locale"
   },
   "exports": {
     ".": {
