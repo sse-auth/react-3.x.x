@@ -1,6 +1,6 @@
 {
   "name": "@sse-auth/locale",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Localization for SSE Auth",
   "scripts": {
     "build": "npm run clean && tsup",
