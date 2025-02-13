@@ -1,10 +1,10 @@
 import * as o from "oauth4webapi";
+import type { InternalOptions, RequestInternal } from "@sse-auth/types/config";
+import type { Cookie, CookiesOptions } from "@sse-auth/types/cookie";
+import type { WebAuthnProviderType } from "../providers/webauthn.js";
+import type { User } from "@sse-auth/types";
 import { InvalidCheck } from "@sse-auth/types/error";
 import { decode, encode } from "../utils/jwt.js";
-import type { Cookie, CookiesOptions } from "@sse-auth/types/cookie";
-import type { InternalOptions, RequestInternal } from "@sse-auth/types/config";
-import { User } from "@sse-auth/types";
-import { WebAuthnProviderType } from "../providers/webauthn.js";
 
 interface CookiePayload {
   value: string;
@@ -18,12 +18,12 @@ async function sealCookie(
   payload: string,
   options: InternalOptions<"oauth" | "oidc" | WebAuthnProviderType>
 ): Promise<Cookie> {
-  const { cookies } = options;
+  const { cookies, logger } = options;
   const cookie = cookies[name];
   const expires = new Date();
   expires.setTime(expires.getTime() + COOKIE_TTL * 1000);
 
-  console.debug(`CREATE_${name.toUpperCase()}`, {
+  logger.debug(`CREATE_${name.toUpperCase()}`, {
     name: cookie.name,
     payload,
     COOKIE_TTL,
@@ -46,8 +46,8 @@ async function parseCookie(
   options: InternalOptions
 ): Promise<string> {
   try {
-    const { cookies, jwt } = options;
-    console.debug(`PARSE_${name.toUpperCase()}`, { cookie: value });
+    const { logger, cookies, jwt } = options;
+    logger.debug(`PARSE_${name.toUpperCase()}`, { cookie: value });
 
     if (!value) throw new InvalidCheck(`${name} cookie was missing`);
     const parsed = await decode<CookiePayload>({
@@ -69,9 +69,9 @@ function clearCookie(
   options: InternalOptions,
   resCookies: Cookie[]
 ) {
-  const { cookies } = options;
+  const { logger, cookies } = options;
   const cookie = cookies[name];
-  console.debug(`CLEAR_${name.toUpperCase()}`, { cookie });
+  logger.debug(`CLEAR_${name.toUpperCase()}`, { cookie });
   resCookies.push({
     name: cookie.name,
     value: "",
@@ -88,10 +88,10 @@ function useCookie(
     resCookies: Cookie[],
     options: InternalOptions<"oidc">
   ) {
-    const { provider } = options;
-    if (!provider.checks.includes(check)) return;
+    const { provider, logger } = options;
+    if (!provider?.checks?.includes(check)) return;
     const cookieValue = cookies?.[options.cookies[name].name];
-    console.debug(`USE_${name.toUpperCase()}`, { value: cookieValue });
+    logger.debug(`USE_${name.toUpperCase()}`, { value: cookieValue });
     const parsed = await parseCookie(name, cookieValue, options);
     clearCookie(name, options, resCookies);
     return parsed;
@@ -167,7 +167,7 @@ export const state = {
   /** Decodes the state. If it could not be decoded, it throws an error. */
   async decode(state: string, options: InternalOptions) {
     try {
-      console.debug(`DECODE_STATE`, { state });
+      options.logger.debug("DECODE_STATE", { state });
       const payload = await decode<EncodedState>({
         secret: options.jwt.secret,
         token: state,

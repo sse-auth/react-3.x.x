@@ -3,7 +3,12 @@ import { InternalOptions, RequestInternal } from "@sse-auth/types/config";
 import { Cookie } from "@sse-auth/types/cookie";
 import { SessionStore } from "../utils/cookie.js";
 import { getLoggedInUser } from "../utils/session.js";
-import { assertInternalOptionsWebAuthn, getAuthenticationResponse, getRegistrationResponse, inferWebAuthnOptions } from "../utils/webauthn-utils.js";
+import {
+  assertInternalOptionsWebAuthn,
+  getAuthenticationResponse,
+  getRegistrationResponse,
+  inferWebAuthnOptions,
+} from "../utils/webauthn-utils.js";
 
 /**
  * Returns authentication or registration options for a WebAuthn flow

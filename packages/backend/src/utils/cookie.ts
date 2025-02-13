@@ -1,9 +1,10 @@
+import type { RequestInternal } from "@sse-auth/types/config";
 import type {
+  Cookie,
   CookieOption,
   CookiesOptions,
-  Cookie,
 } from "@sse-auth/types/cookie";
-import type { RequestInternal } from "@sse-auth/types/config";
+import type { LoggerInstance } from "@sse-auth/types/logger";
 
 // Uncomment to recalculate the estimated size
 // of an empty session cookie
@@ -11,7 +12,7 @@ import type { RequestInternal } from "@sse-auth/types/config";
 // const { serialize } = cookie
 // console.log(
 //   "Cookie estimated to be ",
-//   serialize(`__Secure.sse-auth.session-token.0`, "", {
+//   serialize(`__Secure.authjs.session-token.0`, "", {
 //     expires: new Date(),
 //     httpOnly: true,
 //     maxAge: Number.MAX_SAFE_INTEGER,
@@ -35,7 +36,7 @@ export type JWTString = string;
 
 export type SetCookieOptions = Partial<CookieOption["options"]> & {
   expires?: Date | string;
-  encode?: (value: unknown) => string;
+  encode?: (val: unknown) => string;
 };
 
 /**
@@ -61,7 +62,7 @@ export function defaultCookies(useSecureCookies: boolean) {
   return {
     // default cookie options
     sessionToken: {
-      name: `${cookiePrefix}sse-auth.session-token`,
+      name: `${cookiePrefix}authjs.session-token`,
       options: {
         httpOnly: true,
         sameSite: "lax",
@@ -70,7 +71,7 @@ export function defaultCookies(useSecureCookies: boolean) {
       },
     },
     callbackUrl: {
-      name: `${cookiePrefix}sse-auth.callback-url`,
+      name: `${cookiePrefix}authjs.callback-url`,
       options: {
         httpOnly: true,
         sameSite: "lax",
@@ -81,7 +82,7 @@ export function defaultCookies(useSecureCookies: boolean) {
     csrfToken: {
       // Default to __Host- for CSRF token for additional protection if using useSecureCookies
       // NB: The `__Host-` prefix is stricter than the `__Secure-` prefix.
-      name: `${useSecureCookies ? "__Host-" : ""}sse-auth.csrf-token`,
+      name: `${useSecureCookies ? "__Host-" : ""}authjs.csrf-token`,
       options: {
         httpOnly: true,
         sameSite: "lax",
@@ -90,7 +91,7 @@ export function defaultCookies(useSecureCookies: boolean) {
       },
     },
     pkceCodeVerifier: {
-      name: `${cookiePrefix}sse-auth.pkce.code_verifier`,
+      name: `${cookiePrefix}authjs.pkce.code_verifier`,
       options: {
         httpOnly: true,
         sameSite: "lax",
@@ -100,7 +101,7 @@ export function defaultCookies(useSecureCookies: boolean) {
       },
     },
     state: {
-      name: `${cookiePrefix}sse-auth.state`,
+      name: `${cookiePrefix}authjs.state`,
       options: {
         httpOnly: true,
         sameSite: "lax",
@@ -110,7 +111,7 @@ export function defaultCookies(useSecureCookies: boolean) {
       },
     },
     nonce: {
-      name: `${cookiePrefix}sse-auth.nonce`,
+      name: `${cookiePrefix}authjs.nonce`,
       options: {
         httpOnly: true,
         sameSite: "lax",
@@ -119,7 +120,7 @@ export function defaultCookies(useSecureCookies: boolean) {
       },
     },
     webauthnChallenge: {
-      name: `${cookiePrefix}sse-auth.challenge`,
+      name: `${cookiePrefix}authjs.challenge`,
       options: {
         httpOnly: true,
         sameSite: "lax",
@@ -136,12 +137,12 @@ type Chunks = Record<string, string>;
 export class SessionStore {
   #chunks: Chunks = {};
   #option: CookieOption;
-  #logger: Console;
+  #logger: LoggerInstance | Console;
 
   constructor(
     option: CookieOption,
     cookies: RequestInternal["cookies"],
-    logger: Console
+    logger: LoggerInstance | Console
   ) {
     this.#logger = logger;
     this.#option = option;
@@ -168,12 +169,14 @@ export class SessionStore {
       return aSuffix - bSuffix;
     });
 
+    // Use the sorted keys to join the chunks in the correct order
     return sortedKeys.map((key) => this.#chunks[key]).join("");
   }
 
   /** Given a cookie, return a list of cookies, chunked to fit the allowed cookie size. */
   #chunk(cookie: Cookie): Cookie[] {
     const chunkCount = Math.ceil(cookie.value.length / CHUNK_SIZE);
+
     if (chunkCount === 1) {
       this.#chunks[cookie.name] = cookie.value;
       return [cookie];

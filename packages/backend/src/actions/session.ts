@@ -1,10 +1,10 @@
-import { JWTSessionError, SessionTokenError } from "@sse-auth/types/error";
+import { InternalOptions, ResponseInternal } from "@sse-auth/types/config";
+import { Cookie } from "@sse-auth/types/cookie";
+import { SessionStore } from "../utils/cookie.js";
+import { Session } from "@sse-auth/types";
 import { fromDate } from "../utils/date.js";
-import type { Adapter } from "@sse-auth/types/adapter";
-import type { InternalOptions, ResponseInternal } from "@sse-auth/types/config";
-import type { Session } from "@sse-auth/types";
-import type { Cookie } from "@sse-auth/types/cookie";
-import type { SessionStore } from "../utils/cookie.js";
+import { JWTSessionError, SessionTokenError } from "@sse-auth/types/error";
+import { Adapter } from "@sse-auth/types/adapter";
 
 /** Return a session object filtered via `callbacks.session` */
 export async function session(
@@ -19,6 +19,7 @@ export async function session(
     jwt,
     events,
     callbacks,
+    logger,
     session: { strategy: sessionStrategy, maxAge: sessionMaxAge },
   } = options;
 
@@ -29,7 +30,6 @@ export async function session(
   };
 
   const sessionToken = sessionStore.value;
-
   if (!sessionToken) return response;
 
   if (sessionStrategy === "jwt") {
@@ -76,7 +76,7 @@ export async function session(
         response.cookies?.push(...sessionStore.clean());
       }
     } catch (e) {
-      console.error(new JWTSessionError(e as Error));
+      logger.error(new JWTSessionError(e as Error));
       // If the JWT is not verifiable remove the broken session cookie(s).
       response.cookies?.push(...sessionStore.clean());
     }
@@ -153,7 +153,7 @@ export async function session(
       response.cookies?.push(...sessionStore.clean());
     }
   } catch (e) {
-    console.error(new SessionTokenError(e as Error));
+    logger.error(new SessionTokenError(e as Error));
   }
 
   return response;

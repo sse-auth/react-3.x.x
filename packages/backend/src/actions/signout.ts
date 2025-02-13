@@ -1,7 +1,7 @@
+import { InternalOptions, ResponseInternal } from "@sse-auth/types/config";
+import { Cookie } from "@sse-auth/types/cookie";
 import { SignOutError } from "@sse-auth/types/error";
-import type { InternalOptions, ResponseInternal } from "@sse-auth/types/config";
-import type { Cookie } from "@sse-auth/types/cookie";
-import type { SessionStore } from "../utils/cookie.js";
+import { SessionStore } from "../utils/cookie.js";
 
 /**
  * Destroys the session.
@@ -15,7 +15,7 @@ export async function signOut(
   sessionStore: SessionStore,
   options: InternalOptions
 ): Promise<ResponseInternal> {
-  const { jwt, events, callbackUrl: redirect, session } = options;
+  const { jwt, events, callbackUrl: redirect, logger, session } = options;
   const sessionToken = sessionStore.value;
   if (!sessionToken) return { redirect, cookies };
 
@@ -29,9 +29,10 @@ export async function signOut(
       await events.signOut?.({ session });
     }
   } catch (e) {
-    console.error(new SignOutError(e as Error));
+    logger.error(new SignOutError(e as Error));
   }
 
   cookies.push(...sessionStore.clean());
+
   return { redirect, cookies };
 }

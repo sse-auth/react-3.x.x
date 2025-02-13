@@ -1,7 +1,7 @@
-import { createHash, randomString, toRequest } from "../utils/web.js";
-import { AccessDenied } from "@sse-auth/types/error";
-import type { InternalOptions, RequestInternal } from "@sse-auth/types/config";
 import type { Account } from "@sse-auth/types";
+import type { InternalOptions, RequestInternal } from "@sse-auth/types/config";
+import { AccessDenied } from "@sse-auth/types/error";
+import { createHash, randomString, toRequest } from "../utils/web.js";
 
 /**
  * Starts an e-mail login flow, by generating a token,
@@ -16,6 +16,7 @@ export async function sendToken(
   const { provider, callbacks, adapter } = options;
   const normalizer = provider.normalizeIdentifier ?? defaultNormalizer;
   const email = normalizer(body?.email);
+
   const defaultUser = { id: crypto.randomUUID(), email, emailVerified: null };
   const user = (await adapter!.getUserByEmail(email)) ?? defaultUser;
 
@@ -56,6 +57,7 @@ export async function sendToken(
   );
 
   const secret = provider.secret ?? options.secret;
+
   const baseUrl = new URL(options.basePath, options.url.origin);
 
   const sendRequest = provider.sendVerificationRequest({

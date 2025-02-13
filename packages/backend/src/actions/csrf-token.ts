@@ -1,7 +1,7 @@
-import { createHash, randomString } from "../utils/web.js";
-import type { AuthAction } from "@sse-auth/types";
-import type { InternalOptions } from "@sse-auth/types/config";
+import { AuthAction } from "@sse-auth/types";
+import { InternalOptions } from "@sse-auth/types/config";
 import { MissingCSRF } from "@sse-auth/types/error";
+import { createHash, randomString } from "../utils/web.js";
 
 interface CreateCSRFTokenParams {
   options: InternalOptions;
@@ -52,7 +52,7 @@ export async function createCSRFToken({
   const csrfTokenHash = await createHash(`${csrfToken}${options.secret}`);
   const cookie = `${csrfToken}|${csrfTokenHash}`;
 
-  return { csrfToken, cookie };
+  return { cookie, csrfToken };
 }
 
 export function validateCSRF(action: AuthAction, verified?: boolean) {

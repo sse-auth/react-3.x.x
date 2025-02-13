@@ -1,15 +1,29 @@
-// @ts-nocheck
-import { InternalOptions, RequestInternal, ResponseInternal } from "@sse-auth/types/config";
-import { Cookie } from "@sse-auth/types/cookie";
-import { AccessDenied, AuthError, CallbackRouteError, CredentialsSignin, InvalidProvider, Verification } from "@sse-auth/types/error";
-import { SessionStore } from "utils/cookie.js";
+import type {
+  InternalOptions,
+  RequestInternal,
+  ResponseInternal,
+} from "@sse-auth/types/config";
+import type { Cookie } from "@sse-auth/types/cookie";
+import {
+  AccessDenied,
+  AuthError,
+  CallbackRouteError,
+  CredentialsSignin,
+  InvalidProvider,
+  Verification,
+} from "@sse-auth/types/error";
+import type { SessionStore } from "../utils/cookie.js";
 import { state } from "./checks.js";
 import { handleOAuth } from "./oauth.js";
 import { handleLoginOrRegister } from "./handle-login.js";
-import { AdapterSession } from "@sse-auth/types/adapter";
-import { createHash } from "utils/web.js";
-import { Account } from "@sse-auth/types";
-import { assertInternalOptionsWebAuthn, verifyAuthenticate, verifyRegister } from "utils/webauthn-utils.js";
+import type { AdapterSession } from "@sse-auth/types/adapter";
+import { createHash } from "../utils/web.js";
+import type { Account, Authenticator, User } from "@sse-auth/types";
+import {
+  assertInternalOptionsWebAuthn,
+  verifyAuthenticate,
+  verifyRegister,
+} from "../utils/webauthn-utils.js";
 
 /** Handle callbacks from login services */
 export async function callback(
@@ -31,6 +45,7 @@ export async function callback(
     events,
     callbacks,
     session: { strategy: sessionStrategy, maxAge: sessionMaxAge },
+    logger,
   } = options;
 
   const useJwtSession = sessionStrategy === "jwt";
@@ -58,7 +73,7 @@ export async function callback(
           const proxyRedirect = `${parsedState.origin}?${new URLSearchParams(
             params
           )}`;
-          console.debug("Proxy redirecting to", proxyRedirect);
+          logger.debug("Proxy redirecting to", proxyRedirect);
           return { redirect: proxyRedirect, cookies };
         }
       }
@@ -73,7 +88,7 @@ export async function callback(
         cookies.push(...authorizationResult.cookies);
       }
 
-      console.debug("authorization result", authorizationResult);
+      logger.debug("authorization result", authorizationResult);
 
       const {
         user: userFromProvider,
@@ -99,7 +114,7 @@ export async function callback(
         const { getUserByAccount } = adapter;
         userByAccount = await getUserByAccount({
           providerAccountId: account.providerAccountId,
-          provider: provider.id!,
+          provider: provider.id,
         });
       }
 
@@ -124,7 +139,10 @@ export async function callback(
         const defaultToken = {
           name: user.name,
           email: user.email,
-          picture: user.image,
+          picture:
+            typeof user.image === "string"
+              ? user.image
+              : (user.image as string | null | undefined),
           sub: user.id?.toString(),
         };
         const token = await callbacks.jwt({
@@ -227,7 +245,7 @@ export async function callback(
         providerAccountId: user.email,
         userId: user.id,
         type: "email" as const,
-        provider: provider.id!,
+        provider: provider.id,
       };
 
       const redirect = await handleAuthorized({ user, account }, options);
@@ -249,7 +267,10 @@ export async function callback(
         const defaultToken = {
           name: loggedInUser.name,
           email: loggedInUser.email,
-          picture: loggedInUser.image,
+          picture:
+            typeof user.image === "string"
+              ? user.image
+              : (user.image as string | null | undefined),
           sub: loggedInUser.id?.toString(),
         };
         const token = await callbacks.jwt({
@@ -446,7 +467,7 @@ export async function callback(
         const defaultToken = {
           name: loggedInUser.name,
           email: loggedInUser.email,
-          picture: loggedInUser.image,
+          picture: loggedInUser.image as string | null | undefined,
           sub: loggedInUser.id?.toString(),
         };
         const token = await callbacks.jwt({
@@ -514,7 +535,7 @@ export async function callback(
   } catch (e) {
     if (e instanceof AuthError) throw e;
     const error = new CallbackRouteError(e as Error, { provider: provider.id });
-    console.debug("callback route error details", { method, query, body });
+    logger.debug("callback route error details", { method, query, body });
     throw error;
   }
 }

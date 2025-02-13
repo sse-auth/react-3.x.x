@@ -1,16 +1,17 @@
-import * as checks from "./checks.js";
 import * as o from "oauth4webapi";
+import * as checks from "./checks.js";
 import type { InternalOptions, RequestInternal } from "@sse-auth/types/config";
-import type { Cookie } from "@sse-auth/types/cookie";
 import { conformInternal, customFetch } from "@sse-auth/types/symbol";
+import type { Cookie } from "@sse-auth/types/cookie";
+import type { Account, Profile, TokenSet, User } from "@sse-auth/types";
 import {
   OAuthCallbackError,
   OAuthProfileParseError,
 } from "@sse-auth/types/error";
-import { Account, Profile, TokenSet, User } from "@sse-auth/types";
-import { OAuthConfigInternal } from "@sse-auth/types/provider";
 import { isOIDCProvider } from "../utils/providers.js";
 import { decodeJwt } from "jose";
+import type { OAuthConfigInternal } from "@sse-auth/types/provider";
+import type { LoggerInstance } from "@sse-auth/types/logger";
 
 /**
  * Generates an authorization/request token URL.
@@ -21,7 +22,8 @@ export async function getAuthorizationUrl(
   query: RequestInternal["query"],
   options: InternalOptions<"oauth" | "oidc">
 ) {
-  const { provider } = options;
+  const { logger, provider } = options;
+
   let url = provider.authorization?.url;
   let as: o.AuthorizationServer | undefined;
 
@@ -36,7 +38,15 @@ export async function getAuthorizationUrl(
       // TODO: move away from allowing insecure HTTP requests
       [o.allowInsecureRequests]: true,
     });
-    const as = await o.processDiscoveryResponse(issuer, discoveryResponse);
+    const as = await o
+      .processDiscoveryResponse(issuer, discoveryResponse)
+      .catch((error) => {
+        if (!(error instanceof TypeError) || error.message !== "Invalid URL")
+          throw error;
+        throw new TypeError(
+          `Discovery request responded with an invalid issuer. expected: ${issuer}`
+        );
+      });
 
     if (!as.authorization_endpoint) {
       throw new TypeError(
@@ -54,7 +64,7 @@ export async function getAuthorizationUrl(
   if (!options.isOnRedirectProxy && provider.redirectProxyUrl) {
     redirect_uri = provider.redirectProxyUrl;
     data = provider.callbackUrl;
-    console.debug("using redirect proxy", { redirect_uri, data });
+    logger.debug("using redirect proxy", { redirect_uri, data });
   }
 
   const params = Object.assign(
@@ -71,6 +81,7 @@ export async function getAuthorizationUrl(
   );
 
   for (const k in params) authParams.set(k, params[k]);
+
   const cookies: Cookie[] = [];
 
   if (
@@ -115,11 +126,11 @@ export async function getAuthorizationUrl(
     url.searchParams.set("scope", "openid profile email");
   }
 
-  console.debug("authorization url is ready", { url, cookies, provider });
+  logger.debug("authorization url is ready", { url, cookies, provider });
   return { redirect: url.toString(), cookies };
 }
 
-// Path: packages/backend/src/actions/callback.ts
+// OAuth Callback
 function formUrlEncode(token: string) {
   return encodeURIComponent(token).replace(/%20/g, "+");
 }
@@ -149,10 +160,11 @@ export async function handleOAuth(
   cookies: RequestInternal["cookies"],
   options: InternalOptions<"oauth" | "oidc">
 ) {
-  const { provider } = options;
-  let as: o.AuthorizationServer;
-  const { token, userinfo } = provider;
+  const { logger, provider } = options;
 
+  let as: o.AuthorizationServer;
+
+  const { token, userinfo } = provider;
   // Falls back to authjs.dev if the user only passed params
   if (
     (!token?.url || token.url.host === "authjs.dev") &&
@@ -225,9 +237,10 @@ export async function handleOAuth(
   }
 
   const resCookies: Cookie[] = [];
-  const state = await checks.state.use(cookies, resCookies, options);
-  let codeGrantParams: URLSearchParams;
 
+  const state = await checks.state.use(cookies, resCookies, options);
+
+  let codeGrantParams: URLSearchParams;
   try {
     codeGrantParams = o.validateAuthResponse(
       as,
@@ -241,13 +254,14 @@ export async function handleOAuth(
         providerId: provider.id,
         ...Object.fromEntries(err.cause.entries()),
       };
-      console.debug("OAuthCallbackError", cause);
+      logger.debug("OAuthCallbackError", cause);
       throw new OAuthCallbackError("OAuth Provider returned an error", cause);
     }
     throw err;
   }
 
   const codeVerifier = await checks.pkce.use(cookies, resCookies, options);
+
   let redirect_uri = provider.callbackUrl;
   if (!options.isOnRedirectProxy && provider.redirectProxyUrl) {
     redirect_uri = provider.redirectProxyUrl;
@@ -279,6 +293,7 @@ export async function handleOAuth(
   }
 
   let profile: Profile = {};
+
   const requireIdToken = isOIDCProvider(provider);
 
   if (provider[conformInternal]) {
@@ -308,7 +323,6 @@ export async function handleOAuth(
         break;
     }
   }
-
   const processedCodeResponse = await o.processAuthorizationCodeResponse(
     as,
     client,
@@ -320,9 +334,10 @@ export async function handleOAuth(
   );
 
   const tokens: TokenSet & Pick<Account, "expires_at"> = processedCodeResponse;
+
   if (requireIdToken) {
-    const isTokenClaims = o.getValidatedIdTokenClaims(processedCodeResponse)!;
-    profile = isTokenClaims;
+    const idTokenClaims = o.getValidatedIdTokenClaims(processedCodeResponse)!;
+    profile = idTokenClaims;
 
     // Apple sends some of the user information in a `user` parameter as a stringified JSON.
     // It also only does so the first time the user consents to share their information.
@@ -347,7 +362,7 @@ export async function handleOAuth(
       profile = await o.processUserInfoResponse(
         as,
         client,
-        isTokenClaims.sub,
+        idTokenClaims.sub,
         userinfoResponse
       );
     }
@@ -377,7 +392,13 @@ export async function handleOAuth(
       Math.floor(Date.now() / 1000) + Number(tokens.expires_in);
   }
 
-  const profileResult = await getUserAndAccount(profile, provider, tokens);
+  const profileResult = await getUserAndAccount(
+    profile,
+    provider,
+    tokens,
+    logger
+  );
+
   return { ...profileResult, profile, cookies: resCookies };
 }
 
@@ -388,8 +409,8 @@ export async function handleOAuth(
 export async function getUserAndAccount(
   OAuthProfile: Profile,
   provider: OAuthConfigInternal<any>,
-  tokens: TokenSet
-  //   logger: Console
+  tokens: TokenSet,
+  logger: LoggerInstance
 ) {
   try {
     const userFromProfile = await provider.profile(OAuthProfile, tokens);
@@ -419,8 +440,8 @@ export async function getUserAndAccount(
     // all providers, so we return an empty object; the user should then be
     // redirected back to the sign up page. We log the error to help developers
     // who might be trying to debug this when configuring a new provider.
-    console.debug("getProfile error details", OAuthProfile);
-    console.error(
+    logger.debug("getProfile error details", OAuthProfile);
+    logger.error(
       new OAuthProfileParseError(e as Error, { provider: provider.id })
     );
   }

@@ -1,6 +1,6 @@
-import type { InternalOptions } from "@sse-auth/types/config";
-import type { SessionStore } from "./cookie.js";
-import type { User } from "@sse-auth/types";
+import { InternalOptions } from "@sse-auth/types/config";
+import { SessionStore } from "./cookie.js";
+import { User } from "@sse-auth/types";
 
 /**
  * Returns the currently logged in user, if any.
@@ -26,8 +26,8 @@ export async function getLoggedInUser(
     if (payload && payload.sub) {
       return {
         id: payload.sub,
-        email: payload.email,
         name: payload.name,
+        email: payload.email,
         image: payload.picture,
       };
     }

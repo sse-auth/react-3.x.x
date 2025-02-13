@@ -1,11 +1,11 @@
-import { getAuthorizationUrl } from "./oauth.js";
-import { sendToken } from "./send-token.js";
-import type { Cookie } from "@sse-auth/types/cookie";
-import {
+import type {
   InternalOptions,
   RequestInternal,
   ResponseInternal,
 } from "@sse-auth/types/config";
+import type { Cookie } from "@sse-auth/types/cookie";
+import { getAuthorizationUrl } from "./oauth.js";
+import { sendToken } from "./send-token.js";
 
 export async function signIn(
   request: RequestInternal,
@@ -13,6 +13,7 @@ export async function signIn(
   options: InternalOptions
 ): Promise<ResponseInternal> {
   const signInUrl = `${options.url.origin}${options.basePath}/signin`;
+
   if (!options.provider) return { redirect: signInUrl, cookies };
 
   switch (options.provider.type) {

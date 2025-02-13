@@ -10,6 +10,7 @@ import type {
 } from "@sse-auth/types/config";
 import { AdapterError, EventError } from "@sse-auth/types/error";
 import type { Cookie } from "@sse-auth/types/cookie";
+import { LoggerInstance, setLogger } from "./logger.js";
 
 interface InitParams {
   url: URL;
@@ -85,12 +86,16 @@ export async function init({
   csrfToken: reqCsrfToken,
   csrfDisabled,
   isPost,
-}: InitParams): Promise<{ options: InternalOptions; cookies: Cookie[] }> {
-  const logger: Console = console;
+}: InitParams): Promise<{
+  options: InternalOptions;
+  cookies: Cookie[];
+}> {
+  const logger = setLogger(config);
   const { providers, provider } = parseProviders({ url, providerId, config });
-  const maxAge = 30 * 24 * 60 * 60; // Sessions expire after 30 days of being idle by default
-  let isOnRedirectProxy = false;
 
+  const maxAge = 30 * 24 * 60 * 60; // Sessions expire after 30 days of being idle by default
+
+  let isOnRedirectProxy = false;
   if (
     (provider?.type === "oauth" || provider?.type === "oidc") &&
     provider.redirectProxyUrl
@@ -133,16 +138,17 @@ export async function init({
     providers,
     // Session options
     session: {
+      // If no adapter specified, force use of JSON Web Tokens (stateless)
       strategy: config.adapter ? "database" : "jwt",
       maxAge,
       updateAge: 24 * 60 * 60,
       generateSessionToken: () => generateUUID(),
       ...config.session,
     },
-    // JWT Options
+    // JWT options
     jwt: {
-      secret: config.secret!,
-      maxAge: config.session?.maxAge ?? maxAge,
+      secret: config.secret!, // Asserted in assert.ts
+      maxAge: config.session?.maxAge ?? maxAge, // default to same as `session.maxAge`
       encode: jwt.encode,
       decode: jwt.decode,
       ...config.jwt,
@@ -152,6 +158,7 @@ export async function init({
     adapter: adapterErrorHandler(config.adapter, logger),
     // Callback functions
     callbacks: { ...defaultCallbacks, ...config.callbacks },
+    logger,
     callbackUrl: url.origin,
     isOnRedirectProxy,
     experimental: {
@@ -159,7 +166,8 @@ export async function init({
     },
   };
 
-  // Init Cookies
+  // Init cookies
+
   const cookies: Cookie[] = [];
 
   if (csrfDisabled) {
@@ -188,6 +196,20 @@ export async function init({
     }
   }
 
+  // const { callbackUrl, callbackUrlCookie } = await createCallbackUrl({
+  //   options,
+  //   cookieValue: reqCookies?.[options.cookies.callbackUrl.name],
+  //   paramValue: reqCallbackUrl,
+  // });
+  // options.callbackUrl = callbackUrl;
+  // if (callbackUrlCookie) {
+  //   cookies.push({
+  //     name: options.cookies.callbackUrl.name,
+  //     value: callbackUrlCookie,
+  //     options: options.cookies.callbackUrl.options,
+  //   });
+  // }
+
   return { options, cookies };
 }
 
@@ -196,7 +218,7 @@ type Method = (...args: any[]) => Promise<any>;
 /** Wraps an object of methods and adds error handling. */
 function eventsErrorHandler(
   methods: Partial<InternalOptions["events"]>,
-  logger: Console
+  logger: LoggerInstance
 ): Partial<InternalOptions["events"]> {
   return Object.keys(methods).reduce<any>((acc, name) => {
     acc[name] = async (...args: any[]) => {
@@ -212,7 +234,10 @@ function eventsErrorHandler(
 }
 
 /** Handles adapter induced errors. */
-function adapterErrorHandler(adapter: AuthConfig["adapter"], logger: Console) {
+function adapterErrorHandler(
+  adapter: AuthConfig["adapter"],
+  logger: LoggerInstance
+) {
   if (!adapter) return;
 
   return Object.keys(adapter).reduce<any>((acc, name) => {

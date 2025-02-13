@@ -1,17 +1,14 @@
-import {
-  AccountNotLinked,
-  OAuthAccountNotLinked,
-} from "@sse-auth/types/error";
-import { fromDate } from "../utils/date.js";
+import type { Account, JWT, User } from "@sse-auth/types";
 import type {
   AdapterAccount,
   AdapterSession,
   AdapterUser,
 } from "@sse-auth/types/adapter";
 import type { InternalOptions } from "@sse-auth/types/config";
-import type { Account, User, JWT } from "@sse-auth/types";
+import { AccountNotLinked, OAuthAccountNotLinked } from "@sse-auth/types/error";
 import type { OAuthConfig } from "@sse-auth/types/provider";
 import type { SessionToken } from "../utils/cookie.js";
+import { fromDate } from "../utils/date.js";
 
 /**
  * This function handles the complex flow of signing users in, and either creating,
@@ -34,7 +31,7 @@ export async function handleLoginOrRegister(
   // Input validation
   if (!_account?.providerAccountId || !_account.type)
     throw new Error("Missing or invalid provider account");
-  if (!["email", "oauth", "oidc"].includes(_account.type))
+  if (!["email", "oauth", "oidc", "webauthn"].includes(_account.type))
     throw new Error("Provider not supported");
 
   const {
@@ -293,7 +290,7 @@ export async function handleLoginOrRegister(
       : null;
     if (userByEmail) {
       const provider = options.provider as OAuthConfig<any>;
-      if (provider.allowDangerousEmailAccountLinking) {
+      if (provider?.allowDangerousEmailAccountLinking) {
         // If you trust the oauth provider to correctly verify email addresses, you can opt-in to
         // account linking even when the user is not signed-in.
         user = userByEmail;
@@ -321,8 +318,8 @@ export async function handleLoginOrRegister(
       user = await createUser({ ...profile, emailVerified: null });
       isNewUser = true;
     }
-
     await events.createUser?.({ user });
+
     await linkAccount({ ...account, userId: user.id });
     await events.linkAccount?.({ user, account, profile });
 

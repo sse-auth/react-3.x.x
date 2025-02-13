@@ -3,7 +3,7 @@ import { readdirSync, writeFileSync } from "fs";
 
 const currentDir = process.cwd();
 const providersPath = join(currentDir, "src/providers");
-const outputPath = join(currentDir, "..", "types/provider")
+const outputPath = join(currentDir, "..", "types/src/provider")
 
 const files = readdirSync(providersPath, "utf8");
 

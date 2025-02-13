@@ -1,6 +1,6 @@
 {
   "name": "@sse-auth/backend",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Backend for the SSE Authentication",
   "main": "index.js",
   "type": "module",
@@ -12,7 +12,7 @@
     "build": "npm run clean && tsup",
     "clean": "rimraf dist",
     "prepare": "tsup",
-    "providers": "node scripts/generate-providers"
+    "providers": "node scripts/generate-providers.js"
   },
   "exports": {
     "./providers/*": {

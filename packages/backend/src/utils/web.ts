@@ -1,11 +1,12 @@
-import * as cookie from "./vendored/cookie.js";
-import { UnknownAction } from "@sse-auth/types/error";
-import { AuthAction } from "@sse-auth/types";
-import {
+import type {
+  AuthConfig,
   RequestInternal,
   ResponseInternal,
-  AuthConfig,
 } from "@sse-auth/types/config";
+import * as cookie from "./vendored/cookie.js";
+import { UnknownAction } from "@sse-auth/types/error";
+import { setLogger } from "./logger.js";
+import type { AuthAction } from "@sse-auth/types";
 import { isAuthAction } from "./actions.js";
 
 const { parse: parseCookie, serialize: serializeCookie } = cookie;
@@ -52,11 +53,9 @@ export async function toInternalRequest(
       query: Object.fromEntries(url.searchParams),
     };
   } catch (e) {
-    // const logger = setLogger(config);
-    // logger.error(e as Error);
-    // logger.debug("request", req);
-
-    console.log(e);
+    const logger = setLogger(config);
+    logger.error(e as Error);
+    logger.debug("request", req);
   }
 }
 
@@ -123,6 +122,7 @@ export function parseActionAndProviderId(
   providerId?: string;
 } {
   const a = pathname.match(new RegExp(`^${base}(.+)`));
+
   if (a === null) throw new UnknownAction(`Cannot parse action at ${pathname}`);
   const actionAndProviderId = a.at(-1)!;
   const b = actionAndProviderId.replace(/^\//, "").split("/").filter(Boolean);

@@ -1,5 +1,5 @@
+import type { AuthConfig, InternalProvider } from "@sse-auth/types/config";
 import { merge } from "./merge.js";
-
 import type {
   AccountCallback,
   OAuthConfig,
@@ -8,9 +8,7 @@ import type {
   OAuthUserConfig,
   ProfileCallback,
 } from "@sse-auth/types/provider";
-import type { InternalProvider, AuthConfig } from "@sse-auth/types/config";
-import { customFetch } from "@sse-auth/types/symbol";
-import { Profile } from "@sse-auth/types";
+import type { Profile } from "@sse-auth/types";
 
 /**
  * Adds `signinUrl` and `callbackUrl` to each provider
@@ -86,6 +84,7 @@ function normalizeOAuth(
   }
 
   const token = normalizeEndpoint(c.token, c.issuer);
+
   const userinfo = normalizeEndpoint(c.userinfo, c.issuer);
 
   const checks = c.checks ?? ["pkce"];

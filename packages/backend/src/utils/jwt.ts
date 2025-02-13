@@ -15,6 +15,10 @@
  *
  * ## Installation
  *
+ * ```bash npm2yarn
+ * npm install @auth/core
+ * ```
+ *
  * You can then import this submodule from `@auth/core/jwt`.
  *
  * ## Usage
@@ -26,30 +30,27 @@
  *
  * ## Resources
  *
+ * - [What is a JWT session strategy](https://authjs.dev/concepts/session-strategies#jwt-session)
  * - [RFC7519 - JSON Web Token (JWT)](https://www.rfc-editor.org/rfc/rfc7519)
  *
  * @module jwt
  */
-
 import { hkdf } from "@panva/hkdf";
 import {
-  EncryptJWT,
   base64url,
   calculateJwkThumbprint,
+  calculateJwkThumbprintUri,
   jwtDecrypt,
 } from "jose";
-import { defaultCookies, SessionStore } from "./cookie.js";
-// import type { LoggerInstance } from "./lib/utils/logger.js";
-import { MissingSecret } from "@sse-auth/types/error";
 import * as cookie from "./vendored/cookie.js";
-import {
+import type {
+  GetTokenParams,
   JWT,
   JWTDecodeParams,
-  JWTOptions,
-  Awaitable,
   JWTEncodeParams,
-  GetTokenParams,
 } from "@sse-auth/types";
+import { defaultCookies, SessionStore } from "./cookie.js";
+import { MissingSecret } from "@sse-auth/types/error";
 
 const { parse: parseCookie } = cookie;
 const DEFAULT_MAX_AGE = 30 * 24 * 60 * 60; // 30 days
@@ -58,7 +59,7 @@ const now = () => (Date.now() / 1000) | 0;
 
 const alg = "dir";
 const enc = "A256CBC-HS512";
-type Digest = Parameters<typeof calculateJwkThumbprint>[1];
+type Digest = Parameters<typeof calculateJwkThumbprintUri>[1];
 
 /** Issues a JWT. By default, the JWT is encrypted using "A256CBC-HS512". */
 export async function encode<Payload = JWT>(params: JWTEncodeParams<Payload>) {
@@ -114,11 +115,6 @@ export async function decode<Payload = JWT>(
   );
   return payload as Payload;
 }
-
-type GetTokenParamsBase = {
-  secret?: JWTDecodeParams["secret"];
-  salt?: JWTDecodeParams["salt"];
-};
 
 /**
  * Takes an Auth.js request (`req`) and returns either the Auth.js issued JWT's payload,
