@@ -10,7 +10,7 @@ import type {
 } from "@sse-auth/types/config";
 import { AdapterError, EventError } from "@sse-auth/types/error";
 import type { Cookie } from "@sse-auth/types/cookie";
-import { LoggerInstance, setLogger } from "./logger.js";
+import { LoggerInstance, setLogger } from "@sse-auth/types/logger";
 
 interface InitParams {
   url: URL;

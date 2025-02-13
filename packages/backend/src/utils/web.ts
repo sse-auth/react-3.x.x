@@ -5,7 +5,7 @@ import type {
 } from "@sse-auth/types/config";
 import * as cookie from "./vendored/cookie.js";
 import { UnknownAction } from "@sse-auth/types/error";
-import { setLogger } from "./logger.js";
+import { setLogger } from "@sse-auth/types/logger";
 import type { AuthAction } from "@sse-auth/types";
 import { isAuthAction } from "./actions.js";
 
