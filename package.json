@@ -22,7 +22,7 @@
   "devDependencies": {
     "conventional-changelog-cli": "^5.0.0",
     "conventional-changelog-conventionalcommits": "^8.0.0",
-    "tsup": "^8.3.6",
+    "tsup": "^8.4.0",
     "typescript": "^5.7.3",
     "zx": "^8.3.2"
   }
