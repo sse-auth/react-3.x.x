@@ -1,8 +1,7 @@
 import { InternalOptions, ResponseInternal } from "@sse-auth/types/config";
 import { Cookie } from "@sse-auth/types/cookie";
 import { SignOutError } from "@sse-auth/types/error";
-import { SessionStore } from "../utils/cookie.js";
-
+import { SessionStore } from "utils/cookie.js";
 /**
  * Destroys the session.
  * If the session strategy is database,
@@ -33,6 +32,5 @@ export async function signOut(
   }
 
   cookies.push(...sessionStore.clean());
-
   return { redirect, cookies };
 }

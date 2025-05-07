@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ProviderId } from "@sse-auth/types/provider/index";
 import { Session } from "@sse-auth/types";
 import {
@@ -7,6 +7,7 @@ import {
   RequestInternal,
 } from "@sse-auth/types/config";
 import { skipCSRFCheck } from "@sse-auth/types/symbol";
+import { init } from "@sse-auth/backend/utils/init";
 
 interface AuthContextProps {
   user: any;
@@ -115,7 +116,10 @@ export const AuthProvider: React.FC<
 > = ({ config, children, request }) => {
   const [user, setUser] = React.useState<any>(null);
   const [loading, setLoading] = React.useState(true);
+  const [options, setOptions] = React.useState<InternalOptions>({});
   const csrfDisabled = config.skipCSRFCheck === skipCSRFCheck;
+
+  const {  } = init({ authOptions: config });
 
   return (
     <AuthContext.Provider value={{ user, loading, configInternal: options }}>

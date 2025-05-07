@@ -1,14 +1,13 @@
-import * as jwt from "@sse-auth/backend/utils/jwt";
-import * as cookie from "@sse-auth/backend/utils/cookie";
-import { createCSRFToken } from "@sse-auth/backend/actions/csrf-token";
-import parseProviders from "@sse-auth/backend/utils/providers";
-import { merge } from "@sse-auth/backend/utils/merge";
-import type {
-  AuthConfig,
-  InternalOptions,
-  RequestInternal,
-} from "@sse-auth/types/config";
+import * as jwt from "./utils/jwt.js";
+import * as cookie from "./utils/cookie.js";
+
 import { AdapterError, EventError } from "@sse-auth/types/error";
+import parseProviders from "./utils/providers.js";
+import { setLogger, type LoggerInstance } from "@sse-auth/types/logger";
+import { merge } from "./utils/merge.js";
+
+import type { InternalOptions, RequestInternal } from "@sse-auth/types/config";
+import type { AuthConfig } from "@sse-auth/types/config";
 import { Cookie } from "@sse-auth/types/cookie";
 
 interface InitParams {
@@ -50,30 +49,6 @@ export const defaultCallbacks: InternalOptions["callbacks"] = {
   },
 };
 
-function generateUUID() {
-  if (
-    typeof crypto !== "undefined" &&
-    typeof crypto.randomUUID === "function"
-  ) {
-    return crypto.randomUUID();
-  } else if (
-    typeof window !== "undefined" &&
-    typeof window.crypto !== "undefined" &&
-    typeof window.crypto.randomUUID === "function"
-  ) {
-    return window.crypto.randomUUID();
-  } else {
-    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
-      /[xy]/g,
-      function (c) {
-        const r = (Math.random() * 16) | 0;
-        const v = c === "x" ? r : (r & 0x3) | 0x8;
-        return v.toString(16);
-      }
-    );
-  }
-}
-
 /** Initialize all internal options and cookies. */
 export async function init({
   authOptions: config,
@@ -89,14 +64,14 @@ export async function init({
   options: InternalOptions;
   cookies: Cookie[];
 }> {
-  const logger: Console = console;
+  const logger = setLogger(config);
   const { providers, provider } = parseProviders({ url, providerId, config });
-  const maxAge = 30 * 24 * 60 * 60; // Sessions expire after 30 days of being idle by default
+  const maxAge = 30 * 24 * 60 * 60; // 30 days
   let isOnRedirectProxy = false;
-  
+
   if (
     (provider?.type === "oauth" || provider?.type === "oidc") &&
-    provider.redirectProxyUrl
+    provider?.redirectProxyUrl
   ) {
     try {
       isOnRedirectProxy =
@@ -119,13 +94,10 @@ export async function init({
       brandColor: "",
       buttonText: "",
     },
-    // Custom options override defaults
     ...config,
-    // These computed settings can have values in userOptions but we override them
-    // and are request-specific.
     url,
     action,
-    // @ts-expect-errors
+    // @ts-expect-error
     provider,
     cookies: merge(
       cookie.defaultCookies(
@@ -134,27 +106,23 @@ export async function init({
       config.cookies
     ),
     providers,
-    // Session options
     session: {
       strategy: config.adapter ? "database" : "jwt",
       maxAge,
-      updateAge: 24 * 60 * 60,
-      generateSessionToken: () => generateUUID(),
+      updateAge: 24 * 60 * 60, // 24 hours
+      generateSessionToken: () => crypto.randomUUID(),
       ...config.session,
     },
-    // JWT Options
     jwt: {
       secret: config.secret!,
       maxAge: config.session?.maxAge ?? maxAge,
       encode: jwt.encode,
       decode: jwt.decode,
-      ...config.jwt,
     },
-    // Event messages
     events: eventsErrorHandler(config.events ?? {}, logger),
     adapter: adapterErrorHandler(config.adapter, logger),
-    // Callback functions
     callbacks: { ...defaultCallbacks, ...config.callbacks },
+    logger,
     callbackUrl: url.origin,
     isOnRedirectProxy,
     experimental: {
@@ -162,33 +130,10 @@ export async function init({
     },
   };
 
-  // Init Cookies
   const cookies: Cookie[] = [];
 
   if (csrfDisabled) {
     options.csrfTokenVerified = true;
-  } else {
-    const {
-      csrfToken,
-      cookie: csrfCookie,
-      csrfTokenVerified,
-    } = await createCSRFToken({
-      options,
-      cookieValue: reqCookies?.[options.cookies.csrfToken.name],
-      isPost,
-      bodyValue: reqCsrfToken,
-    });
-
-    options.csrfToken = csrfToken;
-    options.csrfTokenVerified = csrfTokenVerified;
-
-    if (csrfCookie) {
-      cookies.push({
-        name: options.cookies.csrfToken.name,
-        value: csrfCookie,
-        options: options.cookies.csrfToken.options,
-      });
-    }
   }
 
   return { options, cookies };
@@ -199,7 +144,7 @@ type Method = (...args: any[]) => Promise<any>;
 /** Wraps an object of methods and adds error handling. */
 function eventsErrorHandler(
   methods: Partial<InternalOptions["events"]>,
-  logger: Console
+  logger: LoggerInstance
 ): Partial<InternalOptions["events"]> {
   return Object.keys(methods).reduce<any>((acc, name) => {
     acc[name] = async (...args: any[]) => {
@@ -215,7 +160,10 @@ function eventsErrorHandler(
 }
 
 /** Handles adapter induced errors. */
-function adapterErrorHandler(adapter: AuthConfig["adapter"], logger: Console) {
+function adapterErrorHandler(
+  adapter: AuthConfig["adapter"],
+  logger: LoggerInstance
+) {
   if (!adapter) return;
 
   return Object.keys(adapter).reduce<any>((acc, name) => {

@@ -24,7 +24,7 @@ import {
   MissingAdapter,
   WebAuthnVerificationError,
 } from "@sse-auth/types/error";
-import { webauthnChallenge } from "actions/checks.js";
+import { webauthnChallenge } from "../actions/checks.js";
 import { GetUserInfo, WebAuthnProviderType } from "providers/webauthn.js";
 import { randomString } from "./web.js";
 

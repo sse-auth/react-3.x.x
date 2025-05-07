@@ -1,10 +1,8 @@
 import * as o from "oauth4webapi";
-import type { InternalOptions, RequestInternal } from "@sse-auth/types/config";
-import type { Cookie, CookiesOptions } from "@sse-auth/types/cookie";
-import type { WebAuthnProviderType } from "../providers/webauthn.js";
-import type { User } from "@sse-auth/types";
 import { InvalidCheck } from "@sse-auth/types/error";
-import { decode, encode } from "../utils/jwt.js";
+import { encode, decode } from "../../utils/jwt.js";
+import type { CookiesOptions, Cookie } from "@sse-auth/types/cookie";
+import type { InternalOptions, RequestInternal } from "@sse-auth/types/config";
 
 interface CookiePayload {
   value: string;
@@ -16,7 +14,7 @@ const COOKIE_TTL = 60 * 15; // 15 minutes
 async function sealCookie(
   name: keyof CookiesOptions,
   payload: string,
-  options: InternalOptions<"oauth" | "oidc" | WebAuthnProviderType>
+  options: InternalOptions<"oauth" | "oidc">
 ): Promise<Cookie> {
   const { cookies, logger } = options;
   const cookie = cookies[name];
@@ -34,8 +32,10 @@ async function sealCookie(
     ...options.jwt,
     maxAge: COOKIE_TTL,
     token: { value: payload } satisfies CookiePayload,
-    salt: cookie.name,
+    // salt: cookie.salt,
+    salt: "sse-salt",
   });
+
   const cookieOptions = { ...cookie.options, expires };
   return { name: cookie.name, value: encoded, options: cookieOptions };
 }
@@ -196,56 +196,4 @@ export const nonce = {
    * @see https://danielfett.de/2020/05/16/pkce-vs-nonce-equivalent-or-not/#nonce
    */
   use: useCookie("nonce", "nonce"),
-};
-
-const WEBAUTHN_CHALLENGE_MAX_AGE = 60 * 15; // 15 minutes in seconds
-
-interface WebAuthnChallengePayload {
-  challenge: string;
-  registerData?: User;
-}
-
-const webauthnChallengeSalt = "encodedWebauthnChallenge";
-export const webauthnChallenge = {
-  async create(
-    options: InternalOptions<WebAuthnProviderType>,
-    challenge: string,
-    registerData?: User
-  ) {
-    return {
-      cookie: await sealCookie(
-        "webauthnChallenge",
-        await encode({
-          secret: options.jwt.secret,
-          token: { challenge, registerData } satisfies WebAuthnChallengePayload,
-          salt: webauthnChallengeSalt,
-          maxAge: WEBAUTHN_CHALLENGE_MAX_AGE,
-        }),
-        options
-      ),
-    };
-  },
-  /** Returns WebAuthn challenge if present. */
-  async use(
-    options: InternalOptions<WebAuthnProviderType>,
-    cookies: RequestInternal["cookies"],
-    resCookies: Cookie[]
-  ): Promise<WebAuthnChallengePayload> {
-    const cookieValue = cookies?.[options.cookies.webauthnChallenge.name];
-
-    const parsed = await parseCookie("webauthnChallenge", cookieValue, options);
-
-    const payload = await decode<WebAuthnChallengePayload>({
-      secret: options.jwt.secret,
-      token: parsed,
-      salt: webauthnChallengeSalt,
-    });
-
-    // Clear the WebAuthn challenge cookie after use
-    clearCookie("webauthnChallenge", options, resCookies);
-
-    if (!payload) throw new InvalidCheck("WebAuthn challenge was missing");
-
-    return payload;
-  },
 };

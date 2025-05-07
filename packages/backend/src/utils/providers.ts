@@ -9,6 +9,8 @@ import type {
   ProfileCallback,
 } from "@sse-auth/types/provider";
 import type { Profile } from "@sse-auth/types";
+import { customFetch } from "@sse-auth/types/symbol";
+export type {AuthConfig} from "@sse-auth/types/config";
 
 /**
  * Adds `signinUrl` and `callbackUrl` to each provider
@@ -31,9 +33,14 @@ export default function parseProviders(params: {
 
     const id = (userOptions?.id ?? defaults.id) as string;
     // TODO: Support if properties have different types, e.g. authorization: string or object
+    // const merged = merge(defaults, userOptions, {
+    //   signinUrl: `${url}/signin/${id}`,
+    //   callbackUrl: `${url}/callback/${id}`,
+    // });
+
     const merged = merge(defaults, userOptions, {
-      signinUrl: `${url}/signin/${id}`,
-      callbackUrl: `${url}/callback/${id}`,
+      signinUrl: window.location.href,
+      callbackUrl: window.location.href,
     });
 
     if (provider.type === "oauth" || provider.type === "oidc") {

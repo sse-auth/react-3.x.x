@@ -1,7 +1,7 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entryPoints: ["src/**/*"],
+  entry: ["src/actions/oauth/*"],
   format: ["esm", "cjs"],
   outDir: "dist",
   minify: false,

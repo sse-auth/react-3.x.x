@@ -1,34 +1,74 @@
-import * as o from "oauth4webapi";
 import * as checks from "./checks.js";
+import * as o from "oauth4webapi";
+import { decodeJwt } from "jose";
+
+// SSE Auth - Imports
 import type { InternalOptions, RequestInternal } from "@sse-auth/types/config";
-import { conformInternal, customFetch } from "@sse-auth/types/symbol";
 import type { Cookie } from "@sse-auth/types/cookie";
 import type { Account, Profile, TokenSet, User } from "@sse-auth/types";
-import {
-  OAuthCallbackError,
-  OAuthProfileParseError,
-} from "@sse-auth/types/error";
-import { isOIDCProvider } from "../utils/providers.js";
-import { decodeJwt } from "jose";
-import type { OAuthConfigInternal } from "@sse-auth/types/provider";
 import type { LoggerInstance } from "@sse-auth/types/logger";
+import type { OAuthConfigInternal } from "@sse-auth/types/provider";
+import { customFetch, conformInternal } from "@sse-auth/types/symbol";
+import { isOIDCProvider } from "../../utils/providers.js";
+import { OAuthCallbackError } from "@sse-auth/types/error";
+import { OAuthProfileParseError } from "@sse-auth/types/error";
+
+// SSE url - check
+const uriCheck = (url: URL): boolean => {
+  return (
+    url.host === "localhost" ||
+    url.host.endsWith(".sse.dev") ||
+    url.host.endsWith(".sse") ||
+    url.host === "authjs.dev" ||
+    url.host === "auth.sse"
+  );
+};
+
+// Interface SSE Auth - Options
+interface ResponseUser {
+  id: `${string}-${string}-${string}-${string}-${string}`;
+  email: string | undefined;
+  name?: string | null;
+  image?: string | null;
+}
+
+interface ResponseAccount {
+  provider: string;
+  type: "oauth" | "oidc";
+  providerAccountId: string;
+  access_token?: string | undefined;
+  expires_in?: number;
+  id_token?: string;
+  refresh_token?: string;
+  scope?: string;
+  authorization_details?: o.AuthorizationDetails[];
+  token_type?: Lowercase<string> | undefined;
+  expires_at?: number;
+}
+
+interface ResponseData {
+  profile: Profile;
+  cookies: Cookie[];
+  user?: ResponseUser;
+  account: ResponseAccount;
+}
 
 /**
  * Generates an authorization/request token URL.
+ * And the OAuth 2.0 flow.
  *
  * [OAuth 2](https://www.oauth.com/oauth2-servers/authorization/the-authorization-request/)
  */
-export async function getAuthorizationUrl(
+export async function handleOAuthLogin(
   query: RequestInternal["query"],
   options: InternalOptions<"oauth" | "oidc">
 ) {
   const { logger, provider } = options;
 
   let url = provider.authorization?.url;
-  let as: o.AuthorizationServer | undefined;
+  let as: o.AuthorizationDetails | undefined;
 
-  // Falls back to authjs.dev if the user only passed params
-  if (!url || url.host === "authjs.dev") {
+  if (!url || uriCheck(url)) {
     // If url is undefined, we assume that issuer is always defined
     // We check this in assert.ts
 
@@ -38,6 +78,7 @@ export async function getAuthorizationUrl(
       // TODO: move away from allowing insecure HTTP requests
       [o.allowInsecureRequests]: true,
     });
+
     const as = await o
       .processDiscoveryResponse(issuer, discoveryResponse)
       .catch((error) => {
@@ -50,7 +91,7 @@ export async function getAuthorizationUrl(
 
     if (!as.authorization_endpoint) {
       throw new TypeError(
-        "Authorization server did not provide an authorization endpoint."
+        `Discovery request did not return an authorization endpoint. expected: ${issuer}`
       );
     }
 
@@ -58,9 +99,9 @@ export async function getAuthorizationUrl(
   }
 
   const authParams = url.searchParams;
-
   let redirect_uri: string = provider.callbackUrl;
   let data: string | undefined;
+
   if (!options.isOnRedirectProxy && provider.redirectProxyUrl) {
     redirect_uri = provider.redirectProxyUrl;
     data = provider.callbackUrl;
@@ -81,7 +122,6 @@ export async function getAuthorizationUrl(
   );
 
   for (const k in params) authParams.set(k, params[k]);
-
   const cookies: Cookie[] = [];
 
   if (
@@ -102,7 +142,11 @@ export async function getAuthorizationUrl(
   }
 
   if (provider.checks?.includes("pkce")) {
-    if (as && !as.code_challenge_methods_supported?.includes("S256")) {
+    if (
+      as &&
+      Array.isArray(as.code_challenge_methods_supported) &&
+      !as.code_challenge_methods_supported.includes("S256")
+    ) {
       // We assume S256 PKCE support, if the server does not advertise that,
       // a random `nonce` must be used for CSRF protection.
       if (provider.type === "oidc") provider.checks = ["nonce"];
@@ -127,10 +171,21 @@ export async function getAuthorizationUrl(
   }
 
   logger.debug("authorization url is ready", { url, cookies, provider });
-  return { redirect: url.toString(), cookies };
+
+  const redirect = url.toString();
+  const cookieObject = Object.fromEntries(
+    cookies.map((cookie) => [cookie.name, cookie.value])
+  );
+  const {
+    profile,
+    cookies: resCookies,
+    user,
+  } = await handleOAuth(params, cookieObject, options);
+
+  return { profile, cookies: resCookies, user };
 }
 
-// OAuth Callback
+// Function
 function formUrlEncode(token: string) {
   return encodeURIComponent(token).replace(/%20/g, "+");
 }
@@ -301,13 +356,23 @@ export async function handleOAuth(
       case "microsoft-entra-id":
       case "azure-ad": {
         /**
-         * These providers need the authorization server metadata to be re-processed
-         * based on the `id_token`'s `tid` claim
-         * @see https://github.com/MicrosoftDocs/azure-docs/issues/113944
+         * These providers return errors in the response body and
+         * need the authorization server metadata to be re-processed
+         * based on the `id_token`'s `tid` claim.
+         * @see: https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-auth-code-flow#error-response-1
          */
-        const { tid } = decodeJwt(
-          (await codeGrantResponse.clone().json()).id_token
-        );
+        const responseJson = await codeGrantResponse.clone().json();
+        if (responseJson.error) {
+          const cause = {
+            providerId: provider.id,
+            ...responseJson,
+          };
+          throw new OAuthCallbackError(
+            `OAuth Provider returned an error: ${responseJson.error}`,
+            cause
+          );
+        }
+        const { tid } = decodeJwt(responseJson.id_token);
         if (typeof tid === "string") {
           const tenantRe = /microsoftonline\.com\/(\w+)\/v2\.0/;
           const tenantId = as.issuer?.match(tenantRe)?.[1] ?? "common";

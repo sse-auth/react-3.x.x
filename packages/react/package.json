@@ -34,11 +34,10 @@
   },
   "dependencies": {
     "@floating-ui/react-dom": "^2.1.2",
-    "@sse-auth/backend": "^1.0.0",
+    "@sse-auth/backend": "^1.1.0",
     "@sse-auth/locale": "^1.1.0",
     "@sse-auth/types": "^1.3.5",
     "@sse-ui/themer": "^0.1.9",
-    "@ssets/tailwindcss-transformer": "file:../tailwindcss-transformer/ssets-tailwindcss-transformer-1.0.0.tgz",
     "lucide-react": "^0.469.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

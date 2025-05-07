@@ -4,3 +4,5 @@ test
 website
 tsup-plugin
 packages/utils
+docs
+examples
