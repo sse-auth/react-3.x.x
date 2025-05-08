@@ -6,3 +6,4 @@ tsup-plugin
 packages/utils
 docs
 examples
+package-lock.json
