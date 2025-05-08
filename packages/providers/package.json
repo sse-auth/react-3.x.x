@@ -1,7 +1,10 @@
 {
   "name": "@sse-auth/provider",
   "version": "1.0.0",
-  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sse-auth/react-3.x.x.git"
+  },
   "scripts": {
     "build": "tsc",
     "prepublish": "tsc"
