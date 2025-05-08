@@ -9,6 +9,19 @@
     "build": "tsc",
     "prepublish": "tsc"
   },
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "require": "./index.js",
+      "types": "./index.d.ts"
+    },
+    "./package.json": "./package.json",
+    "./*": {
+      "import": "./*.js",
+      "require": "./*.js",
+      "types": "./*.d.ts"
+    }
+  },
   "author": "SSE World",
   "license": "MIT",
   "description": "",
