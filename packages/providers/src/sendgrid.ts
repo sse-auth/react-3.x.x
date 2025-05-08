@@ -1,5 +1,5 @@
-import type { EmailConfig, EmailUserConfig } from "./email.js";
-import { html, text } from "../utils/email.js";
+import type { EmailConfig, EmailUserConfig } from "./email";
+import { html, text } from "./utils/email";
 
 /** @todo Document this */
 export default function SendGrid(config: EmailUserConfig): EmailConfig {

@@ -18,6 +18,7 @@ on:
           - "themes/plugins"
           - "themes/themer"
           - "types"
+          - "providers"
 
 env:
   FORCE_COLOR: true
