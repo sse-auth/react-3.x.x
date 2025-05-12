@@ -101,13 +101,16 @@ export interface OAuthProviderButtonStyles {
    */
   bg?: string;
   brandColor?: string;
-  icon?: React.ReactNode;
+  icon?: {
+    dark: React.ReactNode;
+    light: React.ReactNode
+  };
 }
 
 /** TODO: Document */
 export interface OAuth2Config<Profile>
   extends CommonProviderOptions,
-    PartialIssuer {
+  PartialIssuer {
   /**
    * Identifies the provider when you want to sign in to
    * a specific provider.
@@ -289,9 +292,9 @@ export type OAuthConfigInternal<Profile> = Omit<
    */
   redirectProxyUrl?: OAuth2Config<Profile>["redirectProxyUrl"];
 } & Pick<
-    Required<OAuthConfig<Profile>>,
-    "clientId" | "checks" | "profile" | "account"
-  >;
+  Required<OAuthConfig<Profile>>,
+  "clientId" | "checks" | "profile" | "account"
+>;
 
 export type OIDCConfigInternal<Profile> = OAuthConfigInternal<Profile> & {
   checks: OIDCConfig<Profile>["checks"];
