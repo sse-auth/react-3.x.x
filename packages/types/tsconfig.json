@@ -6,15 +6,15 @@
     "module": "CommonJS",
     "moduleResolution": "node",
     "declaration": true,
-    "declarationMap": true,
+    "declarationMap": false,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "resolveJsonModule": true,
     "sourceMap": false,
     "strict": true,
-    "types": []
+    "types": ["nodemailer", "react"]
   },
   "include": ["src"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "./src/apperaence"]
 }

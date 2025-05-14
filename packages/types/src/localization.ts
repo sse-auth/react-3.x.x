@@ -1,4 +1,4 @@
-export interface Localization extends Record<string, any> {
+export interface Localization {
   locale: string;
 
   // Sign In
@@ -114,12 +114,12 @@ export interface Localization extends Record<string, any> {
 
 export type LocalizationKeys<T> = T extends Record<string, any>
   ? {
-      [K in keyof T]: K extends string
-        ? T[K] extends Record<string, any>
-          ? `${K}` | `${K}.${LocalizationKeys<T[K]>}`
-          : K
-        : never;
-    }[keyof T]
+    [K in keyof T]: K extends string
+    ? T[K] extends Record<string, any>
+    ? `${K}` | `${K}.${LocalizationKeys<T[K]>}`
+    : K
+    : never;
+  }[keyof T]
   : never;
 
 export type LocalizationKey = LocalizationKeys<Localization>;

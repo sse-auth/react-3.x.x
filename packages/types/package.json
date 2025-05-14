@@ -1,28 +1,19 @@
 {
   "name": "@sse-auth/types",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "author": "SSE World",
   "license": "MIT",
   "description": "",
-  "dependencies": {
-    "@simplewebauthn/server": "^13.1.1",
-    "csstype": "^3.1.3",
-    "nodemailer": "^6.9.16",
-    "oauth4webapi": "^3.1.4",
-    "react": "^19.0.0",
-    "tsup": "^8.3.5"
-  },
   "files": [
     "dist",
     "LICENSE",
     "README.md"
   ],
   "scripts": {
-    "build": "npm run clean && tsup",
+    "build": "npm run clean && tsc",
     "clean": "rimraf ./dist",
-    "dev": "tsup --watch",
     "lint": "eslint src",
-    "prepack": "tsup"
+    "prepack": "tsc"
   },
   "exports": {
     ".": {
@@ -128,6 +119,12 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@simplewebauthn/server": "^13.1.1",
+    "nodemailer": "^6.9.16",
+    "oauth4webapi": "^3.1.4",
+    "react": "^19.0.0"
   },
   "repository": {
     "type": "git",
