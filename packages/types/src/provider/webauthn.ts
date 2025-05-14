@@ -12,7 +12,7 @@ import type {
   VerifyAuthenticationResponseOpts,
   VerifyRegistrationResponseOpts,
 } from "@simplewebauthn/server";
-import { InternalOptions, RequestInternal } from "config";
+import { InternalOptions, RequestInternal } from "../config";
 
 export type WebAuthnProviderType = "webauthn";
 
