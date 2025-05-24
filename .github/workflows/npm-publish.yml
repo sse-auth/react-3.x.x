@@ -19,6 +19,7 @@ on:
           - "themes/themer"
           - "types"
           - "providers"
+          - "utils"
 
 env:
   FORCE_COLOR: true
@@ -49,7 +50,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          registry-url: https://registry.npmjs.org/
+          registry-url: https://npm.pkg.github.com/
       - run: npm ci
       - run: |
           cd packages/${{ github.event.inputs.name }}

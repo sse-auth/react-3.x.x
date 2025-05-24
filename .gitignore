@@ -3,7 +3,6 @@ dist
 test
 website
 tsup-plugin
-packages/utils
 docs
 examples
 package-lock.json
