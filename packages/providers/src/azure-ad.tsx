@@ -14,7 +14,10 @@ export default function AzureAD(
     id: "azure-ad",
     name: "Azure Active Directory",
     style: {
-      icon: <AzureIcon />,
+      icon: {
+        dark: <AzureIcon />,
+        light: <AzureIcon />,
+      }
     },
   };
 }

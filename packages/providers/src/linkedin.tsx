@@ -1,4 +1,5 @@
 import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider";
+import { Linkedin as LinkedinIcon } from "@sse-auth/icons";
 
 /** @see https://learn.microsoft.com/en-us/linkedin/consumer/integrations/self-serve/sign-in-with-linkedin-v2#response-body-schema */
 export interface LinkedInProfile extends Record<string, any> {
@@ -21,10 +22,15 @@ export default function LinkedIn<P extends LinkedInProfile>(
     type: "oidc",
     client: { token_endpoint_auth_method: "client_secret_post" },
     issuer: "https://www.linkedin.com/oauth",
-    // style: { bg: "#069", text: "#fff" },
     checks: ["state"],
+    style: {
+      icon: {
+        dark: <LinkedinIcon />,
+        light: <LinkedinIcon />,
+      },
+    },
     options,
   };
 }
 
-export { LinkedIn }
+export { LinkedIn };

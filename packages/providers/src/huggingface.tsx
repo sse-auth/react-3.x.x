@@ -1,4 +1,5 @@
 import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider";
+import { HuggingFace as HuggingFaceIcon } from "@sse-auth/icons";
 
 export interface HuggingfaceProfile {
   /**
@@ -213,6 +214,14 @@ export default function HuggingFace(
     type: "oidc",
     issuer: "https://huggingface.co",
     checks: ["pkce", "state"],
+    style: {
+      icon: {
+        dark: <HuggingFaceIcon />,
+        light: <HuggingFaceIcon />,
+      },
+    },
     options,
   };
 }
+
+export { HuggingFace }

@@ -1,4 +1,5 @@
 import { OAuthConfig } from "@sse-auth/types/provider";
+import { Bitly as BitlyIcon } from "@sse-auth/icons";
 
 interface BitlyEmail {
   email: string;
@@ -39,6 +40,12 @@ export default function Bitly(
         email: primaryEmail,
         image: null,
       };
+    },
+    style: {
+      icon: {
+        dark: <BitlyIcon />,
+        light: <BitlyIcon />,
+      },
     },
     options,
   };

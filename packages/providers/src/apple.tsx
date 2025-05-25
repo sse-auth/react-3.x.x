@@ -1,5 +1,6 @@
 import { conformInternal, customFetch } from "@sse-auth/types/symbol";
 import { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { AppleDark, AppleLight } from "@sse-auth/icons"
 
 /** The returned user profile from Apple when using the profile callback. */
 export interface AppleProfile extends Record<string, any> {
@@ -153,7 +154,10 @@ export default function Apple(
     checks: ["nonce", "state"],
     options: config,
     style: {
-      icon: <AppleIcon />,
+      icon: {
+        dark: <AppleDark />,
+        light: <AppleLight />,
+      }
     },
   };
 }

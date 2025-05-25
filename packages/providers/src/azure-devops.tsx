@@ -85,7 +85,10 @@ export default function AzureDevOpsProvider<P extends AzureDevOpsProfile>(
 
     options,
     style: {
-      icon: <AzureIcon />,
+      icon: {
+        dark: <AzureIcon />,
+        light: <AzureIcon />,
+      }
     },
   };
 }

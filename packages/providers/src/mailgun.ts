@@ -1,5 +1,5 @@
 import type { EmailConfig, EmailUserConfig } from "./email";
-import { html, text } from "./utils/email";
+import { html, text } from "@sse-auth/utils";
 
 export default function MailGun(config: EmailUserConfig): EmailConfig {
   return {

@@ -1,4 +1,5 @@
 import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider";
+import { Azure as AzureIcon } from "@sse-auth/icons";
 
 export interface AzureADB2CProfile {
   exp: number;
@@ -18,19 +19,6 @@ export interface AzureADB2CProfile {
   preferred_username: string;
 }
 
-const AzureIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 59.2 47.3"
-    className="-ml-1 size-3.5"
-  >
-    <path
-      fill="#0072c6"
-      d="M32.4 0 14.9 15.1 0 42h13.4zm2.3 3.5-7.5 21 14.3 18-27.7 4.8h45.4z"
-    />
-  </svg>
-);
-
 export default function AzureADB2C(
   options: OIDCUserConfig<AzureADB2CProfile>
 ): OIDCConfig<AzureADB2CProfile> {
@@ -48,7 +36,10 @@ export default function AzureADB2C(
     },
     options,
     style: {
-      icon: <AzureIcon />,
+      icon: {
+        dark: <AzureIcon />,
+        light: <AzureIcon />,
+      },
     },
   };
 }

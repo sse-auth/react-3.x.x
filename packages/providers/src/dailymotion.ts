@@ -1,5 +1,7 @@
 import { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
 
+// Icon Pending
+
 type GenderType = "male" | "female" | "other" | "prefer-not-to-answer";
 type StatusType = "pending-activation" | "disabled" | "active" | "unknown";
 

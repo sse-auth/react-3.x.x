@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { LINE as LineIcon } from "@sse-auth/icons";
 
 export interface LineProfile extends Record<string, any> {
   iss: string;
@@ -23,9 +24,14 @@ export default function LINE<P extends LineProfile>(
     client: {
       id_token_signed_response_alg: "HS256",
     },
-    // style: { bg: "#00C300", text: "#fff" },
+    style: {
+      icon: {
+        dark: <LineIcon />,
+        light: <LineIcon />,
+      },
+    },
     options,
   };
 }
 
-export { LINE }
+export { LINE, LineIcon };
