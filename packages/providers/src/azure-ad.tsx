@@ -1,8 +1,8 @@
-import { AzureIcon } from "./azure-ad-b2c";
+import { AzureIcon } from "./azure-ad-b2c.js";
 import {
   MicrosoftEntraID,
   MicrosoftEntraIDProfile,
-} from "./microsoft-entra-id";
+} from "./microsoft-entra-id.js";
 
 export type AzureADProfile = MicrosoftEntraIDProfile;
 

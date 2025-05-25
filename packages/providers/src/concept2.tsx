@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { Concept2 as Concept2Icon } from "@sse-auth/icons";
 
 export interface Concept2Profile extends Record<string, any> {
   id: number;
@@ -40,8 +41,14 @@ export default function Concept2(
         image: profile.data.profile_image,
       };
     },
+    style: {
+      icon: {
+        light: <Concept2Icon />,
+        dark: <Concept2Icon />,
+      },
+    },
     options,
   };
 }
 
-export { Concept2 }
+export { Concept2 };

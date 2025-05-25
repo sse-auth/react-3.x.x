@@ -5,16 +5,15 @@
     "moduleResolution": "nodenext",
     "outDir": ".",
     "declaration": true,
-    "sourceMap": true,
+    "declarationMap": false,
+    "sourceMap": false,
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
+    "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
-    "types": ["react", "react-dom", "node"]
   },
-  "include": ["src/**/*"],
+  "include": ["src/*"],
   "exclude": ["node_modules", "*.js", "*.d.ts"]
 }

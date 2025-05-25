@@ -1,5 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { Mailchimp as MailchimpIcon } from "@sse-auth/icons";
+import { MailchimpDark, MailchimpLight } from "@sse-auth/icons";
 
 export default function Mailchimp(
   config: OAuthUserConfig<Record<string, any>>
@@ -21,8 +21,8 @@ export default function Mailchimp(
     },
     style: {
       icon: {
-        dark: <MailchimpIcon />,
-        light: <MailchimpIcon />,
+        light: <MailchimpLight />,
+        dark: <MailchimpDark />,
       },
     },
     options: config,

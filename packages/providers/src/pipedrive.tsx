@@ -1,5 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { Pipedrive as PipedriveIcon } from "@sse-auth/icons";
+import { PipedriveDark, PipedriveLight } from "@sse-auth/icons";
 
 export interface PipedriveProfile extends Record<string, any> {
   success: boolean;
@@ -56,8 +56,8 @@ export default function Pipedrive<P extends PipedriveProfile>(
     },
     style: {
       icon: {
-        dark: <PipedriveIcon />,
-        light: <PipedriveIcon />,
+        light: <PipedriveLight />,
+        dark: <PipedriveDark />,
       },
     },
     options,

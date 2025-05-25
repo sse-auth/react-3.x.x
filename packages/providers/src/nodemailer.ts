@@ -1,5 +1,5 @@
 import { createTransport } from "nodemailer";
-import { html, text } from "./utils/email";
+import { html, text } from "@sse-auth/utils";
 import {
   NodemailerConfig,
   NodemailerUserConfig,

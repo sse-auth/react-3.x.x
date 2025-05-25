@@ -1,4 +1,4 @@
-import type { EmailConfig, EmailUserConfig } from "./email";
+import type { EmailConfig, EmailUserConfig } from "./email.js";
 import { html, text } from "@sse-auth/utils";
 
 export default function MailGun(config: EmailUserConfig): EmailConfig {

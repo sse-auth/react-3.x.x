@@ -1,5 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { EveOnline as EveOnlineIcon } from "@sse-auth/icons";
+import { EveOnlineDark, EveOnlineLight } from "@sse-auth/icons";
 
 export interface EVEOnlineProfile extends Record<string, any> {
   CharacterID: number;
@@ -34,11 +34,11 @@ export default function EVEOnline<P extends EVEOnlineProfile>(
     options,
     style: {
       icon: {
-        dark: <EveOnlineIcon />,
-        light: <EveOnlineIcon />,
+        light: <EveOnlineLight />,
+        dark: <EveOnlineDark />,
       },
     },
   };
 }
 
-export { EVEOnline, EveOnlineIcon };
+export { EVEOnline };

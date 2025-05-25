@@ -1,5 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { WordPress as WordPressIcon } from "@sse-auth/icons";
+import { WordPressDark, WordPressLight } from "@sse-auth/icons";
 
 export default function WordPress(
   config: OAuthUserConfig<Record<string, any>>
@@ -22,8 +22,8 @@ export default function WordPress(
     },
     style: {
       icon: {
-        dark: <WordPressIcon />,
-        light: <WordPressIcon />,
+        light: <WordPressLight />,
+        dark: <WordPressDark />,
       },
     },
     options: config,

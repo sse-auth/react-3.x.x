@@ -1,4 +1,5 @@
 import { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { Dailymotion as DailymotionIcon } from "@sse-auth/icons";
 
 // Icon Pending
 
@@ -326,6 +327,12 @@ export default function Dailymotion(
       };
     },
     checks: ["state"],
+    style: {
+      icon: {
+        light: <DailymotionIcon />,
+        dark: <DailymotionIcon />,
+      },
+    },
     options,
   };
 }

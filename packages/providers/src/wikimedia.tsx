@@ -1,5 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { Wikimedia as WikimediaIcon } from "@sse-auth/icons";
+import { WikimediaLight, WikimediaDark } from "@sse-auth/icons";
 
 export type WikimediaGroup =
   | "*"
@@ -175,8 +175,8 @@ export default function Wikimedia<P extends WikimediaProfile>(
     },
     style: {
       icon: {
-        dark: <WikimediaIcon />,
-        light: <WikimediaIcon />,
+        dark: <WikimediaDark />,
+        light: <WikimediaLight />,
       },
     },
     options,

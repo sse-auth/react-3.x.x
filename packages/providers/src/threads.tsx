@@ -1,5 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { Threads as ThreadsIcon } from "@sse-auth/icons";
+import { ThreadsDark, ThreadsLight } from "@sse-auth/icons";
 
 /**
  * [User](https://developers.facebook.com/docs/threads/reference/user)
@@ -57,8 +57,8 @@ export default function Threads(
     },
     style: {
       icon: {
-        dark: <ThreadsIcon />,
-        light: <ThreadsIcon />,
+        light: <ThreadsLight />,
+        dark: <ThreadsDark />,
       },
     },
     options: config,

@@ -6,3 +6,4 @@ tsup-plugin
 docs
 examples
 package-lock.json
+sse-auth-*.tgz
