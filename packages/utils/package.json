@@ -3,20 +3,26 @@
   "version": "2.0.0",
   "description": "Utilities for SSE Authentication",
   "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc",
     "prepublish": "npm run build"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sse-auth/react-3.x.x.git"
+    "url": "https://github.com/sse-auth/react-3.x.x.git",
+    "directory": "packages/utils"
   },
-  "author": "SSE World",
+  "author": "SSE Authentication",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/sse-auth/react-3.x.x/issues"
-  },
-  "homepage": "https://github.com/sse-auth/react-3.x.x#readme",
   "devDependencies": {
     "@simplewebauthn/browser": "^13.1.0",
     "@simplewebauthn/types": "^12.0.0",
