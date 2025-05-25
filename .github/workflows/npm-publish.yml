@@ -43,26 +43,26 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          registry-url: https://npm.pkg.github.com
-          scope: '@sse-auth'
+          registry-url: https://registry.npmjs.org/
 
       - name: Run CI/CD
         run: npm ci
 
-      - name: Go to the file
-        run: cd packages/${{ github.event.inputs.name }}
+      # - name: Go to the file
+      #   run: cd packages/${{ github.event.inputs.name }}
 
-      - name: Install Dependencies
-        run: npm install
+      # - name: Install Dependencies
+      #   run: npm install
+
+      # - name: Publish the Package
+      #   run: npm publish --provenance --access public
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish the Package
-        run: npm publish --provenance --access public
+        run: |
+          cd packages/${{ github.event.inputs.name }}
+          npm install
+          npm publish --provenance --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # - run: |
-      #     cd packages/${{ github.event.inputs.name }}
-      #     npm install
-      #     npm publish --provenance --access public
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
