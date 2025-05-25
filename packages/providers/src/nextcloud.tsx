@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { Nextcloud as NextcloudIcon } from "@sse-auth/icons";
 
 /**
  * Represents the Nextcloud user profile data returned from the `/ocs/v1.php/cloud/users/`.
@@ -134,8 +135,14 @@ export default function Nextcloud(
         image: `${options.issuer}/avatar/${profile.id}/512`,
       };
     },
+    style: {
+      icon: {
+        dark: <NextcloudIcon />,
+        light: <NextcloudIcon />,
+      },
+    },
     options,
   };
 }
 
-export { Nextcloud }
+export { Nextcloud, NextcloudIcon };

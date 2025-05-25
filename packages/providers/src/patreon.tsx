@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { Patreon as PatreonIcon } from "@sse-auth/icons";
 
 export interface PatreonProfile extends Record<string, any> {
   sub: string;
@@ -28,9 +29,14 @@ export default function Patreon<P extends PatreonProfile>(
         image: profile.data.attributes.image_url,
       };
     },
-    // style: { bg: "#e85b46", text: "#fff" },
+    style: {
+      icon: {
+        dark: <PatreonIcon />,
+        light: <PatreonIcon />,
+      },
+    },
     options,
   };
 }
 
-export { Patreon }
+export { Patreon };

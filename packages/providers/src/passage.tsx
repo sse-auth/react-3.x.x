@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { Passage as PassageIcon } from "@sse-auth/icons";
 
 /** @see [Supported Scopes](https://docs.passage.id/hosted-login/oidc-client-configuration#supported-scopes) */
 export interface PassageProfile {
@@ -31,9 +32,14 @@ export default function Passage(
     name: "Passage",
     type: "oidc",
     client: { token_endpoint_auth_method: "client_secret_basic" },
-    // style: { brandColor: "#3d53f6" },
+    style: {
+      icon: {
+        dark: <PassageIcon />,
+        light: <PassageIcon />,
+      },
+    },
     options: config,
   };
 }
 
-export { Passage }
+export { Passage };

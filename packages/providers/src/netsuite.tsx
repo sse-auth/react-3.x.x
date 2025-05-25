@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { Netsuite as NetSuiteIcon } from "@sse-auth/icons";
 
 export interface OAuthNetSuiteOptions {
   /**
@@ -68,8 +69,14 @@ export default function NetSuite<P extends NetSuiteProfile>(
         image: null,
       };
     },
+    style: {
+      icon: {
+        dark: <NetSuiteIcon />,
+        light: <NetSuiteIcon />,
+      },
+    },
     options: config,
   };
 }
 
-export { NetSuite }
+export { NetSuite };

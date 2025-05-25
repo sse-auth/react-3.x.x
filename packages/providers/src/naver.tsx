@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { Naver as NaverIcon } from "@sse-auth/icons";
 
 /** https://developers.naver.com/docs/login/profile/profile.md */
 export interface NaverProfile extends Record<string, any> {
@@ -36,8 +37,14 @@ export default function Naver<P extends NaverProfile>(
         image: profile.response.profile_image,
       };
     },
+    style: {
+      icon: {
+        dark: <NaverIcon />,
+        light: <NaverIcon />,
+      },
+    },
     options,
   };
 }
 
-export { Naver }
+export { Naver };

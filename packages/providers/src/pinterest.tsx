@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { Pinterest as PinterestIcon } from "@sse-auth/icons";
 
 export interface PinterestProfile extends Record<string, any> {
   account_type: "BUSINESS" | "PINNER";
@@ -28,9 +29,14 @@ export default function PinterestProvider<P extends PinterestProfile>(
         email: null,
       };
     },
-    // style: { brandColor: "#bd081c" },
+    style: {
+      icon: {
+        dark: <PinterestIcon />,
+        light: <PinterestIcon />,
+      },
+    },
     options,
   };
 }
 
-export { PinterestProvider }
+export { PinterestProvider };

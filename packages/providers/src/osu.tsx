@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { Osu as OsuIcon } from "@sse-auth/icons";
 
 export interface OsuUserCompact {
   avatar_url: string;
@@ -67,8 +68,14 @@ export default function Osu<P extends OsuProfile>(
         image: profile.avatar_url,
       };
     },
+    style: {
+      icon: {
+        dark: <OsuIcon />,
+        light: <OsuIcon />,
+      },
+    },
     options,
   };
 }
 
-export { Osu }
+export { Osu };

@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { Notion as NotionIcon } from "@sse-auth/icons";
 
 export interface Person extends Record<string, any> {
   email: string;
@@ -97,8 +98,14 @@ export default function NotionProvider<P extends NotionProfile>(
         image: profile.avatar_url,
       };
     },
+    style: {
+      icon: {
+        dark: <NotionIcon />,
+        light: <NotionIcon />,
+      },
+    },
     options,
   };
 }
 
-export { NotionProvider }
+export { NotionProvider };

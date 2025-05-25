@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { Mastodon as MastodonIcon } from "@sse-auth/icons";
 
 export interface MastodonProfile extends Record<string, any> {
   id: string;
@@ -40,8 +41,14 @@ export default function Mastodon<P extends MastodonProfile>(
         email: null,
       };
     },
+    style: {
+      icon: {
+        dark: <MastodonIcon />,
+        light: <MastodonIcon />,
+      },
+    },
     options,
   };
 }
 
-export { Mastodon }
+export { Mastodon, MastodonIcon };

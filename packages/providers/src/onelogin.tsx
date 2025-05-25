@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { Onelogin as OneLoginIcon } from "@sse-auth/icons";
 
 export default function OneLogin(
   config: OAuthUserConfig<Record<string, any>>
@@ -8,8 +9,14 @@ export default function OneLogin(
     name: "OneLogin",
     type: "oidc",
     wellKnown: `${config.issuer}/oidc/2/.well-known/openid-configuration`,
+    style: {
+      icon: {
+        dark: <OneLoginIcon />,
+        light: <OneLoginIcon />,
+      },
+    },
     options: config,
   };
 }
 
-export { OneLogin }
+export { OneLogin };

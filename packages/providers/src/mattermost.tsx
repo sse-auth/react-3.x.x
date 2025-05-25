@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { Mattermost as MattermostIcon } from "@sse-auth/icons";
 
 /** [Get a user](https://api.mattermost.com/#tag/users/operation/GetUser) */
 export interface MattermostProfile {
@@ -78,9 +79,14 @@ export default function Mattermost<P extends MattermostProfile>(
         image: null,
       };
     },
-    // style: { bg: "#000", text: "#fff" },
+    style: {
+      icon: {
+        dark: <MattermostIcon />,
+        light: <MattermostIcon />,
+      },
+    },
     options: rest,
   };
 }
 
-export { Mattermost }
+export { Mattermost };

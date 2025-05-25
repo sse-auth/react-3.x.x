@@ -1,5 +1,6 @@
 import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider";
 import { customFetch, conformInternal } from "@sse-auth/types/symbol";
+import { MicrosoftEntraID as MicrosoftEntraIDIcon } from "@sse-auth/icons";
 
 export interface MicrosoftEntraIDProfile extends Record<string, any> {
   sub: string;
@@ -64,6 +65,12 @@ export default function MicrosoftEntraID(
       return fetch(...args);
     },
     [conformInternal]: true,
+    style: {
+      icon: {
+        dark: <MicrosoftEntraIDIcon />,
+        light: <MicrosoftEntraIDIcon />,
+      },
+    },
     options: config,
   };
 }

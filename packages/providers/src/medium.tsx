@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { MediumDark, MediumLight } from "@sse-auth/icons";
 
 export default function Medium(
   config: OAuthUserConfig<Record<string, any>>
@@ -18,8 +19,14 @@ export default function Medium(
         image: profile.data.imageUrl,
       };
     },
+    style: {
+      icon: {
+        dark: <MediumDark />,
+        light: <MediumLight />,
+      },
+    },
     options: config,
   };
 }
 
-export { Medium }
+export { Medium };

@@ -1,4 +1,5 @@
 import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider";
+import { HydraDark, HydraLight } from "@sse-auth/icons";
 
 export interface OryHydraProfile extends Record<string, any> {
   iss: string;
@@ -19,9 +20,14 @@ export default function OryHydra<P extends OryHydraProfile>(
     id: "hydra",
     name: "Hydra",
     type: "oidc",
-    // style: { bg: "#fff", text: "#0F172A" },
+    style: {
+      icon: {
+        dark: <HydraDark />,
+        light: <HydraLight />,
+      },
+    },
     options,
   };
 }
 
-export { OryHydra }
+export { OryHydra };

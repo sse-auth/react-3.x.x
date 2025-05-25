@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { OktaDark, OktaLight } from "@sse-auth/icons";
 
 export interface OktaProfile extends Record<string, any> {
   iss: string;
@@ -42,8 +43,14 @@ export default function Okta<P extends OktaProfile>(
     name: "Okta",
     type: "oidc",
     checks: ["pkce", "state"],
+    style: {
+      icon: {
+        dark: <OktaDark />,
+        light: <OktaLight />,
+      },
+    },
     options,
   };
 }
 
-export { Okta }
+export { Okta };

@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { Netlify as NetlifyIcon } from "@sse-auth/icons";
 
 export default function Netlify(
   config: OAuthUserConfig<Record<string, any>>
@@ -18,11 +19,14 @@ export default function Netlify(
         image: profile.avatar_url,
       };
     },
-    // style: {
-    //   brandColor: "#32e6e2",
-    // },
+    style: {
+      icon: {
+        dark: <NetlifyIcon />,
+        light: <NetlifyIcon />,
+      },
+    },
     options: config,
   };
 }
 
-export { Netlify }
+export { Netlify };

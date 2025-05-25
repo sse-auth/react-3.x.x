@@ -1,4 +1,5 @@
 import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider";
+import { PingIDDark, PingIDLight } from "@sse-auth/icons";
 
 export interface PingProfile extends Record<string, any> {
   iss: string;
@@ -30,8 +31,14 @@ export default function PingId(
     id: "ping-id",
     name: "Ping Identity",
     type: "oidc",
+    style: {
+      icon: {
+        dark: <PingIDDark />,
+        light: <PingIDLight />,
+      },
+    },
     options,
   };
 }
 
-export { PingId }
+export { PingId };
