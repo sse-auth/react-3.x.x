@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { VK as VKIcon } from "@sse-auth/icons";
 
 /** https://dev.vk.com/reference/objects/user */
 export interface VkProfile {
@@ -318,9 +319,14 @@ export default function VK<P extends Record<string, any> = VkProfile>(
         image: profile.photo_100,
       };
     },
-    // style: { bg: "#07F", text: "#fff" },
+    style: {
+      icon: {
+        dark: <VKIcon />,
+        light: <VKIcon />,
+      },
+    },
     options,
   };
 }
 
-export { VK }
+export { VK };

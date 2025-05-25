@@ -1,5 +1,6 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
 import { customFetch } from "@sse-auth/types/symbol";
+import { Tiktok as TiktokIcon } from "@sse-auth/icons";
 
 /**
  * [More info](https://developers.tiktok.com/doc/tiktok-api-v2-get-user-info/)
@@ -168,9 +169,14 @@ export default function TikTok(
         email: profile.data.user.email || profile.data.user.username || null,
       };
     },
-    // style: { bg: "#000", text: "#fff" },
+    style: {
+      icon: {
+        dark: <TiktokIcon />,
+        light: <TiktokIcon />,
+      },
+    },
     options,
   };
 }
 
-export { TikTok }
+export { TikTok };

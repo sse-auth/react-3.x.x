@@ -1,5 +1,5 @@
 import type { EmailConfig, EmailUserConfig } from "./email";
-import { html, text } from "./utils/email";
+import { html, text } from "@sse-auth/utils";
 
 /** @todo Document this */
 export default function SendGrid(config: EmailUserConfig): EmailConfig {

@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { Zoom as ZoomIcon } from "@sse-auth/icons";
 
 /**
  * See: https://developers.zoom.us/docs/integrations/oauth/#using-an-access-token
@@ -50,7 +51,12 @@ export default function Zoom(
         image: profile.pic_url,
       };
     },
-    // style: { bg: "#0b5cff", text: "#fff" },
+    style: {
+      icon: {
+        dark: <ZoomIcon />,
+        light: <ZoomIcon />,
+      },
+    },
     options: config,
   };
 }

@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { WordPress as WordPressIcon } from "@sse-auth/icons";
 
 export default function WordPress(
   config: OAuthUserConfig<Record<string, any>>
@@ -19,8 +20,14 @@ export default function WordPress(
         image: profile.avatar_URL,
       };
     },
+    style: {
+      icon: {
+        dark: <WordPressIcon />,
+        light: <WordPressIcon />,
+      },
+    },
     options: config,
   };
 }
 
-export { WordPress }
+export { WordPress };

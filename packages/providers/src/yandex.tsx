@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { Yandex as YandexIcon } from "@sse-auth/icons";
 
 /**
  * - {@link https://yandex.com/dev/id/doc/en/user-information | Getting information about the user}
@@ -95,8 +96,14 @@ export default function Yandex(
             : null,
       };
     },
+    style: {
+      icon: {
+        dark: <YandexIcon />,
+        light: <YandexIcon />,
+      },
+    },
     options,
   };
 }
 
-export { Yandex }
+export { Yandex };

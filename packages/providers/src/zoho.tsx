@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { Zoho as ZohoIcon } from "@sse-auth/icons";
 
 export default function Zoho(
   config: OAuthUserConfig<Record<string, any>>
@@ -19,8 +20,14 @@ export default function Zoho(
         image: null,
       };
     },
+    style: {
+      icon: {
+        dark: <ZohoIcon />,
+        light: <ZohoIcon />,
+      },
+    },
     options: config,
   };
 }
 
-export { Zoho }
+export { Zoho };

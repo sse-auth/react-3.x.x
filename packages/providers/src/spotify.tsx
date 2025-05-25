@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { Spotify as SpotifyIcon } from "@sse-auth/icons";
 
 export interface SpotifyImage {
   url: string;
@@ -30,9 +31,14 @@ export default function Spotify<P extends SpotifyProfile>(
         image: profile.images?.[0]?.url,
       };
     },
-    // style: { brandColor: "#1db954" },
+    style: {
+      icon: {
+        dark: <SpotifyIcon />,
+        light: <SpotifyIcon />,
+      },
+    },
     options,
   };
 }
 
-export { Spotify }
+export { Spotify };

@@ -1,4 +1,5 @@
 import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider";
+import { RobloxDark, RobloxLight } from "@sse-auth/icons";
 
 /**
  * Corresponds to the user structure documented here:
@@ -37,7 +38,12 @@ export default function Roblox(
     authorization: { params: { scope: "openid profile" } },
     issuer: "https://apis.roblox.com/oauth/",
     checks: ["pkce", "state"],
-    // style: { bg: "#5865F2", text: "#fff" },
+    style: {
+      icon: {
+        dark: <RobloxDark />,
+        light: <RobloxLight />,
+      },
+    },
     options,
   };
 }

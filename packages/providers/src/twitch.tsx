@@ -1,4 +1,5 @@
 import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider";
+import { Twitch as TwitchIcon } from "@sse-auth/icons";
 
 export interface TwitchProfile extends Record<string, any> {
   sub: string;
@@ -53,9 +54,14 @@ export default function Twitch(
         }
       },
     },
-    // style: { bg: "#65459B", text: "#fff" },
+    style: {
+      icon: {
+        dark: <TwitchIcon />,
+        light: <TwitchIcon />,
+      },
+    },
     options: config,
   };
 }
 
-export { Twitch }
+export { Twitch };

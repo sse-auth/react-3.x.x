@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { Trakt as TraktIcon } from "@sse-auth/icons";
 
 export interface TraktUser extends Record<string, any> {
   username: string;
@@ -40,13 +41,18 @@ export default function Trakt<P extends TraktUser>(
       return {
         id: profile.ids.slug,
         name: profile.name,
-        email: null, // trakt does not provide user emails
-        image: profile.images.avatar.full, // trakt does not allow hotlinking
+        email: null,
+        image: profile.images.avatar.full,
       };
     },
-    // style: { bg: "#ED2224", text: "#fff" },
+    style: {
+      icon: {
+        dark: <TraktIcon />,
+        light: <TraktIcon />,
+      },
+    },
     options,
   };
 }
 
-export { Trakt }
+export { Trakt };

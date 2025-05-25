@@ -1,4 +1,5 @@
 import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider";
+import { VippsMobilepay as VippsMobilepayIcon } from "@sse-auth/icons";
 
 interface Address {
   address_type: string;
@@ -59,8 +60,13 @@ export default function Vipps(
     issuer: "https://api.vipps.no/access-management-1.0/access/",
     authorization: { params: { scope: "openid name email" } },
     idToken: false,
-    // style: { brandColor: "#f05c18" },
     checks: ["pkce", "state", "nonce"],
+    style: {
+      icon: {
+        dark: <VippsMobilepayIcon />,
+        light: <VippsMobilepayIcon />,
+      },
+    },
     options,
   };
 }

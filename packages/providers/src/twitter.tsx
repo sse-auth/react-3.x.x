@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { Twitter as TwitterIcon } from "@sse-auth/icons";
 
 /**
  * [Users lookup](https://developer.x.com/en/docs/twitter-api/users/lookup/api-reference/get-users-me)
@@ -112,9 +113,14 @@ export default function Twitter(
         image: data.profile_image_url,
       };
     },
-    // style: { bg: "#1da1f2", text: "#fff" },
+    style: {
+      icon: {
+        dark: <TwitterIcon />,
+        light: <TwitterIcon />,
+      },
+    },
     options: config,
   };
 }
 
-export { Twitter }
+export { Twitter };

@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { Slack as SlackIcon } from "@sse-auth/icons";
 
 export interface SlackProfile extends Record<string, any> {
   ok: boolean;
@@ -41,9 +42,14 @@ export default function Slack<P extends SlackProfile>(
     type: "oidc",
     issuer: "https://slack.com",
     checks: ["nonce"],
-    // style: { brandColor: "#611f69" },
+    style: {
+      icon: {
+        dark: <SlackIcon />,
+        light: <SlackIcon />,
+      },
+    },
     options,
   };
 }
 
-export { Slack }
+export { Slack };

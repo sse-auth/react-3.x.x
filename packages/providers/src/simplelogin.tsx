@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { SimpleLogin as SimpleLoginIcon } from "@sse-auth/icons";
 
 export interface SimpleLoginProfile {
   id: number;
@@ -26,9 +27,14 @@ export default function SimpleLogin<P extends SimpleLoginProfile>(
         image: profile.avatar_url,
       };
     },
-    // style: { brandColor: "#e3156a" },
+    style: {
+      icon: {
+        dark: <SimpleLoginIcon />,
+        light: <SimpleLoginIcon />,
+      },
+    },
     options,
   };
 }
 
-export { SimpleLogin }
+export { SimpleLogin };

@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { Reddit as RedditIcon } from "@sse-auth/icons";
 
 export default function Reddit(
   config: OAuthUserConfig<Record<string, any>>
@@ -11,9 +12,14 @@ export default function Reddit(
     token: "https://www.reddit.com/api/v1/access_token",
     userinfo: "https://oauth.reddit.com/api/v1/me",
     checks: ["state"],
-    // style: { brandColor: "#FF4500" },
+    style: {
+      icon: {
+        dark: <RedditIcon />,
+        light: <RedditIcon />,
+      },
+    },
     options: config,
   };
 }
 
-export { Reddit }
+export { Reddit };

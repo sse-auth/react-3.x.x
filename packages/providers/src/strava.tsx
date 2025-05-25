@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { Strava as StravaIcon } from "@sse-auth/icons";
 
 export interface StravaProfile extends Record<string, any> {
   id: string; // this is really a number
@@ -37,8 +38,14 @@ export default function Strava<P extends StravaProfile>(
         image: profile.profile,
       };
     },
+    style: {
+      icon: {
+        dark: <StravaIcon />,
+        light: <StravaIcon />,
+      },
+    },
     options,
   };
 }
 
-export { Strava }
+export { Strava };

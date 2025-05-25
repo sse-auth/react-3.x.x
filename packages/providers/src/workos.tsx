@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { WorkOS as WorkOSIcon } from "@sse-auth/icons";
 
 /**
  * - {@link https://workos.com/docs/reference/sso/profile | The returned profile object}
@@ -47,9 +48,14 @@ export default function WorkOS<P extends WorkOSProfile>(
         image: profile.raw_attributes.picture ?? null,
       };
     },
-    // style: { bg: "#6363f1", text: "#fff" },
+    style: {
+      icon: {
+        dark: <WorkOSIcon />,
+        light: <WorkOSIcon />,
+      },
+    },
     options,
   };
 }
 
-export { WorkOS }
+export { WorkOS };

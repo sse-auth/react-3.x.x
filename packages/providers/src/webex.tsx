@@ -1,4 +1,5 @@
 import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import { Webex as WebexIcon } from "@sse-auth/icons";
 
 /**
  * The returned user profile from Webex when using the profile callback.
@@ -37,8 +38,14 @@ export default function Webex<P extends WebexProfile>(
         image: profile.avatar,
       };
     },
+    style: {
+      icon: {
+        dark: <WebexIcon />,
+        light: <WebexIcon />,
+      },
+    },
     options: config,
   };
 }
 
-export { Webex }
+export { Webex };
