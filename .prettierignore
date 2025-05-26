@@ -1,0 +1,19 @@
+package.json
+package-lock.json
+examples
+test
+scripts
+node_modules
+.github
+CODE_OF_CONDUCT.md
+SECURITY.md
+LICENSE
+.prettierrc
+
+# Ignore all files in the src directory
+authenticator
+ip
+locale
+tailwindcss-transformer
+themes
+tsup-plugin

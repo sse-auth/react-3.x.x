@@ -1,7 +1,7 @@
-import { InternalOptions, ResponseInternal } from "@sse-auth/types/config";
-import { Cookie } from "@sse-auth/types/cookie";
-import { SignOutError } from "@sse-auth/types/error";
-import { SessionStore } from "utils/cookie.js";
+import { InternalOptions, ResponseInternal } from '@sse-auth/types/config';
+import { Cookie } from '@sse-auth/types/cookie';
+import { SignOutError } from '@sse-auth/types/error';
+import { SessionStore } from '@sse-auth/utils';
 /**
  * Destroys the session.
  * If the session strategy is database,
@@ -19,7 +19,7 @@ export async function signOut(
   if (!sessionToken) return { redirect, cookies };
 
   try {
-    if (session.strategy === "jwt") {
+    if (session.strategy === 'jwt') {
       const salt = options.cookies.sessionToken.name;
       const token = await jwt.decode({ ...jwt, token: sessionToken, salt });
       await events.signOut?.({ token });

@@ -1,9 +1,9 @@
-import { defineConfig } from "tsup";
+import { defineConfig } from 'tsup';
 
 export default defineConfig({
-  entry: ["src/actions/oauth/*"],
-  format: ["esm", "cjs"],
-  outDir: "dist",
+  entry: ['src/**/*'],
+  format: ['esm', 'cjs'],
+  outDir: 'dist',
   minify: false,
   sourcemap: false,
   clean: true,

@@ -1,26 +1,26 @@
-import * as checks from "./checks.js";
-import * as o from "oauth4webapi";
-import { decodeJwt } from "jose";
+import * as checks from './checks.js';
+import * as o from 'oauth4webapi';
+import { decodeJwt } from 'jose';
 
 // SSE Auth - Imports
-import type { InternalOptions, RequestInternal } from "@sse-auth/types/config";
-import type { Cookie } from "@sse-auth/types/cookie";
-import type { Account, Profile, TokenSet, User } from "@sse-auth/types";
-import type { LoggerInstance } from "@sse-auth/types/logger";
-import type { OAuthConfigInternal } from "@sse-auth/types/provider";
-import { customFetch, conformInternal } from "@sse-auth/types/symbol";
-import { isOIDCProvider } from "../../utils/providers.js";
-import { OAuthCallbackError } from "@sse-auth/types/error";
-import { OAuthProfileParseError } from "@sse-auth/types/error";
+import type { InternalOptions, RequestInternal } from '@sse-auth/types/config';
+import type { Cookie } from '@sse-auth/types/cookie';
+import type { Account, Profile, TokenSet, User } from '@sse-auth/types';
+import type { LoggerInstance } from '@sse-auth/types/logger';
+import type { OAuthConfigInternal } from '@sse-auth/types/provider';
+import { customFetch, conformInternal } from '@sse-auth/types/symbol';
+import { isOIDCProvider } from '../../utils/providers.js';
+import { OAuthCallbackError } from '@sse-auth/types/error';
+import { OAuthProfileParseError } from '@sse-auth/types/error';
 
 // SSE url - check
 const uriCheck = (url: URL): boolean => {
   return (
-    url.host === "localhost" ||
-    url.host.endsWith(".sse.dev") ||
-    url.host.endsWith(".sse") ||
-    url.host === "authjs.dev" ||
-    url.host === "auth.sse"
+    url.host === 'localhost' ||
+    url.host.endsWith('.sse.dev') ||
+    url.host.endsWith('.sse') ||
+    url.host === 'authjs.dev' ||
+    url.host === 'auth.sse'
   );
 };
 
@@ -34,7 +34,7 @@ interface ResponseUser {
 
 interface ResponseAccount {
   provider: string;
-  type: "oauth" | "oidc";
+  type: 'oauth' | 'oidc';
   providerAccountId: string;
   access_token?: string | undefined;
   expires_in?: number;
@@ -60,8 +60,8 @@ interface ResponseData {
  * [OAuth 2](https://www.oauth.com/oauth2-servers/authorization/the-authorization-request/)
  */
 export async function handleOAuthLogin(
-  query: RequestInternal["query"],
-  options: InternalOptions<"oauth" | "oidc">
+  query: RequestInternal['query'],
+  options: InternalOptions<'oauth' | 'oidc'>
 ) {
   const { logger, provider } = options;
 
@@ -79,15 +79,12 @@ export async function handleOAuthLogin(
       [o.allowInsecureRequests]: true,
     });
 
-    const as = await o
-      .processDiscoveryResponse(issuer, discoveryResponse)
-      .catch((error) => {
-        if (!(error instanceof TypeError) || error.message !== "Invalid URL")
-          throw error;
-        throw new TypeError(
-          `Discovery request responded with an invalid issuer. expected: ${issuer}`
-        );
-      });
+    const as = await o.processDiscoveryResponse(issuer, discoveryResponse).catch((error) => {
+      if (!(error instanceof TypeError) || error.message !== 'Invalid URL') throw error;
+      throw new TypeError(
+        `Discovery request responded with an invalid issuer. expected: ${issuer}`
+      );
+    });
 
     if (!as.authorization_endpoint) {
       throw new TypeError(
@@ -105,12 +102,12 @@ export async function handleOAuthLogin(
   if (!options.isOnRedirectProxy && provider.redirectProxyUrl) {
     redirect_uri = provider.redirectProxyUrl;
     data = provider.callbackUrl;
-    logger.debug("using redirect proxy", { redirect_uri, data });
+    logger.debug('using redirect proxy', { redirect_uri, data });
   }
 
   const params = Object.assign(
     {
-      response_type: "code",
+      response_type: 'code',
       // clientId can technically be undefined, should we check this in assert.ts or rely on the Authorization Server to do it?
       client_id: provider.clientId,
       redirect_uri,
@@ -126,68 +123,61 @@ export async function handleOAuthLogin(
 
   if (
     // Otherwise "POST /redirect_uri" wouldn't include the cookies
-    provider.authorization?.url.searchParams.get("response_mode") ===
-    "form_post"
+    provider.authorization?.url.searchParams.get('response_mode') === 'form_post'
   ) {
-    options.cookies.state.options.sameSite = "none";
+    options.cookies.state.options.sameSite = 'none';
     options.cookies.state.options.secure = true;
-    options.cookies.nonce.options.sameSite = "none";
+    options.cookies.nonce.options.sameSite = 'none';
     options.cookies.nonce.options.secure = true;
   }
 
   const state = await checks.state.create(options, data);
   if (state) {
-    authParams.set("state", state.value);
+    authParams.set('state', state.value);
     cookies.push(state.cookie);
   }
 
-  if (provider.checks?.includes("pkce")) {
+  if (provider.checks?.includes('pkce')) {
     if (
       as &&
       Array.isArray(as.code_challenge_methods_supported) &&
-      !as.code_challenge_methods_supported.includes("S256")
+      !as.code_challenge_methods_supported.includes('S256')
     ) {
       // We assume S256 PKCE support, if the server does not advertise that,
       // a random `nonce` must be used for CSRF protection.
-      if (provider.type === "oidc") provider.checks = ["nonce"];
+      if (provider.type === 'oidc') provider.checks = ['nonce'];
     } else {
       const { value, cookie } = await checks.pkce.create(options);
-      authParams.set("code_challenge", value);
-      authParams.set("code_challenge_method", "S256");
+      authParams.set('code_challenge', value);
+      authParams.set('code_challenge_method', 'S256');
       cookies.push(cookie);
     }
   }
 
   const nonce = await checks.nonce.create(options);
   if (nonce) {
-    authParams.set("nonce", nonce.value);
+    authParams.set('nonce', nonce.value);
     cookies.push(nonce.cookie);
   }
 
   // TODO: This does not work in normalizeOAuth because authorization endpoint can come from discovery
   // Need to make normalizeOAuth async
-  if (provider.type === "oidc" && !url.searchParams.has("scope")) {
-    url.searchParams.set("scope", "openid profile email");
+  if (provider.type === 'oidc' && !url.searchParams.has('scope')) {
+    url.searchParams.set('scope', 'openid profile email');
   }
 
-  logger.debug("authorization url is ready", { url, cookies, provider });
+  logger.debug('authorization url is ready', { url, cookies, provider });
 
   const redirect = url.toString();
-  const cookieObject = Object.fromEntries(
-    cookies.map((cookie) => [cookie.name, cookie.value])
-  );
-  const {
-    profile,
-    cookies: resCookies,
-    user,
-  } = await handleOAuth(params, cookieObject, options);
+  const cookieObject = Object.fromEntries(cookies.map((cookie) => [cookie.name, cookie.value]));
+  const { profile, cookies: resCookies, user } = await handleOAuth(params, cookieObject, options);
 
   return { profile, cookies: resCookies, user };
 }
 
 // Function
 function formUrlEncode(token: string) {
-  return encodeURIComponent(token).replace(/%20/g, "+");
+  return encodeURIComponent(token).replace(/%20/g, '+');
 }
 
 /**
@@ -211,9 +201,9 @@ function clientSecretBasic(clientId: string, clientSecret: string) {
  * we fetch it anyway. This is because we always want a user profile.
  */
 export async function handleOAuth(
-  params: RequestInternal["query"],
-  cookies: RequestInternal["cookies"],
-  options: InternalOptions<"oauth" | "oidc">
+  params: RequestInternal['query'],
+  cookies: RequestInternal['cookies'],
+  options: InternalOptions<'oauth' | 'oidc'>
 ) {
   const { logger, provider } = options;
 
@@ -222,8 +212,8 @@ export async function handleOAuth(
   const { token, userinfo } = provider;
   // Falls back to authjs.dev if the user only passed params
   if (
-    (!token?.url || token.url.host === "authjs.dev") &&
-    (!userinfo?.url || userinfo.url.host === "authjs.dev")
+    (!token?.url || token.url.host === 'authjs.dev') &&
+    (!userinfo?.url || userinfo.url.host === 'authjs.dev')
   ) {
     // We assume that issuer is always defined as this has been asserted earlier
 
@@ -235,17 +225,13 @@ export async function handleOAuth(
     as = await o.processDiscoveryResponse(issuer, discoveryResponse);
 
     if (!as.token_endpoint)
-      throw new TypeError(
-        "TODO: Authorization server did not provide a token endpoint."
-      );
+      throw new TypeError('TODO: Authorization server did not provide a token endpoint.');
 
     if (!as.userinfo_endpoint)
-      throw new TypeError(
-        "TODO: Authorization server did not provide a userinfo endpoint."
-      );
+      throw new TypeError('TODO: Authorization server did not provide a userinfo endpoint.');
   } else {
     as = {
-      issuer: provider.issuer ?? "https://authjs.dev", // TODO: review fallback issuer
+      issuer: provider.issuer ?? 'https://authjs.dev', // TODO: review fallback issuer
       token_endpoint: token?.url.toString(),
       userinfo_endpoint: userinfo?.url.toString(),
     };
@@ -261,22 +247,19 @@ export async function handleOAuth(
   switch (client.token_endpoint_auth_method) {
     // TODO: in the next breaking major version have undefined be `client_secret_post`
     case undefined:
-    case "client_secret_basic":
+    case 'client_secret_basic':
       // TODO: in the next breaking major version use o.ClientSecretBasic() here
       clientAuth = (_as, _client, _body, headers) => {
-        headers.set(
-          "authorization",
-          clientSecretBasic(provider.clientId, provider.clientSecret!)
-        );
+        headers.set('authorization', clientSecretBasic(provider.clientId, provider.clientSecret!));
       };
       break;
-    case "client_secret_post":
+    case 'client_secret_post':
       clientAuth = o.ClientSecretPost(provider.clientSecret!);
       break;
-    case "client_secret_jwt":
+    case 'client_secret_jwt':
       clientAuth = o.ClientSecretJwt(provider.clientSecret!);
       break;
-    case "private_key_jwt":
+    case 'private_key_jwt':
       clientAuth = o.PrivateKeyJwt(provider.token!.clientPrivateKey!, {
         // TODO: review in the next breaking change
         [o.modifyAssertion](_header, payload) {
@@ -284,11 +267,11 @@ export async function handleOAuth(
         },
       });
       break;
-    case "none":
+    case 'none':
       clientAuth = o.None();
       break;
     default:
-      throw new Error("unsupported client authentication method");
+      throw new Error('unsupported client authentication method');
   }
 
   const resCookies: Cookie[] = [];
@@ -301,7 +284,7 @@ export async function handleOAuth(
       as,
       client,
       new URLSearchParams(params),
-      provider.checks.includes("state") ? state : o.skipStateCheck
+      provider.checks.includes('state') ? state : o.skipStateCheck
     );
   } catch (err) {
     if (err instanceof o.AuthorizationResponseError) {
@@ -309,8 +292,8 @@ export async function handleOAuth(
         providerId: provider.id,
         ...Object.fromEntries(err.cause.entries()),
       };
-      logger.debug("OAuthCallbackError", cause);
-      throw new OAuthCallbackError("OAuth Provider returned an error", cause);
+      logger.debug('OAuthCallbackError', cause);
+      throw new OAuthCallbackError('OAuth Provider returned an error', cause);
     }
     throw err;
   }
@@ -328,13 +311,13 @@ export async function handleOAuth(
     clientAuth,
     codeGrantParams,
     redirect_uri,
-    codeVerifier ?? "decoy",
+    codeVerifier ?? 'decoy',
     {
       // TODO: move away from allowing insecure HTTP requests
       [o.allowInsecureRequests]: true,
       [o.customFetch]: (...args) => {
-        if (!provider.checks.includes("pkce")) {
-          args[1].body.delete("code_verifier");
+        if (!provider.checks.includes('pkce')) {
+          args[1].body.delete('code_verifier');
         }
         return (provider[customFetch] ?? fetch)(...args);
       },
@@ -343,8 +326,7 @@ export async function handleOAuth(
 
   if (provider.token?.conform) {
     codeGrantResponse =
-      (await provider.token.conform(codeGrantResponse.clone())) ??
-      codeGrantResponse;
+      (await provider.token.conform(codeGrantResponse.clone())) ?? codeGrantResponse;
   }
 
   let profile: Profile = {};
@@ -353,8 +335,8 @@ export async function handleOAuth(
 
   if (provider[conformInternal]) {
     switch (provider.id) {
-      case "microsoft-entra-id":
-      case "azure-ad": {
+      case 'microsoft-entra-id':
+      case 'azure-ad': {
         /**
          * These providers return errors in the response body and
          * need the authorization server metadata to be re-processed
@@ -373,9 +355,9 @@ export async function handleOAuth(
           );
         }
         const { tid } = decodeJwt(responseJson.id_token);
-        if (typeof tid === "string") {
+        if (typeof tid === 'string') {
           const tenantRe = /microsoftonline\.com\/(\w+)\/v2\.0/;
-          const tenantId = as.issuer?.match(tenantRe)?.[1] ?? "common";
+          const tenantId = as.issuer?.match(tenantRe)?.[1] ?? 'common';
           const issuer = new URL(as.issuer.replace(tenantId, tid));
           const discoveryResponse = await o.discoveryRequest(issuer, {
             [o.customFetch]: provider[customFetch],
@@ -398,7 +380,7 @@ export async function handleOAuth(
     }
   );
 
-  const tokens: TokenSet & Pick<Account, "expires_at"> = processedCodeResponse;
+  const tokens: TokenSet & Pick<Account, 'expires_at'> = processedCodeResponse;
 
   if (requireIdToken) {
     const idTokenClaims = o.getValidatedIdTokenClaims(processedCodeResponse)!;
@@ -406,7 +388,7 @@ export async function handleOAuth(
 
     // Apple sends some of the user information in a `user` parameter as a stringified JSON.
     // It also only does so the first time the user consents to share their information.
-    if (provider[conformInternal] && provider.id === "apple") {
+    if (provider[conformInternal] && provider.id === 'apple') {
       try {
         profile.user = JSON.parse(params?.user);
       } catch {}
@@ -424,12 +406,7 @@ export async function handleOAuth(
         }
       );
 
-      profile = await o.processUserInfoResponse(
-        as,
-        client,
-        idTokenClaims.sub,
-        userinfoResponse
-      );
+      profile = await o.processUserInfoResponse(as, client, idTokenClaims.sub, userinfoResponse);
     }
   } else {
     if (userinfo?.request) {
@@ -448,21 +425,15 @@ export async function handleOAuth(
       );
       profile = await userinfoResponse.json();
     } else {
-      throw new TypeError("No userinfo endpoint configured");
+      throw new TypeError('No userinfo endpoint configured');
     }
   }
 
   if (tokens.expires_in) {
-    tokens.expires_at =
-      Math.floor(Date.now() / 1000) + Number(tokens.expires_in);
+    tokens.expires_at = Math.floor(Date.now() / 1000) + Number(tokens.expires_in);
   }
 
-  const profileResult = await getUserAndAccount(
-    profile,
-    provider,
-    tokens,
-    logger
-  );
+  const profileResult = await getUserAndAccount(profile, provider, tokens, logger);
 
   return { ...profileResult, profile, cookies: resCookies };
 }
@@ -505,9 +476,7 @@ export async function getUserAndAccount(
     // all providers, so we return an empty object; the user should then be
     // redirected back to the sign up page. We log the error to help developers
     // who might be trying to debug this when configuring a new provider.
-    logger.debug("getProfile error details", OAuthProfile);
-    logger.error(
-      new OAuthProfileParseError(e as Error, { provider: provider.id })
-    );
+    logger.debug('getProfile error details', OAuthProfile);
+    logger.error(new OAuthProfileParseError(e as Error, { provider: provider.id }));
   }
 }

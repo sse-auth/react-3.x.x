@@ -7,7 +7,9 @@
     "release": "changeset publish && git push --follow-tags",
     "release:canary": "changeset publish --tag canary --no-git-tag",
     "release:snapshot": "changeset publish --tag snapshot --no-git-tag",
-    "release:verdaccio": "if [ \"$(npm config get registry)\" = \"https://registry.npmjs.org/\" ]; then echo 'Error: Using default registry' && exit 1; else TURBO_CONCURRENCY=1 pnpm build && changeset publish --no-git-tag; fi"
+    "release:verdaccio": "if [ \"$(npm config get registry)\" = \"https://registry.npmjs.org/\" ]; then echo 'Error: Using default registry' && exit 1; else TURBO_CONCURRENCY=1 pnpm build && changeset publish --no-git-tag; fi",
+    "prettier:check": "prettier --check .",
+    "prettier:write": "prettier --write ."
   },
   "repository": {
     "type": "git",
@@ -22,6 +24,8 @@
   "devDependencies": {
     "conventional-changelog-cli": "^5.0.0",
     "conventional-changelog-conventionalcommits": "^8.0.0",
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
     "tsup": "^8.3.6",
     "typescript": "^5.8.3",
     "zx": "^8.5.3"
