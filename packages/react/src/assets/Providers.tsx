@@ -1,4 +1,4 @@
-import { BungieIcon, ClickUpIcon, InstagramIcon } from "./Icon";
+import { BungieIcon, ClickUpIcon, InstagramIcon } from './Icon';
 
 const MicrosoftIcon = () => (
   <svg
@@ -40,11 +40,7 @@ const School42Icon = () => (
 );
 
 const AsgardeoIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="-ml-1 size-3.5"
-    viewBox="0 0 99.9 86.4"
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" className="-ml-1 size-3.5" viewBox="0 0 99.9 86.4">
     <g transform="translate(-553 -389)">
       <path
         fill="#ff7300"
@@ -56,10 +52,7 @@ const AsgardeoIcon = () => (
         d="m553 438.4 9.2-16h20.3L572.4 405l9.1-16 28.6 49.5Z"
         data-name="Path 265"
       />
-      <path
-        d="M613.1 475.4 603 457.8l-10.2 17.6h-18.4L603 426l28.5 49.4Z"
-        data-name="Path 266"
-      />
+      <path d="M613.1 475.4 603 457.8l-10.2 17.6h-18.4L603 426l28.5 49.4Z" data-name="Path 266" />
     </g>
   </svg>
 );
@@ -88,85 +81,42 @@ const AuthentikIcon = () => (
     className="-ml-1 size-3.5"
   >
     <defs></defs>
-    <rect
-      width="35"
-      height="100"
-      x="546.7"
-      y="275.3"
-      style={{ fill: "#fd4b2d" }}
-    />
-    <rect
-      width="35"
-      height="78.2"
-      x="637.7"
-      y="271.1"
-      style={{ fill: "#fd4b2d" }}
-    />
+    <rect width="35" height="100" x="546.7" y="275.3" style={{ fill: '#fd4b2d' }} />
+    <rect width="35" height="78.2" x="637.7" y="271.1" style={{ fill: '#fd4b2d' }} />
     <path
       d="M127.6 385.3a127.6 127.6 0 0 0-112 67h59.2c26.3-22.8 64.4-29.4 92 0h62.8c-24.5-33.2-61.2-67-102-67Z"
-      style={{ fill: "#fd4b2d" }}
+      style={{ fill: '#fd4b2d' }}
     />
     <path
       d="M212.4 512.5C130.6 683.6-13 537.8 74.8 452.2H15.5c-46.5 81.1 17.8 190.5 112.1 188 73 0 133.2-108.3 133.2-127.4 0-8.5-11.7-34.3-31.2-60.6h-62.8c20.8 18.9 39 46.4 45.6 60.3Zm2.2-5Z"
-      style={{ fill: "#fd4b2d" }}
+      style={{ fill: '#fd4b2d' }}
     />
     <path
       d="M1000 274.1V726c0 86.6-70.5 157-157.1 157h-66.7V729.2H458V883h-66.7c-86.6 0-157-70.5-157-157V583.7H739V312.1H495.2v152.7h-261V274a151.3 151.3 0 0 1 1-18 154.4 154.4 0 0 1 3.9-21.1 196 196 0 0 1 1.9-6.7 13.7 13.7 0 0 1 .5-1.6l1-3.2 1.2-3.3 1.4-3.6c.4-1.2 1-2.3 1.5-3.5a159 159 0 0 1 14.2-26.5l.2-.2a196.4 196.4 0 0 1 13-16.6l4.7-5.1.2-.2a36.5 36.5 0 0 1 2.7-2.7 159.8 159.8 0 0 1 18.6-15.6l5.6-3.8 6.4-3.9a143.1 143.1 0 0 1 16.7-8.5 152.8 152.8 0 0 1 18.4-6.6 144.4 144.4 0 0 1 10.8-2.8 158.5 158.5 0 0 1 21.3-3.1l3.1-.2h1.5c2.4-.2 4.8-.2 7.2-.2H843c2.4 0 4.8 0 7.2.2h1.5l3 .2a158.3 158.3 0 0 1 21.4 3l3.6.9c2.5.6 4.9 1.2 7.3 2a152.8 152.8 0 0 1 18.3 6.6 149.8 149.8 0 0 1 23.1 12.4l5.6 3.8a157.5 157.5 0 0 1 21.5 18.5l4.7 5a311.4 311.4 0 0 1 8.6 10.5l4.4 6.2.2.2a159.7 159.7 0 0 1 14.3 26.5l1.4 3.5 1.4 3.6 1.1 3.3c.3 1.2.7 2 1.1 3.2a15.7 15.7 0 0 1 .5 1.6l2 6.7A156 156 0 0 1 999 256a151.3 151.3 0 0 1 1 18Z"
-      style={{ fill: "#fd4b2d" }}
+      style={{ fill: '#fd4b2d' }}
     />
     <path
       d="M973.3 186.6H260.8A157 157 0 0 1 391.2 117h451.7a157 157 0 0 1 130.4 69.5Z"
-      style={{ fill: "#fd4b2d" }}
+      style={{ fill: '#fd4b2d' }}
     />
     <path
       d="M999 256.1H235.1a155.4 155.4 0 0 1 25.6-69.5h712.5a155.3 155.3 0 0 1 25.6 69.5Z"
-      style={{ fill: "#fd4b2d" }}
+      style={{ fill: '#fd4b2d' }}
     />
     <path
       d="M1000 274.1v51.5H738.9v-13.5H495.2v13.5H234.1v-51.5a153.4 153.4 0 0 1 1-18H999a151.3 151.3 0 0 1 1.1 18Z"
-      style={{ fill: "#fd4b2d" }}
+      style={{ fill: '#fd4b2d' }}
     />
-    <rect
-      width="261.1"
-      height="69.5"
-      x="234.1"
-      y="325.6"
-      style={{ fill: "#fd4b2d" }}
-    />
-    <rect
-      width="261.1"
-      height="69.5"
-      x="738.9"
-      y="325.6"
-      style={{ fill: "#fd4b2d" }}
-    />
-    <rect
-      width="261.1"
-      height="69.5"
-      x="234.1"
-      y="395.2"
-      style={{ fill: "#fd4b2d" }}
-    />
-    <rect
-      width="261.1"
-      height="69.5"
-      x="738.9"
-      y="395.2"
-      style={{ fill: "#fd4b2d" }}
-    />
+    <rect width="261.1" height="69.5" x="234.1" y="325.6" style={{ fill: '#fd4b2d' }} />
+    <rect width="261.1" height="69.5" x="738.9" y="325.6" style={{ fill: '#fd4b2d' }} />
+    <rect width="261.1" height="69.5" x="234.1" y="395.2" style={{ fill: '#fd4b2d' }} />
+    <rect width="261.1" height="69.5" x="738.9" y="395.2" style={{ fill: '#fd4b2d' }} />
   </svg>
 );
 
 const AzureIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 59.2 47.3"
-    className="-ml-1 size-3.5"
-  >
-    <path
-      fill="#0072c6"
-      d="M32.4 0 14.9 15.1 0 42h13.4zm2.3 3.5-7.5 21 14.3 18-27.7 4.8h45.4z"
-    />
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 59.2 47.3" className="-ml-1 size-3.5">
+    <path fill="#0072c6" d="M32.4 0 14.9 15.1 0 42h13.4zm2.3 3.5-7.5 21 14.3 18-27.7 4.8h45.4z" />
   </svg>
 );
 
@@ -216,11 +166,7 @@ const BankIDIcon = () => (
 );
 
 const BattleNetIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="-ml-1 size-4"
-    viewBox="0 0 600 580.4"
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" className="-ml-1 size-4" viewBox="0 0 600 580.4">
     <path
       fill="#148eff"
       d="M473.5 197.6c-76-35-185-57.4-287.8-49 5.2-34 17.9-57.8 38.7-62.8 28.7-6.8 60 12 89.9 46.4 19.5 2.5 42.7 7 58.8 10.7C318.7 40.6 245.7-16.8 190.2 4.4c-42.2 16-63.8 74.2-61.2 152.3C74 168.4 31.1 189.2 3.7 219c-1.4 1.6-4.5 5.6-3.4 7.6.8 1.5 3.6-.2 4.8-1 31.9-22.3 72.6-34.3 125.7-41.9 7.5 83.3 42.8 189 101.3 273.8-32 12.5-58.8 13.4-73.6-2.2-20.3-21.4-19.6-58-4.8-101a669 669 0 0 1-20.1-56.3C72 396.4 58.9 488.3 105 525.8c35 28.5 96.2 18.1 162.5-23.1 37.7 41.7 77.1 68.5 116.7 77.3 2.1.4 7.2 1 8.3-.9.9-1.4-2-3-3.3-3.7-35.1-16.4-66-45.7-99-87.9C358.4 439.4 432.3 356 476.5 263c26.9 21.5 41 44.3 35 64.8-8.5 28.3-40.5 46-85.2 54.7a692.4 692.4 0 0 1-38.7 45.6c115.9 4 202-30.5 211.5-89.1 7.1-44.7-32.4-92.4-101.3-129.2 17.4-53.5 20.8-101 8.6-139.7-.7-2-2.6-6.8-4.9-6.8-1.7 0-1.7 3.2-1.6 4.7 3.4 38.6-6.5 80-26.5 129.7ZM260.2 444.3a502.8 502.8 0 0 1-77-264.8A503 503 0 0 1 451 245.2a503 503 0 0 1-190.8 199.1Z"
@@ -235,19 +181,12 @@ const BeyondIdentityIcon = () => (
     viewBox="0 0 32 32"
     className="-ml-1 size-3.5"
   >
-    <path
-      fill="#5077c5"
-      d="m22.1 0-8.3 16.6L10 8.7H7.1l6.7 12.8L25 0Zm-9.2 27.2V30h2.5v-7.7z"
-    />
+    <path fill="#5077c5" d="m22.1 0-8.3 16.6L10 8.7H7.1l6.7 12.8L25 0Zm-9.2 27.2V30h2.5v-7.7z" />
   </svg>
 );
 
 const BoxIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="-ml-1 size-4"
-    viewBox="0 0 444.9 245.4"
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" className="-ml-1 size-4" viewBox="0 0 444.9 245.4">
     <g fill="#0075C9">
       <path d="M239 72.4c-33 0-61.8 18.6-76.3 46A86.4 86.4 0 0 0 34.6 89.6V16.9A17.3 17.3 0 0 0 0 17v143.4a86.4 86.4 0 0 0 162.7 39 86.4 86.4 0 1 0 76.3-127zM86.4 210.6a51.8 51.8 0 1 1 0-103.6 51.8 51.8 0 0 1 0 103.6zm152.6 0a51.8 51.8 0 1 1 0-103.6 51.8 51.8 0 0 1 0 103.6z" />
       <path d="m441.7 218-44.3-59 44.3-59.2A17.3 17.3 0 0 0 414 79l-38.2 51-38.2-51A17.3 17.3 0 0 0 310 99.7l44.2 59.2L310 218a17.3 17.3 0 0 0 27.6 20.8l38.2-51 38.2 51a17.3 17.3 0 0 0 27.6-20.8z" />
@@ -278,12 +217,7 @@ const BoxyHQIcon = () => (
       strokeWidth="40"
       d="m285 171.6-49 49m176.3 49.2 49.5-48.5m-176.6 48.5-49-49m176.9-49.2 48.5 49.5"
     />
-    <path
-      stroke="#212121"
-      strokeLinecap="round"
-      strokeWidth="42"
-      d="M361.3 143.8 338 307"
-    />
+    <path stroke="#212121" strokeLinecap="round" strokeWidth="42" d="M361.3 143.8 338 307" />
     <path
       fill="#212121"
       d="M7.3 131.3 127.8 9.5l7 124.2-127.5-2.4ZM444.8 568l120.9-122.2-120.9 4.1v118Z"
@@ -381,20 +315,14 @@ const CognitoIcon = () => (
       fill="#512843"
       d="m196.3 79.6-.7-.7-66.9-19.5-.7.3-.7-.3L22.1 89.7l-.6.7.8.5 24.1 3.5.8-.3L128 74.8l40.5 9.8 27.9-5"
     />
-    <path
-      fill="#C17B9E"
-      d="m47.2 240.5-25.7 6.3v-.2l-1-155 1-1.2 25.7 3.7v146.4"
-    />
+    <path fill="#C17B9E" d="m47.2 240.5-25.7 6.3v-.2l-1-155 1-1.2 25.7 3.7v146.4" />
     <path fill="#7A3E65" d="m82 180.4 46 5.4.3-.5.2-72-.5-.5-46 5.4v62.2" />
     <path
       fill="#C17B9E"
       d="m174 180.4-46 5.4v-73l46 5.4v62.2m22.3-100.8L128 59.7V0l68.3 33.2v46.4"
     />
     <path fill="#7A3E65" d="M128 0 0 61.8v175l21.5 10V90.4L128 59.7V0" />
-    <path
-      fill="#C17B9E"
-      d="M234.5 51.4v156.8L128 238.9v59.7l128-61.8v-175l-21.5-10.4"
-    />
+    <path fill="#C17B9E" d="M234.5 51.4v156.8L128 238.9v59.7l128-61.8v-175l-21.5-10.4" />
   </svg>
 );
 
@@ -416,7 +344,7 @@ const CoinbaseIcon = () => (
       <path
         id="Layer"
         d="M350.4 777.1c0 259.8 176.7 453.3 428.7 453.3 182.5 0 327.4-115.5 379.5-283h365.1c-66.7 361-367.9 603.6-744.5 603.6C333.2 1551 0 1221.8 0 777.1 0 332.3 341.8.2 779.2.2c385.2 0 680.6 242.6 747.3 600.6h-367.9c-55-167.5-199.8-280.1-382.3-280.1-252 0-425.8 193.5-425.9 456.4z"
-        style={{ fill: "#0052ff" }}
+        style={{ fill: '#0052ff' }}
       />
     </g>
   </svg>
@@ -448,7 +376,7 @@ const DescopeIcon = () => (
     </linearGradient>
     <path
       d="M129.8 174.7c7.6-1.6 14-4.8 19.2-9.7 7.7-7.3 8.8-17.1 8.8-29.4V80.7c0-12.3-1.1-22.1-8.8-29.4-5.2-4.9-11.6-8.1-19.2-9.7V15.4c12.5 1.8 22.9 6.5 31 14.2 10.6 10 19.9 23.5 19.9 40.5v75c0 17-9.3 30.5-19.9 40.5-8.1 7.7-18.5 12.4-31 14.2v-25.1z"
-      style={{ fill: "url(#SVGID_1_)" }}
+      style={{ fill: 'url(#SVGID_1_)' }}
     />
     <linearGradient
       id="SVGID_00000040544740507634666800000017273841385603649669_"
@@ -522,10 +450,7 @@ const DribbbleIcon = () => (
     viewBox="0 0 256 256"
     className="-ml-1 size-4"
   >
-    <path
-      fill="#E74D89"
-      d="M128 8.5a119.3 119.3 0 1 1 .2 238.6A119.3 119.3 0 0 1 128 8.5Z"
-    />
+    <path fill="#E74D89" d="M128 8.5a119.3 119.3 0 1 1 .2 238.6A119.3 119.3 0 0 1 128 8.5Z" />
     <path
       fill="#B2215A"
       d="M128 255.7A128 128 0 0 1 0 127.9a128 128 0 0 1 256-.1c0 70.5-57.4 127.9-128 127.9Zm107.9-110.4a161.2 161.2 0 0 0-68.1-4.7 466.5 466.5 0 0 1 21.2 77.8 108.6 108.6 0 0 0 46.9-73.1Zm-65.2 83.2c-1.6-9.6-8-43-23.3-82.8l-.7.2c-61.7 21.5-83.8 64.2-85.8 68.2a108.9 108.9 0 0 0 109.8 14.4ZM46.8 201c2.5-4.2 32.5-53.8 88.9-72.1l4.3-1.3c-2.7-6.2-5.7-12.4-8.9-18.5a403.9 403.9 0 0 1-112.4 15.5l-.1 3.3c.1 28.1 10.7 53.7 28.2 73.1ZM21 105.6c4.9.1 49.9.3 101.1-13.3C104 60.1 84.4 33.1 81.6 29.2A109.5 109.5 0 0 0 21 105.6Zm81.4-83.8c3 4 22.9 31 40.8 63.9 38.9-14.6 55.3-36.6 57.3-39.4a109 109 0 0 0-98.1-24.5Zm110.2 37.1c-2.3 3.1-20.6 26.6-61 43.1a451.8 451.8 0 0 1 9.7 21.4c36.4-4.6 72.5 2.8 76.1 3.5-.3-25.7-9.5-49.4-24.8-68Z"
@@ -543,7 +468,7 @@ const DropboxIcon = () => (
     <style></style>
     <path
       d="M10.6 1.7 0 8.5l10.6 6.7 10.6-6.7zm21.2 0L21.2 8.5l10.6 6.7 10.6-6.7zM0 22l10.6 6.8L21.2 22l-10.6-6.8zm31.8-6.8L21.2 22l10.6 6.8L42.4 22zM10.6 31l10.6 6.8L31.8 31l-10.6-6.7z"
-      style={{ fill: "#0062ff" }}
+      style={{ fill: '#0062ff' }}
     />
   </svg>
 );
@@ -578,11 +503,7 @@ const FacebookIcon = () => (
 );
 
 const FaceItIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="29.3 101.1 451.7 357.9"
-    className="-ml-1 size-4"
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="29.3 101.1 451.7 357.9" className="-ml-1 size-4">
     <path
       fill="#fd5a00"
       d="M481 104.8c0-1.8-1.9-3.7-1.9-3.7-1.8 0-1.8 0-3.7 1.9-37.5 58.1-76.8 116.2-114.3 176.2H34.9c-3.7 0-5.6 5.6-1.8 7.5a29062.2 29062.2 0 0 1 440.4 170.4c3.7 1.9 7.5-1.9 7.5-3.7z"
@@ -595,36 +516,28 @@ const FaceItIcon = () => (
 );
 
 const FoursquareIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 275.9 275.9"
-    className="-ml-1 size-5"
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 275.9 275.9" className="-ml-1 size-5">
     <style></style>
     <rect width="275.4" height="275.6" x=".1" y=".3" />
     <g>
       <path
         d="M69.2 50.1H121v8.5H77.8v23.8h38.4v8.5H77.8v34.4h-8.6V50.1z"
-        style={{ fill: "#fff" }}
+        style={{ fill: '#fff' }}
       />
       <path
         d="m67.7 198.8 8.4-1.9c1.5 10.4 8.7 16.6 20.4 16.6 10.5 0 18.8-4.9 18.8-12.9 0-5.7-4.2-10.5-20.6-15.4-18.6-5.3-24.8-12.1-24.8-22.1 0-12.9 10.4-19.8 25.5-19.8 16.9 0 24.4 8.6 27 20.4l-8.4 1.9c-2.1-9.7-8.7-13.8-18.9-13.8-9.6 0-16.4 3.6-16.4 10.5 0 5.6 4.4 9.9 19.6 14.7 18.1 5.6 25.9 11.7 25.9 23.3 0 14.4-12.1 21.9-27.5 21.9-16.1-.1-27.1-8.4-29-23.4z"
-        style={{ fill: "#fff" }}
+        style={{ fill: '#fff' }}
       />
       <path
         d="M134.5 182.9c0-22.3 14.6-39.7 37-39.7 22.3 0 36.7 17.5 36.7 39.7 0 11.1-3.7 20.7-9.9 27.7 3 3 5.9 6 8.8 9.2l-6.2 6-9.2-9.5a36.6 36.6 0 0 1-20.2 5.8c-21.6 0-37-16.5-37-39.2zm50.7 27a222 222 0 0 0-8.8-8.1l6-6.1c3.2 2.8 6.4 5.7 9.4 8.6a33.1 33.1 0 0 0 7.2-21.5c0-17.6-10.7-31-27.5-31s-27.6 13.4-27.6 31c0 18.1 11.7 30.8 27.6 30.8 5.1 0 9.7-1.2 13.7-3.7z"
-        style={{ fill: "#fff" }}
+        style={{ fill: '#fff' }}
       />
     </g>
   </svg>
 );
 
 const FreshbooksIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="1 1 253.7 253.7"
-    className="-ml-1 size-4"
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="1 1 253.7 253.7" className="-ml-1 size-4">
     <path
       fill="#0075dd"
       d="M108 1A107 107 0 0 0 1 108v146.7h146.7c59 0 107-47.9 107-107V1zm86.7 43.6a34.6 34.6 0 0 1-10.2 24.5A34.8 34.8 0 0 1 160 79.3h-37.2V109H173v34.8h-50v71.7H81.7v-180h41v32.7a34.7 34.7 0 0 1 34.7-32.6h37.3z"
@@ -669,46 +582,31 @@ const FusionAuthIcon = () => (
     <metadata id="metadata49" />
     <style id="style2" type="text/css"></style>
     <g id="g906" transform="translate(-35.32 -50.46)scale(2.63977)">
-      <g
-        id="g6"
-        fill="#ec8d53"
-        fillOpacity="1"
-        transform="translate(13.26 18.77)scale(.15723)"
-      >
+      <g id="g6" fill="#ec8d53" fillOpacity="1" transform="translate(13.26 18.77)scale(.15723)">
         <path
           id="path4"
           fill="#ec8d53"
           fillOpacity="1"
           d="M77.7 2.2c-3.9 0-7.5 2.1-9.4 5.5a10.6 10.6 0 0 0 9.4 15.8c3.9 0 7.5-2.1 9.4-5.5 2.9-5.2 1-11.7-4.2-14.5-1.7-.8-3.5-1.3-5.2-1.3Z"
-          style={{ fill: "#ec8d53" }}
+          style={{ fill: '#ec8d53' }}
         />
       </g>
-      <g
-        id="g10"
-        fill="#ec8d53"
-        fillOpacity="1"
-        transform="translate(13.26 18.77)scale(.15723)"
-      >
+      <g id="g10" fill="#ec8d53" fillOpacity="1" transform="translate(13.26 18.77)scale(.15723)">
         <path
           id="path8"
           fill="#ec8d53"
           fillOpacity="1"
           d="M16 103.6c-3.9 0-7.5 2.1-9.4 5.5a10.6 10.6 0 0 0 9.4 15.8c3.9 0 7.5-2.1 9.4-5.5 2.9-5.2 1-11.7-4.2-14.5-1.6-.8-3.4-1.3-5.2-1.3z"
-          style={{ fill: "#ec8d53" }}
+          style={{ fill: '#ec8d53' }}
         />
       </g>
-      <g
-        id="g14"
-        fill="#ec8d53"
-        fillOpacity="1"
-        transform="translate(13.26 18.77)scale(.15723)"
-      >
+      <g id="g14" fill="#ec8d53" fillOpacity="1" transform="translate(13.26 18.77)scale(.15723)">
         <path
           id="path12"
           fill="#ec8d53"
           fillOpacity="1"
           d="M136.4 109.1c-3.9 0-7.5 2.1-9.4 5.5a10.6 10.6 0 0 0 9.4 15.8c3.9 0 7.5-2.1 9.4-5.5 2.9-5.2 1-11.7-4.2-14.5-1.6-.9-3.4-1.3-5.2-1.3z"
-          style={{ fill: "#ec8d53" }}
+          style={{ fill: '#ec8d53' }}
         />
       </g>
       <path
@@ -717,7 +615,7 @@ const FusionAuthIcon = () => (
         fillOpacity="1"
         strokeWidth=".16"
         d="M29.66 20.9a.68.68 0 0 0-.85.37c-.13.33.05.7.38.85a10.27 10.27 0 0 1 6.08 6.3l-4.06 1.09a6.17 6.17 0 0 0-9.75-2.56L18.6 24.1a10.4 10.4 0 0 1 4.84-2.47c-.17-.4-.22-.86-.12-1.3-4.23.83-7.82 4-9.01 8.3a11.9 11.9 0 0 0-.37 4.4c.04.33.32.58.65.58h.08a.66.66 0 0 0 .58-.72 10.21 10.21 0 0 1 2.44-7.85l2.89 2.83a6.2 6.2 0 0 0 2.45 9.58l-1.2 3.93a10.16 10.16 0 0 1-4.38-3.2c-.3.34-.68.57-1.12.68a11.54 11.54 0 0 0 9.22 4.5c2.5 0 4.93-.82 7-2.38a.65.65 0 0 0-.8-1.03 10.26 10.26 0 0 1-8.65 1.8l1.19-3.94a5.58 5.58 0 0 0 1.18.1 6.21 6.21 0 0 0 6.12-7.16l4.05-1.09c.32 1.56.27 3.2-.17 4.83-.1.32-.19.63-.32.94.22.05.44.13.65.24.19.11.36.24.52.4a11.6 11.6 0 0 0-6.65-15.17zm-9.22 10.48a5.01 5.01 0 0 1 8.76-2.94 5 5 0 1 1-8.76 2.94z"
-        style={{ fill: "#fff" }}
+        style={{ fill: '#fff' }}
       />
       <path
         id="path42"
@@ -725,7 +623,7 @@ const FusionAuthIcon = () => (
         fillOpacity="1"
         strokeWidth=".16"
         d="M29.22 28.42a4.98 4.98 0 0 0-3.45-1.73l-.34-.01a5.03 5.03 0 1 0 3.79 1.75zm-3.78 6.39c-.75 0-1.36.06-1.36-.35l.6-3.41a1.3 1.3 0 0 1-.57-1.09c0-.72.6-1.32 1.32-1.32.72 0 1.32.6 1.32 1.32 0 .44-.22.84-.57 1.09l.62 3.38v.03c.01.4-.6.35-1.36.35z"
-        style={{ fill: "#ec8d53" }}
+        style={{ fill: '#ec8d53' }}
       />
     </g>
   </svg>
@@ -751,29 +649,25 @@ const GitlabIcon = () => (
     <defs></defs>
     <path
       d="m282.8 170.7-.2-.7-26.2-68.2a6.8 6.8 0 0 0-2.7-3.2 7 7 0 0 0-8 .4 7 7 0 0 0-2.3 3.5l-17.6 54h-71.5l-17.7-54a6.9 6.9 0 0 0-2.3-3.5 7 7 0 0 0-8-.4 6.9 6.9 0 0 0-2.7 3.2L97.4 170l-.2.7a48.5 48.5 0 0 0 16 56l.2.2.2.1 39.8 29.8 19.7 15 12 9a8 8 0 0 0 9.8 0l12-9 19.7-15 40-30h.1a48.6 48.6 0 0 0 16.1-56Z"
-      style={{ fill: "#e24329" }}
+      style={{ fill: '#e24329' }}
     />
     <path
       d="m282.8 170.7-.2-.7a88.3 88.3 0 0 0-35.2 15.8L190 229.2a53007 53007 0 0 0 36.6 27.7l40-30h.1a48.6 48.6 0 0 0 16.1-56.2Z"
-      style={{ fill: "#fc6d26" }}
+      style={{ fill: '#fc6d26' }}
     />
     <path
       d="m153.4 256.9 19.7 14.9 12 9a8 8 0 0 0 9.8 0l12-9 19.7-15-36.6-27.6-36.6 27.7Z"
-      style={{ fill: "#fca326" }}
+      style={{ fill: '#fca326' }}
     />
     <path
       d="M132.6 185.8A88.2 88.2 0 0 0 97.4 170l-.2.7a48.5 48.5 0 0 0 16 56l.2.2.2.1 39.8 29.8 36.6-27.6Z"
-      style={{ fill: "#fc6d26" }}
+      style={{ fill: '#fc6d26' }}
     />
   </svg>
 );
 
 const GoogleIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    className="-ml-1 size-4"
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="-ml-1 size-4">
     <path
       fill="#EA4335"
       d="M5.27 9.76A7.08 7.08 0 0 1 16.42 6.5L19.9 3A11.97 11.97 0 0 0 1.24 6.65l4.03 3.11Z"
@@ -813,139 +707,139 @@ interface Icon {
 
 export const multiIcons: Icon[] = [
   {
-    name: "Google",
+    name: 'Google',
     icons: <GoogleIcon />,
   },
   {
-    name: "Microsoft",
+    name: 'Microsoft',
     icons: <MicrosoftIcon />,
   },
   {
-    name: "Apple",
+    name: 'Apple',
     icons: <AppleIcon />,
   },
   {
-    name: "42School",
+    name: '42School',
     icons: <School42Icon />,
   },
   {
-    name: "Asgardeo",
+    name: 'Asgardeo',
     icons: <AsgardeoIcon />,
   },
   {
-    name: "Auth0",
+    name: 'Auth0',
     icons: <Auth0Icon />,
   },
   {
-    name: "Authentik",
+    name: 'Authentik',
     icons: <AuthentikIcon />,
   },
   {
-    name: "Azure AD",
+    name: 'Azure AD',
     icons: <AzureIcon />,
   },
   {
-    name: "Azure AD B2C",
+    name: 'Azure AD B2C',
     icons: <AzureIcon />,
   },
   {
-    name: "Azure DevOps",
+    name: 'Azure DevOps',
     icons: <AzureIcon />,
   },
   {
-    name: "BankID Norway",
+    name: 'BankID Norway',
     icons: <BankIDIcon />,
   },
   {
-    name: "Battle.net",
+    name: 'Battle.net',
     icons: <BattleNetIcon />,
   },
   {
-    name: "Beyond Identity",
+    name: 'Beyond Identity',
     icons: <BeyondIdentityIcon />,
   },
   {
-    name: "Box",
+    name: 'Box',
     icons: <BoxIcon />,
   },
   {
-    name: "BoxyHQ SAML",
+    name: 'BoxyHQ SAML',
     icons: <BoxyHQIcon />,
   },
   {
-    name: "Bungie",
+    name: 'Bungie',
     icons: <BungieIcon className="-ml-1 size-5 fill-current dark:text-white" />,
   },
   {
-    name: "Click-Up",
+    name: 'Click-Up',
     icons: <ClickUpIcon />,
   },
   {
-    name: "Cognito",
+    name: 'Cognito',
     icons: <CognitoIcon />,
   },
   {
-    name: "Coinbase",
+    name: 'Coinbase',
     icons: <CoinbaseIcon />,
   },
   {
-    name: "Descope",
+    name: 'Descope',
     icons: <DescopeIcon />,
   },
   {
-    name: "Discord",
+    name: 'Discord',
     icons: <DiscordIcon />,
   },
   {
-    name: "Dribbble",
+    name: 'Dribbble',
     icons: <DribbbleIcon />,
   },
   {
-    name: "Dropbox",
+    name: 'Dropbox',
     icons: <DropboxIcon />,
   },
   {
-    name: "EVEOnline",
+    name: 'EVEOnline',
     icons: <EveonlineIcon />,
   },
   {
-    name: "Facebook",
+    name: 'Facebook',
     icons: <FacebookIcon />,
   },
   {
-    name: "Faceit",
+    name: 'Faceit',
     icons: <FaceItIcon />,
   },
   {
-    name: "Foursquare",
+    name: 'Foursquare',
     icons: <FoursquareIcon />,
   },
   {
-    name: "Freshbooks",
+    name: 'Freshbooks',
     icons: <FreshbooksIcon />,
   },
   {
-    name: "Frontegg",
+    name: 'Frontegg',
     icons: <FronteggIcon />,
   },
   {
-    name: "Fusion Auth",
+    name: 'Fusion Auth',
     icons: <FusionAuthIcon />,
   },
   {
-    name: "Github",
+    name: 'Github',
     icons: <GithubIcon />,
   },
   {
-    name: "Gitlab",
+    name: 'Gitlab',
     icons: <GitlabIcon />,
   },
   {
-    name: "Hubspot",
+    name: 'Hubspot',
     icons: <HubspotIcon />,
   },
   {
-    name: "Instagram",
+    name: 'Instagram',
     icons: <InstagramIcon />,
   },
 ];

@@ -1,6 +1,6 @@
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
-import React from "react";
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+import React from 'react';
 
 /**
  * Clone React element.
@@ -16,14 +16,10 @@ export function cloneElement(element: React.ReactElement, classNames: string) {
   });
 }
 
-export function getColumnCount({
-  length,
-  max,
-}: Record<"length" | "max", number>): number {
+export function getColumnCount({ length, max }: Record<'length' | 'max', number>): number {
   const numRows = Math.ceil(length / max);
   return Math.ceil(length / numRows);
 }
-
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

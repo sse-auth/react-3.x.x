@@ -1,38 +1,34 @@
-import Card from "../components/sse-ui/Card";
-import Button from "../components/sse-ui/Button";
-import { Text, Link, Caption, Title } from "../components/sse-ui/typography";
-import Input from "../components/sse-ui/Input";
-import Label from "../components/sse-ui/Label";
-import { multiIcons } from "../assets/Providers";
-import Separator from "../components/sse-ui/Separator";
-import { useLocalization } from "../context/LocalizationContext";
-import { useAuth } from "../context/AuthContext";
-import { useBodyClass } from "../lib/useClass";
+import Card from '../components/sse-ui/Card';
+import Button from '../components/sse-ui/Button';
+import { Text, Link, Caption, Title } from '../components/sse-ui/typography';
+import Input from '../components/sse-ui/Input';
+import Label from '../components/sse-ui/Label';
+import { multiIcons } from '../assets/Providers';
+import Separator from '../components/sse-ui/Separator';
+import { useLocalization } from '../context/LocalizationContext';
+import { useAuth } from '../context/AuthContext';
+import { useBodyClass } from '../lib/useClass';
 
 export function Register() {
   const { localization } = useLocalization();
   const { configInternal } = useAuth();
   useBodyClass(
-    "antialiased bg-gray-50 dark:[--body-text-color:theme(colors.gray.300)] dark:bg-gray-950 font-sans"
+    'antialiased bg-gray-50 dark:[--body-text-color:theme(colors.gray.300)] dark:bg-gray-950 font-sans'
   );
 
-//   if (providers.)
+  //   if (providers.)
 
   return (
     <>
-      <main className="z-10 m-auto items-center justify-center h-fit max-w-md px-6 py-12 lg:absolute">
-        <Card
-          className="relative h-fit p-1 shadow-xl shadow-gray-950/10"
-          variant="mixed"
-        >
+      <main className="z-10 m-auto h-fit max-w-md items-center justify-center px-6 py-12 lg:absolute">
+        <Card className="relative h-fit p-1 shadow-xl shadow-gray-950/10" variant="mixed">
           <div className="p-10" data-rounded="large">
             <div>
               <Title size="xl" className="mb-1">
                 Welcome to SSE Auth
               </Title>
               <Text className="my-0" size="sm">
-                {localization.signUp.subtitle ??
-                  "Create an account to continue"}
+                {localization.signUp.subtitle ?? 'Create an account to continue'}
               </Text>
             </div>
 
@@ -55,10 +51,10 @@ export function Register() {
 
             <form className="mx-auto mt-8 space-y-6">
               <div className="space-y-6 rounded-[--btn-radius] shadow-sm shadow-gray-500/5">
-                <div className="relative my-6 grid items-center gap-3 [grid-template-columns:1fr_auto_1fr]">
+                <div className="relative my-6 grid [grid-template-columns:1fr_auto_1fr] items-center gap-3">
                   <Separator className="h-px border-b" />
                   <Caption as="span" className="block" size="sm">
-                    {localization.signUp.divider_text ?? "Or continue with"}
+                    {localization.signUp.divider_text ?? 'Or continue with'}
                   </Caption>
                   <Separator />
                 </div>
@@ -66,7 +62,7 @@ export function Register() {
                 <div className="space-y-6">
                   <div className="space-y-2.5">
                     <Label size="sm" htmlFor="firstname">
-                      {localization.signUp.label_firstName ?? "First name"}
+                      {localization.signUp.label_firstName ?? 'First name'}
                     </Label>
                     <Input
                       id="firstname"
@@ -80,7 +76,7 @@ export function Register() {
 
                   <div className="space-y-2.5">
                     <Label size="sm" htmlFor="lastname">
-                      {localization.signUp.label_lastName ?? "Last name"}
+                      {localization.signUp.label_lastName ?? 'Last name'}
                     </Label>
                     <Input
                       id="lastname"
@@ -94,7 +90,7 @@ export function Register() {
 
                   <div className="space-y-2.5">
                     <Label size="sm" htmlFor="email">
-                      {localization.signUp.label_email ?? "Email address"}
+                      {localization.signUp.label_email ?? 'Email address'}
                     </Label>
                     <Input
                       id="email"
@@ -108,7 +104,7 @@ export function Register() {
                   <div className="space-y-2.5">
                     {/* <div className="flex items-center justify-between"> */}
                     <Label size="sm" htmlFor="password">
-                      {localization.signUp.label_password ?? "Password"}
+                      {localization.signUp.label_password ?? 'Password'}
                     </Label>
                     {/* </div> */}
                     <Input
@@ -124,9 +120,7 @@ export function Register() {
               </div>
 
               <Button.Root className="w-full">
-                <Button.Label>
-                  {localization.signUp.submit_text ?? "Create Account"}
-                </Button.Label>
+                <Button.Label>{localization.signUp.submit_text ?? 'Create Account'}</Button.Label>
               </Button.Root>
             </form>
           </div>
@@ -137,16 +131,9 @@ export function Register() {
             className="rounded-[calc(var(--card-radius)-0.25rem)] dark:bg-[--ui-bg]"
           >
             <Caption className="my-0" size="sm" align="center">
-              {localization.signUp.link_haveAnAccount ??
-                "Already have an account ? "}{" "}
-              {""}
-              <Link
-                intent="neutral"
-                size="sm"
-                variant="underlined"
-                href="/login"
-              >
-                {localization.signUp.login ?? "Login"}
+              {localization.signUp.link_haveAnAccount ?? 'Already have an account ? '} {''}
+              <Link intent="neutral" size="sm" variant="underlined" href="/login">
+                {localization.signUp.login ?? 'Login'}
               </Link>
             </Caption>
           </Card>

@@ -1,12 +1,10 @@
 /// <reference types="resize-observer-browser" />
 
-import * as React from "react";
-import { useLayoutEffect } from "./useLayoutEffect";
+import * as React from 'react';
+import { useLayoutEffect } from './useLayoutEffect';
 
 function useSize(element: HTMLElement | null) {
-  const [size, setSize] = React.useState<
-    { width: number; height: number } | undefined
-  >(undefined);
+  const [size, setSize] = React.useState<{ width: number; height: number } | undefined>(undefined);
 
   useLayoutEffect(() => {
     if (element) {
@@ -28,14 +26,12 @@ function useSize(element: HTMLElement | null) {
         let width: number;
         let height: number;
 
-        if ("borderBoxSize" in entry) {
-          const borderSizeEntry = entry["borderBoxSize"];
+        if ('borderBoxSize' in entry) {
+          const borderSizeEntry = entry['borderBoxSize'];
           // iron out differences between browsers
-          const borderSize = Array.isArray(borderSizeEntry)
-            ? borderSizeEntry[0]
-            : borderSizeEntry;
-          width = borderSize["inlineSize"];
-          height = borderSize["blockSize"];
+          const borderSize = Array.isArray(borderSizeEntry) ? borderSizeEntry[0] : borderSizeEntry;
+          width = borderSize['inlineSize'];
+          height = borderSize['blockSize'];
         } else {
           // for browsers that don't support `borderBoxSize`
           // we calculate it ourselves to get the correct border box.
@@ -46,7 +42,7 @@ function useSize(element: HTMLElement | null) {
         setSize({ width, height });
       });
 
-      resizeObserver.observe(element, { box: "border-box" });
+      resizeObserver.observe(element, { box: 'border-box' });
 
       return () => resizeObserver.unobserve(element);
     } else {

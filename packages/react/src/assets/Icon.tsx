@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 
 interface SVGComponentProps extends React.SVGProps<SVGSVGElement> {}
 
@@ -20,7 +20,7 @@ export const BungieIcon: React.FC<SVGComponentProps> = (props) => (
           height="100%"
           width="100%"
           style={{
-            overflow: "visible",
+            overflow: 'visible',
           }}
           overflow="visible"
           xlinkHref="#a"
@@ -39,17 +39,10 @@ export const BungieIcon: React.FC<SVGComponentProps> = (props) => (
           <feBlend in2="back" in="SourceGraphic" />
         </filter>
       </defs>
-      <mask
-        id="g"
-        height={18.979}
-        width={39.466}
-        y={0.95}
-        x={16.952}
-        maskUnits="userSpaceOnUse"
-      >
+      <mask id="g" height={18.979} width={39.466} y={0.95} x={16.952} maskUnits="userSpaceOnUse">
         <g
           style={{
-            filter: "url(#b)",
+            filter: 'url(#b)',
           }}
         >
           <defs>
@@ -64,7 +57,7 @@ export const BungieIcon: React.FC<SVGComponentProps> = (props) => (
               height="100%"
               width="100%"
               style={{
-                overflow: "visible",
+                overflow: 'visible',
               }}
               overflow="visible"
               xlinkHref="#d"
@@ -81,26 +74,26 @@ export const BungieIcon: React.FC<SVGComponentProps> = (props) => (
           >
             <stop
               style={{
-                stopColor: "#231f20",
+                stopColor: '#231f20',
               }}
               offset={0}
             />
             <stop
               style={{
-                stopColor: "#f5f5f6",
+                stopColor: '#f5f5f6',
               }}
               offset={0.852}
             />
             <stop
               style={{
-                stopColor: "#fff",
+                stopColor: '#fff',
               }}
               offset={1}
             />
           </linearGradient>
           <path
             style={{
-              fill: "url(#e)",
+              fill: 'url(#e)',
             }}
             clipPath="url(#f)"
             d="M.883-1.921h73.52v30.035H.883z"
@@ -116,7 +109,7 @@ export const BungieIcon: React.FC<SVGComponentProps> = (props) => (
             height="100%"
             width="100%"
             style={{
-              overflow: "visible",
+              overflow: 'visible',
             }}
             overflow="visible"
             xlinkHref="#h"
@@ -131,7 +124,7 @@ export const BungieIcon: React.FC<SVGComponentProps> = (props) => (
               height="100%"
               width="100%"
               style={{
-                overflow: "visible",
+                overflow: 'visible',
               }}
               overflow="visible"
               xlinkHref="#j"
@@ -139,7 +132,7 @@ export const BungieIcon: React.FC<SVGComponentProps> = (props) => (
           </clipPath>
           <path
             style={{
-              fill: "#bbbdbf",
+              fill: '#bbbdbf',
             }}
             d="M56.418 8.447C52.112 3.802 45.588.756 38.443.96c-16.699.476-21.578 14.39-21.49 18.97.893-9.04 9.261-17.615 21.202-17.527 6.819.052 13.037 3.28 16.617 7.582.275-.794.992-1.338 1.646-1.538"
             clipPath="url(#k)"
@@ -152,7 +145,7 @@ export const BungieIcon: React.FC<SVGComponentProps> = (props) => (
       />
       <path
         style={{
-          fill: "#00a3e3",
+          fill: '#00a3e3',
         }}
         d="M57.367 9.506a1.665 1.665 0 1 0 0 3.33 1.665 1.665 0 0 0 0-3.33"
         clipPath="url(#c)"
@@ -223,10 +216,7 @@ export const ClickUpIcon: React.FC<SVGComponentProps> = (props) => (
         filterUnits="userSpaceOnUse"
       >
         <feFlood floodOpacity={0} result="BackgroundImageFix" />
-        <feColorMatrix
-          in="SourceAlpha"
-          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-        />
+        <feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
         <feOffset dy={10} />
         <feGaussianBlur stdDeviation={15} />
         <feColorMatrix values="0 0 0 0 0.0627451 0 0 0 0 0.117647 0 0 0 0 0.211765 0 0 0 0.1 0" />
@@ -246,23 +236,11 @@ export const InstagramIcon: React.FC<SVGComponentProps> = (props) => (
     {...props}
   >
     <defs>
-      <radialGradient
-        id="a"
-        cx="217.8"
-        cy="3291"
-        r="4271.9"
-        gradientUnits="userSpaceOnUse"
-      >
+      <radialGradient id="a" cx="217.8" cy="3291" r="4271.9" gradientUnits="userSpaceOnUse">
         <stop offset=".1" stopColor="#fa8f21" />
         <stop offset=".8" stopColor="#d82d7e" />
       </radialGradient>
-      <radialGradient
-        id="b"
-        cx="2330.6"
-        cy="3182.9"
-        r="3759.3"
-        gradientUnits="userSpaceOnUse"
-      >
+      <radialGradient id="b" cx="2330.6" cy="3182.9" r="3759.3" gradientUnits="userSpaceOnUse">
         <stop offset=".6" stopColor="#8c3aaa" stopOpacity="0" />
         <stop offset="1" stopColor="#8c3aaa" />
       </radialGradient>

@@ -1,10 +1,8 @@
-import React from "react";
+import React from 'react';
 
 export const useBodyClass = (className: string | string[]) => {
   React.useEffect(() => {
-    const classes = Array.isArray(className)
-      ? className
-      : className.split(" ").filter(Boolean);
+    const classes = Array.isArray(className) ? className : className.split(' ').filter(Boolean);
 
     classes.forEach((cls) => {
       document.body.classList.add(cls);
@@ -20,9 +18,7 @@ export const useBodyClass = (className: string | string[]) => {
 
 export const useHTMLClass = (className: string | string[]) => {
   React.useEffect(() => {
-    const classes = Array.isArray(className)
-      ? className
-      : className.split(" ").filter(Boolean);
+    const classes = Array.isArray(className) ? className : className.split(' ').filter(Boolean);
 
     classes.forEach((cls) => {
       document.documentElement.classList.add(cls);

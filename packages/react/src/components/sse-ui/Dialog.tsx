@@ -1,6 +1,6 @@
-import * as DialogPrimitive from "../radix-ui/Dialog";
-import React from "react";
-import Button from "./Button";
+import * as DialogPrimitive from '../radix-ui/Dialog';
+import React from 'react';
+import Button from './Button';
 import {
   dialog,
   title,
@@ -11,7 +11,7 @@ import {
   type TextSizeProp,
   type TextAlignProp,
   type TextWeightProp,
-} from "@sse-ui/themer";
+} from '@sse-ui/themer';
 
 const DialogRoot = DialogPrimitive.Root;
 const DialogTrigger = DialogPrimitive.Trigger;
@@ -25,11 +25,7 @@ const DialogOverlay = React.forwardRef<
   const { overlay } = dialog();
 
   return (
-    <DialogPrimitive.Overlay
-      {...props}
-      ref={forwardedRef}
-      className={overlay({ className })}
-    />
+    <DialogPrimitive.Overlay {...props} ref={forwardedRef} className={overlay({ className })} />
   );
 });
 
@@ -40,7 +36,7 @@ const DialogContent = React.forwardRef<
   const { content } = dialog();
 
   if (fancy && mixed) {
-    throw new Error("The fancy and mixed props cannot be used together.");
+    throw new Error('The fancy and mixed props cannot be used together.');
   }
 
   return (
@@ -59,23 +55,18 @@ const DialogTitle = React.forwardRef<
     align?: TextAlignProp;
     weight?: TextWeightProp;
   }
->(
-  (
-    { className, size = "base", align, weight = "medium", ...props },
-    forwardedRef
-  ) => (
-    <DialogPrimitive.Title
-      {...props}
-      ref={forwardedRef}
-      className={title({
-        size,
-        align,
-        weight,
-        className,
-      })}
-    />
-  )
-);
+>(({ className, size = 'base', align, weight = 'medium', ...props }, forwardedRef) => (
+  <DialogPrimitive.Title
+    {...props}
+    ref={forwardedRef}
+    className={title({
+      size,
+      align,
+      weight,
+      className,
+    })}
+  />
+));
 
 const DialogDescription = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Description>,
@@ -99,31 +90,20 @@ const DialogDescription = React.forwardRef<
   />
 ));
 
-const DialogActions = React.forwardRef<
-  React.ElementRef<"div">,
-  React.ComponentProps<"div">
->(({ className, ...props }, forwardedRef) => {
-  const { actions } = dialog();
-  return (
-    <div {...props} ref={forwardedRef} className={actions({ className })} />
-  );
-});
+const DialogActions = React.forwardRef<React.ElementRef<'div'>, React.ComponentProps<'div'>>(
+  ({ className, ...props }, forwardedRef) => {
+    const { actions } = dialog();
+    return <div {...props} ref={forwardedRef} className={actions({ className })} />;
+  }
+);
 
 type DialogCloseButtonProps = React.ComponentProps<typeof Button.Root>;
 
-const DialogCloseButton: React.FC<DialogCloseButtonProps> = ({
-  className,
-  ...props
-}) => {
+const DialogCloseButton: React.FC<DialogCloseButtonProps> = ({ className, ...props }) => {
   const { close } = dialog();
 
   return (
-    <Button.Root
-      {...props}
-      className={close({ className })}
-      variant="ghost"
-      size="sm"
-    >
+    <Button.Root {...props} className={close({ className })} variant="ghost" size="sm">
       <Button.Icon type="only" size="xs">
         {props.children}
       </Button.Icon>

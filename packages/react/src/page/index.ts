@@ -1,46 +1,36 @@
-import { renderToString } from "react-dom/server";
-import SignoutPage from "./signout.js";
+import { renderToString } from 'react-dom/server';
+import SignoutPage from './signout.js';
 // import css from "./styles.js"
-import VerifyRequestPage from "./verify-request.js";
-import ErrorPage from "./error.js";
+import VerifyRequestPage from './verify-request.js';
+import ErrorPage from './error.js';
 import {
   InternalOptions,
   InternalProvider,
   PublicProvider,
   RequestInternal,
   ResponseInternal,
-} from "@sse-auth/types/config";
-import { Cookie } from "react-router";
-import { UnknownAction } from "@sse-auth/types/error";
+} from '@sse-auth/types/config';
+import { Cookie } from 'react-router';
+import { UnknownAction } from '@sse-auth/types/error';
 
-function send({
-  html,
-  title,
-  status,
-  cookies,
-  theme,
-  headTags,
-}: any): ResponseInternal {
+function send({ html, title, status, cookies, theme, headTags }: any): ResponseInternal {
   return {
     cookies,
     status,
-    headers: { "Content-Type": "text/html" },
+    headers: { 'Content-Type': 'text/html' },
     body: `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><style></style><title>${title}</title>${
-      headTags ?? ""
+      headTags ?? ''
     }</head><body class="__next-auth-theme-${
-      theme?.colorScheme ?? "auto"
+      theme?.colorScheme ?? 'auto'
     }"><div class="page">${renderToString(html)}</div></body></html>`,
   };
 }
 
 type RenderPageParams = {
-  query?: RequestInternal["query"];
+  query?: RequestInternal['query'];
   cookies?: Cookie[];
 } & Partial<
-  Pick<
-    InternalOptions,
-    "url" | "callbackUrl" | "csrfToken" | "providers" | "theme" | "pages"
-  >
+  Pick<InternalOptions, 'url' | 'callbackUrl' | 'csrfToken' | 'providers' | 'theme' | 'pages'>
 >;
 
 /**
@@ -54,22 +44,22 @@ export default function renderPage(params: RenderPageParams) {
     csrf(skip: boolean, options: InternalOptions, cookies: Cookie[]) {
       if (!skip) {
         return {
-          headers: { "Content-Type": "application/json" },
+          headers: { 'Content-Type': 'application/json' },
           body: { csrfToken: options.csrfToken },
           cookies,
         };
       }
-      console.warn("csrf-disabled");
+      console.warn('csrf-disabled');
       cookies.push({
         name: options.cookies.csrfToken.name,
-        value: "",
+        value: '',
         options: { ...options.cookies.csrfToken.options, maxAge: 0 },
       });
       return { status: 404, cookies };
     },
     providers(providers: InternalProvider[]) {
       return {
-        headers: { "Content-Type": "application/json" },
+        headers: { 'Content-Type': 'application/json' },
         body: providers.reduce<Record<string, PublicProvider>>(
           (acc, { id, name, type, signinUrl, callbackUrl }) => {
             acc[id] = { id, name, type, signinUrl, callbackUrl };
@@ -80,11 +70,11 @@ export default function renderPage(params: RenderPageParams) {
       };
     },
     signin(providerId?: string, error?: any) {
-      if (providerId) throw new UnknownAction("Unsupported action");
+      if (providerId) throw new UnknownAction('Unsupported action');
       if (pages?.signIn) {
         let signinUrl = `${pages.signIn}${
-          pages.signIn.includes("?") ? "&" : "?"
-        }${new URLSearchParams({ callbackUrl: params.callbackUrl ?? "/" })}`;
+          pages.signIn.includes('?') ? '&' : '?'
+        }${new URLSearchParams({ callbackUrl: params.callbackUrl ?? '/' })}`;
         if (error) signinUrl = `${signinUrl}&${new URLSearchParams({ error })}`;
         return { redirect: signinUrl, cookies };
       }
@@ -93,13 +83,11 @@ export default function renderPage(params: RenderPageParams) {
       // a simpleWebAuthnBrowserScript is defined, we need to
       // render the script in the page.
       const webauthnProvider = providers?.find(
-        (p): p is InternalProvider<"webauthn"> =>
-          p.type === "webauthn" &&
-          p.enableConditionalUI &&
-          !!p.simpleWebAuthnBrowserVersion
+        (p): p is InternalProvider<'webauthn'> =>
+          p.type === 'webauthn' && p.enableConditionalUI && !!p.simpleWebAuthnBrowserVersion
       );
 
-      let simpleWebAuthnBrowserScript = "";
+      let simpleWebAuthnBrowserScript = '';
       if (webauthnProvider) {
         const { simpleWebAuthnBrowserVersion } = webauthnProvider;
         simpleWebAuthnBrowserScript = `<script src="https://unpkg.com/@simplewebauthn/browser@${simpleWebAuthnBrowserVersion}/dist/bundle/index.umd.min.js" crossorigin="anonymous"></script>`;
@@ -114,11 +102,11 @@ export default function renderPage(params: RenderPageParams) {
           providers: params.providers?.filter(
             (provider) =>
               // Always render oauth and email type providers
-              ["email", "oauth", "oidc"].includes(provider.type) ||
+              ['email', 'oauth', 'oidc'].includes(provider.type) ||
               // Only render credentials type provider if credentials are defined
-              (provider.type === "credentials" && provider.credentials) ||
+              (provider.type === 'credentials' && provider.credentials) ||
               // Only render webauthn type provider if formFields are defined
-              (provider.type === "webauthn" && provider.formFields) ||
+              (provider.type === 'webauthn' && provider.formFields) ||
               // Don't render other provider types
               false
           ),
@@ -127,7 +115,7 @@ export default function renderPage(params: RenderPageParams) {
           error,
           ...query,
         }),
-        title: "Sign In",
+        title: 'Sign In',
         headTags: simpleWebAuthnBrowserScript,
       });
     },
@@ -137,28 +125,26 @@ export default function renderPage(params: RenderPageParams) {
         cookies,
         theme,
         html: SignoutPage({ csrfToken: params.csrfToken, url }),
-        title: "Sign Out",
+        title: 'Sign Out',
       });
     },
     verifyRequest(props?: any) {
       if (pages?.verifyRequest)
         return {
-          redirect: `${pages.verifyRequest}${url?.search ?? ""}`,
+          redirect: `${pages.verifyRequest}${url?.search ?? ''}`,
           cookies,
         };
       return send({
         cookies,
         theme,
         html: VerifyRequestPage({ url, theme, ...props }),
-        title: "Verify Request",
+        title: 'Verify Request',
       });
     },
     error(error?: string) {
       if (pages?.error) {
         return {
-          redirect: `${pages.error}${
-            pages.error.includes("?") ? "&" : "?"
-          }error=${error}`,
+          redirect: `${pages.error}${pages.error.includes('?') ? '&' : '?'}error=${error}`,
           cookies,
         };
       }
@@ -167,7 +153,7 @@ export default function renderPage(params: RenderPageParams) {
         theme,
         // @ts-expect-error
         ...ErrorPage({ url, error }),
-        title: "Error",
+        title: 'Error',
       });
     },
   };

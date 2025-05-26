@@ -1,6 +1,6 @@
-import Button from "./Button";
-import type { ReactNode } from "react";
-import { twMerge } from "tailwind-merge";
+import Button from './Button';
+import type { ReactNode } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 export const Link = ({
   isActive = false,
@@ -16,12 +16,12 @@ export const Link = ({
   return (
     <Button.Root
       href={link}
-      variant={isActive ? "outlined" : "ghost"}
+      variant={isActive ? 'outlined' : 'ghost'}
       intent="gray"
       className={twMerge(
-        "justify-start gap-3.5 px-4",
+        'justify-start gap-3.5 px-4',
         isActive &&
-          "bg-white dark:bg-gray-500/10 dark:!shadow-none dark:[--btn-border-color:theme(colors.transparent)]"
+          'dark:[--btn-border-color:theme(colors.transparent)] bg-white dark:bg-gray-500/10 dark:!shadow-none'
       )}
       aria-label={label}
     >
@@ -44,12 +44,12 @@ export const Root = ({
 }) => (
   <Button.Root
     href={link}
-    variant={isActive ? "outlined" : "ghost"}
+    variant={isActive ? 'outlined' : 'ghost'}
     intent="gray"
     className={twMerge(
-      "justify-start gap-3.5 px-4",
+      'justify-start gap-3.5 px-4',
       isActive &&
-        "bg-white dark:bg-gray-500/10 dark:!shadow-none dark:[--btn-border-color:theme(colors.transparent)]"
+        'dark:[--btn-border-color:theme(colors.transparent)] bg-white dark:bg-gray-500/10 dark:!shadow-none'
     )}
   >
     {children}

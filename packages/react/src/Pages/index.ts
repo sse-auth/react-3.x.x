@@ -1,5 +1,5 @@
-import { renderToString } from "react-dom/server"
-import ErrorPage from "./Error"
+import { renderToString } from 'react-dom/server';
+import ErrorPage from './Error';
 
 export interface PublicProvider {
   id: string;

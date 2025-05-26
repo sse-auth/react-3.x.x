@@ -2,7 +2,14 @@ import React from 'react';
 import * as SelectPrimitive from '../radix-ui/Select';
 import { cloneElement } from '../../lib/utils';
 
-import { caption, select, trigger, type SelectProps, type TriggerProps, type SeparatorProps } from '@sse-ui/themer';
+import {
+  caption,
+  select,
+  trigger,
+  type SelectProps,
+  type TriggerProps,
+  type SeparatorProps,
+} from '@sse-ui/themer';
 
 import { twMerge } from 'tailwind-merge';
 import { ChevronDown, ChevronUp } from 'lucide-react';
@@ -42,7 +49,11 @@ const SelectTrigger = React.forwardRef<
 >(({ size = 'md', variant = 'mixed', className, children, ...props }, forwardedRef) => {
   const { parent } = trigger();
   return (
-    <SelectPrimitive.Trigger {...props} ref={forwardedRef} className={parent({ size, variant, className })}>
+    <SelectPrimitive.Trigger
+      {...props}
+      ref={forwardedRef}
+      className={parent({ size, variant, className })}
+    >
       {children}
     </SelectPrimitive.Trigger>
   );
@@ -56,34 +67,60 @@ const SelectTriggerIcon = ({ className, size, children }: SelectIconProps) => {
 const SelectContent = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content> & SelectProps
->(({ className, variant = 'solid', intent = 'primary', mixed = false, fancy = false, children, ...props }, forwardedRef) => {
-  const { variant: contextVariant, intent: contextIntent, fancy: contextFancy, mixed: contextMixed } = React.useContext(SelectContext);
+>(
+  (
+    {
+      className,
+      variant = 'solid',
+      intent = 'primary',
+      mixed = false,
+      fancy = false,
+      children,
+      ...props
+    },
+    forwardedRef
+  ) => {
+    const {
+      variant: contextVariant,
+      intent: contextIntent,
+      fancy: contextFancy,
+      mixed: contextMixed,
+    } = React.useContext(SelectContext);
 
-  variant = variant || contextVariant || 'solid';
-  intent = intent || contextIntent || 'primary';
-  fancy = fancy || contextFancy || false;
-  mixed = mixed || contextMixed || false;
+    variant = variant || contextVariant || 'solid';
+    intent = intent || contextIntent || 'primary';
+    fancy = fancy || contextFancy || false;
+    mixed = mixed || contextMixed || false;
 
-  if (fancy && mixed) {
-    throw new Error('The fancy and mixed props cannot be used together.');
+    if (fancy && mixed) {
+      throw new Error('The fancy and mixed props cannot be used together.');
+    }
+
+    const { content } = select[variant]();
+
+    return (
+      <SelectContext.Provider value={{ variant, fancy, mixed, intent }}>
+        <SelectPrimitive.Content
+          {...props}
+          ref={forwardedRef}
+          className={content({ mixed, fancy, intent, className })}
+        >
+          {children}
+        </SelectPrimitive.Content>
+      </SelectContext.Provider>
+    );
   }
-
-  const { content } = select[variant]();
-
-  return (
-    <SelectContext.Provider value={{ variant, fancy, mixed, intent }}>
-      <SelectPrimitive.Content {...props} ref={forwardedRef} className={content({ mixed, fancy, intent, className })}>
-        {children}
-      </SelectPrimitive.Content>
-    </SelectContext.Provider>
-  );
-});
+);
 
 const SelectItemIndicator = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.ItemIndicator>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.ItemIndicator>
 >(({ className, ...props }, forwardedRef) => (
-  <SelectPrimitive.ItemIndicator {...props} ref={forwardedRef} className={itemIndicator({ className })} />
+  <SelectPrimitive.ItemIndicator
+    {...props}
+    ref={forwardedRef}
+    className={itemIndicator({ className })}
+  />
 ));
 
 const SelectItem = React.forwardRef<
@@ -103,20 +140,32 @@ const SelectItem = React.forwardRef<
   );
 });
 
-const SelectLabel = React.forwardRef<React.ElementRef<typeof SelectPrimitive.Label>, React.ComponentPropsWithoutRef<typeof SelectPrimitive.Label>>(
-  ({ className, ...props }, forwardedRef) => (
-    <SelectPrimitive.Label {...props} ref={forwardedRef} className={twMerge(caption(), label(), className)} />
-  )
-);
+const SelectLabel = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.Label>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Label>
+>(({ className, ...props }, forwardedRef) => (
+  <SelectPrimitive.Label
+    {...props}
+    ref={forwardedRef}
+    className={twMerge(caption(), label(), className)}
+  />
+));
 
 const SelectSeparator = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Separator>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Separator> & Pick<SeparatorProps, 'fancy' | 'dashed'>
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Separator> &
+    Pick<SeparatorProps, 'fancy' | 'dashed'>
 >(({ className, fancy = false, dashed = false, ...props }, forwardedRef) => {
   const { fancy: contextFancy } = React.useContext(SelectContext);
 
   fancy = fancy || contextFancy || false;
-  return <SelectPrimitive.Separator {...props} ref={forwardedRef} className={separator({ fancy, dashed, className })} />;
+  return (
+    <SelectPrimitive.Separator
+      {...props}
+      ref={forwardedRef}
+      className={separator({ fancy, dashed, className })}
+    />
+  );
 });
 
 export default {

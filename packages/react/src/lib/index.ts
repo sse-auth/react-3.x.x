@@ -1,15 +1,11 @@
-import type {
-  AuthConfig,
-  RequestInternal,
-  ResponseInternal,
-} from "@sse-auth/types/config";
-import { skipCSRFCheck } from "@sse-auth/types/symbol";
-import { init } from "./init";
-import renderPage from "src/page";
-import * as actions from "@sse-auth/backend/actions/index";
-import { SessionStore } from "@sse-auth/backend/utils/cookie";
-import { UnknownAction } from "@sse-auth/types/error";
-import { validateCSRF } from "@sse-auth/backend/actions/csrf-token";
+import type { AuthConfig, RequestInternal, ResponseInternal } from '@sse-auth/types/config';
+import { skipCSRFCheck } from '@sse-auth/types/symbol';
+import { init } from './init';
+import renderPage from 'src/page';
+import * as actions from '@sse-auth/backend/actions/index';
+import { SessionStore } from '@sse-auth/backend/utils/cookie';
+import { UnknownAction } from '@sse-auth/types/error';
+import { validateCSRF } from '@sse-auth/backend/actions/csrf-token';
 
 /** @internal */
 export async function AuthInternal(
@@ -26,66 +22,51 @@ export async function AuthInternal(
     callbackUrl: request.body?.callbackUrl ?? request.query?.callbackUrl,
     csrfToken: request.body?.csrfToken,
     cookies: request.cookies,
-    isPost: method === "POST",
+    isPost: method === 'POST',
     csrfDisabled,
   });
 
-  const sessionStore = new SessionStore(
-    options.cookies.sessionToken,
-    request.cookies,
-    console
-  );
+  const sessionStore = new SessionStore(options.cookies.sessionToken, request.cookies, console);
 
-  if (method === "GET") {
+  if (method === 'GET') {
     const render = renderPage({ ...options, query: request.query, cookies });
     switch (action) {
-      case "callback":
+      case 'callback':
         return await actions.callback(request, options, sessionStore, cookies);
-      case "csrf":
+      case 'csrf':
         return render.csrf(csrfDisabled, options, cookies);
-      case "error":
+      case 'error':
         return render.error(error);
-      case "providers":
+      case 'providers':
         return render.providers(options.providers);
-      case "session":
+      case 'session':
         return await actions.session(options, sessionStore, cookies);
-      case "signin":
+      case 'signin':
         return render.signin(providerId, error);
-      case "signout":
+      case 'signout':
         return render.signout();
-      case "verify-request":
+      case 'verify-request':
         return render.verifyRequest();
-      case "webauthn-options":
-        return await actions.webAuthnOptions(
-          request,
-          options,
-          sessionStore,
-          cookies
-        );
+      case 'webauthn-options':
+        return await actions.webAuthnOptions(request, options, sessionStore, cookies);
       default:
     }
   } else {
     const { csrfTokenVerified } = options;
     switch (action) {
-      case "callback":
-        if (options.provider.type === "credentials")
+      case 'callback':
+        if (options.provider.type === 'credentials')
           // Verified CSRF Token required for credentials providers only
           validateCSRF(action, csrfTokenVerified);
         return await actions.callback(request, options, sessionStore, cookies);
-      case "session":
+      case 'session':
         validateCSRF(action, csrfTokenVerified);
-        return await actions.session(
-          options,
-          sessionStore,
-          cookies,
-          true,
-          request.body?.data
-        );
-      case "signin":
+        return await actions.session(options, sessionStore, cookies, true, request.body?.data);
+      case 'signin':
         validateCSRF(action, csrfTokenVerified);
         return await actions.signIn(request, cookies, options);
 
-      case "signout":
+      case 'signout':
         validateCSRF(action, csrfTokenVerified);
         return await actions.signOut(cookies, sessionStore, options);
       default:

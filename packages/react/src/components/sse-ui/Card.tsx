@@ -3,21 +3,14 @@ import {
   gradientCard,
   type CardProps as CardVariantsProps,
   type GradientCardProps,
-} from "@sse-ui/themer";
+} from '@sse-ui/themer';
 
-interface InnerProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    GradientCardProps {}
+interface InnerProps extends React.HTMLAttributes<HTMLDivElement>, GradientCardProps {}
 
-const InnerCard: React.FC<InnerProps> = ({
-  variant,
-  children,
-  className,
-  ...props
-}) => {
+const InnerCard: React.FC<InnerProps> = ({ variant, children, className, ...props }) => {
   const { inner } = gradientCard({ variant });
 
-  if (variant !== "soft" && variant !== "elevated") {
+  if (variant !== 'soft' && variant !== 'elevated') {
     throw new Error(`Invalid variant prop: ${variant}`);
   }
 
@@ -37,34 +30,30 @@ export interface CardProps
 
 export const Card: React.FC<CardProps> = ({
   className,
-  variant = "mixed",
+  variant = 'mixed',
   fancy = false,
   children,
   gradient = false,
   href,
   ...props
 }) => {
-  const Component = href ? "a" : "div";
+  const Component = href ? 'a' : 'div';
   const { outer } = gradientCard({
-    variant: variant === "elevated" || variant === "soft" ? variant : undefined,
+    variant: variant === 'elevated' || variant === 'soft' ? variant : undefined,
   });
 
   if (fancy && gradient) {
-    throw new Error("The fancy and gradient props cannot be used together.");
+    throw new Error('The fancy and gradient props cannot be used together.');
   }
 
   return (
     <>
-      {gradient && (variant == "elevated" || variant == "soft") ? (
+      {gradient && (variant == 'elevated' || variant == 'soft') ? (
         <Component className={outer({ className })} href={href} {...props}>
           <InnerCard variant={variant}>{children}</InnerCard>
         </Component>
       ) : (
-        <Component
-          className={card({ variant, fancy, className })}
-          href={href}
-          {...props}
-        >
+        <Component className={card({ variant, fancy, className })} href={href} {...props}>
           {children}
         </Component>
       )}

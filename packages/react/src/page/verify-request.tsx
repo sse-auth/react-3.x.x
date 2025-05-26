@@ -1,4 +1,4 @@
-import type { Theme } from "@sse-auth/types";
+import type { Theme } from '@sse-auth/types';
 
 interface VerifyRequestPageProps {
   url: URL;

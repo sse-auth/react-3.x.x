@@ -1,5 +1,5 @@
-import * as React from "react";
-import { composeRefs } from "./composeRefs";
+import * as React from 'react';
+import { composeRefs } from './composeRefs';
 
 /* -------------------------------------------------------------------------------------------------
  * Slot
@@ -22,8 +22,7 @@ const Slot = React.forwardRef<HTMLElement, SlotProps>((props, forwardedRef) => {
       if (child === slottable) {
         // because the new element will be the one rendered, we are only interested
         // in grabbing its children (`newElement.props.children`)
-        if (React.Children.count(newElement) > 1)
-          return React.Children.only(null);
+        if (React.Children.count(newElement) > 1) return React.Children.only(null);
         return React.isValidElement(newElement)
           ? (newElement.props as { children: React.ReactNode }).children
           : null;
@@ -48,7 +47,7 @@ const Slot = React.forwardRef<HTMLElement, SlotProps>((props, forwardedRef) => {
   );
 });
 
-Slot.displayName = "Slot";
+Slot.displayName = 'Slot';
 
 /* -------------------------------------------------------------------------------------------------
  * SlotClone
@@ -58,28 +57,22 @@ interface SlotCloneProps {
   children: React.ReactNode;
 }
 
-const SlotClone = React.forwardRef<any, SlotCloneProps>(
-  (props, forwardedRef) => {
-    const { children, ...slotProps } = props;
+const SlotClone = React.forwardRef<any, SlotCloneProps>((props, forwardedRef) => {
+  const { children, ...slotProps } = props;
 
-    if (React.isValidElement(children)) {
-      const childrenRef = getElementRef(children);
-      return React.cloneElement(children, {
-        ...mergeProps(slotProps, children.props as AnyProps),
-        // @ts-ignore
-        ref: forwardedRef
-          ? composeRefs(forwardedRef, childrenRef)
-          : childrenRef,
-      });
-    }
-
-    return React.Children.count(children) > 1
-      ? React.Children.only(null)
-      : null;
+  if (React.isValidElement(children)) {
+    const childrenRef = getElementRef(children);
+    return React.cloneElement(children, {
+      ...mergeProps(slotProps, children.props as AnyProps),
+      // @ts-ignore
+      ref: forwardedRef ? composeRefs(forwardedRef, childrenRef) : childrenRef,
+    });
   }
-);
 
-SlotClone.displayName = "SlotClone";
+  return React.Children.count(children) > 1 ? React.Children.only(null) : null;
+});
+
+SlotClone.displayName = 'SlotClone';
 
 /* -------------------------------------------------------------------------------------------------
  * Slottable
@@ -95,10 +88,7 @@ type AnyProps = Record<string, any>;
 
 function isSlottable(
   child: React.ReactNode
-): child is React.ReactElement<
-  React.ComponentProps<typeof Slottable>,
-  typeof Slottable
-> {
+): child is React.ReactElement<React.ComponentProps<typeof Slottable>, typeof Slottable> {
   return React.isValidElement(child) && child.type === Slottable;
 }
 
@@ -125,12 +115,10 @@ function mergeProps(slotProps: AnyProps, childProps: AnyProps) {
       }
     }
     // if it's `style`, we merge them
-    else if (propName === "style") {
+    else if (propName === 'style') {
       overrideProps[propName] = { ...slotPropValue, ...childPropValue };
-    } else if (propName === "className") {
-      overrideProps[propName] = [slotPropValue, childPropValue]
-        .filter(Boolean)
-        .join(" ");
+    } else if (propName === 'className') {
+      overrideProps[propName] = [slotPropValue, childPropValue].filter(Boolean).join(' ');
     }
   }
 
@@ -144,23 +132,21 @@ function mergeProps(slotProps: AnyProps, childProps: AnyProps) {
 // Access the ref using the method that doesn't yield a warning.
 function getElementRef(element: React.ReactElement) {
   // React <=18 in DEV
-  let getter = Object.getOwnPropertyDescriptor(element.props, "ref")?.get;
-  let mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
+  let getter = Object.getOwnPropertyDescriptor(element.props, 'ref')?.get;
+  let mayWarn = getter && 'isReactWarning' in getter && getter.isReactWarning;
   if (mayWarn) {
     return (element as any).ref;
   }
 
   // React 19 in DEV
-  getter = Object.getOwnPropertyDescriptor(element, "ref")?.get;
-  mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
+  getter = Object.getOwnPropertyDescriptor(element, 'ref')?.get;
+  mayWarn = getter && 'isReactWarning' in getter && getter.isReactWarning;
   if (mayWarn) {
     return (element.props as { ref?: React.Ref<unknown> }).ref;
   }
 
   // Not DEV
-  return (
-    (element.props as { ref?: React.Ref<unknown> }).ref || (element as any).ref
-  );
+  return (element.props as { ref?: React.Ref<unknown> }).ref || (element as any).ref;
 }
 
 const Root = Slot;

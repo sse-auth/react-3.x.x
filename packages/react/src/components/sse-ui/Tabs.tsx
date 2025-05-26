@@ -1,17 +1,17 @@
-import * as TabsPrimitive from "../radix-ui/Tabs";
-import React from "react";
+import * as TabsPrimitive from '../radix-ui/Tabs';
+import React from 'react';
 import {
   tabs,
   type TabsListProps as ListProps,
   type TabsIndicatorProps as IndicatorProps,
-} from "@sse-ui/themer";
+} from '@sse-ui/themer';
 
 const { list, trigger, indicator } = tabs();
 
-const TabsContext = React.createContext<Omit<ListProps, "variant">>({
-  intent: "primary",
-  size: "md",
-  triggerVariant: "plain",
+const TabsContext = React.createContext<Omit<ListProps, 'variant'>>({
+  intent: 'primary',
+  size: 'md',
+  triggerVariant: 'plain',
 });
 
 const TabsRoot = TabsPrimitive.Root;
@@ -23,15 +23,15 @@ const TabsList = React.forwardRef<
   (
     {
       className,
-      variant = "soft",
-      triggerVariant = "plain",
-      intent = "primary",
-      size = "md",
+      variant = 'soft',
+      triggerVariant = 'plain',
+      intent = 'primary',
+      size = 'md',
       ...props
     },
     forwardedRef
   ) => {
-    variant = variant || "soft";
+    variant = variant || 'soft';
 
     return (
       <TabsContext.Provider value={{ triggerVariant, intent, size }}>
@@ -66,9 +66,9 @@ const TabsTrigger = React.forwardRef<
 });
 
 const TabsIndicator = React.forwardRef<
-  React.ElementRef<"span">,
-  React.ComponentProps<"span"> & Pick<IndicatorProps, "variant">
->(({ className, variant = "bottom", ...props }, forwardedRef) => {
+  React.ElementRef<'span'>,
+  React.ComponentProps<'span'> & Pick<IndicatorProps, 'variant'>
+>(({ className, variant = 'bottom', ...props }, forwardedRef) => {
   const { intent } = React.useContext(TabsContext);
 
   return (

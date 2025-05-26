@@ -1,10 +1,10 @@
-import * as React from "react";
-import { useComposedRefs } from "./composeRefs";
-import { Primitive } from "./Primitive";
-import { useCallbackRef } from "./useCallbackRef";
+import * as React from 'react';
+import { useComposedRefs } from './composeRefs';
+import { Primitive } from './Primitive';
+import { useCallbackRef } from './useCallbackRef';
 
-const AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount";
-const AUTOFOCUS_ON_UNMOUNT = "focusScope.autoFocusOnUnmount";
+const AUTOFOCUS_ON_MOUNT = 'focusScope.autoFocusOnMount';
+const AUTOFOCUS_ON_UNMOUNT = 'focusScope.autoFocusOnUnmount';
 const EVENT_OPTIONS = { bubbles: false, cancelable: true };
 
 type FocusableTarget = HTMLElement | { focus(): void };
@@ -13,7 +13,7 @@ type FocusableTarget = HTMLElement | { focus(): void };
  * FocusScope
  * -----------------------------------------------------------------------------------------------*/
 
-const FOCUS_SCOPE_NAME = "FocusScope";
+const FOCUS_SCOPE_NAME = 'FocusScope';
 
 type FocusScopeElement = React.ElementRef<typeof Primitive.div>;
 type PrimitiveDivProps = React.ComponentPropsWithoutRef<typeof Primitive.div>;
@@ -45,198 +45,173 @@ interface FocusScopeProps extends PrimitiveDivProps {
   onUnmountAutoFocus?: (event: Event) => void;
 }
 
-const FocusScope = React.forwardRef<FocusScopeElement, FocusScopeProps>(
-  (props, forwardedRef) => {
-    const {
-      loop = false,
-      trapped = false,
-      onMountAutoFocus: onMountAutoFocusProp,
-      onUnmountAutoFocus: onUnmountAutoFocusProp,
-      ...scopeProps
-    } = props;
-    const [container, setContainer] = React.useState<HTMLElement | null>(null);
-    const onMountAutoFocus = useCallbackRef(onMountAutoFocusProp);
-    const onUnmountAutoFocus = useCallbackRef(onUnmountAutoFocusProp);
-    const lastFocusedElementRef = React.useRef<HTMLElement | null>(null);
-    const composedRefs = useComposedRefs(forwardedRef, (node) =>
-      setContainer(node)
-    );
+const FocusScope = React.forwardRef<FocusScopeElement, FocusScopeProps>((props, forwardedRef) => {
+  const {
+    loop = false,
+    trapped = false,
+    onMountAutoFocus: onMountAutoFocusProp,
+    onUnmountAutoFocus: onUnmountAutoFocusProp,
+    ...scopeProps
+  } = props;
+  const [container, setContainer] = React.useState<HTMLElement | null>(null);
+  const onMountAutoFocus = useCallbackRef(onMountAutoFocusProp);
+  const onUnmountAutoFocus = useCallbackRef(onUnmountAutoFocusProp);
+  const lastFocusedElementRef = React.useRef<HTMLElement | null>(null);
+  const composedRefs = useComposedRefs(forwardedRef, (node) => setContainer(node));
 
-    const focusScope = React.useRef({
-      paused: false,
-      pause() {
-        this.paused = true;
-      },
-      resume() {
-        this.paused = false;
-      },
-    }).current;
+  const focusScope = React.useRef({
+    paused: false,
+    pause() {
+      this.paused = true;
+    },
+    resume() {
+      this.paused = false;
+    },
+  }).current;
 
-    // Takes care of trapping focus if focus is moved outside programmatically for example
-    React.useEffect(() => {
-      if (trapped) {
-        function handleFocusIn(event: FocusEvent) {
-          if (focusScope.paused || !container) return;
-          const target = event.target as HTMLElement | null;
-          if (container.contains(target)) {
-            lastFocusedElementRef.current = target;
-          } else {
-            focus(lastFocusedElementRef.current, { select: true });
-          }
+  // Takes care of trapping focus if focus is moved outside programmatically for example
+  React.useEffect(() => {
+    if (trapped) {
+      function handleFocusIn(event: FocusEvent) {
+        if (focusScope.paused || !container) return;
+        const target = event.target as HTMLElement | null;
+        if (container.contains(target)) {
+          lastFocusedElementRef.current = target;
+        } else {
+          focus(lastFocusedElementRef.current, { select: true });
         }
-
-        function handleFocusOut(event: FocusEvent) {
-          if (focusScope.paused || !container) return;
-          const relatedTarget = event.relatedTarget as HTMLElement | null;
-
-          // A `focusout` event with a `null` `relatedTarget` will happen in at least two cases:
-          //
-          // 1. When the user switches app/tabs/windows/the browser itself loses focus.
-          // 2. In Google Chrome, when the focused element is removed from the DOM.
-          //
-          // We let the browser do its thing here because:
-          //
-          // 1. The browser already keeps a memory of what's focused for when the page gets refocused.
-          // 2. In Google Chrome, if we try to focus the deleted focused element (as per below), it
-          //    throws the CPU to 100%, so we avoid doing anything for this reason here too.
-          if (relatedTarget === null) return;
-
-          // If the focus has moved to an actual legitimate element (`relatedTarget !== null`)
-          // that is outside the container, we move focus to the last valid focused element inside.
-          if (!container.contains(relatedTarget)) {
-            focus(lastFocusedElementRef.current, { select: true });
-          }
-        }
-
-        // When the focused element gets removed from the DOM, browsers move focus
-        // back to the document.body. In this case, we move focus to the container
-        // to keep focus trapped correctly.
-        function handleMutations(mutations: MutationRecord[]) {
-          const focusedElement = document.activeElement as HTMLElement | null;
-          if (focusedElement !== document.body) return;
-          for (const mutation of mutations) {
-            if (mutation.removedNodes.length > 0) focus(container);
-          }
-        }
-
-        document.addEventListener("focusin", handleFocusIn);
-        document.addEventListener("focusout", handleFocusOut);
-        const mutationObserver = new MutationObserver(handleMutations);
-        if (container)
-          mutationObserver.observe(container, {
-            childList: true,
-            subtree: true,
-          });
-
-        return () => {
-          document.removeEventListener("focusin", handleFocusIn);
-          document.removeEventListener("focusout", handleFocusOut);
-          mutationObserver.disconnect();
-        };
       }
-    }, [trapped, container, focusScope.paused]);
 
-    React.useEffect(() => {
-      if (container) {
-        focusScopesStack.add(focusScope);
-        const previouslyFocusedElement =
-          document.activeElement as HTMLElement | null;
-        const hasFocusedCandidate = container.contains(
-          previouslyFocusedElement
-        );
+      function handleFocusOut(event: FocusEvent) {
+        if (focusScope.paused || !container) return;
+        const relatedTarget = event.relatedTarget as HTMLElement | null;
 
-        if (!hasFocusedCandidate) {
-          const mountEvent = new CustomEvent(AUTOFOCUS_ON_MOUNT, EVENT_OPTIONS);
-          container.addEventListener(AUTOFOCUS_ON_MOUNT, onMountAutoFocus);
-          container.dispatchEvent(mountEvent);
-          if (!mountEvent.defaultPrevented) {
-            focusFirst(removeLinks(getTabbableCandidates(container)), {
+        // A `focusout` event with a `null` `relatedTarget` will happen in at least two cases:
+        //
+        // 1. When the user switches app/tabs/windows/the browser itself loses focus.
+        // 2. In Google Chrome, when the focused element is removed from the DOM.
+        //
+        // We let the browser do its thing here because:
+        //
+        // 1. The browser already keeps a memory of what's focused for when the page gets refocused.
+        // 2. In Google Chrome, if we try to focus the deleted focused element (as per below), it
+        //    throws the CPU to 100%, so we avoid doing anything for this reason here too.
+        if (relatedTarget === null) return;
+
+        // If the focus has moved to an actual legitimate element (`relatedTarget !== null`)
+        // that is outside the container, we move focus to the last valid focused element inside.
+        if (!container.contains(relatedTarget)) {
+          focus(lastFocusedElementRef.current, { select: true });
+        }
+      }
+
+      // When the focused element gets removed from the DOM, browsers move focus
+      // back to the document.body. In this case, we move focus to the container
+      // to keep focus trapped correctly.
+      function handleMutations(mutations: MutationRecord[]) {
+        const focusedElement = document.activeElement as HTMLElement | null;
+        if (focusedElement !== document.body) return;
+        for (const mutation of mutations) {
+          if (mutation.removedNodes.length > 0) focus(container);
+        }
+      }
+
+      document.addEventListener('focusin', handleFocusIn);
+      document.addEventListener('focusout', handleFocusOut);
+      const mutationObserver = new MutationObserver(handleMutations);
+      if (container)
+        mutationObserver.observe(container, {
+          childList: true,
+          subtree: true,
+        });
+
+      return () => {
+        document.removeEventListener('focusin', handleFocusIn);
+        document.removeEventListener('focusout', handleFocusOut);
+        mutationObserver.disconnect();
+      };
+    }
+  }, [trapped, container, focusScope.paused]);
+
+  React.useEffect(() => {
+    if (container) {
+      focusScopesStack.add(focusScope);
+      const previouslyFocusedElement = document.activeElement as HTMLElement | null;
+      const hasFocusedCandidate = container.contains(previouslyFocusedElement);
+
+      if (!hasFocusedCandidate) {
+        const mountEvent = new CustomEvent(AUTOFOCUS_ON_MOUNT, EVENT_OPTIONS);
+        container.addEventListener(AUTOFOCUS_ON_MOUNT, onMountAutoFocus);
+        container.dispatchEvent(mountEvent);
+        if (!mountEvent.defaultPrevented) {
+          focusFirst(removeLinks(getTabbableCandidates(container)), {
+            select: true,
+          });
+          if (document.activeElement === previouslyFocusedElement) {
+            focus(container);
+          }
+        }
+      }
+
+      return () => {
+        container.removeEventListener(AUTOFOCUS_ON_MOUNT, onMountAutoFocus);
+
+        // We hit a react bug (fixed in v17) with focusing in unmount.
+        // We need to delay the focus a little to get around it for now.
+        // See: https://github.com/facebook/react/issues/17894
+        setTimeout(() => {
+          const unmountEvent = new CustomEvent(AUTOFOCUS_ON_UNMOUNT, EVENT_OPTIONS);
+          container.addEventListener(AUTOFOCUS_ON_UNMOUNT, onUnmountAutoFocus);
+          container.dispatchEvent(unmountEvent);
+          if (!unmountEvent.defaultPrevented) {
+            focus(previouslyFocusedElement ?? document.body, {
               select: true,
             });
-            if (document.activeElement === previouslyFocusedElement) {
-              focus(container);
-            }
+          }
+          // we need to remove the listener after we `dispatchEvent`
+          container.removeEventListener(AUTOFOCUS_ON_UNMOUNT, onUnmountAutoFocus);
+
+          focusScopesStack.remove(focusScope);
+        }, 0);
+      };
+    }
+  }, [container, onMountAutoFocus, onUnmountAutoFocus, focusScope]);
+
+  // Takes care of looping focus (when tabbing whilst at the edges)
+  const handleKeyDown = React.useCallback(
+    (event: React.KeyboardEvent) => {
+      if (!loop && !trapped) return;
+      if (focusScope.paused) return;
+
+      const isTabKey = event.key === 'Tab' && !event.altKey && !event.ctrlKey && !event.metaKey;
+      const focusedElement = document.activeElement as HTMLElement | null;
+
+      if (isTabKey && focusedElement) {
+        const container = event.currentTarget as HTMLElement;
+        const [first, last] = getTabbableEdges(container);
+        const hasTabbableElementsInside = first && last;
+
+        // we can only wrap focus if we have tabbable edges
+        if (!hasTabbableElementsInside) {
+          if (focusedElement === container) event.preventDefault();
+        } else {
+          if (!event.shiftKey && focusedElement === last) {
+            event.preventDefault();
+            if (loop) focus(first, { select: true });
+          } else if (event.shiftKey && focusedElement === first) {
+            event.preventDefault();
+            if (loop) focus(last, { select: true });
           }
         }
-
-        return () => {
-          container.removeEventListener(AUTOFOCUS_ON_MOUNT, onMountAutoFocus);
-
-          // We hit a react bug (fixed in v17) with focusing in unmount.
-          // We need to delay the focus a little to get around it for now.
-          // See: https://github.com/facebook/react/issues/17894
-          setTimeout(() => {
-            const unmountEvent = new CustomEvent(
-              AUTOFOCUS_ON_UNMOUNT,
-              EVENT_OPTIONS
-            );
-            container.addEventListener(
-              AUTOFOCUS_ON_UNMOUNT,
-              onUnmountAutoFocus
-            );
-            container.dispatchEvent(unmountEvent);
-            if (!unmountEvent.defaultPrevented) {
-              focus(previouslyFocusedElement ?? document.body, {
-                select: true,
-              });
-            }
-            // we need to remove the listener after we `dispatchEvent`
-            container.removeEventListener(
-              AUTOFOCUS_ON_UNMOUNT,
-              onUnmountAutoFocus
-            );
-
-            focusScopesStack.remove(focusScope);
-          }, 0);
-        };
       }
-    }, [container, onMountAutoFocus, onUnmountAutoFocus, focusScope]);
+    },
+    [loop, trapped, focusScope.paused]
+  );
 
-    // Takes care of looping focus (when tabbing whilst at the edges)
-    const handleKeyDown = React.useCallback(
-      (event: React.KeyboardEvent) => {
-        if (!loop && !trapped) return;
-        if (focusScope.paused) return;
-
-        const isTabKey =
-          event.key === "Tab" &&
-          !event.altKey &&
-          !event.ctrlKey &&
-          !event.metaKey;
-        const focusedElement = document.activeElement as HTMLElement | null;
-
-        if (isTabKey && focusedElement) {
-          const container = event.currentTarget as HTMLElement;
-          const [first, last] = getTabbableEdges(container);
-          const hasTabbableElementsInside = first && last;
-
-          // we can only wrap focus if we have tabbable edges
-          if (!hasTabbableElementsInside) {
-            if (focusedElement === container) event.preventDefault();
-          } else {
-            if (!event.shiftKey && focusedElement === last) {
-              event.preventDefault();
-              if (loop) focus(first, { select: true });
-            } else if (event.shiftKey && focusedElement === first) {
-              event.preventDefault();
-              if (loop) focus(last, { select: true });
-            }
-          }
-        }
-      },
-      [loop, trapped, focusScope.paused]
-    );
-
-    return (
-      <Primitive.div
-        tabIndex={-1}
-        {...scopeProps}
-        ref={composedRefs}
-        onKeyDown={handleKeyDown}
-      />
-    );
-  }
-);
+  return (
+    <Primitive.div tabIndex={-1} {...scopeProps} ref={composedRefs} onKeyDown={handleKeyDown} />
+  );
+});
 
 FocusScope.displayName = FOCUS_SCOPE_NAME;
 
@@ -280,15 +255,12 @@ function getTabbableCandidates(container: HTMLElement) {
   const nodes: HTMLElement[] = [];
   const walker = document.createTreeWalker(container, NodeFilter.SHOW_ELEMENT, {
     acceptNode: (node: any) => {
-      const isHiddenInput = node.tagName === "INPUT" && node.type === "hidden";
-      if (node.disabled || node.hidden || isHiddenInput)
-        return NodeFilter.FILTER_SKIP;
+      const isHiddenInput = node.tagName === 'INPUT' && node.type === 'hidden';
+      if (node.disabled || node.hidden || isHiddenInput) return NodeFilter.FILTER_SKIP;
       // `.tabIndex` is not the same as the `tabindex` attribute. It works on the
       // runtime's understanding of tabbability, so this automatically accounts
       // for any kind of element that could be tabbed to.
-      return node.tabIndex >= 0
-        ? NodeFilter.FILTER_ACCEPT
-        : NodeFilter.FILTER_SKIP;
+      return node.tabIndex >= 0 ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
     },
   });
   while (walker.nextNode()) nodes.push(walker.currentNode as HTMLElement);
@@ -309,20 +281,18 @@ function findVisible(elements: HTMLElement[], container: HTMLElement) {
 }
 
 function isHidden(node: HTMLElement, { upTo }: { upTo?: HTMLElement }) {
-  if (getComputedStyle(node).visibility === "hidden") return true;
+  if (getComputedStyle(node).visibility === 'hidden') return true;
   while (node) {
     // we stop at `upTo` (excluding it)
     if (upTo !== undefined && node === upTo) return false;
-    if (getComputedStyle(node).display === "none") return true;
+    if (getComputedStyle(node).display === 'none') return true;
     node = node.parentElement as HTMLElement;
   }
   return false;
 }
 
-function isSelectableInput(
-  element: any
-): element is FocusableTarget & { select: () => void } {
-  return element instanceof HTMLInputElement && "select" in element;
+function isSelectableInput(element: any): element is FocusableTarget & { select: () => void } {
+  return element instanceof HTMLInputElement && 'select' in element;
 }
 
 function focus(element?: FocusableTarget | null, { select = false } = {}) {
@@ -332,11 +302,7 @@ function focus(element?: FocusableTarget | null, { select = false } = {}) {
     // NOTE: we prevent scrolling on focus, to minimize jarring transitions for users
     element.focus({ preventScroll: true });
     // only select if its not the same element, it supports selection and we need to select
-    if (
-      element !== previouslyFocusedElement &&
-      isSelectableInput(element) &&
-      select
-    )
+    if (element !== previouslyFocusedElement && isSelectableInput(element) && select)
       element.select();
   }
 }
@@ -381,7 +347,7 @@ function arrayRemove<T>(array: T[], item: T) {
 }
 
 function removeLinks(items: HTMLElement[]) {
-  return items.filter((item) => item.tagName !== "A");
+  return items.filter((item) => item.tagName !== 'A');
 }
 
 const Root = FocusScope;

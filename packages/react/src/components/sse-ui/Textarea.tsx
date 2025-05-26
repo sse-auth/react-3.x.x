@@ -1,22 +1,17 @@
-import React from "react";
-import { twMerge } from "tailwind-merge";
-import { form, type InputProps } from "@sse-ui/themer";
+import React from 'react';
+import { twMerge } from 'tailwind-merge';
+import { form, type InputProps } from '@sse-ui/themer';
 
 export interface TextAreaProps
-  extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "size">,
+  extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'size'>,
     InputProps {}
 
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
-  (
-    { className, variant = "mixed", fancy = false, size = "md", ...props },
-    forwardedRef
-  ) => {
+  ({ className, variant = 'mixed', fancy = false, size = 'md', ...props }, forwardedRef) => {
     const { input, textarea } = form();
 
-    if ((variant === "bottomOutlined" || variant === "plain") && fancy) {
-      throw Error(
-        "Fancy is not supported with the bottomOutlined or plain variant !"
-      );
+    if ((variant === 'bottomOutlined' || variant === 'plain') && fancy) {
+      throw Error('Fancy is not supported with the bottomOutlined or plain variant !');
     }
 
     return (

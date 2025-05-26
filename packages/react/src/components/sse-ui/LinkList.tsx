@@ -1,10 +1,10 @@
-import { cloneElement } from "../../lib/utils";
-import * as Accordion from "../radix-ui/Accordion";
-import Button from "./Button";
-import { button } from "@sse-ui/themer";
-import { ChevronDown } from "lucide-react";
-import type { ReactNode } from "react";
-import { twMerge } from "tailwind-merge";
+import { cloneElement } from '../../lib/utils';
+import * as Accordion from '../radix-ui/Accordion';
+import Button from './Button';
+import { button } from '@sse-ui/themer';
+import { ChevronDown } from 'lucide-react';
+import type { ReactNode } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 export const Link = ({
   isActive = false,
@@ -18,12 +18,12 @@ export const Link = ({
   return (
     <Button.Root
       href={link}
-      variant={isActive ? "outlined" : "ghost"}
+      variant={isActive ? 'outlined' : 'ghost'}
       intent="gray"
       className={twMerge(
-        "justify-start gap-3.5 pl-[42px] pr-3",
+        'justify-start gap-3.5 pr-3 pl-[42px]',
         isActive &&
-          "bg-white dark:bg-gray-500/10 dark:!shadow-none dark:[--btn-border-color:theme(colors.transparent)]"
+          'dark:[--btn-border-color:theme(colors.transparent)] bg-white dark:bg-gray-500/10 dark:!shadow-none'
       )}
     >
       <Button.Label className="text-sm">{children}</Button.Label>
@@ -31,18 +31,12 @@ export const Link = ({
   );
 };
 
-export const Group = ({
-  children,
-  value,
-}: {
-  value: string;
-  children: ReactNode;
-}) => {
+export const Group = ({ children, value }: { value: string; children: ReactNode }) => {
   return <Accordion.Item value={value}>{children}</Accordion.Item>;
 };
 
 export const Content = ({ children }: { children: ReactNode }) => (
-  <Accordion.Content className="space-y-1 overflow-hidden data-[state=closed]:animate-slideUp data-[state=open]:animate-slideDown">
+  <Accordion.Content className="data-[state=closed]:animate-slideUp data-[state=open]:animate-slideDown space-y-1 overflow-hidden">
     {children}
   </Accordion.Content>
 );
@@ -51,9 +45,9 @@ export const Trigger = ({ children }: { children: ReactNode }) => (
   <Accordion.Header>
     <Accordion.Trigger
       className={button.ghost({
-        intent: "gray",
-        size: "md",
-        className: "w-full justify-start gap-3.5 px-3 text-sm",
+        intent: 'gray',
+        size: 'md',
+        className: 'w-full justify-start gap-3.5 px-3 text-sm',
       })}
     >
       {children}
@@ -62,14 +56,8 @@ export const Trigger = ({ children }: { children: ReactNode }) => (
   </Accordion.Header>
 );
 
-export const Icon = ({
-  children,
-  className,
-}: {
-  children: ReactNode;
-  className?: string;
-}) =>
-  cloneElement(children as React.ReactElement, twMerge("size-4", className));
+export const Icon = ({ children, className }: { children: ReactNode; className?: string }) =>
+  cloneElement(children as React.ReactElement, twMerge('size-4', className));
 
 export const Root = ({ children }: { children: ReactNode }) => {
   return (

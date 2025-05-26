@@ -1,5 +1,5 @@
-import DropdownMenu from "./sse-ui/Dropdown";
-import Button from "./sse-ui/Button";
+import DropdownMenu from './sse-ui/Dropdown';
+import Button from './sse-ui/Button';
 import {
   // Check,
   // ChevronRight,
@@ -10,10 +10,10 @@ import {
   Settings2,
   // User,
   // UserPlus,
-} from "lucide-react";
-import { Caption, Title } from "./sse-ui/typography";
-import { AdminAvatar } from "./Avatar";
-import { getFirstLetters } from "../lib/letter";
+} from 'lucide-react';
+import { Caption, Title } from './sse-ui/typography';
+import { AdminAvatar } from './Avatar';
+import { getFirstLetters } from '../lib/letter';
 
 interface DropdownProps {
   UserData: {
@@ -29,7 +29,7 @@ export const UserDropdown = ({ UserData, openModel }: DropdownProps) => {
 
   return (
     <DropdownMenu.Root>
-      <DropdownMenu.Trigger className="rounded-[--avatar-radius] hover:ring ring-[--ui-soft-bg] data-[state=open]:ring">
+      <DropdownMenu.Trigger className="rounded-[--avatar-radius] ring-[--ui-soft-bg] hover:ring data-[state=open]:ring">
         <AdminAvatar initial={initials} src={UserData?.img} />
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
@@ -43,32 +43,22 @@ export const UserDropdown = ({ UserData, openModel }: DropdownProps) => {
           variant="soft"
           className="z-50 dark:[--caption-text-color:theme(colors.gray.400)]"
         >
-          <div className="grid gap-3 [grid-template-columns:auto_1fr] p-3">
+          <div className="grid [grid-template-columns:auto_1fr] gap-3 p-3">
             <AdminAvatar initial={initials} src={UserData?.img} />
             <div>
               <Title className="text-sm" as="span" weight="medium">
-                {UserData?.name ?? "SSE World"}
+                {UserData?.name ?? 'SSE World'}
               </Title>
-              <Caption>{UserData?.email ?? "help@sse-auth.org"}</Caption>
+              <Caption>{UserData?.email ?? 'help@sse-auth.org'}</Caption>
 
               <div className="mt-4 grid grid-cols-2 gap-3" data-rounded="large">
-                <Button.Root
-                  className="bg-gray-50"
-                  variant="outlined"
-                  size="xs"
-                  intent="gray"
-                >
+                <Button.Root className="bg-gray-50" variant="outlined" size="xs" intent="gray">
                   <Button.Icon size="xs" type="leading">
                     <Settings />
                   </Button.Icon>
                   <Button.Label onClick={openModel}>Manage</Button.Label>
                 </Button.Root>
-                <Button.Root
-                  className="bg-gray-50"
-                  variant="outlined"
-                  size="xs"
-                  intent="gray"
-                >
+                <Button.Root className="bg-gray-50" variant="outlined" size="xs" intent="gray">
                   <Button.Icon size="xs" type="leading">
                     <LogOut />
                   </Button.Icon>

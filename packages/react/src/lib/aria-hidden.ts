@@ -1,15 +1,11 @@
 export type Undo = () => void;
 
-const getDefaultParent = (
-  originalTarget: Element | Element[]
-): HTMLElement | null => {
-  if (typeof document === "undefined") {
+const getDefaultParent = (originalTarget: Element | Element[]): HTMLElement | null => {
+  if (typeof document === 'undefined') {
     return null;
   }
 
-  const sampleTarget = Array.isArray(originalTarget)
-    ? originalTarget[0]
-    : originalTarget;
+  const sampleTarget = Array.isArray(originalTarget) ? originalTarget[0] : originalTarget;
 
   return sampleTarget.ownerDocument.body;
 };
@@ -35,13 +31,7 @@ const correctTargets = (parent: HTMLElement, targets: Element[]): Element[] =>
         return correctedTarget;
       }
 
-      console.error(
-        "aria-hidden",
-        target,
-        "in not contained inside",
-        parent,
-        ". Doing nothing"
-      );
+      console.error('aria-hidden', target, 'in not contained inside', parent, '. Doing nothing');
 
       return null;
     })
@@ -98,7 +88,7 @@ const applyAttributeToOthers = (
       } else {
         try {
           const attr = node.getAttribute(controlAttribute);
-          const alreadyHidden = attr !== null && attr !== "false";
+          const alreadyHidden = attr !== null && attr !== 'false';
           const counterValue = (counterMap.get(node) || 0) + 1;
           const markerValue = (markerCounter.get(node) || 0) + 1;
 
@@ -111,14 +101,14 @@ const applyAttributeToOthers = (
           }
 
           if (markerValue === 1) {
-            node.setAttribute(markerName, "true");
+            node.setAttribute(markerName, 'true');
           }
 
           if (!alreadyHidden) {
-            node.setAttribute(controlAttribute, "true");
+            node.setAttribute(controlAttribute, 'true');
           }
         } catch (e) {
-          console.error("aria-hidden: cannot operate on ", node, e);
+          console.error('aria-hidden: cannot operate on ', node, e);
         }
       }
     });
@@ -172,11 +162,9 @@ const applyAttributeToOthers = (
 export const hideOthers = (
   originalTarget: Element | Element[],
   parentNode?: HTMLElement,
-  markerName = "data-aria-hidden"
+  markerName = 'data-aria-hidden'
 ): Undo => {
-  const targets = Array.from(
-    Array.isArray(originalTarget) ? originalTarget : [originalTarget]
-  );
+  const targets = Array.from(Array.isArray(originalTarget) ? originalTarget : [originalTarget]);
   const activeParentNode = parentNode || getDefaultParent(originalTarget);
 
   if (!activeParentNode) {
@@ -184,14 +172,9 @@ export const hideOthers = (
   }
 
   // we should not hide ariaLive elements - https://github.com/theKashey/aria-hidden/issues/10
-  targets.push(...Array.from(activeParentNode.querySelectorAll("[aria-live]")));
+  targets.push(...Array.from(activeParentNode.querySelectorAll('[aria-live]')));
 
-  return applyAttributeToOthers(
-    targets,
-    activeParentNode,
-    markerName,
-    "aria-hidden"
-  );
+  return applyAttributeToOthers(targets, activeParentNode, markerName, 'aria-hidden');
 };
 
 /**
@@ -204,7 +187,7 @@ export const hideOthers = (
 export const inertOthers = (
   originalTarget: Element | Element[],
   parentNode?: HTMLElement,
-  markerName = "data-inert-ed"
+  markerName = 'data-inert-ed'
 ): Undo => {
   const activeParentNode = parentNode || getDefaultParent(originalTarget);
 
@@ -212,20 +195,14 @@ export const inertOthers = (
     return () => null;
   }
 
-  return applyAttributeToOthers(
-    originalTarget,
-    activeParentNode,
-    markerName,
-    "inert"
-  );
+  return applyAttributeToOthers(originalTarget, activeParentNode, markerName, 'inert');
 };
 
 /**
  * @returns if current browser supports inert
  */
 export const supportsInert = (): boolean =>
-  typeof HTMLElement !== "undefined" &&
-  HTMLElement.prototype.hasOwnProperty("inert");
+  typeof HTMLElement !== 'undefined' && HTMLElement.prototype.hasOwnProperty('inert');
 
 /**
  * Automatic function to "suppress" DOM elements - _hide_ or _inert_ in the best possible way
@@ -237,10 +214,5 @@ export const supportsInert = (): boolean =>
 export const suppressOthers = (
   originalTarget: Element | Element[],
   parentNode?: HTMLElement,
-  markerName = "data-suppressed"
-): Undo =>
-  (supportsInert() ? inertOthers : hideOthers)(
-    originalTarget,
-    parentNode,
-    markerName
-  );
+  markerName = 'data-suppressed'
+): Undo => (supportsInert() ? inertOthers : hideOthers)(originalTarget, parentNode, markerName);

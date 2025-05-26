@@ -1,13 +1,13 @@
-import * as React from "react";
-import ReactDOM from "react-dom";
-import { Primitive } from "./Primitive";
-import { useLayoutEffect } from "./useLayoutEffect";
+import * as React from 'react';
+import ReactDOM from 'react-dom';
+import { Primitive } from './Primitive';
+import { useLayoutEffect } from './useLayoutEffect';
 
 /* -------------------------------------------------------------------------------------------------
  * Portal
  * -----------------------------------------------------------------------------------------------*/
 
-const PORTAL_NAME = "Portal";
+const PORTAL_NAME = 'Portal';
 
 type PortalElement = React.ElementRef<typeof Primitive.div>;
 type PrimitiveDivProps = React.ComponentPropsWithoutRef<typeof Primitive.div>;
@@ -18,20 +18,15 @@ interface PortalProps extends PrimitiveDivProps {
   container?: Element | DocumentFragment | null;
 }
 
-const Portal = React.forwardRef<PortalElement, PortalProps>(
-  (props, forwardedRef) => {
-    const { container: containerProp, ...portalProps } = props;
-    const [mounted, setMounted] = React.useState(false);
-    useLayoutEffect(() => setMounted(true), []);
-    const container = containerProp || (mounted && globalThis?.document?.body);
-    return container
-      ? ReactDOM.createPortal(
-          <Primitive.div {...portalProps} ref={forwardedRef} />,
-          container
-        )
-      : null;
-  }
-);
+const Portal = React.forwardRef<PortalElement, PortalProps>((props, forwardedRef) => {
+  const { container: containerProp, ...portalProps } = props;
+  const [mounted, setMounted] = React.useState(false);
+  useLayoutEffect(() => setMounted(true), []);
+  const container = containerProp || (mounted && globalThis?.document?.body);
+  return container
+    ? ReactDOM.createPortal(<Primitive.div {...portalProps} ref={forwardedRef} />, container)
+    : null;
+});
 
 Portal.displayName = PORTAL_NAME;
 

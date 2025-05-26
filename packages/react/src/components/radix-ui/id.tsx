@@ -1,9 +1,8 @@
-import * as React from "react";
-import { useLayoutEffect } from "./useLayoutEffect";
+import * as React from 'react';
+import { useLayoutEffect } from './useLayoutEffect';
 
 // We spaces with `.trim().toString()` to prevent bundlers from trying to `import { useId } from 'react';`
-const useReactId =
-  (React as any)[" useId ".trim().toString()] || (() => undefined);
+const useReactId = (React as any)[' useId '.trim().toString()] || (() => undefined);
 let count = 0;
 
 function useId(deterministicId?: string): string {
@@ -12,7 +11,7 @@ function useId(deterministicId?: string): string {
   useLayoutEffect(() => {
     if (!deterministicId) setId((reactId) => reactId ?? String(count++));
   }, [deterministicId]);
-  return deterministicId || (id ? `radix-${id}` : "");
+  return deterministicId || (id ? `radix-${id}` : '');
 }
 
 export { useId };

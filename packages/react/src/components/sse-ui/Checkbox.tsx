@@ -1,10 +1,6 @@
-import * as CheckboxPrimitive from "../radix-ui/Checkbox";
-import React, { forwardRef } from "react";
-import {
-  checkbox,
-  fancyCheckbox,
-  type CheckboxProps as CheckboxVariants,
-} from "@sse-ui/themer";
+import * as CheckboxPrimitive from '../radix-ui/Checkbox';
+import React, { forwardRef } from 'react';
+import { checkbox, fancyCheckbox, type CheckboxProps as CheckboxVariants } from '@sse-ui/themer';
 
 export interface CheckboxProps extends CheckboxVariants {
   className?: string;
@@ -15,12 +11,8 @@ const CheckboxRoot = forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> & CheckboxProps
 >(({ className, intent, fancy, ...props }: CheckboxProps, forwardedRef) => {
-  const classes = fancy
-    ? fancyCheckbox({ intent, className })
-    : checkbox({ intent, className });
-  return (
-    <CheckboxPrimitive.Root ref={forwardedRef} className={classes} {...props} />
-  );
+  const classes = fancy ? fancyCheckbox({ intent, className }) : checkbox({ intent, className });
+  return <CheckboxPrimitive.Root ref={forwardedRef} className={classes} {...props} />;
 });
 
 const CheckboxIndicator = CheckboxPrimitive.Indicator;

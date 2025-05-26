@@ -1,6 +1,6 @@
 /** TODO: Check if all these are used/correct */
-import "./error.css";
-export type ErrorPageParam = "Configuration" | "AccessDenied" | "Verification";
+import './error.css';
+export type ErrorPageParam = 'Configuration' | 'AccessDenied' | 'Verification';
 
 export interface ErrorProps {
   url?: URL;
@@ -15,18 +15,18 @@ interface ErrorView {
 }
 
 export function Error(props: ErrorProps) {
-  const { url, error = "default" } = props;
+  const { url, error = 'default' } = props;
   const signInPageUrl = `${url}/signin`;
 
-  const errors: Record<ErrorPageParam | "default", ErrorView> = {
+  const errors: Record<ErrorPageParam | 'default', ErrorView> = {
     default: {
       status: 200,
-      heading: "Error",
+      heading: 'Error',
       message: (
         <div className="mt-6">
           <a
             href={url?.origin}
-            className="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 focus:ring-primary inline-flex items-center rounded-md px-4 py-2 text-sm font-medium shadow-sm transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none"
             // prefetch={false}
           >
             {url?.host}
@@ -36,13 +36,13 @@ export function Error(props: ErrorProps) {
     },
     Configuration: {
       status: 500,
-      heading: "Configuration Error",
+      heading: 'Configuration Error',
       message: (
         <div>
-          <p className="mt-4 text-lg text-muted-foreground">
+          <p className="text-muted-foreground mt-4 text-lg">
             There is a problem with the server configuration.
           </p>
-          <p className="mt-4 text-lg text-muted-foreground">
+          <p className="text-muted-foreground mt-4 text-lg">
             Check the server logs for more information.
           </p>
         </div>
@@ -50,16 +50,16 @@ export function Error(props: ErrorProps) {
     },
     AccessDenied: {
       status: 403,
-      heading: "Access Denied",
+      heading: 'Access Denied',
       message: (
         <div>
-          <p className="mt-4 text-lg text-muted-foreground">
+          <p className="text-muted-foreground mt-4 text-lg">
             You do not have permission to sign in.
           </p>
           <div className="mt-6">
             <a
               href={signInPageUrl}
-              className="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 focus:ring-primary inline-flex items-center rounded-md px-4 py-2 text-sm font-medium shadow-sm transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none"
               // prefetch={false}
             >
               Sign in
@@ -70,7 +70,7 @@ export function Error(props: ErrorProps) {
     },
     Verification: {
       status: 403,
-      heading: "Unable to sign in",
+      heading: 'Unable to sign in',
       message: <></>,
     },
   };
@@ -112,4 +112,4 @@ export function Error(props: ErrorProps) {
   };
 }
 
-export default Error
+export default Error;

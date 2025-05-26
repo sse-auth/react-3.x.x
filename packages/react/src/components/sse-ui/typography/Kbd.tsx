@@ -1,16 +1,14 @@
-import React from "react"
-import { kbdTheme } from "@sse-ui/themer"
+import React from 'react';
+import { kbdTheme } from '@sse-ui/themer';
 
-export interface KbdProps extends React.HTMLAttributes<HTMLElement>{}
-    
-export const Kbd = React.forwardRef<HTMLPreElement, KbdProps>(({
-    children,
-    className,
-    ...props
-}, ref) => {
+export interface KbdProps extends React.HTMLAttributes<HTMLElement> {}
+
+export const Kbd = React.forwardRef<HTMLPreElement, KbdProps>(
+  ({ children, className, ...props }, ref) => {
     return (
-        <kbd ref={ref} className={kbdTheme({className })} {...props}>
-            {children}
-        </kbd>
-    )
-})
+      <kbd ref={ref} className={kbdTheme({ className })} {...props}>
+        {children}
+      </kbd>
+    );
+  }
+);

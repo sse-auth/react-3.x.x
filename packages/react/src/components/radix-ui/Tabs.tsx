@@ -1,21 +1,21 @@
-import * as React from "react";
-import { composeEventHandlers } from "./core/primitive";
-import { createContextScope } from "./createContext";
-import { createRovingFocusGroupScope } from "./RovingFocusGroup";
-import { Presence } from "./presence";
-import { Primitive } from "./Primitive";
-import * as RovingFocusGroup from "./RovingFocusGroup";
-import { useDirection } from "./Direction";
-import { useControllableState } from "./useControllableState";
-import { useId } from "./id";
+import * as React from 'react';
+import { composeEventHandlers } from './core/primitive';
+import { createContextScope } from './createContext';
+import { createRovingFocusGroupScope } from './RovingFocusGroup';
+import { Presence } from './presence';
+import { Primitive } from './Primitive';
+import * as RovingFocusGroup from './RovingFocusGroup';
+import { useDirection } from './Direction';
+import { useControllableState } from './useControllableState';
+import { useId } from './id';
 
-import type { Scope } from "./createContext";
+import type { Scope } from './createContext';
 
 /* -------------------------------------------------------------------------------------------------
  * Tabs
  * -----------------------------------------------------------------------------------------------*/
 
-const TABS_NAME = "Tabs";
+const TABS_NAME = 'Tabs';
 
 type ScopedProps<P> = P & { __scopeTabs?: Scope };
 const [createTabsContext, createTabsScope] = createContextScope(TABS_NAME, [
@@ -27,18 +27,15 @@ type TabsContextValue = {
   baseId: string;
   value?: string;
   onValueChange: (value: string) => void;
-  orientation?: TabsProps["orientation"];
-  dir?: TabsProps["dir"];
-  activationMode?: TabsProps["activationMode"];
+  orientation?: TabsProps['orientation'];
+  dir?: TabsProps['dir'];
+  activationMode?: TabsProps['activationMode'];
 };
 
-const [TabsProvider, useTabsContext] =
-  createTabsContext<TabsContextValue>(TABS_NAME);
+const [TabsProvider, useTabsContext] = createTabsContext<TabsContextValue>(TABS_NAME);
 
 type TabsElement = React.ElementRef<typeof Primitive.div>;
-type RovingFocusGroupProps = React.ComponentPropsWithoutRef<
-  typeof RovingFocusGroup.Root
->;
+type RovingFocusGroupProps = React.ComponentPropsWithoutRef<typeof RovingFocusGroup.Root>;
 type PrimitiveDivProps = React.ComponentPropsWithoutRef<typeof Primitive.div>;
 interface TabsProps extends PrimitiveDivProps {
   /** The value for the selected tab, if controlled */
@@ -52,16 +49,16 @@ interface TabsProps extends PrimitiveDivProps {
    * Mainly so arrow navigation is done accordingly (left & right vs. up & down)
    * @defaultValue horizontal
    */
-  orientation?: RovingFocusGroupProps["orientation"];
+  orientation?: RovingFocusGroupProps['orientation'];
   /**
    * The direction of navigation between toolbar items.
    */
-  dir?: RovingFocusGroupProps["dir"];
+  dir?: RovingFocusGroupProps['dir'];
   /**
    * Whether a tab is activated automatically or manually.
    * @defaultValue automatic
    * */
-  activationMode?: "automatic" | "manual";
+  activationMode?: 'automatic' | 'manual';
 }
 
 const Tabs = React.forwardRef<TabsElement, TabsProps>(
@@ -71,9 +68,9 @@ const Tabs = React.forwardRef<TabsElement, TabsProps>(
       value: valueProp,
       onValueChange,
       defaultValue,
-      orientation = "horizontal",
+      orientation = 'horizontal',
       dir,
-      activationMode = "automatic",
+      activationMode = 'automatic',
       ...tabsProps
     } = props;
     const direction = useDirection(dir);
@@ -110,11 +107,11 @@ Tabs.displayName = TABS_NAME;
  * TabsList
  * -----------------------------------------------------------------------------------------------*/
 
-const TAB_LIST_NAME = "TabsList";
+const TAB_LIST_NAME = 'TabsList';
 
 type TabsListElement = React.ElementRef<typeof Primitive.div>;
 interface TabsListProps extends PrimitiveDivProps {
-  loop?: RovingFocusGroupProps["loop"];
+  loop?: RovingFocusGroupProps['loop'];
 }
 
 const TabsList = React.forwardRef<TabsListElement, TabsListProps>(
@@ -147,12 +144,10 @@ TabsList.displayName = TAB_LIST_NAME;
  * TabsTrigger
  * -----------------------------------------------------------------------------------------------*/
 
-const TRIGGER_NAME = "TabsTrigger";
+const TRIGGER_NAME = 'TabsTrigger';
 
 type TabsTriggerElement = React.ElementRef<typeof Primitive.button>;
-type PrimitiveButtonProps = React.ComponentPropsWithoutRef<
-  typeof Primitive.button
->;
+type PrimitiveButtonProps = React.ComponentPropsWithoutRef<typeof Primitive.button>;
 interface TabsTriggerProps extends PrimitiveButtonProps {
   value: string;
 }
@@ -177,8 +172,8 @@ const TabsTrigger = React.forwardRef<TabsTriggerElement, TabsTriggerProps>(
           role="tab"
           aria-selected={isSelected}
           aria-controls={contentId}
-          data-state={isSelected ? "active" : "inactive"}
-          data-disabled={disabled ? "" : undefined}
+          data-state={isSelected ? 'active' : 'inactive'}
+          data-disabled={disabled ? '' : undefined}
           disabled={disabled}
           id={triggerId}
           {...triggerProps}
@@ -194,13 +189,12 @@ const TabsTrigger = React.forwardRef<TabsTriggerElement, TabsTriggerProps>(
             }
           })}
           onKeyDown={composeEventHandlers(props.onKeyDown, (event) => {
-            if ([" ", "Enter"].includes(event.key))
-              context.onValueChange(value);
+            if ([' ', 'Enter'].includes(event.key)) context.onValueChange(value);
           })}
           onFocus={composeEventHandlers(props.onFocus, () => {
             // handle "automatic" activation if necessary
             // ie. activate tab following focus
-            const isAutomaticActivation = context.activationMode !== "manual";
+            const isAutomaticActivation = context.activationMode !== 'manual';
             if (!isSelected && !disabled && isAutomaticActivation) {
               context.onValueChange(value);
             }
@@ -217,7 +211,7 @@ TabsTrigger.displayName = TRIGGER_NAME;
  * TabsContent
  * -----------------------------------------------------------------------------------------------*/
 
-const CONTENT_NAME = "TabsContent";
+const CONTENT_NAME = 'TabsContent';
 
 type TabsContentElement = React.ElementRef<typeof Primitive.div>;
 interface TabsContentProps extends PrimitiveDivProps {
@@ -240,9 +234,7 @@ const TabsContent = React.forwardRef<TabsContentElement, TabsContentProps>(
     const isMountAnimationPreventedRef = React.useRef(isSelected);
 
     React.useEffect(() => {
-      const rAF = requestAnimationFrame(
-        () => (isMountAnimationPreventedRef.current = false)
-      );
+      const rAF = requestAnimationFrame(() => (isMountAnimationPreventedRef.current = false));
       return () => cancelAnimationFrame(rAF);
     }, []);
 
@@ -250,7 +242,7 @@ const TabsContent = React.forwardRef<TabsContentElement, TabsContentProps>(
       <Presence present={forceMount || isSelected}>
         {({ present }) => (
           <Primitive.div
-            data-state={isSelected ? "active" : "inactive"}
+            data-state={isSelected ? 'active' : 'inactive'}
             data-orientation={context.orientation}
             role="tabpanel"
             aria-labelledby={triggerId}
@@ -261,9 +253,7 @@ const TabsContent = React.forwardRef<TabsContentElement, TabsContentProps>(
             ref={forwardedRef}
             style={{
               ...props.style,
-              animationDuration: isMountAnimationPreventedRef.current
-                ? "0s"
-                : undefined,
+              animationDuration: isMountAnimationPreventedRef.current ? '0s' : undefined,
             }}
           >
             {present && children}

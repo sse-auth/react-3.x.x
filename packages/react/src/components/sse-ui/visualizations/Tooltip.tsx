@@ -1,9 +1,6 @@
-import React from "react";
-import {
-  vTooltip as tooltip,
-  type VTooltipProps as TooltipVariants,
-} from "@sse-ui/themer";
-import { twMerge } from "tailwind-merge";
+import React from 'react';
+import { vTooltip as tooltip, type VTooltipProps as TooltipVariants } from '@sse-ui/themer';
+import { twMerge } from 'tailwind-merge';
 
 type PayloadEntry = {
   name: string;
@@ -11,9 +8,7 @@ type PayloadEntry = {
   color: string;
 };
 
-interface CustomTooltipProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    TooltipVariants {
+interface CustomTooltipProps extends React.HTMLAttributes<HTMLDivElement>, TooltipVariants {
   active: boolean;
   payload: PayloadEntry[];
   label: string;
@@ -40,7 +35,7 @@ export const CustomTooltip: React.FC<CustomTooltipProps> = ({
   className,
 }) => {
   if (mixed && fancy) {
-    throw new Error("Tooltip cannot be both mixed and fancy");
+    throw new Error('Tooltip cannot be both mixed and fancy');
   }
 
   if (active && payload && payload.length) {
@@ -50,7 +45,7 @@ export const CustomTooltip: React.FC<CustomTooltipProps> = ({
         className={root({
           fancy,
           mixed,
-          className: twMerge("relative z-50", className),
+          className: twMerge('relative z-50', className),
         })}
       >
         <span className={title()}>{label}</span>
@@ -65,7 +60,7 @@ export const CustomTooltip: React.FC<CustomTooltipProps> = ({
                   className={entryIndicator()}
                   style={
                     {
-                      "--entry-indicator-color": entry.color,
+                      '--entry-indicator-color': entry.color,
                     } as React.CSSProperties
                   }
                 />

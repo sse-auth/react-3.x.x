@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 
 /** Number of components which have requested interest to have focus guards */
 let count = 0;
@@ -14,22 +14,14 @@ function FocusGuards(props: any) {
  */
 function useFocusGuards() {
   React.useEffect(() => {
-    const edgeGuards = document.querySelectorAll("[data-radix-focus-guard]");
-    document.body.insertAdjacentElement(
-      "afterbegin",
-      edgeGuards[0] ?? createFocusGuard()
-    );
-    document.body.insertAdjacentElement(
-      "beforeend",
-      edgeGuards[1] ?? createFocusGuard()
-    );
+    const edgeGuards = document.querySelectorAll('[data-radix-focus-guard]');
+    document.body.insertAdjacentElement('afterbegin', edgeGuards[0] ?? createFocusGuard());
+    document.body.insertAdjacentElement('beforeend', edgeGuards[1] ?? createFocusGuard());
     count++;
 
     return () => {
       if (count === 1) {
-        document
-          .querySelectorAll("[data-radix-focus-guard]")
-          .forEach((node) => node.remove());
+        document.querySelectorAll('[data-radix-focus-guard]').forEach((node) => node.remove());
       }
       count--;
     };
@@ -37,13 +29,13 @@ function useFocusGuards() {
 }
 
 function createFocusGuard() {
-  const element = document.createElement("span");
-  element.setAttribute("data-radix-focus-guard", "");
+  const element = document.createElement('span');
+  element.setAttribute('data-radix-focus-guard', '');
   element.tabIndex = 0;
-  element.style.outline = "none";
-  element.style.opacity = "0";
-  element.style.position = "fixed";
-  element.style.pointerEvents = "none";
+  element.style.outline = 'none';
+  element.style.opacity = '0';
+  element.style.position = 'fixed';
+  element.style.pointerEvents = 'none';
   return element;
 }
 

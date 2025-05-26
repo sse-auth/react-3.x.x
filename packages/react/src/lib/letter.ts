@@ -8,13 +8,12 @@ export const getFirstLetters = (inputString: string): { initials: string } => {
   //   return color;
   // };
 
-  const words = inputString.split(" ");
+  const words = inputString.split(' ');
   if (words.length < 2) {
-    return { initials: "" }; // Return empty if not two words
+    return { initials: '' }; // Return empty if not two words
   }
 
-  const initials =
-    words[0].charAt(0).toUpperCase() + words[1].charAt(0).toUpperCase();
+  const initials = words[0].charAt(0).toUpperCase() + words[1].charAt(0).toUpperCase();
   // const color1 = getRandomColor();
   // const color2 = getRandomColor();
 
