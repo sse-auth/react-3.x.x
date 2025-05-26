@@ -13,7 +13,8 @@
     "baseUrl": "./src",
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
-    "allowJs": true
+    "allowJs": true,
+    "types": ["react"]
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "*.js", "*.d.ts"]

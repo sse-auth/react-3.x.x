@@ -1,6 +1,6 @@
 {
   "name": "@sse-auth/utils",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Utilities for SSE Authentication",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -27,11 +27,13 @@
     "@simplewebauthn/browser": "^13.1.0",
     "@simplewebauthn/types": "^12.0.0",
     "@sse-auth/types": "^1.5.0",
+    "@types/react": "^19.1.5",
     "typescript": "^5.8.3"
   },
   "dependencies": {
     "@panva/hkdf": "^1.2.1",
     "@simplewebauthn/server": "^13.1.1",
-    "jose": "^6.0.11"
+    "jose": "^6.0.11",
+    "react": "^19.1.0"
   }
 }
