@@ -1,5 +1,5 @@
-import type { AuthConfig, InternalProvider } from "@sse-auth/types/config";
-import { merge } from "./merge.js";
+import type { AuthConfig, InternalProvider } from '@sse-auth/types/config';
+import { merge } from './merge.js';
 import type {
   AccountCallback,
   OAuthConfig,
@@ -7,10 +7,10 @@ import type {
   OAuthEndpointType,
   OAuthUserConfig,
   ProfileCallback,
-} from "@sse-auth/types/provider";
-import type { Profile } from "@sse-auth/types";
-import { customFetch } from "@sse-auth/types/symbol";
-export type {AuthConfig} from "@sse-auth/types/config";
+} from '@sse-auth/types/provider';
+import type { Profile } from '@sse-auth/types';
+import { customFetch } from '@sse-auth/types/symbol';
+export type { AuthConfig } from '@sse-auth/types/config';
 
 /**
  * Adds `signinUrl` and `callbackUrl` to each provider
@@ -25,10 +25,10 @@ export default function parseProviders(params: {
   provider?: InternalProvider;
 } {
   const { providerId, config } = params;
-  const url = new URL(config.basePath ?? "/auth", params.url.origin);
+  const url = new URL(config.basePath ?? '/auth', params.url.origin);
 
   const providers = config.providers.map((p) => {
-    const provider = typeof p === "function" ? p() : p;
+    const provider = typeof p === 'function' ? p() : p;
     const { options: userOptions, ...defaults } = provider;
 
     const id = (userOptions?.id ?? defaults.id) as string;
@@ -43,18 +43,12 @@ export default function parseProviders(params: {
       callbackUrl: window.location.href,
     });
 
-    if (provider.type === "oauth" || provider.type === "oidc") {
-      merged.redirectProxyUrl ??=
-        userOptions?.redirectProxyUrl ?? config.redirectProxyUrl;
+    if (provider.type === 'oauth' || provider.type === 'oidc') {
+      merged.redirectProxyUrl ??= userOptions?.redirectProxyUrl ?? config.redirectProxyUrl;
 
-      const normalized = normalizeOAuth(merged) as InternalProvider<
-        "oauth" | "oidc"
-      >;
+      const normalized = normalizeOAuth(merged) as InternalProvider<'oauth' | 'oidc'>;
       // We currently don't support redirect proxies for response_mode=form_post
-      if (
-        normalized.authorization?.url.searchParams.get("response_mode") ===
-        "form_post"
-      ) {
+      if (normalized.authorization?.url.searchParams.get('response_mode') === 'form_post') {
         delete normalized.redirectProxyUrl;
       }
 
@@ -69,7 +63,7 @@ export default function parseProviders(params: {
 
   const provider = providers.find(({ id }) => id === providerId);
   if (providerId && !provider) {
-    const availableProviders = providers.map((p) => p.id).join(", ");
+    const availableProviders = providers.map((p) => p.id).join(', ');
     throw new Error(
       `Provider with id "${providerId}" not found. Available providers: [${availableProviders}].`
     );
@@ -86,17 +80,17 @@ function normalizeOAuth(
   if (c.issuer) c.wellKnown ??= `${c.issuer}/.well-known/openid-configuration`;
 
   const authorization = normalizeEndpoint(c.authorization, c.issuer);
-  if (authorization && !authorization.url?.searchParams.has("scope")) {
-    authorization.url.searchParams.set("scope", "openid profile email");
+  if (authorization && !authorization.url?.searchParams.has('scope')) {
+    authorization.url.searchParams.set('scope', 'openid profile email');
   }
 
   const token = normalizeEndpoint(c.token, c.issuer);
 
   const userinfo = normalizeEndpoint(c.userinfo, c.issuer);
 
-  const checks = c.checks ?? ["pkce"];
+  const checks = c.checks ?? ['pkce'];
   if (c.redirectProxyUrl) {
-    if (!checks.includes("state")) checks.push("state");
+    if (!checks.includes('state')) checks.push('state');
     c.redirectProxyUrl = `${c.redirectProxyUrl}/callback/${c.id}`;
   }
 
@@ -161,7 +155,7 @@ function normalizeEndpoint(
   issuer?: string
 ): OAuthConfigInternal<any>[OAuthEndpointType] {
   if (!e && issuer) return;
-  if (typeof e === "string") {
+  if (typeof e === 'string') {
     return { url: new URL(e) };
   }
   // If e.url is undefined, it's because the provider config
@@ -171,10 +165,10 @@ function normalizeEndpoint(
   // a valid URL even if the user only provided params.
   // NOTE: This need to be checked when constructing the URL
   // for the authorization, token and userinfo endpoints.
-  const url = new URL(e?.url ?? "https://authjs.dev");
+  const url = new URL(e?.url ?? 'https://authjs.dev');
   if (e?.params != null) {
     for (let [key, value] of Object.entries(e.params)) {
-      if (key === "claims") {
+      if (key === 'claims') {
         value = JSON.stringify(value);
       }
       url.searchParams.set(key, String(value));
@@ -189,20 +183,20 @@ function normalizeEndpoint(
 }
 
 export function isOIDCProvider(
-  provider: InternalProvider<"oidc" | "oauth">
-): provider is InternalProvider<"oidc"> {
-  return provider.type === "oidc";
+  provider: InternalProvider<'oidc' | 'oauth'>
+): provider is InternalProvider<'oidc'> {
+  return provider.type === 'oidc';
 }
 
 export function isOAuth2Provider(
-  provider: InternalProvider<"oidc" | "oauth">
-): provider is InternalProvider<"oauth"> {
-  return provider.type === "oauth";
+  provider: InternalProvider<'oidc' | 'oauth'>
+): provider is InternalProvider<'oauth'> {
+  return provider.type === 'oauth';
 }
 
 /** Either OAuth 2 or OIDC */
 export function isOAuthProvider(
   provider: InternalProvider<any>
-): provider is InternalProvider<"oauth" | "oidc"> {
-  return provider.type === "oauth" || provider.type === "oidc";
+): provider is InternalProvider<'oauth' | 'oidc'> {
+  return provider.type === 'oauth' || provider.type === 'oidc';
 }

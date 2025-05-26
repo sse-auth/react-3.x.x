@@ -1,6 +1,6 @@
-import { InternalOptions } from "@sse-auth/types/config";
-import { SessionStore } from "./cookie.js";
-import { User } from "@sse-auth/types";
+import { InternalOptions } from '@sse-auth/types/config';
+import { SessionStore } from './cookie.js';
+import { User } from '@sse-auth/types';
 
 /**
  * Returns the currently logged in user, if any.
@@ -19,7 +19,7 @@ export async function getLoggedInUser(
   if (!sessionToken) return null;
 
   // Try to decode JWT
-  if (sessionStrategy === "jwt") {
+  if (sessionStrategy === 'jwt') {
     const salt = options.cookies.sessionToken.name;
     const payload = await jwt.decode({ ...jwt, token: sessionToken, salt });
 

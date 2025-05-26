@@ -1,10 +1,6 @@
-import type { RequestInternal } from "@sse-auth/types/config";
-import type {
-    Cookie,
-    CookieOption,
-    CookiesOptions,
-} from "@sse-auth/types/cookie";
-import type { LoggerInstance } from "@sse-auth/types/logger";
+import type { RequestInternal } from '@sse-auth/types/config';
+import type { Cookie, CookieOption, CookiesOptions } from '@sse-auth/types/cookie';
+import type { LoggerInstance } from '@sse-auth/types/logger';
 
 // Uncomment to recalculate the estimated size
 // of an empty session cookie
@@ -34,18 +30,18 @@ const CHUNK_SIZE = ALLOWED_COOKIE_SIZE - ESTIMATED_EMPTY_COOKIE_SIZE;
 /** Stringified form of `JWT`. Extract the content with `jwt.decode` */
 export type JWTString = string;
 
-export type SetCookieOptions = Partial<CookieOption["options"]> & {
-    expires?: Date | string;
-    encode?: (val: unknown) => string;
+export type SetCookieOptions = Partial<CookieOption['options']> & {
+  expires?: Date | string;
+  encode?: (val: unknown) => string;
 };
 
 /**
  * If `options.session.strategy` is set to `jwt`, this is a stringified `JWT`.
  * In case of `strategy: "database"`, this is the `sessionToken` of the session in the database.
  */
-export type SessionToken<T extends "jwt" | "database" = "jwt"> = T extends "jwt"
-    ? JWTString
-    : string;
+export type SessionToken<T extends 'jwt' | 'database' = 'jwt'> = T extends 'jwt'
+  ? JWTString
+  : string;
 
 /**
  * Use secure cookies if the site uses HTTPS
@@ -58,188 +54,188 @@ export type SessionToken<T extends "jwt" | "database" = "jwt"> = T extends "jwt"
  * @TODO Review cookie settings (names, options)
  */
 export function defaultCookies(useSecureCookies: boolean) {
-    const cookiePrefix = useSecureCookies ? "__Secure-" : "";
-    return {
-        // default cookie options
-        sessionToken: {
-            name: `${cookiePrefix}authjs.session-token`,
-            options: {
-                httpOnly: true,
-                sameSite: "lax",
-                path: "/",
-                secure: useSecureCookies,
-            },
-        },
-        callbackUrl: {
-            name: `${cookiePrefix}authjs.callback-url`,
-            options: {
-                httpOnly: true,
-                sameSite: "lax",
-                path: "/",
-                secure: useSecureCookies,
-            },
-        },
-        csrfToken: {
-            // Default to __Host- for CSRF token for additional protection if using useSecureCookies
-            // NB: The `__Host-` prefix is stricter than the `__Secure-` prefix.
-            name: `${useSecureCookies ? "__Host-" : ""}authjs.csrf-token`,
-            options: {
-                httpOnly: true,
-                sameSite: "lax",
-                path: "/",
-                secure: useSecureCookies,
-            },
-        },
-        pkceCodeVerifier: {
-            name: `${cookiePrefix}authjs.pkce.code_verifier`,
-            options: {
-                httpOnly: true,
-                sameSite: "lax",
-                path: "/",
-                secure: useSecureCookies,
-                maxAge: 60 * 15, // 15 minutes in seconds
-            },
-        },
-        state: {
-            name: `${cookiePrefix}authjs.state`,
-            options: {
-                httpOnly: true,
-                sameSite: "lax",
-                path: "/",
-                secure: useSecureCookies,
-                maxAge: 60 * 15, // 15 minutes in seconds
-            },
-        },
-        nonce: {
-            name: `${cookiePrefix}authjs.nonce`,
-            options: {
-                httpOnly: true,
-                sameSite: "lax",
-                path: "/",
-                secure: useSecureCookies,
-            },
-        },
-        webauthnChallenge: {
-            name: `${cookiePrefix}authjs.challenge`,
-            options: {
-                httpOnly: true,
-                sameSite: "lax",
-                path: "/",
-                secure: useSecureCookies,
-                maxAge: 60 * 15, // 15 minutes in seconds
-            },
-        },
-    } as const satisfies CookiesOptions;
+  const cookiePrefix = useSecureCookies ? '__Secure-' : '';
+  return {
+    // default cookie options
+    sessionToken: {
+      name: `${cookiePrefix}authjs.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: useSecureCookies,
+      },
+    },
+    callbackUrl: {
+      name: `${cookiePrefix}authjs.callback-url`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: useSecureCookies,
+      },
+    },
+    csrfToken: {
+      // Default to __Host- for CSRF token for additional protection if using useSecureCookies
+      // NB: The `__Host-` prefix is stricter than the `__Secure-` prefix.
+      name: `${useSecureCookies ? '__Host-' : ''}authjs.csrf-token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: useSecureCookies,
+      },
+    },
+    pkceCodeVerifier: {
+      name: `${cookiePrefix}authjs.pkce.code_verifier`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: useSecureCookies,
+        maxAge: 60 * 15, // 15 minutes in seconds
+      },
+    },
+    state: {
+      name: `${cookiePrefix}authjs.state`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: useSecureCookies,
+        maxAge: 60 * 15, // 15 minutes in seconds
+      },
+    },
+    nonce: {
+      name: `${cookiePrefix}authjs.nonce`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: useSecureCookies,
+      },
+    },
+    webauthnChallenge: {
+      name: `${cookiePrefix}authjs.challenge`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: useSecureCookies,
+        maxAge: 60 * 15, // 15 minutes in seconds
+      },
+    },
+  } as const satisfies CookiesOptions;
 }
 
 type Chunks = Record<string, string>;
 
 export class SessionStore {
-    #chunks: Chunks = {};
-    #option: CookieOption;
-    #logger: LoggerInstance | Console;
+  #chunks: Chunks = {};
+  #option: CookieOption;
+  #logger: LoggerInstance | Console;
 
-    constructor(
-        option: CookieOption,
-        cookies: RequestInternal["cookies"],
-        logger: LoggerInstance | Console
-    ) {
-        this.#logger = logger;
-        this.#option = option;
-        if (!cookies) return;
+  constructor(
+    option: CookieOption,
+    cookies: RequestInternal['cookies'],
+    logger: LoggerInstance | Console
+  ) {
+    this.#logger = logger;
+    this.#option = option;
+    if (!cookies) return;
 
-        const { name: sessionCookiePrefix } = option;
+    const { name: sessionCookiePrefix } = option;
 
-        for (const [name, value] of Object.entries(cookies)) {
-            if (!name.startsWith(sessionCookiePrefix) || !value) continue;
-            this.#chunks[name] = value;
-        }
+    for (const [name, value] of Object.entries(cookies)) {
+      if (!name.startsWith(sessionCookiePrefix) || !value) continue;
+      this.#chunks[name] = value;
+    }
+  }
+
+  /**
+   * The JWT Session or database Session ID
+   * constructed from the cookie chunks.
+   */
+  get value() {
+    // Sort the chunks by their keys before joining
+    const sortedKeys = Object.keys(this.#chunks).sort((a, b) => {
+      const aSuffix = parseInt(a.split('.').pop() || '0');
+      const bSuffix = parseInt(b.split('.').pop() || '0');
+
+      return aSuffix - bSuffix;
+    });
+
+    // Use the sorted keys to join the chunks in the correct order
+    return sortedKeys.map((key) => this.#chunks[key]).join('');
+  }
+
+  /** Given a cookie, return a list of cookies, chunked to fit the allowed cookie size. */
+  #chunk(cookie: Cookie): Cookie[] {
+    const chunkCount = Math.ceil(cookie.value.length / CHUNK_SIZE);
+
+    if (chunkCount === 1) {
+      this.#chunks[cookie.name] = cookie.value;
+      return [cookie];
     }
 
-    /**
-     * The JWT Session or database Session ID
-     * constructed from the cookie chunks.
-     */
-    get value() {
-        // Sort the chunks by their keys before joining
-        const sortedKeys = Object.keys(this.#chunks).sort((a, b) => {
-            const aSuffix = parseInt(a.split(".").pop() || "0");
-            const bSuffix = parseInt(b.split(".").pop() || "0");
-
-            return aSuffix - bSuffix;
-        });
-
-        // Use the sorted keys to join the chunks in the correct order
-        return sortedKeys.map((key) => this.#chunks[key]).join("");
+    const cookies: Cookie[] = [];
+    for (let i = 0; i < chunkCount; i++) {
+      const name = `${cookie.name}.${i}`;
+      const value = cookie.value.substr(i * CHUNK_SIZE, CHUNK_SIZE);
+      cookies.push({ ...cookie, name, value });
+      this.#chunks[name] = value;
     }
 
-    /** Given a cookie, return a list of cookies, chunked to fit the allowed cookie size. */
-    #chunk(cookie: Cookie): Cookie[] {
-        const chunkCount = Math.ceil(cookie.value.length / CHUNK_SIZE);
+    this.#logger.debug('CHUNKING_SESSION_COOKIE', {
+      message: `Session cookie exceeds allowed ${ALLOWED_COOKIE_SIZE} bytes.`,
+      emptyCookieSize: ESTIMATED_EMPTY_COOKIE_SIZE,
+      valueSize: cookie.value.length,
+      chunks: cookies.map((c) => c.value.length + ESTIMATED_EMPTY_COOKIE_SIZE),
+    });
 
-        if (chunkCount === 1) {
-            this.#chunks[cookie.name] = cookie.value;
-            return [cookie];
-        }
+    return cookies;
+  }
 
-        const cookies: Cookie[] = [];
-        for (let i = 0; i < chunkCount; i++) {
-            const name = `${cookie.name}.${i}`;
-            const value = cookie.value.substr(i * CHUNK_SIZE, CHUNK_SIZE);
-            cookies.push({ ...cookie, name, value });
-            this.#chunks[name] = value;
-        }
+  /** Returns cleaned cookie chunks. */
+  #clean(): Record<string, Cookie> {
+    const cleanedChunks: Record<string, Cookie> = {};
+    for (const name in this.#chunks) {
+      delete this.#chunks?.[name];
+      cleanedChunks[name] = {
+        name,
+        value: '',
+        options: { ...this.#option.options, maxAge: 0 },
+      };
+    }
+    return cleanedChunks;
+  }
 
-        this.#logger.debug("CHUNKING_SESSION_COOKIE", {
-            message: `Session cookie exceeds allowed ${ALLOWED_COOKIE_SIZE} bytes.`,
-            emptyCookieSize: ESTIMATED_EMPTY_COOKIE_SIZE,
-            valueSize: cookie.value.length,
-            chunks: cookies.map((c) => c.value.length + ESTIMATED_EMPTY_COOKIE_SIZE),
-        });
+  /**
+   * Given a cookie value, return new cookies, chunked, to fit the allowed cookie size.
+   * If the cookie has changed from chunked to unchunked or vice versa,
+   * it deletes the old cookies as well.
+   */
+  chunk(value: string, options: Partial<Cookie['options']>): Cookie[] {
+    // Assume all cookies should be cleaned by default
+    const cookies: Record<string, Cookie> = this.#clean();
 
-        return cookies;
+    // Calculate new chunks
+    const chunked = this.#chunk({
+      name: this.#option.name,
+      value,
+      options: { ...this.#option.options, ...options },
+    });
+
+    // Update stored chunks / cookies
+    for (const chunk of chunked) {
+      cookies[chunk.name] = chunk;
     }
 
-    /** Returns cleaned cookie chunks. */
-    #clean(): Record<string, Cookie> {
-        const cleanedChunks: Record<string, Cookie> = {};
-        for (const name in this.#chunks) {
-            delete this.#chunks?.[name];
-            cleanedChunks[name] = {
-                name,
-                value: "",
-                options: { ...this.#option.options, maxAge: 0 },
-            };
-        }
-        return cleanedChunks;
-    }
+    return Object.values(cookies);
+  }
 
-    /**
-     * Given a cookie value, return new cookies, chunked, to fit the allowed cookie size.
-     * If the cookie has changed from chunked to unchunked or vice versa,
-     * it deletes the old cookies as well.
-     */
-    chunk(value: string, options: Partial<Cookie["options"]>): Cookie[] {
-        // Assume all cookies should be cleaned by default
-        const cookies: Record<string, Cookie> = this.#clean();
-
-        // Calculate new chunks
-        const chunked = this.#chunk({
-            name: this.#option.name,
-            value,
-            options: { ...this.#option.options, ...options },
-        });
-
-        // Update stored chunks / cookies
-        for (const chunk of chunked) {
-            cookies[chunk.name] = chunk;
-        }
-
-        return Object.values(cookies);
-    }
-
-    /** Returns a list of cookies that should be cleaned. */
-    clean(): Cookie[] {
-        return Object.values(this.#clean());
-    }
+  /** Returns a list of cookies that should be cleaned. */
+  clean(): Cookie[] {
+    return Object.values(this.#clean());
+  }
 }

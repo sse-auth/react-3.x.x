@@ -37,7 +37,7 @@ export async function webauthnScript(authURL, providerID) {
     // Create the options URL with the action and query parameters
     const url = new URL(`${authURL}/webauthn-options/${providerID}`);
 
-    if (action) url.searchParams.append("action", action);
+    if (action) url.searchParams.append('action', action);
 
     const formFields = getFormFields();
     formFields.forEach((field) => {
@@ -46,7 +46,7 @@ export async function webauthnScript(authURL, providerID) {
 
     const res = await fetch(url);
     if (!res.ok) {
-      console.error("Failed to fetch options", res);
+      console.error('Failed to fetch options', res);
 
       return;
     }
@@ -76,9 +76,7 @@ export async function webauthnScript(authURL, providerID) {
   function getFormFields() {
     const form = getForm();
     /** @type {HTMLInputElement[]} */
-    const formFields = Array.from(
-      form.querySelectorAll("input[data-form-field]")
-    );
+    const formFields = Array.from(form.querySelectorAll('input[data-form-field]'));
 
     return formFields;
   }
@@ -97,17 +95,17 @@ export async function webauthnScript(authURL, providerID) {
     // If a POST request, create hidden fields in the form
     // and submit it so the browser redirects on login
     if (action) {
-      const actionInput = document.createElement("input");
-      actionInput.type = "hidden";
-      actionInput.name = "action";
+      const actionInput = document.createElement('input');
+      actionInput.type = 'hidden';
+      actionInput.name = 'action';
       actionInput.value = action;
       form.appendChild(actionInput);
     }
 
     if (data) {
-      const dataInput = document.createElement("input");
-      dataInput.type = "hidden";
-      dataInput.name = "data";
+      const dataInput = document.createElement('input');
+      dataInput.type = 'hidden';
+      dataInput.name = 'data';
       dataInput.value = JSON.stringify(data);
       form.appendChild(dataInput);
     }
@@ -132,7 +130,7 @@ export async function webauthnScript(authURL, providerID) {
     );
 
     // Submit authentication response to server
-    return await submitForm("authenticate", authResp);
+    return await submitForm('authenticate', authResp);
   }
 
   /**
@@ -152,7 +150,7 @@ export async function webauthnScript(authURL, providerID) {
     const regResp = await WebAuthnBrowser.startRegistration(options);
 
     // Submit registration response to server
-    return await submitForm("register", regResp);
+    return await submitForm('register', regResp);
   }
 
   /**
@@ -165,9 +163,9 @@ export async function webauthnScript(authURL, providerID) {
     // if the browser can't handle autofill, don't try
     if (!WebAuthnBrowser.browserSupportsWebAuthnAutofill()) return;
 
-    const res = await fetchOptions("authenticate");
+    const res = await fetchOptions('authenticate');
     if (!res) {
-      console.error("Failed to fetch option for autofill authentication");
+      console.error('Failed to fetch option for autofill authentication');
 
       return;
     }
@@ -189,32 +187,32 @@ export async function webauthnScript(authURL, providerID) {
 
     // If the browser can't do WebAuthn, hide the form
     if (!WebAuthnBrowser.browserSupportsWebAuthn()) {
-      form.style.display = "none";
+      form.style.display = 'none';
 
       return;
     }
 
     if (form) {
-      form.addEventListener("submit", async (e) => {
+      form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         // Fetch options from the server without assuming that
         // the user is registered
         const res = await fetchOptions(undefined);
         if (!res) {
-          console.error("Failed to fetch options for form submission");
+          console.error('Failed to fetch options for form submission');
 
           return;
         }
 
         // Then execute the appropriate flow
-        if (res.action === "authenticate") {
+        if (res.action === 'authenticate') {
           try {
             await authenticationFlow(res.options, false);
           } catch (e) {
             console.error(e);
           }
-        } else if (res.action === "register") {
+        } else if (res.action === 'register') {
           try {
             await registrationFlow(res.options);
           } catch (e) {

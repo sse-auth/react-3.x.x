@@ -1,4 +1,4 @@
-import type { Theme } from "@sse-auth/types";
+import type { Theme } from '@sse-auth/types';
 
 /**
  * Email HTML body
@@ -10,14 +10,14 @@ import type { Theme } from "@sse-auth/types";
  */
 export function html(params: { url: string; host: string; theme: Theme }) {
   const { url, host, theme } = params;
-  const escapedHost = host.replace(/\./g, "&#8203;.");
-  const brandColor = theme.brandColor || "#346df1";
-  const buttonText = theme.buttonText || "#fff";
+  const escapedHost = host.replace(/\./g, '&#8203;.');
+  const brandColor = theme.brandColor || '#346df1';
+  const buttonText = theme.buttonText || '#fff';
 
   const color = {
-    background: "#f9f9f9",
-    text: "#444",
-    mainBackground: "#fff",
+    background: '#f9f9f9',
+    text: '#444',
+    mainBackground: '#fff',
     buttonBackground: brandColor,
     buttonBorder: brandColor,
     buttonText,
