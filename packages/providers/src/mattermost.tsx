@@ -1,5 +1,5 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { Mattermost as MattermostIcon } from "@sse-auth/icons";
+import type { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { Mattermost as MattermostIcon } from '@sse-auth/icons';
 
 /** [Get a user](https://api.mattermost.com/#tag/users/operation/GetUser) */
 export interface MattermostProfile {
@@ -64,10 +64,10 @@ export default function Mattermost<P extends MattermostProfile>(
   const { issuer, ...rest } = config;
 
   return {
-    id: "mattermost",
-    name: "Mattermost",
-    type: "oauth",
-    client: { token_endpoint_auth_method: "client_secret_post" },
+    id: 'mattermost',
+    name: 'Mattermost',
+    type: 'oauth',
+    client: { token_endpoint_auth_method: 'client_secret_post' },
     token: `${issuer}/oauth/access_token`,
     authorization: `${issuer}/oauth/authorize`,
     userinfo: `${issuer}/api/v4/users/me`,

@@ -3,9 +3,9 @@ import {
   generateRegistrationOptions,
   verifyAuthenticationResponse,
   verifyRegistrationResponse,
-} from "@simplewebauthn/server";
-import { InternalOptions } from "@sse-auth/types/config";
-import { MissingAdapter } from "@sse-auth/types/error";
+} from '@simplewebauthn/server';
+import { InternalOptions } from '@sse-auth/types/config';
+import { MissingAdapter } from '@sse-auth/types/error';
 import {
   DEFAULT_SIMPLEWEBAUTHN_BROWSER_VERSION,
   DEFAULT_WEBAUTHN_TIMEOUT,
@@ -13,15 +13,13 @@ import {
   RelayingParty,
   WebAuthnConfig,
   WebAuthnProviderType,
-} from "@sse-auth/types/provider/webauthn";
-export * from "@sse-auth/types/provider/webauthn";
+} from '@sse-auth/types/provider/webauthn';
+export * from '@sse-auth/types/provider/webauthn';
 
-export default function WebAuthn(
-  config: Partial<WebAuthnConfig>
-): WebAuthnConfig {
+export default function WebAuthn(config: Partial<WebAuthnConfig>): WebAuthnConfig {
   return {
-    id: "webauthn",
-    name: "WebAuthn",
+    id: 'webauthn',
+    name: 'WebAuthn',
     enableConditionalUI: true,
     simpleWebAuthn: {
       generateAuthenticationOptions,
@@ -33,16 +31,16 @@ export default function WebAuthn(
     registrationOptions: { timeout: DEFAULT_WEBAUTHN_TIMEOUT },
     formFields: {
       email: {
-        label: "Email",
+        label: 'Email',
         required: true,
-        autoComplete: "username webauthn",
+        autoComplete: 'username webauthn',
       },
     },
     simpleWebAuthnBrowserVersion: DEFAULT_SIMPLEWEBAUTHN_BROWSER_VERSION,
     getUserInfo,
     getRelayingParty,
     ...config,
-    type: "webauthn",
+    type: 'webauthn',
   };
 }
 
@@ -61,16 +59,14 @@ export default function WebAuthn(
 const getUserInfo: GetUserInfo = async (options, request) => {
   const { adapter } = options;
   if (!adapter)
-    throw new MissingAdapter(
-      "WebAuthn provider requires a database adapter to be configured"
-    );
+    throw new MissingAdapter('WebAuthn provider requires a database adapter to be configured');
 
   // Get email address from the query.
   const { query, body, method } = request;
-  const email = (method === "POST" ? body?.email : query?.email) as unknown;
+  const email = (method === 'POST' ? body?.email : query?.email) as unknown;
 
   // If email is not provided, return null
-  if (!email || typeof email !== "string") return null;
+  if (!email || typeof email !== 'string') return null;
 
   const existingUser = await adapter.getUserByEmail(email);
   if (existingUser) {
@@ -92,13 +88,9 @@ function getRelayingParty(
   const { provider, url } = options;
   const { relayingParty } = provider;
 
-  const id = Array.isArray(relayingParty?.id)
-    ? relayingParty.id[0]
-    : relayingParty?.id;
+  const id = Array.isArray(relayingParty?.id) ? relayingParty.id[0] : relayingParty?.id;
 
-  const name = Array.isArray(relayingParty?.name)
-    ? relayingParty.name[0]
-    : relayingParty?.name;
+  const name = Array.isArray(relayingParty?.name) ? relayingParty.name[0] : relayingParty?.name;
   const origin = Array.isArray(relayingParty?.origin)
     ? relayingParty.origin[0]
     : relayingParty?.origin;

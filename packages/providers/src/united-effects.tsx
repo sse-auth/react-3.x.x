@@ -1,5 +1,5 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { UnitedEffects as UnitedEffectsIcon } from "@sse-auth/icons";
+import type { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { UnitedEffects as UnitedEffectsIcon } from '@sse-auth/icons';
 
 export interface UnitedEffectsProfile extends Record<string, any> {
   sub: string;
@@ -10,11 +10,11 @@ export default function UnitedEffects<P extends UnitedEffectsProfile>(
   options: OAuthUserConfig<P> & { issuer: string }
 ): OAuthConfig<P> {
   return {
-    id: "united-effects",
-    name: "United Effects",
-    type: "oidc",
+    id: 'united-effects',
+    name: 'United Effects',
+    type: 'oidc',
     authorization: {
-      params: { scope: "openid email profile", resource: options.issuer },
+      params: { scope: 'openid email profile', resource: options.issuer },
     },
     style: {
       icon: {

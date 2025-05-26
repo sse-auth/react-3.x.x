@@ -1,5 +1,5 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { Gitlab as GitLabIcon } from "@sse-auth/icons";
+import type { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { Gitlab as GitLabIcon } from '@sse-auth/icons';
 
 export interface GitLabProfile extends Record<string, any> {
   id: number;
@@ -50,12 +50,12 @@ export default function GitLab<P extends GitLabProfile>(
   options: OAuthUserConfig<P>
 ): OAuthConfig<P> {
   return {
-    id: "gitlab",
-    name: "GitLab",
-    type: "oauth",
-    authorization: "https://gitlab.com/oauth/authorize?scope=read_user",
-    token: "https://gitlab.com/oauth/token",
-    userinfo: "https://gitlab.com/api/v4/user",
+    id: 'gitlab',
+    name: 'GitLab',
+    type: 'oauth',
+    authorization: 'https://gitlab.com/oauth/authorize?scope=read_user',
+    token: 'https://gitlab.com/oauth/token',
+    userinfo: 'https://gitlab.com/api/v4/user',
     profile(profile) {
       return {
         id: profile.sub?.toString(),

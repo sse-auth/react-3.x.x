@@ -1,6 +1,6 @@
-import { conformInternal, customFetch } from "@sse-auth/types/symbol";
-import { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { AppleDark, AppleLight } from "@sse-auth/icons"
+import { conformInternal, customFetch } from '@sse-auth/types/symbol';
+import { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { AppleDark, AppleLight } from '@sse-auth/icons';
 
 /** The returned user profile from Apple when using the profile callback. */
 export interface AppleProfile extends Record<string, any> {
@@ -8,7 +8,7 @@ export interface AppleProfile extends Record<string, any> {
    * The issuer registered claim identifies the principal that issued the identity token.
    * Since Apple generates the token, the value is `https://appleid.apple.com`.
    */
-  iss: "https://appleid.apple.com";
+  iss: 'https://appleid.apple.com';
   /**
    * The audience registered claim identifies the recipient for which the identity token is intended.
    * Since the token is meant for your application, the value is the `client_id` from your developer account.
@@ -58,13 +58,13 @@ export interface AppleProfile extends Record<string, any> {
    * The value of this claim is always true, because the servers only return verified email addresses.
    * The value can either be a String (`"true"`) or a Boolean (`true`).
    */
-  email_verified: "true" | true;
+  email_verified: 'true' | true;
 
   /**
    * A String or Boolean value that indicates whether the email shared by the user is the proxy address.
    * The value can either be a String (`"true"` or `"false"`) or a Boolean (`true` or `false`).
    */
-  is_private_email: boolean | "true" | "false";
+  is_private_email: boolean | 'true' | 'false';
 
   /**
    * An Integer value that indicates whether the user appears to be a real person.
@@ -109,18 +109,16 @@ const AppleIcon = () => (
   </svg>
 );
 
-export default function Apple(
-  config: OAuthUserConfig<AppleProfile>
-): OAuthConfig<AppleProfile> {
+export default function Apple(config: OAuthUserConfig<AppleProfile>): OAuthConfig<AppleProfile> {
   return {
-    id: "apple",
-    name: "Apple",
-    type: "oidc",
-    issuer: "https://appleid.apple.com",
+    id: 'apple',
+    name: 'Apple',
+    type: 'oidc',
+    issuer: 'https://appleid.apple.com',
     authorization: {
       params: {
-        scope: "name email", // https://developer.apple.com/documentation/sign_in_with_apple/clientconfigi/3230955-scope
-        response_mode: "form_post",
+        scope: 'name email', // https://developer.apple.com/documentation/sign_in_with_apple/clientconfigi/3230955-scope
+        response_mode: 'form_post',
       },
     },
     // We need to parse the special `user` parameter the first time the user consents to the app.
@@ -140,24 +138,24 @@ export default function Apple(
     // Apple does not provide a userinfo endpoint.
     async [customFetch](...args): Promise<Response> {
       const url = new URL(args[0] instanceof Request ? args[0].url : args[0]);
-      if (url.pathname.endsWith(".well-known/openid-configuration")) {
+      if (url.pathname.endsWith('.well-known/openid-configuration')) {
         const response: Response = await fetch(...args);
         const json: Record<string, any> = await response.clone().json();
         return Response.json({
           ...json,
-          userinfo_endpoint: "https://appleid.apple.com/fake_endpoint",
+          userinfo_endpoint: 'https://appleid.apple.com/fake_endpoint',
         });
       }
       return fetch(...args);
     },
-    client: { token_endpoint_auth_method: "client_secret_post" },
-    checks: ["nonce", "state"],
+    client: { token_endpoint_auth_method: 'client_secret_post' },
+    checks: ['nonce', 'state'],
     options: config,
     style: {
       icon: {
         dark: <AppleDark />,
         light: <AppleLight />,
-      }
+      },
     },
   };
 }

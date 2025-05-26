@@ -1,22 +1,22 @@
-import type { EmailConfig, EmailUserConfig } from "./email.js";
-import { html, text } from "@sse-auth/utils";
+import type { EmailConfig, EmailUserConfig } from './email.js';
+import { html, text } from '@sse-auth/utils';
 
 /** @todo Document this */
 export default function ForwardEmail(config: EmailUserConfig): EmailConfig {
   return {
-    id: "forwardemail",
-    type: "email",
-    name: "Forward Email",
-    from: "SSE Auth <no-reply@auth.sse>",
+    id: 'forwardemail',
+    type: 'email',
+    name: 'Forward Email',
+    from: 'SSE Auth <no-reply@auth.sse>',
     maxAge: 24 * 60 * 60,
     async sendVerificationRequest(params) {
       const { identifier: to, provider, url, theme } = params;
       const { host } = new URL(url);
-      const res = await fetch("https://api.forwardemail.net/v1/emails", {
-        method: "POST",
+      const res = await fetch('https://api.forwardemail.net/v1/emails', {
+        method: 'POST',
         headers: {
-          Authorization: `Basic ${btoa(provider.apiKey + ":")}`,
-          "Content-Type": "application/json",
+          Authorization: `Basic ${btoa(provider.apiKey + ':')}`,
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           from: provider.from,
@@ -27,13 +27,10 @@ export default function ForwardEmail(config: EmailUserConfig): EmailConfig {
         }),
       });
 
-      if (!res.ok)
-        throw new Error(
-          "Forward Email error: " + JSON.stringify(await res.json())
-        );
+      if (!res.ok) throw new Error('Forward Email error: ' + JSON.stringify(await res.json()));
     },
     options: config,
   };
 }
 
-export { ForwardEmail }
+export { ForwardEmail };

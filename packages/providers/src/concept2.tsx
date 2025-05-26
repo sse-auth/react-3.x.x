@@ -1,5 +1,5 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { Concept2 as Concept2Icon } from "@sse-auth/icons";
+import type { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { Concept2 as Concept2Icon } from '@sse-auth/icons';
 
 export interface Concept2Profile extends Record<string, any> {
   id: number;
@@ -22,17 +22,17 @@ export default function Concept2(
   options: OAuthUserConfig<Concept2Profile>
 ): OAuthConfig<Concept2Profile> {
   return {
-    id: "concept2",
-    name: "Concept2",
-    type: "oauth",
+    id: 'concept2',
+    name: 'Concept2',
+    type: 'oauth',
     authorization: {
-      url: "https://log.concept2.com/oauth/authorize",
+      url: 'https://log.concept2.com/oauth/authorize',
       params: {
-        scope: "user:read,results:write",
+        scope: 'user:read,results:write',
       },
     },
-    token: "https://log.concept2.com/oauth/access_token",
-    userinfo: "https://log.concept2.com/api/users/me",
+    token: 'https://log.concept2.com/oauth/access_token',
+    userinfo: 'https://log.concept2.com/api/users/me',
     profile(profile) {
       return {
         id: profile.data.id,

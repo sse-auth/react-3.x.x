@@ -1,5 +1,5 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { SimpleLogin as SimpleLoginIcon } from "@sse-auth/icons";
+import type { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { SimpleLogin as SimpleLoginIcon } from '@sse-auth/icons';
 
 export interface SimpleLoginProfile {
   id: number;
@@ -15,10 +15,10 @@ export default function SimpleLogin<P extends SimpleLoginProfile>(
   options: OAuthUserConfig<P>
 ): OAuthConfig<P> {
   return {
-    id: "simplelogin",
-    name: "SimpleLogin",
-    type: "oidc",
-    issuer: "https://app.simplelogin.io",
+    id: 'simplelogin',
+    name: 'SimpleLogin',
+    type: 'oidc',
+    issuer: 'https://app.simplelogin.io',
     profile(profile) {
       return {
         id: profile.sub,

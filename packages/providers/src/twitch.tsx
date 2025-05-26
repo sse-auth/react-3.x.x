@@ -1,5 +1,5 @@
-import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider";
-import { Twitch as TwitchIcon } from "@sse-auth/icons";
+import type { OIDCConfig, OIDCUserConfig } from '@sse-auth/types/provider';
+import { Twitch as TwitchIcon } from '@sse-auth/icons';
 
 export interface TwitchProfile extends Record<string, any> {
   sub: string;
@@ -8,18 +8,16 @@ export interface TwitchProfile extends Record<string, any> {
   picture: string;
 }
 
-export default function Twitch(
-  config: OIDCUserConfig<TwitchProfile>
-): OIDCConfig<TwitchProfile> {
+export default function Twitch(config: OIDCUserConfig<TwitchProfile>): OIDCConfig<TwitchProfile> {
   return {
-    issuer: "https://id.twitch.tv/oauth2",
-    id: "twitch",
-    name: "Twitch",
-    type: "oidc",
-    client: { token_endpoint_auth_method: "client_secret_post" },
+    issuer: 'https://id.twitch.tv/oauth2',
+    id: 'twitch',
+    name: 'Twitch',
+    type: 'oidc',
+    client: { token_endpoint_auth_method: 'client_secret_post' },
     authorization: {
       params: {
-        scope: "openid user:read:email",
+        scope: 'openid user:read:email',
         claims: {
           id_token: { email: null, picture: null, preferred_username: null },
         },
@@ -29,28 +27,24 @@ export default function Twitch(
       async conform(response) {
         const body = await response.json();
         if (response.ok) {
-          if (typeof body.scope === "string") {
-            console.warn(
-              "'scope' is a string. Redundant workaround, please open an issue."
-            );
+          if (typeof body.scope === 'string') {
+            console.warn("'scope' is a string. Redundant workaround, please open an issue.");
           } else if (Array.isArray(body.scope)) {
-            body.scope = body.scope.join(" ");
+            body.scope = body.scope.join(' ');
             return new Response(JSON.stringify(body), response);
-          } else if ("scope" in body) {
+          } else if ('scope' in body) {
             delete body.scope;
             return new Response(JSON.stringify(body), response);
           }
         } else {
           const { message: error_description, error } = body;
-          if (typeof error !== "string") {
+          if (typeof error !== 'string') {
             return new Response(
-              JSON.stringify({ error: "invalid_request", error_description }),
+              JSON.stringify({ error: 'invalid_request', error_description }),
               response
             );
           }
-          console.warn(
-            "Response has 'error'. Redundant workaround, please open an issue."
-          );
+          console.warn("Response has 'error'. Redundant workaround, please open an issue.");
         }
       },
     },

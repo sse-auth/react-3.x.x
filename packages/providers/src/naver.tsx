@@ -1,5 +1,5 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { Naver as NaverIcon } from "@sse-auth/icons";
+import type { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { Naver as NaverIcon } from '@sse-auth/icons';
 
 /** https://developers.naver.com/docs/login/profile/profile.md */
 export interface NaverProfile extends Record<string, any> {
@@ -10,7 +10,7 @@ export interface NaverProfile extends Record<string, any> {
     nickname?: string;
     name?: string;
     email?: string;
-    gender?: "F" | "M" | "U";
+    gender?: 'F' | 'M' | 'U';
     age?: string;
     birthday?: string;
     profile_image?: string;
@@ -19,16 +19,14 @@ export interface NaverProfile extends Record<string, any> {
   };
 }
 
-export default function Naver<P extends NaverProfile>(
-  options: OAuthUserConfig<P>
-): OAuthConfig<P> {
+export default function Naver<P extends NaverProfile>(options: OAuthUserConfig<P>): OAuthConfig<P> {
   return {
-    id: "naver",
-    name: "Naver",
-    type: "oauth",
-    authorization: "https://nid.naver.com/oauth2.0/authorize",
-    token: "https://nid.naver.com/oauth2.0/token",
-    userinfo: "https://openapi.naver.com/v1/nid/me",
+    id: 'naver',
+    name: 'Naver',
+    type: 'oauth',
+    authorization: 'https://nid.naver.com/oauth2.0/authorize',
+    token: 'https://nid.naver.com/oauth2.0/token',
+    userinfo: 'https://openapi.naver.com/v1/nid/me',
     profile(profile) {
       return {
         id: profile.response.id,

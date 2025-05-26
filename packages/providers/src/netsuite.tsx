@@ -1,5 +1,5 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { Netsuite as NetSuiteIcon } from "@sse-auth/icons";
+import type { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { Netsuite as NetSuiteIcon } from '@sse-auth/icons';
 
 export interface OAuthNetSuiteOptions {
   /**
@@ -16,7 +16,7 @@ export interface OAuthNetSuiteOptions {
    * "consent" - the consent screen appears every time. The user must authenticate if there is no active session.
    * login consent or consent login - the consent screen appears every time, and the user must authenticate even if there is an active session and allow the connection to the NetSuite. Similar to GitHub, Google, and Facebook data consent screens.
    */
-  prompt: string | "none" | "login" | "consent";
+  prompt: string | 'none' | 'login' | 'consent';
   /**
    * EX: TSTDRV1234567 or 81555 for prod
    */
@@ -51,13 +51,13 @@ export default function NetSuite<P extends NetSuiteProfile>(
   const { accountID } = config;
 
   return {
-    id: "netsuite",
-    name: "NetSuite",
-    type: "oauth",
-    checks: ["state"],
+    id: 'netsuite',
+    name: 'NetSuite',
+    type: 'oauth',
+    checks: ['state'],
     authorization: {
       url: `https://${accountID}.app.netsuite.com/app/login/oauth2/authorize.nl`,
-      params: { scope: "restlets rest_webservices" },
+      params: { scope: 'restlets rest_webservices' },
     },
     token: `https://${accountID}.suitetalk.api.netsuite.com/services/rest/auth/oauth2/v1/token`,
     profile(profile) {

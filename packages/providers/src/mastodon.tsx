@@ -1,5 +1,5 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { Mastodon as MastodonIcon } from "@sse-auth/icons";
+import type { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { Mastodon as MastodonIcon } from '@sse-auth/icons';
 
 export interface MastodonProfile extends Record<string, any> {
   id: string;
@@ -27,9 +27,9 @@ export default function Mastodon<P extends MastodonProfile>(
   }
 ): OAuthConfig<P> {
   return {
-    id: "mastodon",
-    name: "Mastodon",
-    type: "oauth",
+    id: 'mastodon',
+    name: 'Mastodon',
+    type: 'oauth',
     authorization: `${options.issuer}/oauth/authorize?scope=read`,
     token: `${options.issuer}/oauth/token`,
     userinfo: `${options.issuer}/api/v1/accounts/verify_credentials`,

@@ -1,16 +1,16 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { Box as BoxIcon } from "@sse-auth/icons";
+import type { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { Box as BoxIcon } from '@sse-auth/icons';
 
 export default function Box(
   options: OAuthUserConfig<Record<string, any>>
 ): OAuthConfig<Record<string, any>> {
   return {
-    id: "box",
-    name: "Box",
-    type: "oauth",
-    authorization: "https://account.box.com/api/oauth2/authorize",
-    token: "https://api.box.com/oauth2/token",
-    userinfo: "https://api.box.com/2.0/users/me",
+    id: 'box',
+    name: 'Box',
+    type: 'oauth',
+    authorization: 'https://account.box.com/api/oauth2/authorize',
+    token: 'https://api.box.com/oauth2/token',
+    userinfo: 'https://api.box.com/2.0/users/me',
     profile(profile) {
       return {
         id: profile.id,

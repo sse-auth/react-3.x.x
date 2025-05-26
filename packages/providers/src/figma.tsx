@@ -1,5 +1,5 @@
-import { OAuth2Config, OAuthUserConfig } from "@sse-auth/types/provider";
-import { Figma as FigmaIcon } from "@sse-auth/icons";
+import { OAuth2Config, OAuthUserConfig } from '@sse-auth/types/provider';
+import { Figma as FigmaIcon } from '@sse-auth/icons';
 
 /**
  * @see https://www.figma.com/developers/api#users-types
@@ -11,22 +11,20 @@ interface FigmaProfile {
   img_url: string;
 }
 
-export default function Figma(
-  options: OAuthUserConfig<FigmaProfile>
-): OAuth2Config<FigmaProfile> {
+export default function Figma(options: OAuthUserConfig<FigmaProfile>): OAuth2Config<FigmaProfile> {
   return {
-    id: "figma",
-    name: "Figma",
-    type: "oauth",
+    id: 'figma',
+    name: 'Figma',
+    type: 'oauth',
     authorization: {
-      url: "https://www.figma.com/oauth",
+      url: 'https://www.figma.com/oauth',
       params: {
-        scope: "files:read",
+        scope: 'files:read',
       },
     },
-    checks: ["state"],
-    token: "https://api.figma.com/v1/oauth/token",
-    userinfo: "https://api.figma.com/v1/me",
+    checks: ['state'],
+    token: 'https://api.figma.com/v1/oauth/token',
+    userinfo: 'https://api.figma.com/v1/me',
     profile(profile) {
       return {
         name: profile.handle,

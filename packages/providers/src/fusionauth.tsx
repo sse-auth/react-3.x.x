@@ -1,5 +1,5 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { FusionauthDark, FusionauthLight } from "@sse-auth/icons";
+import type { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { FusionauthDark, FusionauthLight } from '@sse-auth/icons';
 
 /**
  * This is the default openid signature returned from FusionAuth
@@ -27,19 +27,19 @@ export default function FusionAuth<P extends FusionAuthProfile>(
   options: OAuthUserConfig<P> & { tenantId?: string }
 ): OAuthConfig<P> {
   return {
-    id: "fusionauth",
-    name: "FusionAuth",
-    type: "oauth",
+    id: 'fusionauth',
+    name: 'FusionAuth',
+    type: 'oauth',
     wellKnown: options?.tenantId
       ? `${options.issuer}/.well-known/openid-configuration?tenantId=${options.tenantId}`
       : `${options.issuer}/.well-known/openid-configuration`,
     authorization: {
       params: {
-        scope: "openid offline_access",
+        scope: 'openid offline_access',
         ...(options?.tenantId && { tenantId: options.tenantId }),
       },
     },
-    checks: ["pkce", "state"],
+    checks: ['pkce', 'state'],
     profile(profile) {
       return {
         id: profile.sub,

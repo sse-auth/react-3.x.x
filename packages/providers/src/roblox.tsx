@@ -1,5 +1,5 @@
-import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider";
-import { RobloxDark, RobloxLight } from "@sse-auth/icons";
+import type { OIDCConfig, OIDCUserConfig } from '@sse-auth/types/provider';
+import { RobloxDark, RobloxLight } from '@sse-auth/icons';
 
 /**
  * Corresponds to the user structure documented here:
@@ -28,16 +28,14 @@ export interface RobloxProfile extends Record<string, any> {
   picture: string | null;
 }
 
-export default function Roblox(
-  options: OIDCUserConfig<RobloxProfile>
-): OIDCConfig<RobloxProfile> {
+export default function Roblox(options: OIDCUserConfig<RobloxProfile>): OIDCConfig<RobloxProfile> {
   return {
-    id: "roblox",
-    name: "Roblox",
-    type: "oidc",
-    authorization: { params: { scope: "openid profile" } },
-    issuer: "https://apis.roblox.com/oauth/",
-    checks: ["pkce", "state"],
+    id: 'roblox',
+    name: 'Roblox',
+    type: 'oidc',
+    authorization: { params: { scope: 'openid profile' } },
+    issuer: 'https://apis.roblox.com/oauth/',
+    checks: ['pkce', 'state'],
     style: {
       icon: {
         dark: <RobloxDark />,
@@ -48,4 +46,4 @@ export default function Roblox(
   };
 }
 
-export { Roblox }
+export { Roblox };

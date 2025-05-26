@@ -1,5 +1,5 @@
-import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider";
-import { Frontegg as FronteggIcon } from "@sse-auth/icons";
+import type { OIDCConfig, OIDCUserConfig } from '@sse-auth/types/provider';
+import { Frontegg as FronteggIcon } from '@sse-auth/icons';
 
 /** The returned user profile from Frontegg when using the profile callback. [Reference](https://docs.frontegg.com/docs/admin-portal-profile). */
 export interface FronteggProfile {
@@ -23,9 +23,9 @@ export default function Frontegg(
   options: OIDCUserConfig<FronteggProfile>
 ): OIDCConfig<FronteggProfile> {
   return {
-    id: "frontegg",
-    name: "Frontegg",
-    type: "oidc",
+    id: 'frontegg',
+    name: 'Frontegg',
+    type: 'oidc',
     authorization: `${options.issuer}/oauth/authorize`,
     token: `${options.issuer}/oauth/token`,
     userinfo: `${options.issuer}/identity/resources/users/v2/me`,

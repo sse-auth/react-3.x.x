@@ -1,5 +1,5 @@
-import { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider";
-import { LogtoDark, LogtoLight } from "@sse-auth/icons";
+import { OIDCConfig, OIDCUserConfig } from '@sse-auth/types/provider';
+import { LogtoDark, LogtoLight } from '@sse-auth/icons';
 
 /** The returned user profile from Logto when using the profile callback. [Reference](https://docs.logto.io/quick-starts/next-auth#scopes-and-claims). */
 export interface LogtoProfile {
@@ -37,16 +37,14 @@ export interface LogtoProfile {
   [claim: string]: unknown;
 }
 
-export default function Logto(
-  options: OIDCUserConfig<LogtoProfile>
-): OIDCConfig<LogtoProfile> {
+export default function Logto(options: OIDCUserConfig<LogtoProfile>): OIDCConfig<LogtoProfile> {
   return {
-    id: "logto",
-    name: "Logto",
-    type: "oidc",
+    id: 'logto',
+    name: 'Logto',
+    type: 'oidc',
     authorization: {
       params: {
-        scope: "offline_access openid email profile",
+        scope: 'offline_access openid email profile',
       },
     },
     profile(profile) {

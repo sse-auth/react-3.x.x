@@ -1,5 +1,5 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { ThreadsDark, ThreadsLight } from "@sse-auth/icons";
+import type { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { ThreadsDark, ThreadsLight } from '@sse-auth/icons';
 
 /**
  * [User](https://developers.facebook.com/docs/threads/reference/user)
@@ -36,16 +36,15 @@ export default function Threads(
   config: OAuthUserConfig<ThreadsProfile>
 ): OAuthConfig<ThreadsProfile> {
   return {
-    id: "threads",
-    name: "Threads",
-    type: "oauth",
-    checks: ["state"],
-    authorization: "https://threads.net/oauth/authorize?scope=threads_basic",
-    token: "https://graph.threads.net/oauth/access_token",
-    userinfo:
-      "https://graph.threads.net/v1.0/me?fields=id,username,threads_profile_picture_url",
+    id: 'threads',
+    name: 'Threads',
+    type: 'oauth',
+    checks: ['state'],
+    authorization: 'https://threads.net/oauth/authorize?scope=threads_basic',
+    token: 'https://graph.threads.net/oauth/access_token',
+    userinfo: 'https://graph.threads.net/v1.0/me?fields=id,username,threads_profile_picture_url',
     client: {
-      token_endpoint_auth_method: "client_secret_post",
+      token_endpoint_auth_method: 'client_secret_post',
     },
     profile({ data }) {
       return {

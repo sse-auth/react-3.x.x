@@ -1,5 +1,5 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { Passage as PassageIcon } from "@sse-auth/icons";
+import type { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { Passage as PassageIcon } from '@sse-auth/icons';
 
 /** @see [Supported Scopes](https://docs.passage.id/hosted-login/oidc-client-configuration#supported-scopes) */
 export interface PassageProfile {
@@ -28,10 +28,10 @@ export default function Passage(
   config: OAuthUserConfig<PassageProfile>
 ): OAuthConfig<PassageProfile> {
   return {
-    id: "passage",
-    name: "Passage",
-    type: "oidc",
-    client: { token_endpoint_auth_method: "client_secret_basic" },
+    id: 'passage',
+    name: 'Passage',
+    type: 'oidc',
+    client: { token_endpoint_auth_method: 'client_secret_basic' },
     style: {
       icon: {
         dark: <PassageIcon />,

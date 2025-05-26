@@ -1,5 +1,5 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { WorkOS as WorkOSIcon } from "@sse-auth/icons";
+import type { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { WorkOS as WorkOSIcon } from '@sse-auth/icons';
 
 /**
  * - {@link https://workos.com/docs/reference/sso/profile | The returned profile object}
@@ -26,18 +26,18 @@ export interface WorkOSProfile extends Record<string, any> {
 export default function WorkOS<P extends WorkOSProfile>(
   options: OAuthUserConfig<P> & { connection?: string }
 ): OAuthConfig<P> {
-  const { issuer = "https://api.workos.com/", connection = "" } = options;
+  const { issuer = 'https://api.workos.com/', connection = '' } = options;
 
   const connectionParams = new URLSearchParams({ connection });
 
   return {
-    id: "workos",
-    name: "WorkOS",
-    type: "oauth",
+    id: 'workos',
+    name: 'WorkOS',
+    type: 'oauth',
     authorization: `${issuer}sso/authorize?${connectionParams}`,
     token: `${issuer}sso/token`,
     client: {
-      token_endpoint_auth_method: "client_secret_post",
+      token_endpoint_auth_method: 'client_secret_post',
     },
     userinfo: `${issuer}sso/profile`,
     profile(profile) {

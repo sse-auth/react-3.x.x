@@ -1,5 +1,5 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { Dribbble as DribbbleIcon } from "@sse-auth/icons";
+import type { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { Dribbble as DribbbleIcon } from '@sse-auth/icons';
 
 export interface DribbbleProfile extends Record<string, any> {
   id: number;
@@ -18,21 +18,21 @@ export default function Dribbble<P extends DribbbleProfile>(
      *
      * @default public
      */
-    scope?: "public" | "public upload";
+    scope?: 'public' | 'public upload';
   }
 ): OAuthConfig<P> {
   return {
-    id: "dribbble",
-    name: "Dribbble",
-    type: "oauth",
+    id: 'dribbble',
+    name: 'Dribbble',
+    type: 'oauth',
 
     authorization: {
-      url: "https://dribbble.com/oauth/authorize",
+      url: 'https://dribbble.com/oauth/authorize',
       params: { scope: options.scope },
     },
 
-    token: "https://dribbble.com/oauth/token",
-    userinfo: "https://api.dribbble.com/v2/user",
+    token: 'https://dribbble.com/oauth/token',
+    userinfo: 'https://api.dribbble.com/v2/user',
 
     profile(profile) {
       return {

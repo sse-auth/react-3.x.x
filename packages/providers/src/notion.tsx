@@ -1,5 +1,5 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { Notion as NotionIcon } from "@sse-auth/icons";
+import type { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { Notion as NotionIcon } from '@sse-auth/icons';
 
 export interface Person extends Record<string, any> {
   email: string;
@@ -7,14 +7,14 @@ export interface Person extends Record<string, any> {
 
 // https://developers.notion.com/reference/user
 export interface User extends Record<string, any> {
-  object: "user" | "bot";
+  object: 'user' | 'bot';
   id: string;
   type: string;
   name: string;
   avatar_url: null | string;
   person: Person;
   owner?: {
-    type: "workspace" | "user";
+    type: 'workspace' | 'user';
     workspace: string;
   };
   workspace_name?: string | null;
@@ -43,16 +43,16 @@ interface AdditionalConfig {
   redirectUri: string;
 }
 
-const NOTION_HOST = "https://api.notion.com";
-const NOTION_API_VERSION = "2022-06-28";
+const NOTION_HOST = 'https://api.notion.com';
+const NOTION_API_VERSION = '2022-06-28';
 
 export default function NotionProvider<P extends NotionProfile>(
   options: OAuthUserConfig<P> & AdditionalConfig
 ): OAuthConfig<P> {
   return {
-    id: "notion",
-    name: "Notion",
-    type: "oauth",
+    id: 'notion',
+    name: 'Notion',
+    type: 'oauth',
     token: {
       url: `${NOTION_HOST}/v1/oauth/token`,
     },
@@ -66,7 +66,7 @@ export default function NotionProvider<P extends NotionProfile>(
         const profile = await fetch(`${NOTION_HOST}/v1/users/me`, {
           headers: {
             Authorization: `Bearer ${context.tokens.access_token}`,
-            "Notion-Version": NOTION_API_VERSION,
+            'Notion-Version': NOTION_API_VERSION,
           },
         });
 
@@ -83,8 +83,8 @@ export default function NotionProvider<P extends NotionProfile>(
     authorization: {
       params: {
         client_id: options.clientId,
-        response_type: "code",
-        owner: "user",
+        response_type: 'code',
+        owner: 'user',
         redirect_uri: options.redirectUri,
       },
       url: `${NOTION_HOST}/v1/oauth/authorize`,

@@ -1,5 +1,5 @@
-import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider";
-import { Kinde as KindeIcon } from "@sse-auth/icons";
+import type { OIDCConfig, OIDCUserConfig } from '@sse-auth/types/provider';
+import { Kinde as KindeIcon } from '@sse-auth/icons';
 
 /** The returned user profile from Kinde when using the profile callback. [Reference](https://kinde.com/api/docs/#get-user-profile). */
 export interface KindeProfile extends Record<string, any> {
@@ -19,13 +19,11 @@ export interface KindeProfile extends Record<string, any> {
   username: string;
 }
 
-export default function Kinde(
-  config: OIDCUserConfig<KindeProfile>
-): OIDCConfig<KindeProfile> {
+export default function Kinde(config: OIDCUserConfig<KindeProfile>): OIDCConfig<KindeProfile> {
   return {
-    id: "kinde",
-    name: "Kinde",
-    type: "oidc",
+    id: 'kinde',
+    name: 'Kinde',
+    type: 'oidc',
     style: {
       icon: {
         dark: <KindeIcon />,
@@ -33,7 +31,7 @@ export default function Kinde(
       },
     },
     options: config,
-    checks: ["state", "pkce"],
+    checks: ['state', 'pkce'],
   };
 }
 

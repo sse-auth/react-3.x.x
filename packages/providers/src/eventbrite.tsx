@@ -1,5 +1,5 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { Eventbrite as EventbriteIcon } from "@sse-auth/icons";
+import type { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { Eventbrite as EventbriteIcon } from '@sse-auth/icons';
 
 export interface EventbriteProfile extends Record<string, any> {
   id: string;
@@ -14,15 +14,15 @@ export default function Eventbrite<P extends EventbriteProfile>(
   config: OAuthUserConfig<P>
 ): OAuthConfig<P> {
   return {
-    id: "eventbrite",
-    name: "Eventbrite",
-    type: "oauth",
+    id: 'eventbrite',
+    name: 'Eventbrite',
+    type: 'oauth',
     authorization: {
-      url: "https://www.eventbrite.com/oauth/authorize",
-      params: { scope: "user.profile" },
+      url: 'https://www.eventbrite.com/oauth/authorize',
+      params: { scope: 'user.profile' },
     },
-    token: "https://www.eventbrite.com/oauth/token",
-    userinfo: "https://www.eventbriteapi.com/v3/users/me/",
+    token: 'https://www.eventbrite.com/oauth/token',
+    userinfo: 'https://www.eventbriteapi.com/v3/users/me/',
     profile(profile) {
       return {
         id: profile.id,
@@ -34,7 +34,7 @@ export default function Eventbrite<P extends EventbriteProfile>(
       };
     },
     client: {
-      token_endpoint_auth_method: "client_secret_post",
+      token_endpoint_auth_method: 'client_secret_post',
     },
     style: {
       icon: {

@@ -1,5 +1,5 @@
-import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider";
-import { Descope as DescopeIcon } from "@sse-auth/icons";
+import type { OIDCConfig, OIDCUserConfig } from '@sse-auth/types/provider';
+import { Descope as DescopeIcon } from '@sse-auth/icons';
 
 /** The returned user profile from Descope when using the profile callback.
  * [See Load User](https://docs.descope.com/api/openapi/usermanagement/operation/LoadUser/)
@@ -27,10 +27,10 @@ export default function Descope(
   config: OIDCUserConfig<DescopeProfile>
 ): OIDCConfig<DescopeProfile> {
   return {
-    id: "discope",
-    name: "Descope",
-    type: "oidc",
-    checks: ["pkce", "state"],
+    id: 'discope',
+    name: 'Descope',
+    type: 'oidc',
+    checks: ['pkce', 'state'],
     options: config,
     style: {
       icon: {

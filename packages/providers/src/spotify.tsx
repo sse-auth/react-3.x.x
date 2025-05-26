@@ -1,5 +1,5 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { Spotify as SpotifyIcon } from "@sse-auth/icons";
+import type { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { Spotify as SpotifyIcon } from '@sse-auth/icons';
 
 export interface SpotifyImage {
   url: string;
@@ -16,13 +16,12 @@ export default function Spotify<P extends SpotifyProfile>(
   options: OAuthUserConfig<P>
 ): OAuthConfig<P> {
   return {
-    id: "spotify",
-    name: "Spotify",
-    type: "oauth",
-    authorization:
-      "https://accounts.spotify.com/authorize?scope=user-read-email",
-    token: "https://accounts.spotify.com/api/token",
-    userinfo: "https://api.spotify.com/v1/me",
+    id: 'spotify',
+    name: 'Spotify',
+    type: 'oauth',
+    authorization: 'https://accounts.spotify.com/authorize?scope=user-read-email',
+    token: 'https://accounts.spotify.com/api/token',
+    userinfo: 'https://api.spotify.com/v1/me',
     profile(profile) {
       return {
         id: profile.id,

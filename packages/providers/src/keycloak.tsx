@@ -1,5 +1,5 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { Keycloak as KeycloakIcon } from "@sse-auth/icons";
+import type { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { Keycloak as KeycloakIcon } from '@sse-auth/icons';
 
 export interface KeycloakProfile extends Record<string, any> {
   exp: number;
@@ -29,9 +29,9 @@ export default function Keycloak<P extends KeycloakProfile>(
   options: OAuthUserConfig<P>
 ): OAuthConfig<P> {
   return {
-    id: "keycloak",
-    name: "Keycloak",
-    type: "oidc",
+    id: 'keycloak',
+    name: 'Keycloak',
+    type: 'oidc',
     style: {
       icon: {
         dark: <KeycloakIcon />,

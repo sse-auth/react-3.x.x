@@ -1,5 +1,5 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { PipedriveDark, PipedriveLight } from "@sse-auth/icons";
+import type { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { PipedriveDark, PipedriveLight } from '@sse-auth/icons';
 
 export interface PipedriveProfile extends Record<string, any> {
   success: boolean;
@@ -40,12 +40,12 @@ export default function Pipedrive<P extends PipedriveProfile>(
   options: OAuthUserConfig<P>
 ): OAuthConfig<P> {
   return {
-    id: "pipedrive",
-    name: "Pipedrive",
-    type: "oauth",
-    authorization: "https://oauth.pipedrive.com/oauth/authorize",
-    token: "https://oauth.pipedrive.com/oauth/token",
-    userinfo: "https://api.pipedrive.com/users/me",
+    id: 'pipedrive',
+    name: 'Pipedrive',
+    type: 'oauth',
+    authorization: 'https://oauth.pipedrive.com/oauth/authorize',
+    token: 'https://oauth.pipedrive.com/oauth/token',
+    userinfo: 'https://api.pipedrive.com/users/me',
     profile: ({ data: profile }) => {
       return {
         id: profile.id.toString(),

@@ -1,5 +1,5 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { Google as GoogleIcon } from "@sse-auth/icons";
+import type { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { Google as GoogleIcon } from '@sse-auth/icons';
 
 export interface GoogleProfile extends Record<string, any> {
   aud: string;
@@ -24,10 +24,10 @@ export default function Google<P extends GoogleProfile>(
   options: OAuthUserConfig<P>
 ): OAuthConfig<P> {
   return {
-    id: "google",
-    name: "Google",
-    type: "oidc",
-    issuer: "https://accounts.google.com",
+    id: 'google',
+    name: 'Google',
+    type: 'oidc',
+    issuer: 'https://accounts.google.com',
     style: {
       icon: {
         dark: <GoogleIcon />,

@@ -1,5 +1,5 @@
-import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider";
-import { VippsMobilepay as VippsMobilepayIcon } from "@sse-auth/icons";
+import type { OIDCConfig, OIDCUserConfig } from '@sse-auth/types/provider';
+import { VippsMobilepay as VippsMobilepayIcon } from '@sse-auth/icons';
 
 interface Address {
   address_type: string;
@@ -50,17 +50,15 @@ export interface VippsProfile extends Record<string, any> {
   };
 }
 
-export default function Vipps(
-  options: OIDCUserConfig<VippsProfile>
-): OIDCConfig<VippsProfile> {
+export default function Vipps(options: OIDCUserConfig<VippsProfile>): OIDCConfig<VippsProfile> {
   return {
-    id: "vipps",
-    name: "Vipps",
-    type: "oidc",
-    issuer: "https://api.vipps.no/access-management-1.0/access/",
-    authorization: { params: { scope: "openid name email" } },
+    id: 'vipps',
+    name: 'Vipps',
+    type: 'oidc',
+    issuer: 'https://api.vipps.no/access-management-1.0/access/',
+    authorization: { params: { scope: 'openid name email' } },
     idToken: false,
-    checks: ["pkce", "state", "nonce"],
+    checks: ['pkce', 'state', 'nonce'],
     style: {
       icon: {
         dark: <VippsMobilepayIcon />,
@@ -71,4 +69,4 @@ export default function Vipps(
   };
 }
 
-export { Vipps }
+export { Vipps };

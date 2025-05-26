@@ -1,5 +1,5 @@
-import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider";
-import { BankidNo as BankIDIcon } from "@sse-auth/icons";
+import type { OIDCConfig, OIDCUserConfig } from '@sse-auth/types/provider';
+import { BankidNo as BankIDIcon } from '@sse-auth/icons';
 
 /**
  * @see [Core conepts - ID Token](https://confluence.bankidnorge.no/confluence/pdoidcl/technical-documentation/core-concepts/id-token)
@@ -15,7 +15,7 @@ export interface BankIDNorwayProfile {
   /** Always client_id */
   aud: string;
   sub: string;
-  typ: "ID";
+  typ: 'ID';
   /** Equals client_id */
   azp: string;
   session_state: string;
@@ -41,7 +41,7 @@ export interface BankIDNorwayProfile {
    * note that this value may differ from any `amr` value specified
    * in the `login_hint` parameter of the [authorize](https://confluence.bankidnorge.no/confluence/pdoidcl/technical-documentation/api/authorize) endpoint.
    */
-  amr: "BID" | "BIM" | "BIS";
+  amr: 'BID' | 'BIM' | 'BIS';
   /** Personal Identifier (PID) / Serial Number) from associated BankID certificate. */
   bankid_altsub: string;
   /**
@@ -85,16 +85,16 @@ export default function BankIDNorway(
   config: OIDCUserConfig<BankIDNorwayProfile>
 ): OIDCConfig<BankIDNorwayProfile> {
   return {
-    id: "bankid-no",
-    name: "BankID Norge",
-    type: "oidc",
-    issuer: "https://auth.bankid.no/auth/realms/prod",
+    id: 'bankid-no',
+    name: 'BankID Norge',
+    type: 'oidc',
+    issuer: 'https://auth.bankid.no/auth/realms/prod',
     client: {
-      token_endpoint_auth_method: "client_secret_post",
-      userinfo_signed_response_alg: "RS256",
+      token_endpoint_auth_method: 'client_secret_post',
+      userinfo_signed_response_alg: 'RS256',
     },
     idToken: false,
-    authorization: { params: { ui_locales: "no", login_hint: "BIS" } },
+    authorization: { params: { ui_locales: 'no', login_hint: 'BIS' } },
     profile(profile) {
       return {
         id: profile.sub,
@@ -103,7 +103,7 @@ export default function BankIDNorway(
         image: null,
       };
     },
-    checks: ["pkce", "state", "nonce"],
+    checks: ['pkce', 'state', 'nonce'],
     options: config,
     style: {
       icon: {

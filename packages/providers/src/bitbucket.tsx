@@ -1,5 +1,5 @@
-import { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { Bitbucket as BitBucketIcon } from "@sse-auth/icons";
+import { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { Bitbucket as BitBucketIcon } from '@sse-auth/icons';
 
 type LiteralUnion<T extends U, U = string> = T | (U & Record<never, never>);
 
@@ -9,9 +9,7 @@ type LiteralUnion<T extends U, U = string> = T | (U & Record<never, never>);
 export interface BitbucketProfile {
   display_name: string;
   links: Record<
-    LiteralUnion<
-      "self" | "avatar" | "repositories" | "snippets" | "html" | "hooks"
-    >,
+    LiteralUnion<'self' | 'avatar' | 'repositories' | 'snippets' | 'html' | 'hooks'>,
     { href?: string }
   >;
   created_on: string;
@@ -30,17 +28,17 @@ export default function BitBucket(
   options: OAuthUserConfig<BitbucketProfile>
 ): OAuthConfig<BitbucketProfile> {
   return {
-    id: "bitbucket",
-    name: "Bitbucket",
-    type: "oauth",
+    id: 'bitbucket',
+    name: 'Bitbucket',
+    type: 'oauth',
     authorization: {
-      url: "https://bitbucket.org/site/oauth2/authorize",
+      url: 'https://bitbucket.org/site/oauth2/authorize',
       params: {
-        scope: "account",
+        scope: 'account',
       },
     },
-    token: "https://bitbucket.org/site/oauth2/access_token",
-    userinfo: "https://api.bitbucket.org/2.0/user",
+    token: 'https://bitbucket.org/site/oauth2/access_token',
+    userinfo: 'https://api.bitbucket.org/2.0/user',
     profile(profile) {
       return {
         name: profile.display_name ?? profile.username,

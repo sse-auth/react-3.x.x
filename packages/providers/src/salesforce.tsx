@@ -1,5 +1,5 @@
-import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider";
-import { Salesforce as SalesforceIcon } from "@sse-auth/icons";
+import type { OIDCConfig, OIDCUserConfig } from '@sse-auth/types/provider';
+import { Salesforce as SalesforceIcon } from '@sse-auth/icons';
 
 export interface SalesforceProfile extends Record<string, any> {
   sub: string;
@@ -12,12 +12,12 @@ export default function Salesforce(
   options: OIDCUserConfig<SalesforceProfile>
 ): OIDCConfig<SalesforceProfile> {
   return {
-    id: "salesforce",
-    name: "Salesforce",
-    type: "oidc",
-    issuer: "https://login.salesforce.com",
+    id: 'salesforce',
+    name: 'Salesforce',
+    type: 'oidc',
+    issuer: 'https://login.salesforce.com',
     idToken: false,
-    checks: ["pkce", "state", "nonce"],
+    checks: ['pkce', 'state', 'nonce'],
     style: {
       icon: {
         dark: <SalesforceIcon />,

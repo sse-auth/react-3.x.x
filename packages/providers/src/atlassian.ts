@@ -1,4 +1,4 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
+import type { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
 
 /** The returned user profile from Atlassian when using the profile callback. */
 export interface AtlassianProfile extends Record<string, any> {
@@ -24,15 +24,15 @@ export default function Atlassian(
   options: OAuthUserConfig<AtlassianProfile>
 ): OAuthConfig<AtlassianProfile> {
   return {
-    id: "atlassian",
-    name: "Atlassian",
-    type: "oauth",
+    id: 'atlassian',
+    name: 'Atlassian',
+    type: 'oauth',
     authorization: {
-      url: "https://auth.atlassian.com/authorize",
-      params: { audience: "api.atlassian.com", scope: "read:me" },
+      url: 'https://auth.atlassian.com/authorize',
+      params: { audience: 'api.atlassian.com', scope: 'read:me' },
     },
-    token: "https://auth.atlassian.com/oauth/token",
-    userinfo: "https://api.atlassian.com/me",
+    token: 'https://auth.atlassian.com/oauth/token',
+    userinfo: 'https://api.atlassian.com/me',
     profile(profile) {
       return {
         id: profile.account_id,
@@ -41,7 +41,7 @@ export default function Atlassian(
         image: profile.picture,
       };
     },
-    checks: ["state"],
+    checks: ['state'],
     options,
   };
 }

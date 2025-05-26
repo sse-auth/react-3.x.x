@@ -1,5 +1,5 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { Zoom as ZoomIcon } from "@sse-auth/icons";
+import type { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { Zoom as ZoomIcon } from '@sse-auth/icons';
 
 /**
  * See: https://developers.zoom.us/docs/integrations/oauth/#using-an-access-token
@@ -33,16 +33,14 @@ export interface ZoomProfile extends Record<string, any> {
   status: string;
 }
 
-export default function Zoom(
-  config: OAuthUserConfig<ZoomProfile>
-): OAuthConfig<ZoomProfile> {
+export default function Zoom(config: OAuthUserConfig<ZoomProfile>): OAuthConfig<ZoomProfile> {
   return {
-    id: "zoom",
-    name: "Zoom",
-    type: "oauth",
-    authorization: "https://zoom.us/oauth/authorize?scope",
-    token: "https://zoom.us/oauth/token",
-    userinfo: "https://api.zoom.us/v2/users/me",
+    id: 'zoom',
+    name: 'Zoom',
+    type: 'oauth',
+    authorization: 'https://zoom.us/oauth/authorize?scope',
+    token: 'https://zoom.us/oauth/token',
+    userinfo: 'https://api.zoom.us/v2/users/me',
     profile(profile) {
       return {
         id: profile.id,

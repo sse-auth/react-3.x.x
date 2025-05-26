@@ -1,5 +1,5 @@
-import { OAuthConfig } from "@sse-auth/types/provider";
-import { Bitly as BitlyIcon } from "@sse-auth/icons";
+import { OAuthConfig } from '@sse-auth/types/provider';
+import { Bitly as BitlyIcon } from '@sse-auth/icons';
 
 interface BitlyEmail {
   email: string;
@@ -19,20 +19,17 @@ export interface BitlyProfile {
   default_group_guid: string;
 }
 
-export default function Bitly(
-  options: OAuthConfig<BitlyProfile>
-): OAuthConfig<BitlyProfile> {
+export default function Bitly(options: OAuthConfig<BitlyProfile>): OAuthConfig<BitlyProfile> {
   return {
-    id: "bitly",
-    name: "Bitly",
-    type: "oauth",
-    authorization: "https://bitly.com/oauth/authorize",
-    token: "https://api-ssl.bitly.com/v4/oauth/access_token",
-    userinfo: "https://api-ssl.bitly.com/v4/user",
+    id: 'bitly',
+    name: 'Bitly',
+    type: 'oauth',
+    authorization: 'https://bitly.com/oauth/authorize',
+    token: 'https://api-ssl.bitly.com/v4/oauth/access_token',
+    userinfo: 'https://api-ssl.bitly.com/v4/user',
     profile(profile) {
       const primaryEmail =
-        profile.emails.find((email) => email.is_primary)?.email ||
-        profile.emails[0].email;
+        profile.emails.find((email) => email.is_primary)?.email || profile.emails[0].email;
 
       return {
         id: profile.login,

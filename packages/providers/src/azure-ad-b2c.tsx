@@ -1,5 +1,5 @@
-import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider";
-import { Azure as AzureIcon } from "@sse-auth/icons";
+import type { OIDCConfig, OIDCUserConfig } from '@sse-auth/types/provider';
+import { Azure as AzureIcon } from '@sse-auth/icons';
 
 export interface AzureADB2CProfile {
   exp: number;
@@ -23,9 +23,9 @@ export default function AzureADB2C(
   options: OIDCUserConfig<AzureADB2CProfile>
 ): OIDCConfig<AzureADB2CProfile> {
   return {
-    id: "azure-ad-b2c",
-    name: "Azure AD B2C",
-    type: "oidc",
+    id: 'azure-ad-b2c',
+    name: 'Azure AD B2C',
+    type: 'oidc',
     profile(profile) {
       return {
         id: profile.sub,

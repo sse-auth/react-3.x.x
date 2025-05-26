@@ -1,5 +1,5 @@
-import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider"
-import { Auth0 as Auth0Icon } from "@sse-auth/icons";
+import type { OIDCConfig, OIDCUserConfig } from '@sse-auth/types/provider';
+import { Auth0 as Auth0Icon } from '@sse-auth/icons';
 
 /** The returned user profile from Auth0 when using the profile callback. [Reference](https://auth0.com/docs/manage-users/user-accounts/user-profiles/user-profile-structure). */
 export interface Auth0Profile extends Record<string, any> {
@@ -63,19 +63,17 @@ export interface Auth0Profile extends Record<string, any> {
   user_id: string;
 }
 
-export default function Auth0(
-  config: OIDCUserConfig<Auth0Profile>
-): OIDCConfig<Auth0Profile> {
+export default function Auth0(config: OIDCUserConfig<Auth0Profile>): OIDCConfig<Auth0Profile> {
   return {
-    id: "auth0",
-    name: "Auth0",
-    type: "oidc",
+    id: 'auth0',
+    name: 'Auth0',
+    type: 'oidc',
     options: config,
     style: {
       icon: {
         dark: <Auth0Icon />,
         light: <Auth0Icon />,
-      }
+      },
     },
   };
 }

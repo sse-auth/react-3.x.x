@@ -1,1 +1,1 @@
-export * from "@sse-auth/types/provider/provider-types"
+export * from '@sse-auth/types/provider/provider-types';

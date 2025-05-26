@@ -1,10 +1,10 @@
-import { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { Dailymotion as DailymotionIcon } from "@sse-auth/icons";
+import { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { Dailymotion as DailymotionIcon } from '@sse-auth/icons';
 
 // Icon Pending
 
-type GenderType = "male" | "female" | "other" | "prefer-not-to-answer";
-type StatusType = "pending-activation" | "disabled" | "active" | "unknown";
+type GenderType = 'male' | 'female' | 'other' | 'prefer-not-to-answer';
+type StatusType = 'pending-activation' | 'disabled' | 'active' | 'unknown';
 
 /**
  * @see [Dailymotion User](https://developers.dailymotion.com/api/platform-api/reference/#user)
@@ -15,7 +15,7 @@ export interface DailymotionProfile {
    * Indicates whether the user is active or not.
    * @see [Reference](https://developers.dailymotion.com/api/platform-api/reference/#user-active-field)
    */
-  active?: "y" | "n";
+  active?: 'y' | 'n';
   /**
    * The user's address.
    * @see [Reference](https://developers.dailymotion.com/api/platform-api/reference/#user-address-field)
@@ -307,17 +307,17 @@ export interface DailymotionProfile {
 export default function Dailymotion(
   options: OAuthUserConfig<DailymotionProfile>
 ): OAuthConfig<DailymotionProfile> {
-  const url = "https://api.dailymotion.com";
+  const url = 'https://api.dailymotion.com';
   return {
-    id: "dailymotion",
-    name: "Dailymotion",
-    type: "oauth",
+    id: 'dailymotion',
+    name: 'Dailymotion',
+    type: 'oauth',
     authorization: {
       url: `${url}/oauth/authorize`,
-      params: { scope: "read" },
+      params: { scope: 'read' },
     },
-    token: "https://www.dailymotion.com/oauth/token",
-    userinfo: "https://api.dailymotion.com/me",
+    token: 'https://www.dailymotion.com/oauth/token',
+    userinfo: 'https://api.dailymotion.com/me',
     profile(profile) {
       return {
         id: profile.id,
@@ -326,7 +326,7 @@ export default function Dailymotion(
         image: profile.avatar_url,
       };
     },
-    checks: ["state"],
+    checks: ['state'],
     style: {
       icon: {
         light: <DailymotionIcon />,

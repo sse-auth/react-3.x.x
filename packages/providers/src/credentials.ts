@@ -1,16 +1,13 @@
-import { CredentialInput, CredentialsConfig } from "@sse-auth/types/provider";
-export * from "@sse-auth/types/provider/credentials"
+import { CredentialInput, CredentialsConfig } from '@sse-auth/types/provider';
+export * from '@sse-auth/types/provider/credentials';
 
 export default function Credentials<
-  CredentialsInputs extends Record<string, CredentialInput> = Record<
-    string,
-    CredentialInput
-  >
+  CredentialsInputs extends Record<string, CredentialInput> = Record<string, CredentialInput>,
 >(config: Partial<CredentialsConfig<CredentialsInputs>>): CredentialsConfig {
   return {
-    id: "credentials",
-    name: "Credentials",
-    type: "credentials",
+    id: 'credentials',
+    name: 'Credentials',
+    type: 'credentials',
     credentials: {},
     authorize: () => null,
     // @ts-expect-error
@@ -18,4 +15,4 @@ export default function Credentials<
   };
 }
 
-export { Credentials }
+export { Credentials };

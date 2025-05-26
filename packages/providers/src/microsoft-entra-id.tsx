@@ -1,6 +1,6 @@
-import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider";
-import { customFetch, conformInternal } from "@sse-auth/types/symbol";
-import { MicrosoftEntraID as MicrosoftEntraIDIcon } from "@sse-auth/icons";
+import type { OIDCConfig, OIDCUserConfig } from '@sse-auth/types/provider';
+import { customFetch, conformInternal } from '@sse-auth/types/symbol';
+import { MicrosoftEntraID as MicrosoftEntraIDIcon } from '@sse-auth/icons';
 
 export interface MicrosoftEntraIDProfile extends Record<string, any> {
   sub: string;
@@ -20,13 +20,13 @@ export default function MicrosoftEntraID(
   }
 ): OIDCConfig<MicrosoftEntraIDProfile> {
   const { profilePhotoSize = 48 } = config;
-  config.issuer ??= "https://login.microsoftonline.com/common/v2.0";
+  config.issuer ??= 'https://login.microsoftonline.com/common/v2.0';
 
   return {
-    id: "microsoft-entra-id",
-    name: "Microsoft Entra ID",
-    type: "oidc",
-    authorization: { params: { scope: "openid profile email User.Read" } },
+    id: 'microsoft-entra-id',
+    name: 'Microsoft Entra ID',
+    type: 'oidc',
+    authorization: { params: { scope: 'openid profile email User.Read' } },
     async profile(profile, tokens) {
       // https://learn.microsoft.com/en-us/graph/api/profilephoto-get?view=graph-rest-1.0&tabs=http#examples
       const response = await fetch(
@@ -37,10 +37,10 @@ export default function MicrosoftEntraID(
       // Confirm that profile photo was returned
       let image;
       // TODO: Do this without Buffer
-      if (response.ok && typeof Buffer !== "undefined") {
+      if (response.ok && typeof Buffer !== 'undefined') {
         try {
           const pictureBuffer = await response.arrayBuffer();
-          const pictureBase64 = Buffer.from(pictureBuffer).toString("base64");
+          const pictureBase64 = Buffer.from(pictureBuffer).toString('base64');
           image = `data:image/jpeg;base64, ${pictureBase64}`;
         } catch {}
       }
@@ -54,12 +54,12 @@ export default function MicrosoftEntraID(
     },
     async [customFetch](...args) {
       const url = new URL(args[0] instanceof Request ? args[0].url : args[0]);
-      if (url.pathname.endsWith(".well-known/openid-configuration")) {
+      if (url.pathname.endsWith('.well-known/openid-configuration')) {
         const response = await fetch(args[0], args[1]);
         const json = await response.clone().json();
         const tenantRe = /microsoftonline\.com\/(\w+)\/v2\.0/;
-        const tenantId = config.issuer?.match(tenantRe)?.[1] ?? "common";
-        const issuer = json.issuer.replace("{tenantid}", tenantId);
+        const tenantId = config.issuer?.match(tenantRe)?.[1] ?? 'common';
+        const issuer = json.issuer.replace('{tenantid}', tenantId);
         return Response.json({ ...json, issuer });
       }
       return fetch(...args);

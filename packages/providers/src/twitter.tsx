@@ -1,5 +1,5 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { TwitterDark, TwitterLight } from "@sse-auth/icons";
+import type { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { TwitterDark, TwitterLight } from '@sse-auth/icons';
 
 /**
  * [Users lookup](https://developer.x.com/en/docs/twitter-api/users/lookup/api-reference/get-users-me)
@@ -97,14 +97,13 @@ export default function Twitter(
   config: OAuthUserConfig<TwitterProfile>
 ): OAuthConfig<TwitterProfile> {
   return {
-    id: "twitter",
-    name: "Twitter",
-    type: "oauth",
-    checks: ["pkce", "state"],
-    authorization:
-      "https://x.com/i/oauth2/authorize?scope=users.read tweet.read offline.access",
-    token: "https://api.x.com/2/oauth2/token",
-    userinfo: "https://api.x.com/2/users/me?user.fields=profile_image_url",
+    id: 'twitter',
+    name: 'Twitter',
+    type: 'oauth',
+    checks: ['pkce', 'state'],
+    authorization: 'https://x.com/i/oauth2/authorize?scope=users.read tweet.read offline.access',
+    token: 'https://api.x.com/2/oauth2/token',
+    userinfo: 'https://api.x.com/2/users/me?user.fields=profile_image_url',
     profile({ data }) {
       return {
         id: data.id,

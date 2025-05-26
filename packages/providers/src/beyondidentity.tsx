@@ -1,5 +1,5 @@
-import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider";
-import { Beyondidentity as BeyondIdentityIcon } from "@sse-auth/icons";
+import type { OIDCConfig, OIDCUserConfig } from '@sse-auth/types/provider';
+import { Beyondidentity as BeyondIdentityIcon } from '@sse-auth/icons';
 
 /** @see [Beyond Identity Developer Docs](https://developer.beyondidentity.com/) */
 export interface BeyondIdentityProfile {
@@ -17,9 +17,9 @@ export default function BeyondIdentity(
   config: OIDCUserConfig<BeyondIdentityProfile>
 ): OIDCConfig<BeyondIdentityProfile> {
   return {
-    id: "beyondidentity",
-    name: "Beyond Identity",
-    type: "oidc",
+    id: 'beyondidentity',
+    name: 'Beyond Identity',
+    type: 'oidc',
     profile(profile) {
       return {
         id: profile.sub,

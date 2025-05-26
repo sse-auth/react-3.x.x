@@ -1,21 +1,21 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { Kakao as KakaoIcon } from "@sse-auth/icons";
+import type { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { Kakao as KakaoIcon } from '@sse-auth/icons';
 
 export type DateTime = string;
-export type Gender = "female" | "male";
-export type Birthday = "SOLAR" | "LUNAR";
+export type Gender = 'female' | 'male';
+export type Birthday = 'SOLAR' | 'LUNAR';
 export type AgeRange =
-  | "1-9"
-  | "10-14"
-  | "15-19"
-  | "20-29"
-  | "30-39"
-  | "40-49"
-  | "50-59"
-  | "60-69"
-  | "70-79"
-  | "80-89"
-  | "90-";
+  | '1-9'
+  | '10-14'
+  | '15-19'
+  | '20-29'
+  | '30-39'
+  | '40-49'
+  | '50-59'
+  | '60-69'
+  | '70-79'
+  | '80-89'
+  | '90-';
 
 /**
  * https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#req-user-info
@@ -68,18 +68,16 @@ export interface KakaoProfile extends Record<string, any> {
   };
 }
 
-export default function Kakao<P extends KakaoProfile>(
-  options: OAuthUserConfig<P>
-): OAuthConfig<P> {
+export default function Kakao<P extends KakaoProfile>(options: OAuthUserConfig<P>): OAuthConfig<P> {
   return {
-    id: "kakao",
-    name: "Kakao",
-    type: "oauth",
-    authorization: "https://kauth.kakao.com/oauth/authorize?scope",
-    token: "https://kauth.kakao.com/oauth/token",
-    userinfo: "https://kapi.kakao.com/v2/user/me",
+    id: 'kakao',
+    name: 'Kakao',
+    type: 'oauth',
+    authorization: 'https://kauth.kakao.com/oauth/authorize?scope',
+    token: 'https://kauth.kakao.com/oauth/token',
+    userinfo: 'https://kapi.kakao.com/v2/user/me',
     client: {
-      token_endpoint_auth_method: "client_secret_post",
+      token_endpoint_auth_method: 'client_secret_post',
     },
     profile(profile) {
       return {

@@ -1,5 +1,5 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { HubSpot as HubspotIcon } from "@sse-auth/icons";
+import type { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { HubSpot as HubspotIcon } from '@sse-auth/icons';
 
 interface HubSpotProfile extends Record<string, any> {
   // https://legacydocs.hubspot.com/docs/methods/oauth2/get-access-token-information
@@ -13,25 +13,25 @@ export default function HubSpot<P extends HubSpotProfile>(
   options: OAuthUserConfig<P>
 ): OAuthConfig<P> {
   return {
-    id: "hubspot",
-    name: "HubSpot",
-    type: "oauth",
+    id: 'hubspot',
+    name: 'HubSpot',
+    type: 'oauth',
     authorization: {
-      url: "https://app.hubspot.com/oauth/authorize",
-      params: { scope: "oauth", client_id: options.clientId },
+      url: 'https://app.hubspot.com/oauth/authorize',
+      params: { scope: 'oauth', client_id: options.clientId },
     },
     client: {
-      token_endpoint_auth_method: "client_secret_post",
+      token_endpoint_auth_method: 'client_secret_post',
     },
-    token: "https://api.hubapi.com/oauth/v1/token",
+    token: 'https://api.hubapi.com/oauth/v1/token',
     userinfo: {
-      url: "https://api.hubapi.com/oauth/v1/access-tokens",
+      url: 'https://api.hubapi.com/oauth/v1/access-tokens',
       async request({ tokens, provider }) {
         const url = `${provider.userinfo?.url}/${tokens.access_token}`;
 
         return await fetch(url, {
-          headers: { "Content-Type": "application/json" },
-          method: "GET",
+          headers: { 'Content-Type': 'application/json' },
+          method: 'GET',
         }).then(async (res) => await res.json());
       },
     },

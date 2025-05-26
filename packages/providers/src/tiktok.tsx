@@ -1,6 +1,6 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { customFetch } from "@sse-auth/types/symbol";
-import { Tiktok as TiktokIcon } from "@sse-auth/icons";
+import type { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { customFetch } from '@sse-auth/types/symbol';
+import { Tiktok as TiktokIcon } from '@sse-auth/icons';
 
 /**
  * [More info](https://developers.tiktok.com/doc/tiktok-api-v2-get-user-info/)
@@ -123,16 +123,16 @@ export default function TikTok(
   return {
     async [customFetch](...args) {
       const url = new URL(args[0] instanceof Request ? args[0].url : args[0]);
-      if (url.pathname.endsWith("/token/")) {
+      if (url.pathname.endsWith('/token/')) {
         const [url, request] = args;
 
         const customHeaders = {
           ...request?.headers,
-          "content-type": "application/x-www-form-urlencoded",
+          'content-type': 'application/x-www-form-urlencoded',
         };
 
         const customBody = new URLSearchParams(request?.body as string);
-        customBody.append("client_key", options.clientId!);
+        customBody.append('client_key', options.clientId!);
         const response = await fetch(url, {
           ...request,
           headers: customHeaders,
@@ -143,23 +143,23 @@ export default function TikTok(
       }
       return fetch(...args);
     },
-    id: "tiktok",
-    name: "TikTok",
-    type: "oauth",
+    id: 'tiktok',
+    name: 'TikTok',
+    type: 'oauth',
     client: {
-      token_endpoint_auth_method: "client_secret_post",
+      token_endpoint_auth_method: 'client_secret_post',
     },
     authorization: {
-      url: "https://www.tiktok.com/v2/auth/authorize",
+      url: 'https://www.tiktok.com/v2/auth/authorize',
       params: {
         client_key: options.clientId,
-        scope: "user.info.profile",
+        scope: 'user.info.profile',
       },
     },
 
-    token: "https://open.tiktokapis.com/v2/oauth/token/",
+    token: 'https://open.tiktokapis.com/v2/oauth/token/',
     userinfo:
-      "https://open.tiktokapis.com/v2/user/info/?fields=open_id,avatar_url,display_name,username",
+      'https://open.tiktokapis.com/v2/user/info/?fields=open_id,avatar_url,display_name,username',
 
     profile(profile) {
       return {

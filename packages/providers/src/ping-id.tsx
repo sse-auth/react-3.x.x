@@ -1,5 +1,5 @@
-import type { OIDCConfig, OIDCUserConfig } from "@sse-auth/types/provider";
-import { PingIDDark, PingIDLight } from "@sse-auth/icons";
+import type { OIDCConfig, OIDCUserConfig } from '@sse-auth/types/provider';
+import { PingIDDark, PingIDLight } from '@sse-auth/icons';
 
 export interface PingProfile extends Record<string, any> {
   iss: string;
@@ -21,16 +21,14 @@ export interface PingProfile extends Record<string, any> {
   email: string;
   env: string;
   org: string;
-  "p1.region": string;
+  'p1.region': string;
 }
 
-export default function PingId(
-  options: OIDCUserConfig<PingProfile>
-): OIDCConfig<PingProfile> {
+export default function PingId(options: OIDCUserConfig<PingProfile>): OIDCConfig<PingProfile> {
   return {
-    id: "ping-id",
-    name: "Ping Identity",
-    type: "oidc",
+    id: 'ping-id',
+    name: 'Ping Identity',
+    type: 'oidc',
     style: {
       icon: {
         dark: <PingIDDark />,

@@ -1,5 +1,5 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { Osu as OsuIcon } from "@sse-auth/icons";
+import type { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { Osu as OsuIcon } from '@sse-auth/icons';
 
 export interface OsuUserCompact {
   avatar_url: string;
@@ -50,16 +50,14 @@ export interface OsuProfile extends OsuUserCompact, Record<string, any> {
   is_restricted: boolean;
 }
 
-export default function Osu<P extends OsuProfile>(
-  options: OAuthUserConfig<P>
-): OAuthConfig<P> {
+export default function Osu<P extends OsuProfile>(options: OAuthUserConfig<P>): OAuthConfig<P> {
   return {
-    id: "osu",
-    name: "osu!",
-    type: "oauth",
-    token: "https://osu.ppy.sh/oauth/token",
-    authorization: "https://osu.ppy.sh/oauth/authorize?scope=identify",
-    userinfo: "https://osu.ppy.sh/api/v2/me",
+    id: 'osu',
+    name: 'osu!',
+    type: 'oauth',
+    token: 'https://osu.ppy.sh/oauth/token',
+    authorization: 'https://osu.ppy.sh/oauth/authorize?scope=identify',
+    userinfo: 'https://osu.ppy.sh/api/v2/me',
     profile(profile) {
       return {
         id: profile.id.toString(),

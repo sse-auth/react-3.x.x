@@ -1,6 +1,6 @@
-import Nodemailer from "./nodemailer.js";
-import type { NodemailerConfig, NodemailerUserConfig } from "./nodemailer.js";
-export * from "@sse-auth/types/provider/email";
+import Nodemailer from './nodemailer.js';
+import type { NodemailerConfig, NodemailerUserConfig } from './nodemailer.js';
+export * from '@sse-auth/types/provider/email';
 
 /**
  * @deprecated
@@ -13,7 +13,7 @@ export * from "@sse-auth/types/provider/email";
 export default function Email(config: NodemailerUserConfig): NodemailerConfig {
   return {
     ...Nodemailer(config),
-    id: "email",
-    name: "Email",
+    id: 'email',
+    name: 'Email',
   };
 }

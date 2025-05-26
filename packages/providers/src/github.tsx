@@ -1,11 +1,11 @@
-import type { OAuthConfig, OAuthUserConfig } from "@sse-auth/types/provider";
-import { GitHubDark, GitHubLight } from "@sse-auth/icons";
+import type { OAuthConfig, OAuthUserConfig } from '@sse-auth/types/provider';
+import { GitHubDark, GitHubLight } from '@sse-auth/icons';
 
 export interface GitHubEmail {
   email: string;
   primary: boolean;
   verified: boolean;
-  visibility: "public" | "private";
+  visibility: 'public' | 'private';
 }
 
 /** @see [Get the authenticated user](https://docs.github.com/en/rest/users/users#get-the-authenticated-user) */
@@ -67,18 +67,18 @@ export default function Github(
     };
   }
 ): OAuthConfig<GitHubProfile> {
-  const baseUrl = config?.enterprise?.baseUrl ?? "https://github.com";
+  const baseUrl = config?.enterprise?.baseUrl ?? 'https://github.com';
   const apiBaseUrl = config?.enterprise?.baseUrl
     ? `${config?.enterprise?.baseUrl}/api/v3`
-    : "https://api.github.com";
+    : 'https://api.github.com';
 
   return {
-    id: "github",
-    name: "Github",
-    type: "oauth",
+    id: 'github',
+    name: 'Github',
+    type: 'oauth',
     authorization: {
       url: `${baseUrl}/login/oauth/authorize`,
-      params: { scope: "read:user user:email" },
+      params: { scope: 'read:user user:email' },
     },
     token: `${baseUrl}/login/oauth/access_token`,
     userinfo: `${apiBaseUrl}/user`,
