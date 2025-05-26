@@ -1,54 +1,54 @@
 type ErrorOptions = Error | Record<string, unknown>;
 
 type ErrorType =
-  | "AccessDenied"
-  | "AdapterError"
-  | "CallbackRouteError"
-  | "ErrorPageLoop"
-  | "EventError"
-  | "InvalidCallbackUrl"
-  | "CredentialsSignin"
-  | "InvalidEndpoints"
-  | "InvalidCheck"
-  | "JWTSessionError"
-  | "MissingAdapter"
-  | "MissingAdapterMethods"
-  | "MissingAuthorize"
-  | "MissingSecret"
-  | "OAuthAccountNotLinked"
-  | "OAuthCallbackError"
-  | "OAuthProfileParseError"
-  | "SessionTokenError"
-  | "OAuthSignInError"
-  | "EmailSignInError"
-  | "SignOutError"
-  | "UnknownAction"
-  | "UnsupportedStrategy"
-  | "InvalidProvider"
-  | "UntrustedHost"
-  | "Verification"
-  | "MissingCSRF"
-  | "AccountNotLinked"
-  | "DuplicateConditionalUI"
-  | "MissingWebAuthnAutocomplete"
-  | "WebAuthnVerificationError"
-  | "ExperimentalFeatureNotEnabled";
+  | 'AccessDenied'
+  | 'AdapterError'
+  | 'CallbackRouteError'
+  | 'ErrorPageLoop'
+  | 'EventError'
+  | 'InvalidCallbackUrl'
+  | 'CredentialsSignin'
+  | 'InvalidEndpoints'
+  | 'InvalidCheck'
+  | 'JWTSessionError'
+  | 'MissingAdapter'
+  | 'MissingAdapterMethods'
+  | 'MissingAuthorize'
+  | 'MissingSecret'
+  | 'OAuthAccountNotLinked'
+  | 'OAuthCallbackError'
+  | 'OAuthProfileParseError'
+  | 'SessionTokenError'
+  | 'OAuthSignInError'
+  | 'EmailSignInError'
+  | 'SignOutError'
+  | 'UnknownAction'
+  | 'UnsupportedStrategy'
+  | 'InvalidProvider'
+  | 'UntrustedHost'
+  | 'Verification'
+  | 'MissingCSRF'
+  | 'AccountNotLinked'
+  | 'DuplicateConditionalUI'
+  | 'MissingWebAuthnAutocomplete'
+  | 'WebAuthnVerificationError'
+  | 'ExperimentalFeatureNotEnabled';
 
 /** TODO: Check if all these are used/correct */
-export type ErrorPageParam = "Configuration" | "AccessDenied" | "Verification";
+export type ErrorPageParam = 'Configuration' | 'AccessDenied' | 'Verification';
 
 /** TODO: Check if all these are used/correct */
 export type SignInPageErrorParam =
-  | "Signin"
-  | "OAuthSignin"
-  | "OAuthCallbackError"
-  | "OAuthCreateAccount"
-  | "EmailCreateAccount"
-  | "Callback"
-  | "OAuthAccountNotLinked"
-  | "EmailSignin"
-  | "CredentialsSignin"
-  | "SessionRequired";
+  | 'Signin'
+  | 'OAuthSignin'
+  | 'OAuthCallbackError'
+  | 'OAuthCreateAccount'
+  | 'EmailCreateAccount'
+  | 'Callback'
+  | 'OAuthAccountNotLinked'
+  | 'EmailSignin'
+  | 'CredentialsSignin'
+  | 'SessionRequired';
 
 /**
  * Base error class for all Auth.js errors.
@@ -63,17 +63,14 @@ export class AuthError extends Error {
    * Default is `"error"`.
    * @internal
    */
-  kind?: "signIn" | "error";
+  kind?: 'signIn' | 'error';
   cause?: Record<string, unknown> & { err?: Error };
-  constructor(
-    message?: string | Error | ErrorOptions,
-    errorOptions?: ErrorOptions
-  ) {
+  constructor(message?: string | Error | ErrorOptions, errorOptions?: ErrorOptions) {
     if (message instanceof Error) {
       super(undefined, {
         cause: { err: message, ...(message.cause as any), ...errorOptions },
       });
-    } else if (typeof message === "string") {
+    } else if (typeof message === 'string') {
       if (errorOptions instanceof Error) {
         errorOptions = { err: errorOptions, ...(errorOptions.cause as any) };
       }
@@ -83,18 +80,18 @@ export class AuthError extends Error {
     }
     this.name = this.constructor.name;
     // @ts-expect-error https://github.com/microsoft/TypeScript/issues/3841
-    this.type = this.constructor.type ?? "AuthError";
+    this.type = this.constructor.type ?? 'AuthError';
     // @ts-expect-error https://github.com/microsoft/TypeScript/issues/3841
-    this.kind = this.constructor.kind ?? "error";
+    this.kind = this.constructor.kind ?? 'error';
 
     Error.captureStackTrace?.(this, this.constructor);
     const url = `https://sse-auth.github.io/reference/core/errors#${this.type.toLowerCase()}`;
-    this.message += `${this.message ? ". " : ""}Read more at ${url}`;
+    this.message += `${this.message ? '. ' : ''}Read more at ${url}`;
   }
 }
 
 export class SignInError extends AuthError {
-  static kind = "signIn";
+  static kind = 'signIn';
 }
 
 /**
@@ -111,7 +108,7 @@ export class SignInError extends AuthError {
  * :::
  */
 export class AdapterError extends AuthError {
-  static type = "AdapterError";
+  static type = 'AdapterError';
 }
 
 /**
@@ -119,7 +116,7 @@ export class AdapterError extends AuthError {
  * or if it returns `false`.
  */
 export class AccessDenied extends AuthError {
-  static type = "AccessDenied";
+  static type = 'AccessDenied';
 }
 
 /**
@@ -162,7 +159,7 @@ export class AccessDenied extends AuthError {
  * :::
  */
 export class CallbackRouteError extends AuthError {
-  static type = "CallbackRouteError";
+  static type = 'CallbackRouteError';
 }
 
 /**
@@ -174,7 +171,7 @@ export class CallbackRouteError extends AuthError {
  * Learn more at [Guide: Error pages](https://authjs.dev/guides/pages/error)
  */
 export class ErrorPageLoop extends AuthError {
-  static type = "ErrorPageLoop";
+  static type = 'ErrorPageLoop';
 }
 
 /**
@@ -186,7 +183,7 @@ export class ErrorPageLoop extends AuthError {
  * Learn more at [`events`](https://authjs.dev/reference/core/types#eventcallbacks)
  */
 export class EventError extends AuthError {
-  static type = "EventError";
+  static type = 'EventError';
 }
 
 /**
@@ -200,7 +197,7 @@ export class EventError extends AuthError {
  * There is no action required, but it might be an indicator that somebody is trying to attack your application.
  */
 export class InvalidCallbackUrl extends AuthError {
-  static type = "InvalidCallbackUrl";
+  static type = 'InvalidCallbackUrl';
 }
 
 /**
@@ -210,7 +207,7 @@ export class InvalidCallbackUrl extends AuthError {
  * 2. If you throw this error in a framework that handles form actions server-side, this error is thrown, instead of redirecting the user, so you'll need to handle.
  */
 export class CredentialsSignin extends SignInError {
-  static type = "CredentialsSignin";
+  static type = 'CredentialsSignin';
   /**
    * The error code that is set in the `code` query parameter of the redirect URL.
    *
@@ -222,7 +219,7 @@ export class CredentialsSignin extends SignInError {
    * Generally, we don't recommend hinting specifically if the user had either a wrong username or password specifically,
    * try rather something like "Invalid credentials".
    */
-  code: string = "credentials";
+  code: string = 'credentials';
 }
 
 /**
@@ -232,7 +229,7 @@ export class CredentialsSignin extends SignInError {
  * Learn more at [`OAuth2Config`](https://authjs.dev/reference/core/providers#oauth2configprofile) or [Guide: OAuth Provider](https://authjs.dev/guides/configuring-oauth-providers)
  */
 export class InvalidEndpoints extends AuthError {
-  static type = "InvalidEndpoints";
+  static type = 'InvalidEndpoints';
 }
 
 /**
@@ -242,7 +239,7 @@ export class InvalidEndpoints extends AuthError {
  * Learn more at [`checks`](https://authjs.dev/reference/core/providers#checks)
  */
 export class InvalidCheck extends AuthError {
-  static type = "InvalidCheck";
+  static type = 'InvalidCheck';
 }
 
 /**
@@ -257,7 +254,7 @@ export class InvalidCheck extends AuthError {
  * Learn more at [`secret`](https://authjs.dev/reference/core#secret), [`jwt.encode`](https://authjs.dev/reference/core/jwt#encode-1) or [`jwt.decode`](https://authjs.dev/reference/core/jwt#decode-2) for more information.
  */
 export class JWTSessionError extends AuthError {
-  static type = "JWTSessionError";
+  static type = 'JWTSessionError';
 }
 
 /**
@@ -268,7 +265,7 @@ export class JWTSessionError extends AuthError {
  * Learn more at [Database Adapters](https://authjs.dev/getting-started/database), [Email provider](https://authjs.dev/getting-started/authentication/email) or [Concept: Database session strategy](https://authjs.dev/concepts/session-strategies#database-session)
  */
 export class MissingAdapter extends AuthError {
-  static type = "MissingAdapter";
+  static type = 'MissingAdapter';
 }
 
 /**
@@ -279,7 +276,7 @@ export class MissingAdapter extends AuthError {
  * Learn more at [Database Adapters](https://authjs.dev/getting-started/database)
  */
 export class MissingAdapterMethods extends AuthError {
-  static type = "MissingAdapterMethods";
+  static type = 'MissingAdapterMethods';
 }
 
 /**
@@ -289,7 +286,7 @@ export class MissingAdapterMethods extends AuthError {
  * Learn more at [Credentials provider](https://authjs.dev/getting-started/authentication/credentials)
  */
 export class MissingAuthorize extends AuthError {
-  static type = "MissingAuthorize";
+  static type = 'MissingAuthorize';
 }
 
 /**
@@ -306,7 +303,7 @@ export class MissingAuthorize extends AuthError {
  * :::
  */
 export class MissingSecret extends AuthError {
-  static type = "MissingSecret";
+  static type = 'MissingSecret';
 }
 
 /**
@@ -322,7 +319,7 @@ export class MissingSecret extends AuthError {
  * :::
  */
 export class OAuthAccountNotLinked extends SignInError {
-  static type = "OAuthAccountNotLinked";
+  static type = 'OAuthAccountNotLinked';
 }
 
 /**
@@ -332,7 +329,7 @@ export class OAuthAccountNotLinked extends SignInError {
  * For a full list of possible reasons, check out the specification [Authorization Code Grant: Error Response](https://www.rfc-editor.org/rfc/rfc6749#section-4.1.2.1)
  */
 export class OAuthCallbackError extends SignInError {
-  static type = "OAuthCallbackError";
+  static type = 'OAuthCallbackError';
 }
 
 /**
@@ -341,7 +338,7 @@ export class OAuthCallbackError extends SignInError {
  * changed, or the [`OAuth2Config.profile`](https://authjs.dev/reference/core/providers#oauth2configprofile) method is not implemented correctly.
  */
 export class OAuthProfileParseError extends AuthError {
-  static type = "OAuthProfileParseError";
+  static type = 'OAuthProfileParseError';
 }
 
 /**
@@ -352,7 +349,7 @@ export class OAuthProfileParseError extends AuthError {
  * Learn more at [Concept: Database session strategy](https://authjs.dev/concepts/session-strategies#database)
  */
 export class SessionTokenError extends AuthError {
-  static type = "SessionTokenError";
+  static type = 'SessionTokenError';
 }
 
 /**
@@ -371,7 +368,7 @@ export class SessionTokenError extends AuthError {
  * :::
  */
 export class OAuthSignInError extends SignInError {
-  static type = "OAuthSignInError";
+  static type = 'OAuthSignInError';
 }
 
 /**
@@ -385,7 +382,7 @@ export class OAuthSignInError extends SignInError {
  *   Check the database logs.
  */
 export class EmailSignInError extends SignInError {
-  static type = "EmailSignInError";
+  static type = 'EmailSignInError';
 }
 
 /**
@@ -399,7 +396,7 @@ export class EmailSignInError extends SignInError {
  *
  */
 export class SignOutError extends AuthError {
-  static type = "SignOutError";
+  static type = 'SignOutError';
 }
 
 /**
@@ -408,7 +405,7 @@ export class SignOutError extends AuthError {
  * See [`AuthAction`](https://authjs.dev/reference/core/types#authaction) for the supported actions.
  */
 export class UnknownAction extends AuthError {
-  static type = "UnknownAction";
+  static type = 'UnknownAction';
 }
 
 /**
@@ -417,12 +414,12 @@ export class UnknownAction extends AuthError {
  * Learn more at [`strategy`](https://authjs.dev/reference/core#strategy) or [Credentials provider](https://authjs.dev/getting-started/authentication/credentials)
  */
 export class UnsupportedStrategy extends AuthError {
-  static type = "UnsupportedStrategy";
+  static type = 'UnsupportedStrategy';
 }
 
 /** Thrown when an endpoint was incorrectly called without a provider, or with an unsupported provider. */
 export class InvalidProvider extends AuthError {
-  static type = "InvalidProvider";
+  static type = 'InvalidProvider';
 }
 
 /**
@@ -437,7 +434,7 @@ export class InvalidProvider extends AuthError {
  * Learn more at [`trustHost`](https://authjs.dev/reference/core#trusthost) or [Guide: Deployment](https://authjs.dev/getting-started/deployment)
  */
 export class UntrustedHost extends AuthError {
-  static type = "UntrustedHost";
+  static type = 'UntrustedHost';
 }
 
 /**
@@ -446,7 +443,7 @@ export class UntrustedHost extends AuthError {
  * or because the token has expired. Ask the user to log in again.
  */
 export class Verification extends AuthError {
-  static type = "Verification";
+  static type = 'Verification';
 }
 
 /**
@@ -460,18 +457,18 @@ export class Verification extends AuthError {
  * and request parameter. More on this at [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Glossary/CSRF).
  */
 export class MissingCSRF extends SignInError {
-  static type = "MissingCSRF";
+  static type = 'MissingCSRF';
 }
 
 const clientErrors = new Set<ErrorType>([
-  "CredentialsSignin",
-  "OAuthAccountNotLinked",
-  "OAuthCallbackError",
-  "AccessDenied",
-  "Verification",
-  "MissingCSRF",
-  "AccountNotLinked",
-  "WebAuthnVerificationError",
+  'CredentialsSignin',
+  'OAuthAccountNotLinked',
+  'OAuthCallbackError',
+  'AccessDenied',
+  'Verification',
+  'MissingCSRF',
+  'AccountNotLinked',
+  'WebAuthnVerificationError',
 ]);
 
 /**
@@ -489,7 +486,7 @@ export function isClientError(error: Error): error is AuthError {
  * Only one provider can have this option enabled at a time.
  */
 export class DuplicateConditionalUI extends AuthError {
-  static type = "DuplicateConditionalUI";
+  static type = 'DuplicateConditionalUI';
 }
 
 /**
@@ -498,14 +495,14 @@ export class DuplicateConditionalUI extends AuthError {
  * The `webauthn` autocomplete param is required for conditional UI to work.
  */
 export class MissingWebAuthnAutocomplete extends AuthError {
-  static type = "MissingWebAuthnAutocomplete";
+  static type = 'MissingWebAuthnAutocomplete';
 }
 
 /**
  * Thrown when a WebAuthn provider fails to verify a client response.
  */
 export class WebAuthnVerificationError extends AuthError {
-  static type = "WebAuthnVerificationError";
+  static type = 'WebAuthnVerificationError';
 }
 
 /**
@@ -515,12 +512,12 @@ export class WebAuthnVerificationError extends AuthError {
  * For security reasons, Auth.js does not automatically link accounts to existing accounts if the user is not signed in.
  */
 export class AccountNotLinked extends SignInError {
-  static type = "AccountNotLinked";
+  static type = 'AccountNotLinked';
 }
 
 /**
  * Thrown when an experimental feature is used but not enabled.
  */
 export class ExperimentalFeatureNotEnabled extends AuthError {
-  static type = "ExperimentalFeatureNotEnabled";
+  static type = 'ExperimentalFeatureNotEnabled';
 }

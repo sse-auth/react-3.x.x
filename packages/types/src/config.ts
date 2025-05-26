@@ -9,7 +9,7 @@ import type {
   Session,
   Theme,
   User,
-} from "./index";
+} from './index';
 import type {
   CredentialInput,
   CredentialsConfig,
@@ -20,11 +20,11 @@ import type {
   ProviderType,
   WebAuthnConfig,
   WebAuthnProviderType,
-} from "./provider";
-import type { Adapter, AdapterSession, AdapterUser } from "./adapter";
-import { Cookie, CookieOption, CookiesOptions } from "./cookie";
-import { raw, skipCSRFCheck } from "./symbol";
-import { LoggerInstance } from "./logger";
+} from './provider';
+import type { Adapter, AdapterSession, AdapterUser } from './adapter';
+import { Cookie, CookieOption, CookiesOptions } from './cookie';
+import { raw, skipCSRFCheck } from './symbol';
+import { LoggerInstance } from './logger';
 
 export interface PagesOptions {
   /**
@@ -89,7 +89,7 @@ export interface AuthConfig {
      *
      * [Documentation](https://authjs.dev/reference/core#authconfig#session) | [Adapter](https://authjs.dev/reference/core#authconfig#adapter) | [About JSON Web Tokens](https://authjs.dev/concepts/session-strategies#jwt-session)
      */
-    strategy?: "jwt" | "database";
+    strategy?: 'jwt' | 'database';
     /**
      * Relative time from now in seconds when to expire the session
      *
@@ -256,7 +256,7 @@ export interface AuthConfig {
          * :::
          */
         newSession: any;
-        trigger?: "update";
+        trigger?: 'update';
       }
     ) => Awaitable<Session | DefaultSession>;
     /**
@@ -305,7 +305,7 @@ export interface AuthConfig {
        * - update event: Triggered by the `useSession().update` method.
        * In case of the latter, `trigger` will be `undefined`.
        */
-      trigger?: "signIn" | "signUp" | "update";
+      trigger?: 'signIn' | 'signUp' | 'update';
       /** @deprecated use `trigger === "signUp"` instead */
       isNewUser?: boolean;
       /**
@@ -348,8 +348,8 @@ export interface AuthConfig {
      */
     signOut?: (
       message:
-        | { session: Awaited<ReturnType<Required<Adapter>["deleteSession"]>> }
-        | { token: Awaited<ReturnType<JWTOptions["decode"]>> }
+        | { session: Awaited<ReturnType<Required<Adapter>['deleteSession']>> }
+        | { token: Awaited<ReturnType<JWTOptions['decode']>> }
     ) => Awaitable<void>;
     createUser?: (message: { user: User }) => Awaitable<void>;
     updateUser?: (message: { user: User }) => Awaitable<void>;
@@ -504,17 +504,17 @@ export interface AuthConfig {
 }
 
 /** @internal */
-export type InternalProvider<T = ProviderType> = (T extends "oauth"
+export type InternalProvider<T = ProviderType> = (T extends 'oauth'
   ? OAuthConfigInternal<any>
-  : T extends "oidc"
-  ? OIDCConfigInternal<any>
-  : T extends "email"
-  ? EmailConfig
-  : T extends "credentials"
-  ? CredentialsConfig
-  : T extends WebAuthnProviderType
-  ? WebAuthnConfig
-  : never) & {
+  : T extends 'oidc'
+    ? OIDCConfigInternal<any>
+    : T extends 'email'
+      ? EmailConfig
+      : T extends 'credentials'
+        ? CredentialsConfig
+        : T extends WebAuthnProviderType
+          ? WebAuthnConfig
+          : never) & {
   signinUrl: string;
   /** @example `"https://example.com/api/auth/callback/id"` */
   callbackUrl: string;
@@ -530,7 +530,7 @@ export interface PublicProvider {
 
 export interface RequestInternal {
   url: URL;
-  method: "GET" | "POST";
+  method: 'GET' | 'POST';
   cookies?: Partial<Record<string, string>>;
   headers?: Record<string, any>;
   query?: Record<string, any>;
@@ -541,9 +541,7 @@ export interface RequestInternal {
 }
 
 // Should only be used by frameworks
-export interface ResponseInternal<
-  Body extends string | Record<string, any> | any[] | null = any
-> {
+export interface ResponseInternal<Body extends string | Record<string, any> | any[] | null = any> {
   status?: number;
   headers?: Headers | HeadersInit;
   body?: Body;
@@ -567,12 +565,12 @@ export interface InternalOptions<TProviderType = ProviderType> {
   theme: Theme;
   debug: boolean;
   logger: LoggerInstance;
-  session: NonNullable<Required<AuthConfig["session"]>>;
+  session: NonNullable<Required<AuthConfig['session']>>;
   pages: Partial<PagesOptions>;
   jwt: JWTOptions;
-  events: NonNullable<AuthConfig["events"]>;
+  events: NonNullable<AuthConfig['events']>;
   adapter: Required<Adapter> | undefined;
-  callbacks: NonNullable<Required<AuthConfig["callbacks"]>>;
+  callbacks: NonNullable<Required<AuthConfig['callbacks']>>;
   cookies: Record<keyof CookiesOptions, CookieOption>;
   callbackUrl: string;
   /**
@@ -580,6 +578,6 @@ export interface InternalOptions<TProviderType = ProviderType> {
    * See also {@link OAuthConfigInternal.redirectProxyUrl}.
    */
   isOnRedirectProxy: boolean;
-  experimental: NonNullable<AuthConfig["experimental"]>;
+  experimental: NonNullable<AuthConfig['experimental']>;
   basePath: string;
 }

@@ -1,25 +1,21 @@
-import { CommonProviderOptions } from "./index";
-import type { Awaitable, User } from "../index";
-import type { JSX } from "react";
+import { CommonProviderOptions } from './index';
+import type { Awaitable, User } from '../index';
+import type { JSX } from 'react';
 
 /**
  * Besides providing type safety inside {@link CredentialsConfig.authorize}
  * it also determines how the credentials input fields will be rendered
  * on the default sign in page.
  */
-export interface CredentialInput
-  extends Partial<JSX.IntrinsicElements["input"]> {
+export interface CredentialInput extends Partial<JSX.IntrinsicElements['input']> {
   label?: string;
 }
 
 /** The Credentials Provider needs to be configured. */
 export interface CredentialsConfig<
-  CredentialsInputs extends Record<string, CredentialInput> = Record<
-    string,
-    CredentialInput
-  >
+  CredentialsInputs extends Record<string, CredentialInput> = Record<string, CredentialInput>,
 > extends CommonProviderOptions {
-  type: "credentials";
+  type: 'credentials';
   credentials: CredentialInput;
   /**
    * Gives full control over how you handle the credentials received from the user.
@@ -74,4 +70,4 @@ export interface CredentialsConfig<
   ) => Awaitable<User | null>;
 }
 
-export type CredentialsProviderId = "credentials";
+export type CredentialsProviderId = 'credentials';

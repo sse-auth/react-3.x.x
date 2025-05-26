@@ -1,6 +1,6 @@
-import { TokenEndpointResponse } from "oauth4webapi";
-import { Authenticator, Awaitable, Profile } from "./index";
-import { ProviderType } from "./provider";
+import { TokenEndpointResponse } from 'oauth4webapi';
+import { Authenticator, Awaitable, Profile } from './index';
+import { ProviderType } from './provider';
 
 export interface Account extends Partial<TokenEndpointResponse> {
   /** Provider's id for this account. E.g. "google". See the full list at https://authjs.dev/reference/core/providers */
@@ -43,10 +43,7 @@ export interface AdapterUser extends Profile {
    */
   emailVerified: Date | null;
 }
-export type AdapterAccountType = Extract<
-  ProviderType,
-  "oauth" | "oidc" | "email" | "webauthn"
->;
+export type AdapterAccountType = Extract<ProviderType, 'oauth' | 'oidc' | 'email' | 'webauthn'>;
 export interface AdapterAccount extends Account {
   userId: string;
   type: AdapterAccountType;
@@ -145,24 +142,20 @@ export interface Adapter {
    * See also [User management](https://sse-auth.github.io/guides/creating-a-database-adapter#user-management)
    */
   getUserByAccount?(
-    providerAccountId: Pick<AdapterAccount, "provider" | "providerAccountId">
+    providerAccountId: Pick<AdapterAccount, 'provider' | 'providerAccountId'>
   ): Awaitable<AdapterUser | null>;
   /**
    * Updates a user in the database and returns it.
    *
    * See also [User management](https://sse-auth.github.io/guides/creating-a-database-adapter#user-management)
    */
-  updateUser?(
-    user: Partial<AdapterUser> & Pick<AdapterUser, "id">
-  ): Awaitable<AdapterUser>;
+  updateUser?(user: Partial<AdapterUser> & Pick<AdapterUser, 'id'>): Awaitable<AdapterUser>;
   /**
    * @todo This method is currently not invoked yet.
    *
    * See also [User management](https://sse-auth.github.io/guides/creating-a-database-adapter#user-management)
    */
-  deleteUser?(
-    userId: string
-  ): Promise<void> | Awaitable<AdapterUser | null | undefined>;
+  deleteUser?(userId: string): Promise<void> | Awaitable<AdapterUser | null | undefined>;
   /**
    * This method is invoked internally (but optionally can be used for manual linking).
    * It creates an [Account](https://sse-auth.github.io/reference/core/adapters#models) in the database.
@@ -174,7 +167,7 @@ export interface Adapter {
   ): Promise<void> | Awaitable<AdapterAccount | null | undefined>;
   /** @todo This method is currently not invoked yet. */
   unlinkAccount?(
-    providerAccountId: Pick<AdapterAccount, "provider" | "providerAccountId">
+    providerAccountId: Pick<AdapterAccount, 'provider' | 'providerAccountId'>
   ): Promise<void> | Awaitable<AdapterAccount | undefined>;
   /**
    * Creates a session for the user and returns it.
@@ -205,7 +198,7 @@ export interface Adapter {
    * See also [Database Session management](https://sse-auth.github.io/guides/creating-a-database-adapter#database-session-management)
    */
   updateSession?(
-    session: Partial<AdapterSession> & Pick<AdapterSession, "sessionToken">
+    session: Partial<AdapterSession> & Pick<AdapterSession, 'sessionToken'>
   ): Awaitable<AdapterSession | null | undefined>;
   /**
    * Deletes a session from the database. It is preferred that this method also
@@ -240,8 +233,8 @@ export interface Adapter {
    * If an account is not found, the adapter must return `null`.
    */
   getAccount?(
-    providerAccountId: AdapterAccount["providerAccountId"],
-    provider: AdapterAccount["provider"]
+    providerAccountId: AdapterAccount['providerAccountId'],
+    provider: AdapterAccount['provider']
   ): Awaitable<AdapterAccount | null>;
   /**
    * Returns an authenticator from its credentialID.
@@ -249,16 +242,14 @@ export interface Adapter {
    * If an authenticator is not found, the adapter must return `null`.
    */
   getAuthenticator?(
-    credentialID: AdapterAuthenticator["credentialID"]
+    credentialID: AdapterAuthenticator['credentialID']
   ): Awaitable<AdapterAuthenticator | null>;
   /**
    * Create a new authenticator.
    *
    * If the creation fails, the adapter must throw an error.
    */
-  createAuthenticator?(
-    authenticator: AdapterAuthenticator
-  ): Awaitable<AdapterAuthenticator>;
+  createAuthenticator?(authenticator: AdapterAuthenticator): Awaitable<AdapterAuthenticator>;
   /**
    * Returns all authenticators from a user.
    *
@@ -266,7 +257,7 @@ export interface Adapter {
    * If the retrieval fails for some other reason, the adapter must throw an error.
    */
   listAuthenticatorsByUserId?(
-    userId: AdapterAuthenticator["userId"]
+    userId: AdapterAuthenticator['userId']
   ): Awaitable<AdapterAuthenticator[]>;
   /**
    * Updates an authenticator's counter.
@@ -274,7 +265,7 @@ export interface Adapter {
    * If the update fails, the adapter must throw an error.
    */
   updateAuthenticatorCounter?(
-    credentialID: AdapterAuthenticator["credentialID"],
-    newCounter: AdapterAuthenticator["counter"]
+    credentialID: AdapterAuthenticator['credentialID'],
+    newCounter: AdapterAuthenticator['counter']
   ): Awaitable<AdapterAuthenticator>;
 }

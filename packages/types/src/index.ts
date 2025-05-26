@@ -1,15 +1,12 @@
-import type { TokenEndpointResponse, AuthorizationDetails } from "oauth4webapi";
-import { ProviderType } from "./provider";
+import type { TokenEndpointResponse, AuthorizationDetails } from 'oauth4webapi';
+import { ProviderType } from './provider';
 
 export type { AuthorizationDetails };
 
 export type Awaitable<T> = T | PromiseLike<T>;
 export type Awaited<T> = T extends Promise<infer U> ? U : T;
 
-export type SemverString =
-  | `v${number}`
-  | `v${number}.${number}`
-  | `v${number}.${number}.${number}`;
+export type SemverString = `v${number}` | `v${number}.${number}` | `v${number}.${number}.${number}`;
 
 /**
  * Different tokens returned by OAuth Providers.
@@ -161,19 +158,18 @@ export interface Authenticator {
 }
 
 export interface Theme {
-  colorScheme?: "auto" | "dark" | "light";
+  colorScheme?: 'auto' | 'dark' | 'light';
   logo?: string;
   brandColor?: string;
   buttonText?: string;
 }
 
 type GetTokenParamsBase = {
-  secret?: JWTDecodeParams["secret"];
-  salt?: JWTDecodeParams["salt"];
+  secret?: JWTDecodeParams['secret'];
+  salt?: JWTDecodeParams['salt'];
 };
 
-export interface GetTokenParams<R extends boolean = false>
-  extends GetTokenParamsBase {
+export interface GetTokenParams<R extends boolean = false> extends GetTokenParamsBase {
   /** The request containing the JWT either in the cookies or in the `Authorization` header. */
   req: Request | { headers: Headers | Record<string, string> };
   /**
@@ -189,7 +185,7 @@ export interface GetTokenParams<R extends boolean = false>
    * @default false
    */
   raw?: R;
-  decode?: JWTOptions["decode"];
+  decode?: JWTOptions['decode'];
   logger?: Console;
 }
 
@@ -291,11 +287,11 @@ export interface JWTOptions {
  *   - **`GET`**: Returns the options for the WebAuthn authentication and registration flows.
  */
 export type AuthAction =
-  | "callback"
-  | "csrf"
-  | "error"
-  | "providers"
-  | "session"
-  | "signin"
-  | "signout"
-  | "verify-request";
+  | 'callback'
+  | 'csrf'
+  | 'error'
+  | 'providers'
+  | 'session'
+  | 'signin'
+  | 'signout'
+  | 'verify-request';

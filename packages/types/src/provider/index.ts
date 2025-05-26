@@ -1,16 +1,16 @@
-import { OAuth2Config, OAuthConfig, OIDCConfig } from "./oauth";
-import { EmailConfig } from "./email";
-import { CredentialsConfig, CredentialsProviderId } from "./credentials";
-import { Profile } from "../index";
-import { EmailProviderId, OAuthProviderId } from "./provider-types";
-import { WebAuthnConfig, WebAuthnProviderType } from "./webauthn";
+import { OAuth2Config, OAuthConfig, OIDCConfig } from './oauth';
+import { EmailConfig } from './email';
+import { CredentialsConfig, CredentialsProviderId } from './credentials';
+import { Profile } from '../index';
+import { EmailProviderId, OAuthProviderId } from './provider-types';
+import { WebAuthnConfig, WebAuthnProviderType } from './webauthn';
 
-export * from "./email";
-export * from "./credentials";
-export * from "./nodemailer";
-export * from "./oauth";
-export * from "./webauthn";
-export * from "./provider-types";
+export * from './email';
+export * from './credentials';
+export * from './nodemailer';
+export * from './oauth';
+export * from './webauthn';
+export * from './provider-types';
 
 /**
  * Providers passed to Auth.js must define one of these types.
@@ -20,12 +20,7 @@ export * from "./provider-types";
  * @see [Email or Passwordless Authentication](https://authjs.dev/concepts/oauth)
  * @see [Credentials-based Authentication](https://authjs.dev/concepts/credentials)
  */
-export type ProviderType =
-  | "oidc"
-  | "oauth"
-  | "email"
-  | "credentials"
-  | WebAuthnProviderType;
+export type ProviderType = 'oidc' | 'oauth' | 'email' | 'credentials' | WebAuthnProviderType;
 
 /** Shared across all {@link ProviderType} */
 export interface CommonProviderOptions {
@@ -63,23 +58,11 @@ interface InternalProviderOptions {
  * @see [Credentials guide](https://authjs.dev/guides/providers/credentials)
  */
 export type Provider<P extends Profile = any> = (
-  | ((
-      | OIDCConfig<P>
-      | OAuth2Config<P>
-      | EmailConfig
-      | CredentialsConfig
-      | WebAuthnConfig
-    ) &
+  | ((OIDCConfig<P> | OAuth2Config<P> | EmailConfig | CredentialsConfig | WebAuthnConfig) &
       InternalProviderOptions)
   | ((
       ...args: any
-    ) => (
-      | OAuth2Config<P>
-      | OIDCConfig<P>
-      | EmailConfig
-      | CredentialsConfig
-      | WebAuthnConfig
-    ) &
+    ) => (OAuth2Config<P> | OIDCConfig<P> | EmailConfig | CredentialsConfig | WebAuthnConfig) &
       InternalProviderOptions)
 ) &
   InternalProviderOptions;

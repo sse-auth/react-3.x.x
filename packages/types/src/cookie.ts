@@ -65,7 +65,7 @@ export interface SerializeOptions {
    *
    * More information about priority levels can be found in [the specification](https://tools.ietf.org/html/draft-west-cookie-priority-00#section-4.1).
    */
-  priority?: "low" | "medium" | "high";
+  priority?: 'low' | 'medium' | 'high';
   /**
    * Specifies the value for the [`SameSite` `Set-Cookie` attribute](https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-09#section-5.4.7).
    *
@@ -76,7 +76,7 @@ export interface SerializeOptions {
    *
    * More information about enforcement levels can be found in [the specification](https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-09#section-5.4.7).
    */
-  sameSite?: boolean | "lax" | "strict" | "none";
+  sameSite?: boolean | 'lax' | 'strict' | 'none';
 }
 
 /** [Documentation](https://authjs.dev/reference/core#cookies) */

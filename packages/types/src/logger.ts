@@ -1,12 +1,12 @@
-import { AuthError } from "./error";
-import type { AuthConfig } from "./config";
+import { AuthError } from './error';
+import type { AuthConfig } from './config';
 
 export type WarningCode =
-  | "debug-enabled"
-  | "csrf-disabled"
-  | "experimental-webauthn"
-  | "env-url-basepath-redundant"
-  | "env-url-basepath-mismatch";
+  | 'debug-enabled'
+  | 'csrf-disabled'
+  | 'experimental-webauthn'
+  | 'env-url-basepath-redundant'
+  | 'env-url-basepath-mismatch';
 
 /**
  * Override any of the methods, and the rest will use the default logger.
@@ -18,10 +18,10 @@ export interface LoggerInstance extends Record<string, Function> {
   debug: (message: string, metadata?: unknown) => void;
 }
 
-const red = "\x1b[31m";
-const yellow = "\x1b[33m";
-const grey = "\x1b[90m";
-const reset = "\x1b[0m";
+const red = '\x1b[31m';
+const yellow = '\x1b[33m';
+const grey = '\x1b[90m';
+const reset = '\x1b[0m';
 
 const defaultLogger: LoggerInstance = {
   error(error) {
@@ -29,19 +29,15 @@ const defaultLogger: LoggerInstance = {
     console.error(`${red}[auth][error]${reset} ${name}: ${error.message}`);
     if (
       error.cause &&
-      typeof error.cause === "object" &&
-      "err" in error.cause &&
+      typeof error.cause === 'object' &&
+      'err' in error.cause &&
       error.cause.err instanceof Error
     ) {
       const { err, ...data } = error.cause;
       console.error(`${red}[auth][cause]${reset}:`, err.stack);
-      if (data)
-        console.error(
-          `${red}[auth][details]${reset}:`,
-          JSON.stringify(data, null, 2)
-        );
+      if (data) console.error(`${red}[auth][details]${reset}:`, JSON.stringify(data, null, 2));
     } else if (error.stack) {
-      console.error(error.stack.replace(/.*/, "").substring(1));
+      console.error(error.stack.replace(/.*/, '').substring(1));
     }
   },
   warn(code) {
@@ -49,10 +45,7 @@ const defaultLogger: LoggerInstance = {
     console.warn(`${yellow}[auth][warn][${code}]${reset}`, `Read more: ${url}`);
   },
   debug(message, metadata) {
-    console.log(
-      `${grey}[auth][debug]:${reset} ${message}`,
-      JSON.stringify(metadata, null, 2)
-    );
+    console.log(`${grey}[auth][debug]:${reset} ${message}`, JSON.stringify(metadata, null, 2));
   },
 };
 
@@ -60,9 +53,7 @@ const defaultLogger: LoggerInstance = {
  * Override the built-in logger with user's implementation.
  * Any `undefined` level will use the default logger.
  */
-export function setLogger(
-  config: Pick<AuthConfig, "logger" | "debug">
-): LoggerInstance {
+export function setLogger(config: Pick<AuthConfig, 'logger' | 'debug'>): LoggerInstance {
   const newLogger: LoggerInstance = {
     ...defaultLogger,
   };

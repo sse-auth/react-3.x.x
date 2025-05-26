@@ -1,23 +1,23 @@
 import {
-    generateAuthenticationOptions,
-    generateRegistrationOptions,
-    verifyAuthenticationResponse,
-    verifyRegistrationResponse,
-  } from "@simplewebauthn/server"
-import { SemverString, User } from "../index";
-import type { CommonProviderOptions, CredentialInput } from "./index";
+  generateAuthenticationOptions,
+  generateRegistrationOptions,
+  verifyAuthenticationResponse,
+  verifyRegistrationResponse,
+} from '@simplewebauthn/server';
+import { SemverString, User } from '../index';
+import type { CommonProviderOptions, CredentialInput } from './index';
 import type {
   GenerateRegistrationOptionsOpts,
   GenerateAuthenticationOptionsOpts,
   VerifyAuthenticationResponseOpts,
   VerifyRegistrationResponseOpts,
-} from "@simplewebauthn/server";
-import { InternalOptions, RequestInternal } from "../config";
+} from '@simplewebauthn/server';
+import { InternalOptions, RequestInternal } from '../config';
 
-export type WebAuthnProviderType = "webauthn";
+export type WebAuthnProviderType = 'webauthn';
 
 export const DEFAULT_WEBAUTHN_TIMEOUT = 5 * 60 * 1000; // 5 minutes
-export const DEFAULT_SIMPLEWEBAUTHN_BROWSER_VERSION: SemverString = "v9.0.1";
+export const DEFAULT_SIMPLEWEBAUTHN_BROWSER_VERSION: SemverString = 'v9.0.1';
 
 export type RelayingParty = {
   /** Relaying Party ID. Use the website's domain name. */
@@ -40,37 +40,23 @@ type RelayingPartyArray = {
 export type GetUserInfo = (
   options: InternalOptions<WebAuthnProviderType>,
   request: RequestInternal
-) => Promise<
-  | { user: User; exists: true }
-  | { user: Omit<User, "id">; exists: false }
-  | null
->;
+) => Promise<{ user: User; exists: true } | { user: Omit<User, 'id'>; exists: false } | null>;
 
 type ConfigurableAuthenticationOptions = Omit<
   GenerateAuthenticationOptionsOpts,
-  "rpID" | "allowCredentials" | "challenge"
+  'rpID' | 'allowCredentials' | 'challenge'
 >;
 type ConfigurableRegistrationOptions = Omit<
   GenerateRegistrationOptionsOpts,
-  | "rpName"
-  | "rpID"
-  | "userID"
-  | "userName"
-  | "challenge"
-  | "userDisplayName"
-  | "excludeCredentials"
+  'rpName' | 'rpID' | 'userID' | 'userName' | 'challenge' | 'userDisplayName' | 'excludeCredentials'
 >;
 type ConfigurableVerifyAuthenticationOptions = Omit<
   VerifyAuthenticationResponseOpts,
-  | "expectedChallenge"
-  | "expectedOrigin"
-  | "expectedRPID"
-  | "authenticator"
-  | "response"
+  'expectedChallenge' | 'expectedOrigin' | 'expectedRPID' | 'authenticator' | 'response'
 >;
 type ConfigurableVerifyRegistrationOptions = Omit<
   VerifyRegistrationResponseOpts,
-  "expectedChallenge" | "expectedOrigin" | "expectedRPID" | "response"
+  'expectedChallenge' | 'expectedOrigin' | 'expectedRPID' | 'response'
 >;
 
 export interface WebAuthnConfig extends CommonProviderOptions {

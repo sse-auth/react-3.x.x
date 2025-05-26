@@ -1,12 +1,12 @@
-import type { Transport, TransportOptions } from "nodemailer";
-import * as JSONTransport from "nodemailer/lib/json-transport/index.js";
-import * as SendmailTransport from "nodemailer/lib/sendmail-transport/index.js";
-import * as SESTransport from "nodemailer/lib/ses-transport/index.js";
-import * as SMTPPool from "nodemailer/lib/smtp-pool/index.js";
-import * as SMTPTransport from "nodemailer/lib/smtp-transport/index.js";
-import * as StreamTransport from "nodemailer/lib/stream-transport/index.js";
-import type { Awaitable, Theme } from "../index";
-import type { EmailConfig } from "./email";
+import type { Transport, TransportOptions } from 'nodemailer';
+import * as JSONTransport from 'nodemailer/lib/json-transport/index.js';
+import * as SendmailTransport from 'nodemailer/lib/sendmail-transport/index.js';
+import * as SESTransport from 'nodemailer/lib/ses-transport/index.js';
+import * as SMTPPool from 'nodemailer/lib/smtp-pool/index.js';
+import * as SMTPTransport from 'nodemailer/lib/smtp-transport/index.js';
+import * as StreamTransport from 'nodemailer/lib/stream-transport/index.js';
+import type { Awaitable, Theme } from '../index';
+import type { EmailConfig } from './email';
 
 type AllTransportOptions =
   | string
@@ -39,7 +39,4 @@ export interface NodemailerConfig extends EmailConfig {
   options?: NodemailerUserConfig;
 }
 
-export type NodemailerUserConfig = Omit<
-  Partial<NodemailerConfig>,
-  "options" | "type"
->;
+export type NodemailerUserConfig = Omit<Partial<NodemailerConfig>, 'options' | 'type'>;

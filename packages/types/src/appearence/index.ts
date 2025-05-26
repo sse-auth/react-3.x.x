@@ -1,4 +1,4 @@
-import type * as CSS from "csstype";
+import type * as CSS from 'csstype';
 
 import type {
   AlertId,
@@ -10,8 +10,8 @@ import type {
   ProfileSectionId,
   SelectId,
   UserPreviewId,
-} from "./elementIds";
-import type { BuiltInColors, TransparentColor } from "./theme";
+} from './elementIds';
+import type { BuiltInColors, TransparentColor } from './theme';
 
 type CSSProperties = CSS.PropertiesFallback<number | string>;
 type CSSPropertiesWithMultiValues = {
@@ -23,21 +23,21 @@ interface CSSObject extends CSSPropertiesWithMultiValues, CSSPseudos {}
 type UserDefinedStyle = string | CSSObject;
 
 type Shade =
-  | "25"
-  | "50"
-  | "100"
-  | "150"
-  | "200"
-  | "300"
-  | "400"
-  | "500"
-  | "600"
-  | "700"
-  | "750"
-  | "800"
-  | "850"
-  | "900"
-  | "950";
+  | '25'
+  | '50'
+  | '100'
+  | '150'
+  | '200'
+  | '300'
+  | '400'
+  | '500'
+  | '600'
+  | '700'
+  | '750'
+  | '800'
+  | '850'
+  | '900'
+  | '950';
 export type ColorScale<T = string> = Record<Shade, T>;
 export type AlphaColorScale<T = string> = {
   [K in Shade]: T;
@@ -50,17 +50,8 @@ export type CssColorOrAlphaScale = string | AlphaColorScale;
 type CssColor = string | TransparentColor | BuiltInColors;
 type CssLengthUnit = string;
 
-type FontWeightNamedValue = CSS.Properties["fontWeight"];
-type FontWeightNumericValue =
-  | 100
-  | 200
-  | 300
-  | 400
-  | 500
-  | 600
-  | 700
-  | 800
-  | 900;
+type FontWeightNamedValue = CSS.Properties['fontWeight'];
+type FontWeightNumericValue = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
 
 type FontWeightScale = {
   normal?: FontWeightNamedValue | FontWeightNumericValue;
@@ -69,23 +60,23 @@ type FontWeightScale = {
 };
 
 type WebSafeFont =
-  | "Arial"
-  | "Brush Script MT"
-  | "Courier New"
-  | "Garamond"
-  | "Georgia"
-  | "Helvetica"
-  | "Tahoma"
-  | "Times New Roman"
-  | "Trebuchet MS"
-  | "Verdana";
+  | 'Arial'
+  | 'Brush Script MT'
+  | 'Courier New'
+  | 'Garamond'
+  | 'Georgia'
+  | 'Helvetica'
+  | 'Tahoma'
+  | 'Times New Roman'
+  | 'Trebuchet MS'
+  | 'Verdana';
 
 export type FontFamily = string | WebSafeFont;
 
-type LoadingState = "loading";
-type ErrorState = "error";
-type OpenState = "open";
-type ActiveState = "active";
+type LoadingState = 'loading';
+type ErrorState = 'error';
+type OpenState = 'open';
+type ActiveState = 'active';
 export type ElementState = LoadingState | ErrorState | OpenState | ActiveState;
 type ControlState = ErrorState;
 
@@ -106,40 +97,38 @@ type WithOptions<Ids = never, States = never, Jsx = never> = {
  */
 export type StateSelectors<
   E extends string,
-  S extends ElementState | undefined = never
+  S extends ElementState | undefined = never,
 > = S extends never ? never : `${E}__${S}`;
 
 /**
  * Create a type union consisting of the base element with all valid ids appended
  */
-export type IdSelectors<
-  E extends string,
-  Id extends string | undefined = never
-> = Id extends never ? never : `${E}__${Id}`;
+export type IdSelectors<E extends string, Id extends string | undefined = never> = Id extends never
+  ? never
+  : `${E}__${Id}`;
 
 /**
  * Create a type union consisting of all base, base+state, base+id, base+id+state combinations
  */
 type ElementPartsKeys<Name extends string, Opts extends ConfigOptions> =
-  | StateSelectors<Name, Opts["states"]>
-  | IdSelectors<Name, Opts["ids"]>
-  | StateSelectors<IdSelectors<Name, Opts["ids"]>, Opts["states"]>;
+  | StateSelectors<Name, Opts['states']>
+  | IdSelectors<Name, Opts['ids']>
+  | StateSelectors<IdSelectors<Name, Opts['ids']>, Opts['states']>;
 
 /**
  * Create an object type mapping base elements and part combinations (base, base+state, base+id, base+id+state)
  * to the value they can accept (usually a style rule, a string class or jsx)
  */
 type Selectors<RootElemName extends string, Opts extends ConfigOptions> =
-  | Partial<Record<RootElemName, UserDefinedStyle | Opts["jsx"]>>
+  | Partial<Record<RootElemName, UserDefinedStyle | Opts['jsx']>>
   | Partial<Record<ElementPartsKeys<RootElemName, Opts>, UserDefinedStyle>>;
 
 /**
  * Convert a kebab-cased key from ElementsConfig into a camelCased Elements key
  */
-export type ElementObjectKey<K extends string> =
-  K extends `${infer Parent}-${infer Rest}`
-    ? `${Parent}${Capitalize<Rest>}`
-    : K;
+export type ElementObjectKey<K extends string> = K extends `${infer Parent}-${infer Rest}`
+  ? `${Parent}${Capitalize<Rest>}`
+  : K;
 
 /**
  * A map that describes the possible combinations we need to generate
@@ -177,7 +166,7 @@ export type ElementsConfig = {
   footerActionText: WithOptions;
   footerActionLink: WithOptions;
   footerPages: WithOptions;
-  footerPagesLink: WithOptions<"help" | "terms" | "privacy">;
+  footerPagesLink: WithOptions<'help' | 'terms' | 'privacy'>;
 
   socialButtonsRoot: WithOptions;
   socialButtons: WithOptions;
@@ -276,32 +265,32 @@ export type ElementsConfig = {
   avatarImageActionsRemove: WithOptions;
 
   // TODO: We can remove "Popover" from these:
-  userButtonBox: WithOptions<never, "open">;
-  userButtonOuterIdentifier: WithOptions<never, "open">;
-  userButtonTrigger: WithOptions<never, "open">;
-  userButtonAvatarBox: WithOptions<never, "open">;
-  userButtonAvatarImage: WithOptions<never, "open">;
+  userButtonBox: WithOptions<never, 'open'>;
+  userButtonOuterIdentifier: WithOptions<never, 'open'>;
+  userButtonTrigger: WithOptions<never, 'open'>;
+  userButtonAvatarBox: WithOptions<never, 'open'>;
+  userButtonAvatarImage: WithOptions<never, 'open'>;
   userButtonPopoverRootBox: WithOptions;
   userButtonPopoverCard: WithOptions;
   userButtonPopoverMain: WithOptions;
-  userButtonPopoverActions: WithOptions<"singleSession" | "multiSession">;
+  userButtonPopoverActions: WithOptions<'singleSession' | 'multiSession'>;
   userButtonPopoverActionButton: WithOptions<
-    "manageAccount" | "addAccount" | "signOut" | "signOutAll"
+    'manageAccount' | 'addAccount' | 'signOut' | 'signOutAll'
   >;
   userButtonPopoverActionButtonIconBox: WithOptions<
-    "manageAccount" | "addAccount" | "signOut" | "signOutAll"
+    'manageAccount' | 'addAccount' | 'signOut' | 'signOutAll'
   >;
   userButtonPopoverActionButtonIcon: WithOptions<
-    "manageAccount" | "addAccount" | "signOut" | "signOutAll"
+    'manageAccount' | 'addAccount' | 'signOut' | 'signOutAll'
   >;
   userButtonPopoverCustomItemButton: WithOptions<string>;
   userButtonPopoverCustomItemButtonIconBox: WithOptions<string>;
   userButtonPopoverActionItemButtonIcon: WithOptions<string>;
   userButtonPopoverFooter: WithOptions;
-  userButtonPopoverFooterPagesLink: WithOptions<"terms" | "privacy">;
+  userButtonPopoverFooterPagesLink: WithOptions<'terms' | 'privacy'>;
 
-  organizationSwitcherTrigger: WithOptions<never, "open">;
-  organizationSwitcherTriggerIcon: WithOptions<never, "open">;
+  organizationSwitcherTrigger: WithOptions<never, 'open'>;
+  organizationSwitcherTriggerIcon: WithOptions<never, 'open'>;
   organizationSwitcherPopoverRootBox: WithOptions;
   organizationSwitcherPopoverCard: WithOptions;
   organizationSwitcherPopoverMain: WithOptions;
@@ -309,15 +298,15 @@ export type ElementsConfig = {
   organizationSwitcherPopoverInvitationActions: WithOptions;
   organizationSwitcherPopoverInvitationActionsBox: WithOptions;
   organizationSwitcherPopoverActionButton: WithOptions<
-    "manageOrganization" | "createOrganization" | "switchOrganization"
+    'manageOrganization' | 'createOrganization' | 'switchOrganization'
   >;
   organizationSwitcherPreviewButton: WithOptions;
   organizationSwitcherInvitationAcceptButton: WithOptions;
   organizationSwitcherPopoverActionButtonIconBox: WithOptions<
-    "manageOrganization" | "createOrganization"
+    'manageOrganization' | 'createOrganization'
   >;
   organizationSwitcherPopoverActionButtonIcon: WithOptions<
-    "manageOrganization" | "createOrganization"
+    'manageOrganization' | 'createOrganization'
   >;
   organizationSwitcherPopoverFooter: WithOptions;
 
@@ -358,11 +347,11 @@ export type ElementsConfig = {
   identityPreviewEditButton: WithOptions;
   identityPreviewEditButtonIcon: WithOptions;
 
-  passkeyIcon: WithOptions<"firstFactor">;
+  passkeyIcon: WithOptions<'firstFactor'>;
 
-  accountSwitcherActionButton: WithOptions<"addAccount" | "signOutAll">;
-  accountSwitcherActionButtonIconBox: WithOptions<"addAccount" | "signOutAll">;
-  accountSwitcherActionButtonIcon: WithOptions<"addAccount" | "signOutAll">;
+  accountSwitcherActionButton: WithOptions<'addAccount' | 'signOutAll'>;
+  accountSwitcherActionButtonIconBox: WithOptions<'addAccount' | 'signOutAll'>;
+  accountSwitcherActionButtonIcon: WithOptions<'addAccount' | 'signOutAll'>;
 
   alert: WithOptions<AlertId>;
   alertIcon: WithOptions<AlertId>;
@@ -381,7 +370,7 @@ export type ElementsConfig = {
 
   paginationButton: WithOptions;
   paginationButtonIcon: WithOptions;
-  paginationRowText: WithOptions<"allRowsCount" | "rowsCount" | "displaying">;
+  paginationRowText: WithOptions<'allRowsCount' | 'rowsCount' | 'displaying'>;
 
   selectButton: WithOptions<SelectId>;
   selectSearchInput: WithOptions<SelectId>;
@@ -414,7 +403,7 @@ export type ElementsConfig = {
   formattedPhoneNumberFlag: WithOptions;
   formattedPhoneNumberText: WithOptions;
 
-  formattedDate: WithOptions<"tableCell">;
+  formattedDate: WithOptions<'tableCell'>;
 
   scrollBox: WithOptions;
 
@@ -430,9 +419,9 @@ export type ElementsConfig = {
   pageScrollBox: WithOptions;
   page: WithOptions;
 
-  activeDevice: WithOptions<"current">;
-  activeDeviceListItem: WithOptions<"current">;
-  activeDeviceIcon: WithOptions<"mobile" | "desktop">;
+  activeDevice: WithOptions<'current'>;
+  activeDeviceListItem: WithOptions<'current'>;
+  activeDeviceIcon: WithOptions<'mobile' | 'desktop'>;
 
   impersonationFab: WithOptions;
   impersonationFabIcon: WithOptions;
@@ -447,17 +436,14 @@ export type ElementsConfig = {
   qrCodeContainer: WithOptions;
 
   // default descriptors
-  badge: WithOptions<"primary" | "actionRequired">;
+  badge: WithOptions<'primary' | 'actionRequired'>;
   notificationBadge: WithOptions;
   buttonArrowIcon: WithOptions;
   spinner: WithOptions;
 };
 
 export type Elements = {
-  [k in keyof ElementsConfig]: Selectors<
-    ElementObjectKey<k> & string,
-    ElementsConfig[k]
-  >;
+  [k in keyof ElementsConfig]: Selectors<ElementObjectKey<k> & string, ElementsConfig[k]>;
 }[keyof ElementsConfig];
 
 export type Variables = {
@@ -567,7 +553,7 @@ export type Variables = {
   spacingUnit?: CssLengthUnit;
 };
 
-export type BaseThemeTaggedType = { __type: "prebuilt_appearance" };
+export type BaseThemeTaggedType = { __type: 'prebuilt_appearance' };
 export type BaseTheme = BaseThemeTaggedType;
 
 export type Theme = {
@@ -605,7 +591,7 @@ export type Layout = {
    * To customise the logo further, you can use {@link Appearance.elements}
    * @default inside
    */
-  logoPlacement?: "inside" | "outside" | "none";
+  logoPlacement?: 'inside' | 'outside' | 'none';
   /**
    * The URL of your custom logo the components will display.
    * By default, the components will use the logo you've set in the Clerk Dashboard.
@@ -630,13 +616,13 @@ export type Layout = {
    * To customise the social buttons further, you can use {@link Appearance.elements}
    * @default auto
    */
-  socialButtonsVariant?: "auto" | "iconButton" | "blockButton";
+  socialButtonsVariant?: 'auto' | 'iconButton' | 'blockButton';
   /**
    * Controls whether the social buttons will be rendered above or below the card form.
    * To customise the social button container further, you can use {@link Appearance.elements}
    * @default 'top'
    */
-  socialButtonsPlacement?: "top" | "bottom";
+  socialButtonsPlacement?: 'top' | 'bottom';
   /**
    * Controls whether the SignIn or SignUp forms will include optional fields.
    * You can make a field required or optional through the {@link https://dashboard.clerk.com|Clerk dashboard}.
