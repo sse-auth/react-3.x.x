@@ -23,7 +23,7 @@
   "homepage": "https://github.com/sse-auth/react-3.x.x#readme",
   "devDependencies": {
     "conventional-changelog-cli": "^5.0.0",
-    "conventional-changelog-conventionalcommits": "^8.0.0",
+    "conventional-changelog-conventionalcommits": "^9.0.0",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "tsup": "^8.5.0",
