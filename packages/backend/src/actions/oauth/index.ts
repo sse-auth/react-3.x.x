@@ -9,7 +9,7 @@ import type { Account, Profile, TokenSet, User } from '@sse-auth/types';
 import type { LoggerInstance } from '@sse-auth/types/logger';
 import type { OAuthConfigInternal } from '@sse-auth/types/provider';
 import { customFetch, conformInternal } from '@sse-auth/types/symbol';
-import { isOIDCProvider } from '../../utils/providers.js';
+import { isOIDCProvider } from '@sse-auth/utils';
 import { OAuthCallbackError } from '@sse-auth/types/error';
 import { OAuthProfileParseError } from '@sse-auth/types/error';
 
@@ -388,7 +388,7 @@ export async function handleOAuth(
 
     // Apple sends some of the user information in a `user` parameter as a stringified JSON.
     // It also only does so the first time the user consents to share their information.
-    if (provider[conformInternal] && provider.id === 'apple') {
+    if ((provider as any)[conformInternal] && provider.id === 'apple') {
       try {
         profile.user = JSON.parse(params?.user);
       } catch {}
@@ -400,7 +400,7 @@ export async function handleOAuth(
         client,
         processedCodeResponse.access_token,
         {
-          [o.customFetch]: provider[customFetch],
+          [o.customFetch]: (provider as any)[customFetch],
           // TODO: move away from allowing insecure HTTP requests
           [o.allowInsecureRequests]: true,
         }

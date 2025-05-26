@@ -1,6 +1,6 @@
 import * as o from 'oauth4webapi';
 import { InvalidCheck } from '@sse-auth/types/error';
-import { encode, decode } from '../../utils/jwt.js';
+import { encode, decode } from '@sse-auth/utils';
 import type { CookiesOptions, Cookie } from '@sse-auth/types/cookie';
 import type { InternalOptions, RequestInternal } from '@sse-auth/types/config';
 

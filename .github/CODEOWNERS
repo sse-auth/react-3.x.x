@@ -2,6 +2,6 @@
 # https://help.github.com/en/articles/about-code-owners
 
 *                     @sseworld
-.github               @sseworld @ssewofficial
+.github               @sseworld
 /packages/            @sseworld
-/packages/adapter-*/  @ssewofficial
+/packages/adapter-*/  @sseworld

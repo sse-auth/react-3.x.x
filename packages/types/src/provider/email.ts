@@ -7,7 +7,7 @@ import type { Awaitable, Theme } from '../index';
 import type { NodemailerConfig } from './nodemailer';
 
 // TODO: Rename to Token provider
-// when started working on https://github.com/nextauthjs/next-auth/discussions/1465
+// when started working on https://github.com/orgs/sse-auth/discussions/1465
 export type EmailProviderType = 'email';
 
 export type EmailProviderSendVerificationRequestParams = {

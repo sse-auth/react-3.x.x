@@ -12,7 +12,7 @@ export async function session(
   cookies: Cookie[],
   isUpdate?: boolean,
   newSession?: any
-) {
+): Promise<ResponseInternal<Session | null>> {
   const {
     adapter,
     jwt,
