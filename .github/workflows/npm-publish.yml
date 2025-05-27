@@ -32,8 +32,9 @@ env:
 
 jobs:
   release:
-    name: Create Release and Publish NPM
+    name: Publish NPM - ${{ github.event.inputs.name }}
     runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.name != ''
 
     steps:
       - name: Checkout repository
