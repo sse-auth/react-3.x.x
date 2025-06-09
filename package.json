@@ -28,6 +28,6 @@
     "prettier-plugin-tailwindcss": "^0.6.11",
     "tsup": "^8.5.0",
     "typescript": "^5.8.3",
-    "zx": "^8.5.4"
+    "zx": "^8.5.5"
   }
 }
